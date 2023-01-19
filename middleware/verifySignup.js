@@ -47,10 +47,21 @@ next()
 
 
 verifyRolesExist=  (req,res,next)=>{
-    
+    if(req.body.roles)
+{
     for (var i =0; i<req.roles.length ; i++)
     {
-        Roles.includes()
+        if (!Roles.includes(req.roles[i]))
+        {
+            res.status(400).send(`Role ${req.roles[i]} does not exist`)
+            return ;
+        }
+
+        
     }
+}
+    next()
+
+
 
     }
