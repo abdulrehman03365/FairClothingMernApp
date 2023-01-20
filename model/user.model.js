@@ -3,7 +3,8 @@
 const mongoose = require('mongoose')
 
 const schema =mongoose.Schema;
-const user=mongoose.model('user' ,new schema({name:String 
+const user=mongoose.model('user' ,new schema({
+    name:String 
     ,email:String
     ,password:String,
     Role:[{type:mongoose.Schema.Types.ObjectId,

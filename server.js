@@ -7,8 +7,10 @@ const bodyParser = require('body-parser');
 const handlers=require('./lib/handlers');
 const { join } = require('path');
 const bcrypt =require('bcrypt');
-
-
+const cors=require('cors')
+const cookieSession=require('cookie-session');
+const db = require('./model/index');
+const { mongoose } = require('./model/index');
 
 
 require('dotenv').config()
@@ -17,14 +19,39 @@ require('dotenv').config()
 console.log(join(__dirname,'public'));
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({extended:true}))
+app.user(cors())
+app.user(cookieSession({
+	name:'NodeJsBokingWebsite',
+	secret:'COOKIE_SECRET',
+	httpOnly:true
 
-
+}))
 
 // Setting view engine
 Handlebars=handlebars.create({defaultLayout:'main'});
 app.engine('handlebars',Handlebars.engine)
 app.set('view engine','handlebars');
 app.set('port',process.env.PORT || 3000);
+
+
+
+//get mongodb connection
+const uri = `mongodb+srv://${process.env.MONGO_DB_USERNAME}:${process.env.MONGO_DB_PASSWORD}@cluster0.gzyxqbq.mongodb.net/BookingApplicationDB?retryWrites=true&w=majority`
+mongoose.set('strictQuery', true);
+mongoose.connection.on('error',(error)=>{console.error('connection to MongoDB disconnected :');})
+mongoose.connection.on('connected',(data)=>{console.log('connected to mongoDB');})
+mongoose.connection.on('connecting',()=>{console.log('connecting to mongodb');})
+mongoose.connection.on('close',()=>{console.log('MongoDB connection closed');})
+mongoose.connect(uri,
+{
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+  }).then(()=>{
+  console.log("You are connected successfully to MongoDB");
+})
+
+
+
 
 
 // get mysql connection 
