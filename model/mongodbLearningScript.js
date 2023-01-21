@@ -15,19 +15,42 @@ mongoose.connect(uri,
     useNewUrlParser: true,
     useUnifiedTopology: true
   }).then(()=>{
-// addrole()
+addrole()
 //adduser()
 //getAllRoles()
 // createUser()
-updateUser()
-  }).
+//updateUser()
+ 
+
+//findRoles()
+}).
 catch(
     error=>{console.error(error.message);}
 )
 
+
+
+
+function findRoles()
+{
+  role.find({name:{$in :['user','admin']}},function(err,roles){
+    if(err)
+    {
+        console.log(err);
+        res.status(404).send({'message':"Roles does not exist"})
+    }
+
+    
+    
+    user.roles=roles.map((role)=>{})
+
+})
+}
+
+
 function addrole()
 {const role =db.role;
-new role({name:'user'}).save((err,res)=>{if (err)
+new role({name:'owner'}).save((err,res)=>{if (err)
 console.error(err)
 else 
 console.log(res,'\n')

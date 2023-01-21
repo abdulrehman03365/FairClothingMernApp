@@ -1,6 +1,6 @@
-const { default: mongoose } = require('mongoose')
 
-mongoose=require('mongoose')
+
+const mongoose=require('mongoose')
 const db ={}
 db.mongoose=mongoose
 db.Roles =['User','Admin','Owner']
