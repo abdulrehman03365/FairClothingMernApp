@@ -7,7 +7,9 @@ const bodyParser = require('body-parser');
 const handlers=require('./lib/handlers');
 const { join } = require('path');
 const bcrypt =require('bcrypt');
-
+const cors=require('cors')
+const cookieSession=require('cookie-session');
+const { default: mongoose } = require('mongoose');
 
 
 
@@ -17,6 +19,10 @@ require('dotenv').config()
 console.log(join(__dirname,'public'));
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({extended:true}))
+app.use(cors())
+app.use(cookieSession({name:'BookingWebsiteSession',
+'secret':"Secret_Key",httpOnly:true}))
+
 
 
 
@@ -25,6 +31,13 @@ Handlebars=handlebars.create({defaultLayout:'main'});
 app.engine('handlebars',Handlebars.engine)
 app.set('view engine','handlebars');
 app.set('port',process.env.PORT || 3000);
+
+
+
+
+// get mongodb Connection
+mongoose.connect()
+
 
 
 // get mysql connection 
