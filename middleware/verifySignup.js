@@ -1,6 +1,35 @@
 const db=require('../model')
 const Roles=db.Roles;
 const user=db.user;
+
+checkEmptyfields=(req,res,next)=>{
+
+    if (!req.username)
+    {
+        res.status(400).send({'message':"User Name cannot be empty"})
+        return
+
+    }
+    
+    if (!req.email)
+    {
+        res.status(400).send({'message':"Email cannot be empty"})
+        return
+    }
+
+    
+    if (!req.password)
+    {
+        req.status(400).send({'message':"Email cannot be empty"})
+        return
+    }
+
+ next()
+}
+
+
+
+
 checkDuplicateUser=(req,res,next)=>{
 user.findOne({'user':req.body.username}
 ,function(err,result){
@@ -21,10 +50,11 @@ user.findOne({'user':req.body.username}
 
 
 })
+}
 
 
-
-user.findOne({'email':req.body.email},function(res,result){
+checkDuplicateEmail=(req,res,next)=>{
+    user.findOne({'email':req.body.email},function(res,result){
 
 if(err)
 {
@@ -64,4 +94,10 @@ verifyRolesExist=  (req,res,next)=>{
 
 
 
+    }
+
+    module.exports={
+        checkDuplicateEmail,
+        checkDuplicateUser,
+        checkEmptyfields
     }

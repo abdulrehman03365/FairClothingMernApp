@@ -4,11 +4,12 @@
     <h1 id="'Signup Header">
         Sign Up
     </h1>
-<form id="login-form" action="/signup-process" method="POST">
-    <label for="uname">uname</label>
-    <input type="text" name="uname"  class="login-form-field">
-    <label for="email"></label>
-    <input type="email" name="email" class="login-form-field">
+    <form id="login-form" action="/api/auth/signUp" method="POST">
+    <label for="username">username</label>
+    <input type="text" name="username" id="login-form"  class="login-form-field">
+    
+    <label for="email">email</label>
+    <input type="email" name="email" id="login-form" class="login-form-field">
     <input type="password" name="password" id="pass" class="login-form-field" placeholder="Password">
     <input type="submit" value="Login" id="login-form-submit">
 

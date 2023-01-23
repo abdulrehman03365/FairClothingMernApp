@@ -16,11 +16,13 @@ const { mongoose } = require('./model/index');
 require('dotenv').config()
 
 //Middlewares
-console.log(join(__dirname,'public'));
+// console.log(join(__dirname,'public'));
+app.use(cors())
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({extended:true}))
-app.user(cors())
-app.user(cookieSession({
+// 
+
+app.use(cookieSession({
 	name:'NodeJsBokingWebsite',
 	secret:'COOKIE_SECRET',
 	httpOnly:true
@@ -33,6 +35,8 @@ app.engine('handlebars',Handlebars.engine)
 app.set('view engine','handlebars');
 app.set('port',process.env.PORT || 3000);
 
+
+require('./routes/auth.routes.js')(app);
 
 
 //get mongodb connection
@@ -109,7 +113,9 @@ app.post('/api/newsletterSignup',
 handlers.api.newsletterSignup)
 
 
-
+app.get('/signIn',(req,res)=>{
+	res.render('signIn')
+})
 app.get('/signup',(req,res)=>{
 	res.render('signup')})
 
@@ -138,7 +144,7 @@ app.post('/signup-process',async (req,res)=>{
 				
 			
 				const userDetails = {
-					uname:req.body.uname,
+					uname:req.body.username,
 					email:req.body.email,
 					password:password
 

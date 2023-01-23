@@ -1,57 +1,54 @@
 const jwt = require('jsonwebtoken');
 const { Roles } = require('../model');
+require('dotenv').config
 
-verifyJwtToken=(req,res,next)=>{
+verifyJwtToken = (req, res, next) => {
 
     token = req.session.token;
 
-    if(!token)
-    {
-res.status(403).send({'message':"Tocken is not provided"})
-return;    
-}
+    if (!token) {
+        res.status(403).send({ 'message': "Tocken is not provided" })
+        return;
+    }
 
-    if (token)
-    {
-           jwt.verify(token,secret,function (err,decoded){
-            if(err)
-            {
+    if (token) {
+        jwt.verify(token, process.env.JWT_SECRET, function (err, decoded) {
+            if (err) {
                 console.log(err);
-            res.status(401).send({'message':"unauthenticated"})                
-        return;    
-        }
-
-            else
-            {
-                req.userId=decoded.id;
-
-            next()
+                res.status(500).send({ 'message': "Authentication error" })
+                return;
             }
-           })
-           
+
+            else {
+                req.userId = decoded.id;
+
+                next()
+            }
+        })
+
     }
 
 
 }
 
 
-isadmin=(req,res,next)=>{
+isadmin = (req, res, next) => {
 
 }
 
-isUser=(req,res,next)=>{
-
-}
-
-
-isOwner=(req,res,next)=>{
+isUser = (req, res, next) => {
 
 }
 
 
-
-login=(req,res,next)=>{
+isOwner = (req, res, next) => {
 
 }
 
-signOut=(req,res,next)=>{}
+
+
+login = (req, res, next) => {
+
+}
+
+signOut = (req, res, next) => { }
