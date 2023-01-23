@@ -4,23 +4,23 @@ const user=db.user;
 
 checkEmptyfields=(req,res,next)=>{
 
-    if (!req.username)
+    if (!req.body.username)
     {
         res.status(400).send({'message':"User Name cannot be empty"})
         return
 
     }
     
-    if (!req.email)
+    if (!req.body.email)
     {
         res.status(400).send({'message':"Email cannot be empty"})
         return
     }
 
     
-    if (!req.password)
+    if (!req.body.password)
     {
-        req.status(400).send({'message':"Email cannot be empty"})
+        res.status(400).send({'message':" Password cannot be empty"})
         return
     }
 
