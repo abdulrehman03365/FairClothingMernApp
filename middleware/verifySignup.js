@@ -21,10 +21,11 @@ user.findOne({'user':req.body.username}
 
 
 })
+}
 
 
-
-user.findOne({'email':req.body.email},function(res,result){
+checkDuplicateEmail=(req,res,next)=>{
+    user.findOne({'email':req.body.email},function(res,result){
 
 if(err)
 {
@@ -64,4 +65,9 @@ verifyRolesExist=  (req,res,next)=>{
 
 
 
+    }
+
+    module.exports={
+        checkDuplicateEmail,
+        checkDuplicateUser
     }
