@@ -36,7 +36,7 @@ return;
 
 
 isadmin=(req,res,next)=>{
-Roles.
+
 }
 
 isUser=(req,res,next)=>{
