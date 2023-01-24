@@ -14,7 +14,8 @@ module.exports = function (app) {
     AuthController.signUpController)
 
 
-    app.get("/api/auth/signIn",verifySignup.checkEmptyfields,AuthController.signInController)
+    app.post("/api/auth/signIn",[verifySignup.checkEmptyfields],AuthController.signInController)
+
     app.get("/api/auth/signout",AuthController.signOutController)
 
 
