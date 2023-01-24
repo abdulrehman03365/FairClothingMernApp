@@ -182,7 +182,7 @@ signInController =(req,res,next)=>{
                {
                 authorities.push("Role_"+user.roles[i].name.toUpperCase())
                }
-               res.status(200).send({'userId':userId,'authoroties':authorities,'authTocken':token})
+               res.status(200).send({'userId':user._id,'authoroties':authorities,'authTocken':token})
 
 
 
