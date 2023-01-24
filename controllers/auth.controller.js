@@ -1,12 +1,24 @@
 const db = require('../model');
-const user=require('../model/user.model')
+const User=require('../model/user.model')
 const role=require('../model/role.model');
 const bcrypt=require('bcrypt')
 const jwt = require('jsonwebtoken')
+var enc_pass=""
 require('dotenv').config()
 
-signUpController=(req,res,next)=>{
 
+
+
+signUpController=  (req,res,next)=>{
+  const  user = new User( 
+        {
+            name : req.body.username,
+            email: req.body.email,
+            password : enc_pass
+        }
+        
+        )
+    
 const myPass=req.body.password
 bcrypt.genSalt(10,(err,salt)=>{
 if(err)
@@ -24,46 +36,33 @@ if(err)
                 return;
             }
             
-            enc_pass=hash
+          enc_pass=hash
         })
     })
     
 
 
-const user = new user( 
-{
-    name : req.body.username,
-    email: req.body.email,
-    password : enc_pass
-}
-
-)
 
 
 
-    db.user.create(function(err,user){
+
+    user.save( function(err, user){     
         if (err)
         {
             console.log(err);
             res.status(500).send({"message":err.message})
             return;
         }
-
-
         if (req.body.roles)
         {
-
-            role.find({name:{$in :req.body.roles}},function(err,roles){
+           role.find({name:{$in :req.body.roles}}, function(err,roles){
                 if(err)
                 {
                     console.log(err);
                     res.status(404).send({'message':"Roles does not exist"})
                 }
-
-                
-                
                 user.roles=roles.map((role)=>{role._id})
-                user.save(function(err,result){
+                user.save( function(err,result){
                     
                     if(err)
                     {
@@ -82,27 +81,19 @@ const user = new user(
                 })
 
             })
-        
-        
-
-
-            
-        }
+          }
 
         else
         
-        role.findOne({'name':"user"},function(err,res){
+        role.findOne({'name':"user"},function(err,result_user){
             if(err)
         {
             res.status(500).send({'message':err})
             console.log(err);
+            return;
 
         }
-
-        else
-        {
-
-            user.roles=[res._id]
+            user.Roles=[result_user._id]
             user.save((err)=>{
                 if(err)
                 {
@@ -116,9 +107,6 @@ const user = new user(
             }
             
             })
-            
-
-        }
 
         })
 
@@ -137,7 +125,7 @@ const user = new user(
 }
 signInController =(req,res,next)=>{
 
-    user.findOne({'name':req.body.username},(err,user)=>{
+    User.findOne({'name':req.body.username},(err,user)=>{
 
         if (err)
         {
@@ -152,7 +140,7 @@ signInController =(req,res,next)=>{
 
     })
 
-    user.findOne({'email':req.body.email},(err,user)=>{
+    User.findOne({'email':req.body.email},(err,user)=>{
         if(err)
         {
             console.log(err);

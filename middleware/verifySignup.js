@@ -12,14 +12,14 @@ checkEmptyfields=(req,res,next)=>{
 
     }
     
-    if (!req.email)
+    if (!req.body.email)
     {
         res.status(400).send({'message':"Email cannot be empty"})
         return
     }
 
     
-    if (!req.password)
+    if (!req.body.password)
     {
         req.status(400).send({'message':"Email cannot be empty"})
         return
@@ -31,8 +31,8 @@ checkEmptyfields=(req,res,next)=>{
 
 
 
-checkDuplicateUser=(req,res,next)=>{
-user.findOne({'user':req.body.username}
+checkDuplicateUser=async (req,res,next)=>{
+await user.find({'name':req.body.username}
 ,function(err,result){
 
     if (err)
@@ -40,10 +40,13 @@ user.findOne({'user':req.body.username}
         res.status(400).send({message:{err}})
     return;
     }
-
-    if (result)
+    
+    console.log(result);
+    if (result.length!=0)
     {
-        res.status(500).send({message:'Failed ! username already exist'});
+        
+        res.status(500).send({message:'Failed ! username already exist',
+    result :result});
         return ;
     }
 
@@ -54,8 +57,8 @@ user.findOne({'user':req.body.username}
 }
 
 
-checkDuplicateEmail=(req,res,next)=>{
-    user.findOne({'email':req.body.email},function(res,result){
+checkDuplicateEmail=async (req,res,next)=>{
+ await   user.findOne({'email':req.body.email}, function(err,result){
 
 if(err)
 {
@@ -63,9 +66,10 @@ res.status(500).send({message : err})
 return;
 }
 
-if (result)
+console.log(result);
+if (result.length!=0)
 
-res.status(400).send('Failed ! email already exist')
+res.status(400).send({error :"Failed ! email already exist",result :result})
 return ;
 })
 

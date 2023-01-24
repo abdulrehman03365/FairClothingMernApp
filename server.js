@@ -33,7 +33,7 @@ app.use(cookieSession({
 Handlebars=handlebars.create({defaultLayout:'main'});
 app.engine('handlebars',Handlebars.engine)
 app.set('view engine','handlebars');
-app.set('port',process.env.PORT || 3000);
+app.set('port',process.env.PORT || 8000);
 
 
 require('./routes/auth.routes.js')(app);

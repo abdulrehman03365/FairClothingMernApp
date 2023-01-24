@@ -22,7 +22,7 @@ mongoose.connect(uri,
 //getAllRoles()
 // createUser()
 //updateUser()
- findRoles()
+//  findRoles()
 
 
     })
