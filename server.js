@@ -108,7 +108,7 @@ app.get('/call_sp',(req,res)=>{
 app.get('/',(req,res)=>{res.render('home')
 console.log(process.env);
 })
-app.get('/newsletter',(req,res)=>{res.render('newsletter',{style:'signup.css'})})
+app.get('/newsletter',(req,res)=>{res.render('newsletter',{style:'Signup.css'})})
 app.post('/api/newsletterSignup',
 handlers.api.newsletterSignup)
 
@@ -117,7 +117,7 @@ app.get('/signIn',(req,res)=>{
 	res.render('signIn')
 })
 app.get('/signup',(req,res)=>{
-	res.render('signup')})
+	res.render('signup',{cssfile:'./public/Signup.css'})})
 
 
 app.post('/signup-process',async (req,res)=>{

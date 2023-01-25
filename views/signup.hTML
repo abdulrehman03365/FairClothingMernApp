@@ -1,0 +1,63 @@
+   <!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Booking Website</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+   <style>
+
+
+    
+    #main-holder{
+        
+
+  margin: 30%;
+  width: 50%;
+  height: 50%;
+  outline: dashed 1px black;
+  /* Center vertically and horizontally */
+  display: flex;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  border: 3px solid black  ;
+     
+       
+    }
+    
+    #Signup-Header{
+
+
+    }
+   
+
+  
+
+    #login-form-field{
+        
+margin-top: 10px;
+        
+    }
+   </style>
+    <script src='main.js'></script>
+</head>
+<body>
+   <div id="main-holder" >
+    <h1 id="Signup-Header">
+        Sign Up
+    </h1>
+    <form id="SignUp-form" action="/api/auth/signUp" method="POST">
+    <label for="username">username</label>
+    <input type="text" name="username" id="login-form"  class="login-form-field">
+    <label for="email">email</label>
+    <input type="email" name="email" id="login-form" class="login-form-field">
+    <label for="password">password</label>
+    <input type="password" name="password" id="pass" class="login-form-field" placeholder="Password">
+    <input type="submit" value="SignUp" id="login-form-submit">
+
+</form>
+
+</div>
+</body>
+</html>
