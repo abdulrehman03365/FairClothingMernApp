@@ -31,8 +31,8 @@ checkEmptyfields=(req,res,next)=>{
 
 
 
-checkDuplicateUser=async (req,res,next)=>{
-await user.find({'name':req.body.username}
+checkDuplicateUser= (req,res,next)=>{
+ user.find({'name':req.body.username}
 ,function(err,result){
 
     if (err)
@@ -57,8 +57,8 @@ await user.find({'name':req.body.username}
 }
 
 
-checkDuplicateEmail=async (req,res,next)=>{
- await   user.findOne({'email':req.body.email}, function(err,result){
+checkDuplicateEmail= (req,res,next)=>{
+    user.find({'email':req.body.email}, function(err,result){
 
 if(err)
 {
@@ -84,11 +84,12 @@ next()
 verifyRolesExist=  (req,res,next)=>{
     if(req.body.roles)
 {
-    for (var i =0; i<req.roles.length ; i++)
+    for (var i =0; i<req.body.roles.length ; i++)
     {
-        if (!Roles.includes(req.roles[i]))
+        if (!Roles.includes(req.body.roles[i]))
         {
-            res.status(400).send(`Role ${req.roles[i]} does not exist`)
+            
+            res.status(400).send(`Role ${req.body.roles[i]} does not exist`)
             return ;
         }
 

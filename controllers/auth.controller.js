@@ -75,7 +75,8 @@ if(err)
 
                     {
 
-                        res.status().send({"message":'User is created successfuly'})
+                        res.status(200).send({"message":'User is created successfuly'})
+                        return;
                     }
 
                 })
@@ -103,6 +104,7 @@ if(err)
             else
 
             {
+                log(result_user)
                 res.status(201).send({"message":"User is created successfully"})
             }
             
