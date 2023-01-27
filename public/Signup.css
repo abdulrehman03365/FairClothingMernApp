@@ -1,70 +1,97 @@
-#main-holder {
-  width: 50%;
-  height: 70%;
-  display: block; 
-  justify-items: center;
-  background-color: black;
-  margin: auto;
-  width: 0%;
-  align-items: center;
-
-  border-radius: 7px;
-  box-shadow: 0px 0px 5px 2px black;
-}
-
-#login-error-msg-holder {
-  width: 100%;
-  height: 100%;
-  display: grid;
-  justify-items: center;
-  align-items: center;
-}
-
-#login-error-msg {
-  width: 23%;
-  text-align: center;
+body{
+  box-sizing: border-box;
   margin: 0;
-  padding: 5px;
-  font-size: 12px;
-  font-weight: bold;
-  color: #8a0000;
-  border: 1px solid #8a0000;
-  background-color: #e58f8f;
-  opacity: 0;
+  padding: 0;
+  background-color: white;
 }
 
-#error-msg-second-line {
-  display: block;
-}
-
-#login-form {
-  align-self: flex-start;
-  display: grid;
-  justify-items: center;
+.signUpForm{
+  display: flex;
+  justify-content: center;
   align-items: center;
+  height: 100vh;
 }
 
-.login-form-field::placeholder {
-  color: #3a3a3a;
+.title{
+font-family: "lato", sans-serif;
+margin-top: 0;
+width: 100%;
+margin-bottom: 20px;
+text-align: center;
+
 }
 
-.login-form-field {
-  border: none;
-  border-bottom: 1px solid #3a3a3a;
-  margin-bottom: 10px;
-  border-radius: 3px;
-  outline: none;
-  padding: 0px 0px 5px 5px;
+.form{
+  background-color: white;
+  width: 400px;
+  border-radius: 8px;
+  padding: 20px 40px;
+  box-shadow: 10px 10px 25px 10px rgba(92, 99, 105, .2);
 }
 
-#login-form-submit {
+.inputContainer {
+  position: relative;
+  height: 30px;
+  width: 90%;
+  margin-bottom: 17px;
+}
+
+.input {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  height: 100%;
   width: 100%;
-  padding: 7px;
-  border: none;
-  border-radius: 5px;
-  color: white;
-  font-weight: bold;
-  background-color: #3a3a3a;
-  cursor: pointer;
+  border: 1px solid #DADCE0;
+  border-radius: 7px;
+  font-size: 16px;
+  padding: 0 20px;
   outline: none;
+  background: none;
+  z-index: 1;
 }
+::placeholder {
+  color: transparent;
+}
+
+.label {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+ 
+  padding: 0 4px;
+  background-color: white;
+  color: #DADCE0;
+  font-size: 10px;
+  transition: 0.5s;
+  z-index: 2;
+}
+.submitBtn{
+
+  display: block;
+  margin-left: auto;
+  padding: 10px 15px;
+  border: none;
+ background-color: black;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 30px;
+}
+
+
+.label{
+ 
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    padding: 0 4px;
+    background-color: white;
+    color: #DADCE0;
+    font-size: 16px;
+    transition: 0.5s;
+    z-index: 0;
+
+}
+

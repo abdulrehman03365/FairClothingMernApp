@@ -5,59 +5,37 @@
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <title>Booking Website</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
-   <style>
-
-
-    
-    #main-holder{
-        
-
-  margin: 30%;
-  width: 50%;
-  height: 50%;
-  outline: dashed 1px black;
-  /* Center vertically and horizontally */
-  display: flex;
-  position: relative;
-  justify-content: center;
-  align-items: center;
-  border: 3px solid black  ;
-     
-       
-    }
-    
-    #Signup-Header{
-
-
-    }
-   
-
-  
-
-    #login-form-field{
-        
-margin-top: 10px;
-        
-    }
-   </style>
+    <link rel="stylesheet" href="../public/Signup.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato&display=swap">
     <script src='main.js'></script>
 </head>
-<body>
-   <div id="main-holder" >
-    <h1 id="Signup-Header">
-        Sign Up
-    </h1>
-    <form id="SignUp-form" action="/api/auth/signUp" method="POST">
-    <label for="username">username</label>
-    <input type="text" name="username" id="login-form"  class="login-form-field">
-    <label for="email">email</label>
-    <input type="email" name="email" id="login-form" class="login-form-field">
-    <label for="password">password</label>
-    <input type="password" name="password" id="pass" class="login-form-field" placeholder="Password">
-    <input type="submit" value="SignUp" id="login-form-submit">
-
-</form>
-
-</div>
+<body >
+    <div class="signUpForm">
+        <form action="api/auth/signup" method="get" class="form">
+          <h1 class="title">Sign up</h1>
+    
+          <div class="inputContainer">
+            <input type="text" class="input" placeholder="a">
+            <label for="" class="label">Email</label>
+          </div>
+    
+          <div class="inputContainer">
+            <input type="text" class="input" placeholder="a">
+            <label for="" class="label">Username</label>
+          </div>
+    
+          <div class="inputContainer">
+            <input type="text" class="input" placeholder="a">
+            <label for="" class="label">Password</label>
+          </div>
+    
+          <div class="inputContainer">
+            <input type="text" class="input" placeholder="a">
+            <label for="" class="label">Confirm Password</label>
+          </div>
+    
+          <input type="submit" class="submitBtn" value="Sign up">
+        </form>
+      </div>
 </body>
 </html>
