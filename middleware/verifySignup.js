@@ -1,27 +1,25 @@
 const db=require('../model')
 const Roles=db.Roles;
 const user=db.user;
-
+const flash=require('connect-flash-plus')
 checkEmptyfields=(req,res,next)=>{
 
-    if (!req.body.username)
+    
     if (!req.body.username)
     {
-        res.status(400).send({'message':"User Name cannot be empty"})
+    
+        // res.status(400).send({'message':"username cannot be empty"})
+        req.flash('error',"Username can't be empty")
+        res.redirect('/signIn')
+
         return
 
     }
     
-    if (!req.body.email)
-    {
-        res.status(400).send({'message':"Email cannot be empty"})
-        return
-    }
-
-    
+ 
     if (!req.body.password)
     {
-        req.status(400).send({'message':"Email cannot be empty"})
+        req.status(400).send({'message':"password cannot be empty"})
         return
     }
 

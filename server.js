@@ -11,12 +11,13 @@ const cors=require('cors')
 const cookieSession=require('cookie-session');
 const db = require('./model/index');
 const { mongoose } = require('./model/index');
-
+const flash = require('connect-flash-plus');
 
 require('dotenv').config()
 
 //Middlewares
 // console.log(join(__dirname,'public'));
+
 app.use(cors())
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({extended:true}))
@@ -28,6 +29,7 @@ app.use(cookieSession({
 	httpOnly:true
 
 }))
+app.use(flash())
 
 // Setting view engine
 Handlebars=handlebars.create({defaultLayout:'main'});
@@ -114,10 +116,10 @@ handlers.api.newsletterSignup)
 
 
 app.get('/signIn',(req,res)=>{
-	res.render('signIn')
+	res.render('signIn',{cssfile:'signIn.css'})
 })
 app.get('/signup',(req,res)=>{
-	res.render('signup',{cssfile:'./public/Signup.css'})})
+	res.render('signup',{cssfile:'signup.css'})})
 
 
 app.post('/signup-process',async (req,res)=>{

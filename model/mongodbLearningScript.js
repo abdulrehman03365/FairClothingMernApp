@@ -24,8 +24,19 @@ mongoose.connect(uri,
 //updateUser()
 //  findRoles()
 
-
+// deleteAll()
     })
+
+
+
+  function deleteAll()
+  {
+    user.deleteMany({ name:{ $regex: /^a/ } }).then(function(){
+      console.log("Data deleted"); // Success
+  }).catch(function(error){
+      console.log(error); // Failure
+  });
+  }
 
   function findRoles()
 {

@@ -3,6 +3,7 @@ const User=require('../model/user.model')
 const role=require('../model/role.model');
 const bcrypt=require('bcrypt')
 const jwt = require('jsonwebtoken')
+const flash=require('connect-flash')
 var enc_pass=""
 require('dotenv').config()
 
@@ -128,37 +129,32 @@ if(err)
 signInController =(req,res,next)=>{
 
     User.findOne({'name':req.body.username},(err,user)=>{
-
-        if (err)
-        {
-            res.status(500).send({'message':err})
-        return;
-        }
-
-        else if (!user)
-        {
-            res.status(404).status('user does not exist')
-        }
-
-    })
-
-    User.findOne({'email':req.body.email},(err,user)=>{
+  
+       
         if(err)
         {
             console.log(err);
-            res.status(500).send({"message":err})
+            res.status(500).send({"message":err.message})
             return;
         }
-        
-        
+                                                                                                                                                                                                                                                                                                                      
+        if (!user)
+        {
+            // res.status(402).send({'message': "User not found"})
+            req.flash('error','Invalid username or password')
+            res.redirect('/signIn')
+            return;
+        }
         else
         {
 
             isValidPassword=bcrypt.compare(req.body.password,user.password)
             if(!isValidPassword)
             {
-
-                res.status(401).send('invalid password is provided')
+                alert('Error: Invalid Email or password')
+                req.redirect('/signIn')
+                return;
+                // res.status(401).send('invalid password is provided')
             }
 
             if(isValidPassword)
@@ -173,6 +169,8 @@ signInController =(req,res,next)=>{
                 authorities.push("Role_"+user.roles[i].name.toUpperCase())
                }
                res.status(200).send({'userId':user._id,'authoroties':authorities,'authTocken':token})
+               alert('Login Successfull')
+               req.redirect('/')
 
 
 
