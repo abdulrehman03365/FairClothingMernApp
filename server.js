@@ -12,6 +12,7 @@ const cookieSession=require('cookie-session');
 const db = require('./model/index');
 const { mongoose } = require('./model/index');
 const flash = require('connect-flash-plus');
+const { authJwtMiddleware } = require('./middleware');
 
 require('dotenv').config()
 
@@ -33,8 +34,8 @@ app.use(flash())
 
 // Setting view engine
 Handlebars=handlebars.create({defaultLayout:'main'});
-app.engine('handlebars',Handlebars.engine)
-app.set('view engine','handlebars');
+// app.engine('handlebars',Handlebars.engine)
+// app.set('view engine','handlebars');
 app.set('port',process.env.PORT || 8000);
 
 
@@ -106,21 +107,34 @@ app.get('/call_sp',(req,res)=>{
 })
 
 
+// const viewPath=path.join(__dirname,'./views')
+console.log(__dirname);
 
-app.get('/',(req,res)=>{res.render('home',{style:'home.css'})
-console.log(process.env);
+app.get('/',(req,res)=>{
+	
+  
+	res.sendFile(__dirname +"/views/home.html")
+
+
 })
+
+
+
+
+
+
 app.get('/newsletter',(req,res)=>{res.render('newsletter',{style:'Signup.css'})})
 app.post('/api/newsletterSignup',
 handlers.api.newsletterSignup)
 
 
 app.get('/signIn',(req,res)=>{
-	res.render('signIn',{cssfile:'signIn.css'})
+	res.sendFile(__dirname+"/views/signIn.html")
 })
 app.get('/signup',(req,res)=>{
-	res.render('signup',{cssfile:'signup.css'})})
+	res.sendFile(__dirname+"/views/signup.html")})
 
+app.get('/become-Partner',)
 
 app.post('/signup-process',async (req,res)=>{
 	const password = await bcrypt.hash(req.body.password,10)
