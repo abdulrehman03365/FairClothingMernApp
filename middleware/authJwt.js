@@ -7,7 +7,8 @@ verifyJwtToken = (req, res, next) => {
     token = req.session.token;
 
     if (!token) {
-        res.status(403).send({ 'message': "Tocken is not provided" })
+        console.log("Auth tocken is not ");
+        res.status(403).send({ 'message': "Auth tocken is not provided" })
         return;
     }
 
@@ -52,3 +53,5 @@ login = (req, res, next) => {
 }
 
 signOut = (req, res, next) => { }
+
+module.exports={verifyJwtToken}
