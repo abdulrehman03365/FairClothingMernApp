@@ -12,6 +12,7 @@ const cookieSession=require('cookie-session');
 const db = require('./model/index');
 const { mongoose } = require('./model/index');
 const flash = require('connect-flash-plus');
+const { authJwtMiddleware } = require('./middleware');
 
 require('dotenv').config()
 
@@ -33,28 +34,28 @@ app.use(flash())
 
 // Setting view engine
 Handlebars=handlebars.create({defaultLayout:'main'});
-app.engine('handlebars',Handlebars.engine)
-app.set('view engine','handlebars');
+// app.engine('handlebars',Handlebars.engine)
+// app.set('view engine','handlebars');
 app.set('port',process.env.PORT || 8000);
 
 
 require('./routes/auth.routes.js')(app);
+require('./routes/user.routes.js')(app);
 
-
-// //get mongodb connection
-// const uri = `mongodb+srv://${process.env.MONGO_DB_USERNAME}:${process.env.MONGO_DB_PASSWORD}@cluster0.gzyxqbq.mongodb.net/BookingApplicationDB?retryWrites=true&w=majority`
-// mongoose.set('strictQuery', true);
-// mongoose.connection.on('error',(error)=>{console.error('connection to MongoDB disconnected :');})
-// mongoose.connection.on('connected',(data)=>{console.log('connected to mongoDB');})
-// mongoose.connection.on('connecting',()=>{console.log('connecting to mongodb');})
-// mongoose.connection.on('close',()=>{console.log('MongoDB connection closed');})
-// mongoose.connect(uri,
-// {
-//     useNewUrlParser: true,
-//     useUnifiedTopology: true
-//   }).then(()=>{
-//   console.log("You are connected successfully to MongoDB");
-// })
+//get mongodb connection
+const uri = `mongodb+srv://${process.env.MONGO_DB_USERNAME}:${process.env.MONGO_DB_PASSWORD}@cluster0.gzyxqbq.mongodb.net/BookingApplicationDB?retryWrites=true&w=majority`
+mongoose.set('strictQuery', true);
+mongoose.connection.on('error',(error)=>{console.error('connection to MongoDB disconnected :');})
+mongoose.connection.on('connected',(data)=>{console.log('connected to mongoDB');})
+mongoose.connection.on('connecting',()=>{console.log('connecting to mongodb');})
+mongoose.connection.on('close',()=>{console.log('MongoDB connection closed');})
+mongoose.connect(uri,
+{
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+  }).then(()=>{
+  console.log("You are connected successfully to MongoDB");
+})
 
 
 
@@ -106,21 +107,34 @@ app.get('/call_sp',(req,res)=>{
 })
 
 
+// const viewPath=path.join(__dirname,'./views')
+console.log(__dirname);
 
-app.get('/',(req,res)=>{res.render('home',{style:'home.css'})
-console.log(process.env);
+app.get('/',(req,res)=>{
+	
+  
+	res.sendFile(__dirname +"/views/home.html")
+
+
 })
+
+
+
+
+
+
 app.get('/newsletter',(req,res)=>{res.render('newsletter',{style:'Signup.css'})})
 app.post('/api/newsletterSignup',
 handlers.api.newsletterSignup)
 
 
 app.get('/signIn',(req,res)=>{
-	res.render('signIn',{cssfile:'signIn.css'})
+	res.sendFile(__dirname+"/views/signIn.html")
 })
 app.get('/signup',(req,res)=>{
-	res.render('signup',{cssfile:'signup.css'})})
+	res.sendFile(__dirname+"/views/signup.html")})
 
+app.get('/become-Partner',)
 
 app.post('/signup-process',async (req,res)=>{
 	const password = await bcrypt.hash(req.body.password,10)
