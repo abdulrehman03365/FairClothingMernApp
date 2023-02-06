@@ -1,25 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import notFound from './pages/notFound/notFound'
+import home from './pages/home/home'
+import signIn from  './pages/signIn/signIn'
+import signUp from './pages/singUp/signUp'
+import becomePartner from './pages/becomePartner/becomePartner'
+import { Component } from "react"
+import {Route , Link , BrowserRouter as Router , Routes} from 'react-router-dom'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+
+function App(params) {
+    
+  
+return(
+    <div className='App'>
+      <Routes>
+      <Route  path="/" element={<home/>} />
+            <Route path='/signIn' element={<signIn/>} />
+            <Route path='/signUp' element={<signUp/>} />
+            <Route path='/becomePartner' element={<becomePartner/>} />
+            <Route element={<notFound/>}/>
+      </Routes>
+
     </div>
-  );
+
+
+   )
 }
 
-export default App;
+
+
+export default App
