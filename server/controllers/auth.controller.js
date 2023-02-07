@@ -141,8 +141,11 @@ signInController =(req,res,next)=>{
         if (!user)
         {
             // res.status(402).send({'message': "User not found"})
-            req.flash('error','Invalid username or password')
-            res.redirect('/signIn')
+            // req.flash('error','Invalid username or password')
+            // res.redirect('/signIn')
+            
+            console.log('Invalid username or password provided.');
+            res.status(402).send({message:'Invalid Username or password'})
             return;
         }
         else
@@ -151,10 +154,12 @@ signInController =(req,res,next)=>{
             isValidPassword=bcrypt.compare(req.body.password,user.password)
             if(!isValidPassword)
             {
-                alert('Error: Invalid Email or password')
-                req.redirect('/signIn')
+                // alert('Error: Invalid Email or password')
+                // req.redirect('/signIn')
+                // return;
+                console.log('Password is not valid');
+                res.status(401).send('invalid password is provided')
                 return;
-                // res.status(401).send('invalid password is provided')
             }
 
             if(isValidPassword)

@@ -1,12 +1,12 @@
 
 import React from 'react'
 import { Component } from 'react'
+import './signIn.css'
 
 class SignIn extends Component{
-    return()
-    {
-<body>
-  
+  render()
+  {  
+  return(
     <div class="logInForm">
         <form action="api/auth/signIn" method="post" class="form">
           <h1 class="title">Log In</h1>
@@ -24,9 +24,10 @@ class SignIn extends Component{
     
           <input type="submit" class="submitBtn" value="Sign up"/>
         </form>
-      </div>
-</body>
-    }
-}
+      </div>)
+    
+
+    
+  }}
 
 export default SignIn

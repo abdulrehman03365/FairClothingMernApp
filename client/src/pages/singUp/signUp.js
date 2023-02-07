@@ -1,6 +1,6 @@
 import { Component } from "react";
 import './signUp.css'
-class signUp extends Component{
+class SignUp extends Component{
 
     render(){
         return(
@@ -37,4 +37,4 @@ class signUp extends Component{
 }
 }
 
-export default signUp;
+export default SignUp;
