@@ -4,7 +4,7 @@ class signUp extends Component{
 
     render(){
         return(
-<div class="signUpForm">
+ <div class="signUpForm">
       <form action="api/auth/signup" method="post" class="form">
         <h1 class="title">Sign up</h1>
   
@@ -30,10 +30,11 @@ class signUp extends Component{
   
         <input type="submit" class="submitBtn" value="Sign up"/>
       </form>
-    </div>
+    </div> 
 
         )
-    }
+
+}
 }
 
 export default signUp;
