@@ -50,9 +50,7 @@ body{
     background: none;
     z-index: 1;
   }
-  ::placeholder {
-    color: transparent;
-  }
+ 
   
   .label {
     position: absolute;
