@@ -22,7 +22,7 @@ function onSubmit (data){
 
 } 
 
-};
+
 
 
   return(
