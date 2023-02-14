@@ -128,7 +128,7 @@ if(err)
 }
 signInController =(req,res,next)=>{
 
-    User.findOne({'name':req.body.username},(err,user)=>{
+    User.findOne({'email':req.body.email},(err,email)=>{
   
        
         if(err)
@@ -138,20 +138,20 @@ signInController =(req,res,next)=>{
             return;
         }
                                                                                                                                                                                                                                                                                                                       
-        if (!user)
+        if (!email)
         {
             // res.status(402).send({'message': "User not found"})
             // req.flash('error','Invalid username or password')
             // res.redirect('/signIn')
             
-            console.log('Invalid username or password provided.');
-            res.status(402).send({message:'Invalid Username or password'})
+            console.log('Invalid Email or password provided.');
+            res.status(402).send({message:'Invalid Email or password'})
             return;
         }
         else
         {
 
-            isValidPassword=bcrypt.compare(req.body.password,user.password)
+            isValidPassword=bcrypt.compare(req.body.password,email.password)
             if(!isValidPassword)
             {
                 // alert('Error: Invalid Email or password')
@@ -165,15 +165,15 @@ signInController =(req,res,next)=>{
             if(isValidPassword)
             {
                
-             const token=jwt.sign({id:user._id},process.env.JWT_SECRET,{expiresIn:60000})
+             const token=jwt.sign({id:email._id},process.env.JWT_SECRET,{expiresIn:60000})
                
                req.session.token=token
                var authorities =[]
-               for(i=0 ;i<user.roles;i++)
+               for(i=0 ;i<email.roles;i++)
                {
-                authorities.push("Role_"+user.roles[i].name.toUpperCase())
+                authorities.push("Role_"+email.roles[i].name.toUpperCase())
                }
-               res.status(200).send({'userId':user._id,'authoroties':authorities,'authTocken':token})
+               res.status(200).send({'userId':email._id,'authoroties':authorities,'authTocken':token})
                req.redirect('/')
 
 
