@@ -1,11 +1,12 @@
 
 
-import Home from './pages/home/home';
-import BecomePartner from './pages/becomePartner/becomePartner';
-import SignIn from './pages/signIn/signIn';
-import SignUp from './pages/singUp/signUp';
+import Home from './components/home/home';
+import BecomePartner from './components/becomePartner/becomePartner';
+import SignIn from './components/signIn/signIn';
+import SignUp from './components/singUp/signUp';
 import { ReactDOM , Browser, Component } from 'react';
-import NotFound from './pages/notFound/notFound';
+import NotFound from './components/notFound/notFound';
+import { ProtectedRoutes } from './components/protectedRoutes';
 import {BrowserRouter as Router , Routes , Route , Link} from 'react-router-dom'
 class App extends Component
  {
@@ -14,11 +15,12 @@ class App extends Component
     return ( 
         <Router>
       <div>
+       
         <Routes>
             <Route  path='/' element={<Home/>} />
             <Route path="signIn" element={<SignIn/>} />
             <Route path ="signUp" element={<SignUp/>} />
-            <Route path="becomePartner" element={<BecomePartner/>}/>
+            <Route path="becomePartner" element={<ProtectedRoutes component={BecomePartner} />}/>
             <Route path='*' element={<NotFound/>}/>
             
         </Routes>
