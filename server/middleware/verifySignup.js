@@ -5,28 +5,9 @@ const user=db.user;
 const flash=require('connect-flash-plus')
 checkEmptyfields=(req,res,next)=>{
 
-
-    if (!req.body.username )
-    {
-
-       
-        return
-
-    }
-
-
-    if (!req.body.password)
-    {
-        
-    }
-
-
-    if (!req.body.ema)
-    {
-        
-    }
-
- next()
+if (!req.body.email.trim() || !password.trim() || !password.trim()  )
+res.status(400).send({message:'Field must not be empty'})
+next()
 }
 
 

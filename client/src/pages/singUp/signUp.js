@@ -7,7 +7,7 @@ function SignUpform(){
 const {register, handleSubmit , formState : {errors}}=useForm();
 
 function onSubmit (data){
-  fetch('https:\\localhost:3000\\api\auth\signup',{method:'POST',
+  fetch('https:\\localhost:8000\\api\auth\signup',{method:'POST',
   headers:{
     'Content-type':'applicaion/json'
   

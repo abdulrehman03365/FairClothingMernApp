@@ -1,20 +1,22 @@
 import { Component } from "react";
 import './signIn.css'
 import {useForm} from "react-hook-form"
-
+import {useNavigate} from 'react-router-dom'
  function SignIn()
    {
     const {register, handleSubmit , formState : {errors}}=useForm();
-     
+     const navigate = useNavigate();
       function handleSignIn(data,event){
         event.preventDefault()
-        fetch('https:\\localhost:3000\\api\auth\signIn',{method:'POST',
+        fetch('http://localhost:8000/api/auth/signIn',{method:'POST',
         headers:{
           'Content-type':'applicaion/json'
         
         }, 
         body :JSON.stringify(data)} ).then(data => {
           console.log('Success:', data);
+          navigate("/becomePartner")
+          
         })
         .catch(error => {
           console.error('Error:', error);
