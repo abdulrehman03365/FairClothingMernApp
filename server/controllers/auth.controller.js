@@ -62,7 +62,7 @@ if(err)
                     console.log(err);
                     res.status(404).send({'message':"Roles does not exist"})
                 }
-                user.roles=roles.map((role)=>{role._id})
+                user.Role=roles.map((role)=>{role._id})
                 user.save( function(err,result){
                     
                     if(err)
@@ -95,7 +95,7 @@ if(err)
             return;
 
         }
-            user.Roles=[result_user._id]
+            user.Role=[result_user._id]
             user.save((err)=>{
                 if(err)
                 {
@@ -105,7 +105,7 @@ if(err)
             else
 
             {
-                log(result_user)
+                log("Created User details " + result_user)
                 res.status(201).send({"message":"User is created successfully"})
             }
             
@@ -173,8 +173,10 @@ signInController =(req,res,next)=>{
                {
                 authorities.push("Role_"+email.roles[i].name.toUpperCase())
                }
+               console.log("Email and Password are correct and user is successfuly Loged In",{'userId':email._id,
+               'authoroties':authorities,'authTocken':token});
                res.status(200).send({'userId':email._id,'authoroties':authorities,'authTocken':token})
-               req.redirect('/')
+              
 
 
 
