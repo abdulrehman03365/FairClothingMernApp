@@ -1,27 +1,43 @@
-import { Component } from "react";
+import { Component , useState } from "react";
 import './signIn.css'
 import {useForm} from "react-hook-form"
 import {useNavigate} from 'react-router-dom'
  function SignIn()
    {
     const {register, handleSubmit , formState : {errors}}=useForm();
-     const navigate = useNavigate();
-      function handleSignIn(data,event){
+    const [successMessage, setSuccessMessage] = useState('')
+    const [errorMessage, setErrorMessage] =useState('')
+    const navigate = useNavigate();
+    async function handleSignIn(data,event){
         event.preventDefault()
-        fetch('http://localhost:8000/api/auth/signIn',{method:'POST',
+        try{
+          const response= await fetch('http://localhost:8000/api/auth/signIn',{method:'POST',
         headers:{
-          'Content-type':'applicaion/json'
+          'Content-type':'application/json'
         
         }, 
-        body :JSON.stringify(data)} ).then(data => {
-          console.log('Success:', data);
-          navigate("/becomePartner")
-          
-        })
-        .catch(error => {
+        body :JSON.stringify(data)}  )
+          if (response.ok)
+          {
+            console.log(response);
+            setSuccessMessage("Successfully Loged In")
+            navigate("/becomePartner")
+            
+
+          }  
+          else if (response.status!=200)
+          {
           console.error('Error:', error);
-        });
-       }
+          setErrorMessage(error)
+          }
+
+
+        }
+        catch(error)
+        {
+          setErrorMessage(error.message)
+        }
+        }
 
 
 
@@ -51,7 +67,11 @@ import {useNavigate} from 'react-router-dom'
         {errors.password?.type==='required' && <p role={'alert'}>Password is required</p>}
 
         <input type="submit" className="submitBtn" value="Log In"/>
+
       </form>
+        
+        {successMessage && <div>{successMessage}</div>}
+        {errorMessage && <div>{errorMessage}</div>}
     </div> 
       </>
        

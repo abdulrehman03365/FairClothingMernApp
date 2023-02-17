@@ -3,8 +3,8 @@ const db=require('../model')
 const Roles=db.Roles;
 const user=db.user;
 checkEmptyfields=(req,res,next)=>{
-
-if (!req.body.email.trim() || !req.body.password.trim() || !req.body.confirmPassword.trim()  )
+console.log(req);
+if (!req.body.email.trim() || !req.body.password.trim())
 res.status(400).send({message:'Signup Field must not be empty'})
 next()
 }

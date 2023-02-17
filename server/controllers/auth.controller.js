@@ -127,7 +127,7 @@ if(err)
 
 }
 signInController =(req,res,next)=>{
-
+   
     User.findOne({'email':req.body.email},(err,email)=>{
   
        

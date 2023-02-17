@@ -7,16 +7,19 @@ function SignUpform(){
 const {register, handleSubmit , formState : {errors}}=useForm();
 
 function onSubmit (data){
+  
   fetch('https:\\localhost:8000\\api\auth\signup',{method:'POST',
   headers:{
     'Content-type':'applicaion/json'
   
   }, 
-  body :JSON.stringify(data)} ).then(data => {
-    console.log('Success:', data);
-  })
+  body :JSON.stringify(data)} ).
+  then(
+    response=>{if (response.ok)alert('Successfully signed Up;')}
+  )
   .catch(error => {
     console.error('Error:', error);
+    alert('Error:', error)
   });
 
 

@@ -13,7 +13,7 @@ module.exports = function (app) {
     app.post("/api/auth/signup",[verifySignup.checkEmptyfields,verifySignup.checkDuplicateUser,verifySignup.checkDuplicateEmail],
     AuthController.signUpController)
 
-
+    
     app.post("/api/auth/signIn",[verifySignup.checkEmptyfields],AuthController.signInController)
 
     app.get("/api/auth/signout",AuthController.signOutController)
