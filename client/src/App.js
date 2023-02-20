@@ -1,13 +1,14 @@
 
 
-import Home from './components/home/home';
-import BecomePartner from './components/becomePartner/becomePartner';
-import SignIn from './components/signIn/signIn';
-import SignUp from './components/singUp/signUp';
+import Home from './pages/home/home';
+import BecomePartner from './pages/becomePartner/becomePartner';
+import SignIn from './pages/signIn/signIn';
+import SignUp from './pages/singUp/signUp';
 import { ReactDOM , Browser, Component } from 'react';
-import NotFound from './components/notFound/notFound';
-import { ProtectedRoutes } from './components/protectedRoutes';
+import NotFound from './pages/notFound/notFound';
+import { ProtectedRoutes } from './pages/protectedRoutes';
 import {BrowserRouter as Router , Routes , Route , Link} from 'react-router-dom'
+import 'bootstrap/dist/css/bootstrap.min.css';
 class App extends Component
  {
   render ()

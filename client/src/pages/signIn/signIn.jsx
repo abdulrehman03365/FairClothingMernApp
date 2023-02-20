@@ -1,13 +1,17 @@
 import { Component , useState } from "react";
 import './signIn.css'
+import {Alert} from 'react-bootstrap'
 import {useForm} from "react-hook-form"
 import {useNavigate} from 'react-router-dom'
+import Alertcomp from "../../components/alertComp";
  function SignIn()
    {
     const {register, handleSubmit , formState : {errors}}=useForm();
     const [successMessage, setSuccessMessage] = useState('')
     const [errorMessage, setErrorMessage] =useState('')
+    const [showErrorAlert ,setShowErrorAlert]=useState('false')
     const navigate = useNavigate();
+    
     async function handleSignIn(data,event){
         event.preventDefault()
         try{
@@ -27,8 +31,10 @@ import {useNavigate} from 'react-router-dom'
           }  
           else if (response.status!=200)
           {
-          console.error('Error:', error);
-          setErrorMessage(error)
+          const jsonResp= await response.json()
+          console.error('Error:'+ jsonResp.message);
+          setErrorMessage("Error :" + jsonResp.message)
+          setShowErrorAlert(true)
           }
 
 
@@ -36,16 +42,19 @@ import {useNavigate} from 'react-router-dom'
         catch(error)
         {
           setErrorMessage(error.message)
+         
+          setShowErrorAlert(true)
         }
         }
 
-
+        const [show,setShow]=useState(false);
 
         return(
 
             <>
       
-      
+      <Alert show={showErrorAlert} message={errorMessage} varient={"danger"} dismissible onClose={()=>{showErrorAlert(false)}} 
+      />
       <div className="logInForm" >
       <form className="form" onSubmit={handleSubmit(handleSignIn)}>
 
@@ -70,8 +79,8 @@ import {useNavigate} from 'react-router-dom'
 
       </form>
         
-        {successMessage && <div>{successMessage}</div>}
-        {errorMessage && <div>{errorMessage}</div>}
+        {/* {successMessage && <div>{successMessage}</div>}
+        {errorMessage && <div>{errorMessage}</div>} */}
     </div> 
       </>
        
