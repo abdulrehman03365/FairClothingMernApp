@@ -5,14 +5,15 @@ import './alertComp.css'
 
 function Alertcomp(props)
 {
-   const {varient ,message}=props
+   const {varient ,message , show , onClose}=props
+  
 
   
 
     
        
-
-        return  <Alert id='alertbox' varient={varient} dismissible >{message} </Alert>
+  
+        return  <Alert id='alertbox'show={show} onClose={onClose} variant={varient} dismissible >{message} </Alert>
          
         
       

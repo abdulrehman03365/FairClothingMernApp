@@ -4,12 +4,13 @@ import {Alert} from 'react-bootstrap'
 import {useForm} from "react-hook-form"
 import {useNavigate} from 'react-router-dom'
 import Alertcomp from "../../components/alertComp";
+
  function SignIn()
    {
     const {register, handleSubmit , formState : {errors}}=useForm();
     const [successMessage, setSuccessMessage] = useState('')
     const [errorMessage, setErrorMessage] =useState('')
-    const [showErrorAlert ,setShowErrorAlert]=useState('false')
+    const [showErrorAlert ,setShowErrorAlert]=useState(false)
     const navigate = useNavigate();
     
     async function handleSignIn(data,event){
@@ -34,6 +35,7 @@ import Alertcomp from "../../components/alertComp";
           const jsonResp= await response.json()
           console.error('Error:'+ jsonResp.message);
           setErrorMessage("Error :" + jsonResp.message)
+          
           setShowErrorAlert(true)
           }
 
@@ -47,14 +49,14 @@ import Alertcomp from "../../components/alertComp";
         }
         }
 
-        const [show,setShow]=useState(false);
-
+      
+        console.log(showErrorAlert);
         return(
 
             <>
       
-      <Alert show={showErrorAlert} message={errorMessage} varient={"danger"} dismissible onClose={()=>{showErrorAlert(false)}} 
-      />
+       
+      {showErrorAlert && <Alertcomp varient={"danger"} show={showErrorAlert} onClose={()=>setShowErrorAlert(false)} message={errorMessage} ></Alertcomp>}
       <div className="logInForm" >
       <form className="form" onSubmit={handleSubmit(handleSignIn)}>
 
