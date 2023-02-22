@@ -16,7 +16,7 @@ import Alertcomp from "../../components/alertComp";
     async function handleSignIn(data,event){
         event.preventDefault()
         try{
-          const response= await fetch('http://localhost:8000/api/auth/signIn',{method:'POST',
+          const response= await fetch('http://localhost:8000/api/auth/signIn',{method:'POST',credentials:'include',
         headers:{
           'Content-type':'application/json'
         
@@ -26,6 +26,7 @@ import Alertcomp from "../../components/alertComp";
           {
             console.log(response);
             setSuccessMessage("Successfully Loged In")
+           
             navigate("/becomePartner")
             
 

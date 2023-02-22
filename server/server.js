@@ -20,7 +20,10 @@ require('dotenv').config()
 // console.log(join(__dirname,'public'));
 
 app.use(express.json());
-app.use(cors())
+app.use(cors({credentials: true,
+origin: 'http://localhost:3000',
+methods: ['GET', 'POST', 'PUT', 'DELETE'],
+allowedHeaders: ['Content-Type', 'Authorization']}))
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({extended:true}))
 // 
@@ -31,7 +34,7 @@ app.use(cookieSession({
 	httpOnly:true
 
 }))
-app.use(flash())
+
 
 // Setting view engine
 Handlebars=handlebars.create({defaultLayout:'main'});

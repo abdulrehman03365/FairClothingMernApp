@@ -145,7 +145,7 @@ signInController =(req,res,next)=>{
             // res.redirect('/signIn')
             
             console.log('Invalid Email or password provided.');
-            res.status(402).send({message:'Invalid Email or password'})
+            res.status(400).send({message:'Invalid Email or password'})
             return;
         }
         else

@@ -36,13 +36,13 @@ function onSubmit (data){
         <h1 className="title">Sign up</h1>
         <div className="inputContainer">
           <input type="text" {...register("username",{required:true})} aria-invalid={errors.username ? "true" : "false"} className="input" name="username"  />
-          <label for="" className="label">Username</label>
+          <label  className="label">Username</label>
         </div>
         {errors.username?.type==='required' && <p role={'alert'}>Username is required</p>}
   
         <div className="inputContainer">
           <input type="text" {...register("email",{required:true , pattern :{value:/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,message:'Plz enter a valid email'}})}    className="input" name ="email"  />
-          <label for="" className="label">Email</label>
+          <label  className="label">Email</label>
 
         </div>
         {errors.email?.type==='required' && <p role={'alert'}>Email is required</p>}
@@ -51,14 +51,14 @@ function onSubmit (data){
   
         <div className="inputContainer">
           <input type="text" {...register("password",{required:true , minlength:8})}  className="input" name="password" />
-          <label for="" className="label">Password</label>
+          <label  className="label">Password</label>
         </div>
         {errors.password?.type==='required' && <p role={'alert'}>Password is required</p>}
         
   
         <div className="inputContainer">
           <input type="text" {...register("confirmPassword",{required:true , minlength:8})} className="input" name="confirmPassword"/>
-          <label for="" className="label">Confirm Password</label>
+          <label  className="label">Confirm Password</label>
         </div>
         {errors.confirmPassword?.type==='required' && <p role={'alert'}>Confirm password is required</p>}
   
