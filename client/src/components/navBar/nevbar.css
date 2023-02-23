@@ -26,6 +26,7 @@
     color: rgb(13, 26, 38);
     position: fixed;
     top: 0;
+    
     height: 60px;
     line-height: 60px;
     width: 100vw;
@@ -34,8 +35,8 @@
   
   .nav-wrapper {
     margin: auto;
-    text-align: center;
-    width: 70%;
+    text-align: start;
+    width: 100%;
   } @media(max-width: 768px) {
       .nav-wrapper {
         width: 90%;
@@ -49,7 +50,7 @@
   
   .logo {
     float: left;
-    margin-left: 28px;
+    margin-left: 10px;
     font-size: 1.5em;
     height: 60px;
     letter-spacing: 1px;
@@ -86,7 +87,7 @@
   #navbar li a {
     color: rgb(13, 26, 38);
     display: block;
-    font-size: 0.7em;
+    font-size: 0.9em;
     height: 50px;
     letter-spacing: 1px;
     margin: 0 20px;
@@ -100,7 +101,7 @@
   
   #navbar li a:hover {
     /* border-bottom: 1px solid rgb(28, 121, 184); */
-    color: rgb(28, 121, 184);
+    color: #141619;
     transition: all 1s ease;
     -webkit-transition: all 1s ease;
   }

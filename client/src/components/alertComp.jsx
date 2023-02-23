@@ -5,15 +5,14 @@ import './alertComp.css'
 
 function Alertcomp(props)
 {
-   const {varient ,message , show , onClose}=props
+   const {varient ,message }=props
   
-
-  
-
+  const [show,setShow]=useState(true)
+  const handleClose=()=>{setShow(false)}
     
        
   
-        return  <Alert id='alertbox'show={show} onClose={onClose} variant={varient} dismissible >{message} </Alert>
+        return  <Alert id='alertbox'show={show} onClose={handleClose} variant={varient} dismissible >{message} </Alert>
          
         
       

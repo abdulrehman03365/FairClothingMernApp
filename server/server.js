@@ -29,7 +29,7 @@ app.use(bodyParser.urlencoded({extended:true}))
 // 
 
 app.use(cookieSession({
-	name:'NodeJsBokingWebsite',
+	name:'NodeJsBoockingWebsite',
 	secret:'COOKIE_SECRET',
 	httpOnly:true
 

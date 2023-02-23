@@ -57,7 +57,7 @@ import Alertcomp from "../../components/alertComp";
             <>
       
        
-      {showErrorAlert && <Alertcomp varient={"danger"} show={showErrorAlert} onClose={()=>setShowErrorAlert(false)} message={errorMessage} ></Alertcomp>}
+      {showErrorAlert && <Alertcomp varient={"danger"}  message={errorMessage} ></Alertcomp>}
       <div className="logInForm" >
       <form className="form" onSubmit={handleSubmit(handleSignIn)}>
 
