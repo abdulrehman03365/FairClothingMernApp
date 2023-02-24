@@ -2,27 +2,31 @@ import { Route, Navigate } from "react-router-dom";
 import BecomePartner from "./becomePartner/becomePartner";
 import Cookies from 'js-cookie';
 import Alertcomp from "../components/alertComp";
-export function ProtectedRoutes({component:Component ,...rest}) {
-//   const isAuthenticated = localStorage.getItem("token");
- 
-const tocken=Cookies.get('NodeJsBoockingWebsite')
- console.log("tocken is :" + tocken);
- if (tocken)
+import { useState } from "react";
+
+export  function  ProtectedRoutes({component:Component ,...rest}) {
+
+
+const token=localStorage.getItem('token')
+ console.log("tocken is :" + token);
+ if (token)
  {
    return (
     <>
-    <Component/> 
-    <Navigate to="/signIn"/>
+  <Component  > </Component>
     </>
-     
+    
     );
  }
  else
  {
   
   return (
-    <Alertcomp varient={"success"}  message={"Your Login session is expired"} ></Alertcomp>
-  )
+    <>
+    <Navigate to="/signIn"></Navigate>
+    </>
+   
+    )
 
  }
 
