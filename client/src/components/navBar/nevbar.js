@@ -22,7 +22,7 @@ function Nevbar() {
           <li><Link to={'/'} className="nav-link"> Home </Link></li>
           <li><Link to={'/signUp'} className="nav-link">Sign Up</Link></li>
           <li><Link to={'/signIn'} className="nav-link">Sign In</Link></li>
-          <li><Link to={'/becomePartner'} className="nav-link">Become Partner</Link></li>
+          <li><Link to={'/bookMarque'} className="nav-link">Book Marque</Link></li>
         </ul>
         </ul>
       </div>

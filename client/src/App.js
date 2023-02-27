@@ -1,7 +1,7 @@
 
 
 import Home from './pages/home/home';
-import BecomePartner from './pages/becomePartner/becomePartner';
+import bookMarque from './pages/bookMarque/bookMarque';
 import SignIn from './pages/signIn/signIn';
 import SignUp from './pages/singUp/signUp';
 import { ReactDOM , Browser, Component } from 'react';
@@ -22,7 +22,7 @@ class App extends Component
             <Route  path='/' element={<Home/>} />
             <Route path="signIn" element={<SignIn/>} />
             <Route path ="signUp" element={<SignUp/>} />
-            <Route path="becomePartner" element={<ProtectedRoutes component={BecomePartner} />}/>
+            <Route path="bookMarque" element={<ProtectedRoutes component={bookMarque} />}/>
             <Route path='*' element={<NotFound/>}/>
             
         </Routes>
