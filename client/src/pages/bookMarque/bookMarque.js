@@ -10,7 +10,7 @@ function bookMarque()
  const marqueDetails=[{
   name:"Niaz Marque",
   location :'Adiala Road',
-  img:src={}} ,
+  img:"./marqueImages/bilal.jpg"} ,
 {name:"Niaz Marque",
 location :'Adiala Road',
 img:"client/public/marqueImages/bilal.jpeg"},
