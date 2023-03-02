@@ -1,0 +1,47 @@
+.top_sec{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    margin-top: 2%;
+    margin-left: 2%;
+    margin-bottom: 2%;
+
+}
+
+.marqueView{
+    
+    border-radius: 5px;
+    border: 2px solid;
+
+}
+
+.top_sec text{
+
+    margin-top: 2%;
+}
+
+#marqueImg{
+
+    height: 30vh;
+}
+
+#bottom_sec{
+display: flex;
+flex-direction: row;
+justify-content: space-between;
+
+}
+
+.bottom_st{
+display: flex;
+justify-content: flex-start;
+gap: 4px;
+
+}
+
+.bottom_end{
+
+    display: flex;
+    justify-content: flex-end;
+}

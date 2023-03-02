@@ -1,5 +1,10 @@
 #MarquePlaceHolder {
     width: 100%;
-    background-color: black;
-    height: 80vh;
+    background-color: rgb(158, 146, 146);
+    height: 90vh;
+    display: grid;
+    align-items: center;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 20px;
 }
+
