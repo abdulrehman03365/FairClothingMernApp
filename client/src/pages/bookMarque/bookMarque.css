@@ -2,9 +2,10 @@
     width: 100%;
     background-color: rgb(158, 146, 146);
     height: 90vh;
-    display: grid;
+    display: flex;
     align-items: center;
     grid-template-columns: repeat(3, 1fr);
     grid-gap: 20px;
+    flex-wrap: wrap;
 }
 
