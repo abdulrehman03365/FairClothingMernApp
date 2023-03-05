@@ -1,26 +1,43 @@
-import { Component } from "react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import './bookMarque.css'
+import Nevbar from "../../components/navBar/nevbar";
+import MarqueView from "../../components/marqueView/marqueView";
 
-function bookMarque()
-{
+function BookMarque() {
+  const marqueDetails = [
+    {
+      name: "Niaz Marque",
+      location: "Adiala Road",
+      img: "./marqueImages/bilal.jpg"
+      
+    },
+    {
+      name: "Niaz Marque",
+      location: "Adiala Road",
+      img: "./marqueImages/bilal.jpg"
+    },
+    {
+      name: "Niaz Marque",
+      location: "Adiala Road",
+      img: "./marqueImages/bilal.jpg"
+    },
+    {
+      name: "Niaz Marque",
+      location: "Adiala Road",
+      img: "./marqueImages/bilal.jpg"
+    }
+  ];
 
-  
-   
-   
- 
-
-
-    return(
-   
+  return (
     <div>
-   
-   
-    <div id="marquePlaceHolder"></div>
+      <Nevbar />
+      <div id="MarquePlaceHolder">
+        {marqueDetails.map((marqueDetail) => (
+          <MarqueView marqueDetail={marqueDetail} />
+        ))}
+      </div>
     </div>
-    
-    )
-  
-   
+  );
 }
 
-export default bookMarque
+export default BookMarque;

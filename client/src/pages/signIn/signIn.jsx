@@ -29,7 +29,7 @@ import Alertcomp from "../../components/alertComp";
             setSuccessMessage("Successfully Loged In")
             localStorage.setItem('token',JsonResp.authTocken)
            
-            navigate("/becomePartner")
+            navigate("/bookMarque")
             
 
           }  

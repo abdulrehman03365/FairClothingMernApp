@@ -1,0 +1,25 @@
+#bt-preview{
+   margin: 10% 0% 0% 10%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+margin-bottom: 10%;
+    
+}
+
+p{
+    margin-bottom: 0rm;
+}
+
+#st-preview{
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+}
+
+#preview-holder{
+    width: 40%;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+}

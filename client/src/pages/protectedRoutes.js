@@ -1,5 +1,5 @@
 import { Route, Navigate } from "react-router-dom";
-import BecomePartner from "./becomePartner/becomePartner";
+import bookMarque from "./bookMarque/bookMarque";
 import Cookies from 'js-cookie';
 import Alertcomp from "../components/alertComp";
 import { useState } from "react";

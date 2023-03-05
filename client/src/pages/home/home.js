@@ -1,9 +1,10 @@
-import { Component } from "react";
+import { Component, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import BecomePartner from "../becomePartner/becomePartner";
+import bookMarque from "../bookMarque/bookMarque";
 import Nevbar from "../../components/navBar/nevbar";
 function Home(){
+
 
  const [value,setValue]=useState("initial value")
         return( 

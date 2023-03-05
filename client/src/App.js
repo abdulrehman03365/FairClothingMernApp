@@ -1,14 +1,16 @@
 
-
+import AdminHome from './adminPages/adminHome';
 import Home from './pages/home/home';
-import BecomePartner from './pages/becomePartner/becomePartner';
+import bookMarque from './pages/bookMarque/bookMarque';
 import SignIn from './pages/signIn/signIn';
 import SignUp from './pages/singUp/signUp';
-import { ReactDOM , Browser, Component } from 'react';
+import { ReactDOM , Browser, Component, useState } from 'react';
 import NotFound from './pages/notFound/notFound';
+
 import { ProtectedRoutes } from './pages/protectedRoutes';
 import {BrowserRouter as Router , Routes , Route , Link} from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.min.css';
+import ManageMarques from './adminPages/manageMarques/manageMarques';
 class App extends Component
  {
   render ()
@@ -22,8 +24,11 @@ class App extends Component
             <Route  path='/' element={<Home/>} />
             <Route path="signIn" element={<SignIn/>} />
             <Route path ="signUp" element={<SignUp/>} />
-            <Route path="becomePartner" element={<ProtectedRoutes component={BecomePartner} />}/>
+            <Route path="bookMarque" element={<ProtectedRoutes component={bookMarque} />}/>
+            <Route path='/admin' element={<AdminHome/>}/>
+            <Route path='/manageMarques' element={<ManageMarques/>}/>
             <Route path='*' element={<NotFound/>}/>
+           
             
         </Routes>
       </div>
