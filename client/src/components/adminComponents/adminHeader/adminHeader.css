@@ -2,9 +2,9 @@
     background-color: #fff;
     border-bottom: 1px solid #ddd;
     padding: 1rem;
-    position: fixed;
     top: 0;
     width: 100%;
+    position: relative;
     z-index: 999;
   }
   

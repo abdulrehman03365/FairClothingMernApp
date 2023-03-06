@@ -8,23 +8,32 @@ function BookMarque() {
     {
       name: "Niaz Marque",
       location: "Adiala Road",
-      img: "./marqueImages/bilal.jpg"
+      img: "./marqueImages/bilal.jpg",
+      status:"booked",
+      capacity:"1000"
+
       
     },
     {
       name: "Niaz Marque",
       location: "Adiala Road",
-      img: "./marqueImages/bilal.jpg"
+      img: "./marqueImages/bilal.jpg",
+      status:"booked",
+      capacity:"1000"
     },
     {
       name: "Niaz Marque",
       location: "Adiala Road",
-      img: "./marqueImages/bilal.jpg"
+      img: "./marqueImages/bilal.jpg",
+      status:"booked",
+      capacity:"1000"
     },
     {
       name: "Niaz Marque",
       location: "Adiala Road",
-      img: "./marqueImages/bilal.jpg"
+      img: "./marqueImages/bilal.jpg",
+      status:"booked",
+      capacity:"1000"
     }
   ];
 
