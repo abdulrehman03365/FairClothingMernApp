@@ -1,8 +1,11 @@
 import AdminHeader from "../../components/adminComponents/adminHeader/adminHeader";
 import Preview from "../../components/adminComponents/preview/preview";
 import {useForm} from "react-hook-form"
+import { useState } from "react";
 import './manageMarques.css'
 function ManageMarques() {
+
+   const [imagePreview, setImagePreview] = useState(null);
 
 
   const handleSubmit=()=>
