@@ -1,7 +1,8 @@
 const { application } = require('express')
+const {addMarque}=require('../controllers/marqueCRUD.controller')
+const {authJwtMiddleware,marqueCRUD} = require('../middleware')
+const {AuthController} = require('../controllers/auth.controller')
 
-const {authJwtMiddleware} = require('../middleware')
-const AuthController = require('../controllers/auth.controller')
 
 module.exports = function (app) {
 
@@ -10,11 +11,7 @@ module.exports = function (app) {
     next()
     })
 
-    app.get("/become-Partner",authJwtMiddleware.verifyJwtToken,(req,res)=>{
-
-     res.sendFile("F:/NodeJsLearning/NodeJsBookingWebSite/views/become-Partner.html")})
-
-
+   app.post("/api/addMarque",marqueCRUD.validateParameters,addMarque)
 
 
 }

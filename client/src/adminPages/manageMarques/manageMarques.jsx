@@ -4,15 +4,29 @@ import {useForm} from "react-hook-form"
 import './manageMarques.css'
 import { useState } from "react";
 function ManageMarques() {
-
+  const {register, handleSubmit , formState : {errors}}=useForm();
+  const [image,setImage]=useState()
   const [imagePreview,setImagePreview]=useState(null)
   const []=useState(null)
 
-  function handleSubmit(data,event) {
+  function handleFormSubmit(data,event) {
     event.preventDefault()
+    console.log(data);
   } 
-  const handleImageChange=()=>{
-    
+  function handleImageChange(event){
+    console.log(event.target.files);
+
+    const file = event.target.files[0];
+  
+    setImage(file);
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onloadend = () => {
+      setImagePreview(reader.result);
+  
+    };
+
+   
   }
     return ( 
      <div>
@@ -23,31 +37,31 @@ function ManageMarques() {
          <button className="addNewBt">Add new</button>
         </div>
       
-         <form onSubmit={handleSubmit}>
+         <form onSubmit={handleSubmit(handleFormSubmit)}>
             <div className="add-marque-form" style={{"marginTop":50 , "display":"flex" ,
        "flexDirection":"column" , "alignContent":"center"  , "justifyContent":"center" , "marginRight":"30%" , "marginLeft":"30%"}}>
 
             <input className="add-marque-input" {...register("name",{required:true})}></input>
             <label>Marque Name</label>
-            {errors.name?.type==='required' && <p role={'alert'}>name is required</p>}
+            {errors.name?.type==='required' && <p role={'alert'} style={{"color":"red"}}>Marque name is required</p>}
            
             <input className="add-marque-input" {...register("location",{required:true})}></input>
             <label>Marque Location</label>
-            {errors.location?.type==='required' && <p role={'alert'}>Location is required</p>}
+            {errors.location?.type==='required' && <p role={'alert'} style={{"color":"red"}}>Location is required</p>}
             
             <input className="add-marque-input" {...register("capacity",{required:true})}></input>
             <label>Capacity</label>
-            {errors.capacity?.type==='required' && <p role={'alert'}>Capacity is required</p>}
+            {errors.capacity?.type==='required' && <p role={'alert'} style={{"color":"red"}}>Capacity is required</p>}
 
             <input className="add-marque-input" {...register("status",{required:true})}></input>
             <label>Status</label>
-            {errors.status?.type==='required' && <p role={'alert'}>Status is required</p>}
+            {errors.status?.type==='required' && <p style={{"color":"red"}} role={'alert'}>Status is required</p>}
 
             <label htmlFor="image">Image: </label>
-            <input type="file" id="imageInput" onChange={handleImageChange} {...register("image",{required:true})}></input>
+            <input type="file" id="imageInput" onChange={handleImageChange}  ></input>
             {imagePreview && (
             <img src={imagePreview} alt="Image preview" style={{ width: '200px' }} /> )}
-            <input type={"submit"} value="Add Marque"></input>
+            <input type={"submit"} style={{ display: 'inline-block', width: 'auto' }} value="Add Marque"></input>
 
 
 
