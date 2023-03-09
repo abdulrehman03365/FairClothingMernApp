@@ -1,8 +1,9 @@
 const   marque = require( "../model/marque.model")
-async function addMarque(res,req,next){
+async function addMarque(req,res,next){
 
-const {name,location,image,capacity,status}=req.body
-
+const {name,location,image,status}=req.body
+const capacity= parseInt (req.body.capacity);
+// console.log(typeof capacity);
 try{
     const newMarque= new marque({
         name: name,
@@ -20,8 +21,8 @@ try{
 
 catch(error)
 {
-    console.error(err);
-    res.status(500).json({ error: 'Server error' });
+    console.error(error);
+    res.status(500).json({ error: error });
 }
 }
 

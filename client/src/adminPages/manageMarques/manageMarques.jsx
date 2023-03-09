@@ -5,22 +5,38 @@ import { useState } from "react";
 import './manageMarques.css'
 
 function ManageMarques() {
+  const AWS = require('aws-sdk')
   const {register, handleSubmit , formState : {errors}}=useForm();
   const [image,setImage]=useState()
   const [imagePreview,setImagePreview]=useState(null)
   const []=useState(null)
+  
 
-  async function  handleFormSubmit(data,event) {
-    event.preventDefault()
-   await fetch('http://api/addMarque',{method:'POST',
-  credentials:true,
-  Headers: {'Content-type':'form-data'}, 
-  body:{data} 
-  })
+  async function uploadImage()
+  {
+     
 
+  }
 
-    console.log(data);
-  } 
+  async function handleFormSubmit(data, event) {
+    event.preventDefault();
+
+    
+    const formData = new FormData();
+    
+    for (const key in data) {
+      formData.append(key, data[key]);
+    }
+    
+    await fetch('http://localhost:8000/api/addMarque', {
+      method: 'POST',
+      credentials: 'include',
+      headers: new Headers({
+        'Content-type': 'application/x-www-form-urlencoded'
+      }), 
+      body: formData 
+    });
+  }
   function handleImageChange(event){
     console.log(event.target.files);
 
