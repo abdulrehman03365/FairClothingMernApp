@@ -8,38 +8,51 @@ function ManageMarques() {
   
   const {register, handleSubmit , formState : {errors}}=useForm();
   const [image,setImage]=useState()
-  const [imagePreview,setImagePreview]=useState(null)
+  const [imagePreview,setImagePreview]=useState(null)  
   const []=useState(null)
-  const s3 =new AWS.S3({
-    accessKeyId: process.env.REACT_APP_AWS_ACCESS_KEY,
-    secretAccessKey: process.env.REACT_APP_AWS_SECRET_ACCESS_KEY,
- })
+  const [base64image,setBase64Image]=useState('');
 
- const params = {
-  Bucket :'',
-  Key:'',
-  Body:''
-
- }
   
 
-  async function uploadImage()
-  {
+//   const s3 =new AWS.S3({
+//     accessKeyId: process.env.REACT_APP_AWS_ACCESS_KEY,
+//     secretAccessKey: process.env.REACT_APP_AWS_SECRET_ACCESS_KEY,
+//  })
+
+//  const params = {
+//   Bucket :'bookingwebsitebucket',
+//   Key:image.name,
+//   Body:image
+
+
+//  }
+  
+
+  // async function uploadImage()
+  // {
  
-    s3.putObject(params, (err, data) => {
-      if (err)
-        console.log(err);
+  //   s3.putObject(params, (err, data) => {
+  //     if (err)
+  //     {
+  //       console.log(err);
+  //       return;
+  //     } 
+  //     else 
+       
+  //       console.log(data.location);
+        
+  //   })
 
-      else
-        console.log(data);
-    })
-
-  }
+  // }
 
   async function handleFormSubmit(data, event) {
     event.preventDefault();
-    
-    
+    data['base64Image']=imagePreview;
+    data['imagaName']=image.name;
+    data['imageType']=image.type;
+   
+    // const url=await uploadImage();
+    // console.log("s3 url:" +url);
     const formData = new FormData();
     
     for (const key in data) {
@@ -55,20 +68,21 @@ function ManageMarques() {
       body: formData 
     });
   }
-  function handleImageChange(event){
-    console.log(event.target.files);
 
-    const file = event.target.files[0];
-  
-    setImage(file);
+  function convertToBase64(file){
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onloadend = () => {
       setImagePreview(reader.result);
-  
+      setBase64Image(reader.result)
     };
+  }
+  function handleImageChange(event){
+    console.log(event.target.files);
+    const file = event.target.files[0];
+    setImage(file);
+    convertToBase64(file)
 
-   
   }
     return ( 
      <div>

@@ -9,6 +9,8 @@
     "nodemon": "^2.0.20"
   },
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.288.0",
+    "aws-sdk": "^2.1332.0",
     "bcrypt": "^5.1.0",
     "body-parser": "^1.20.1",
     "connect-flash": "^0.1.1",

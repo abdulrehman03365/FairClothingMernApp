@@ -9,8 +9,7 @@ import { ProtectedRoutes } from './pages/protectedRoutes';
 import {BrowserRouter as Router , Routes , Route , Link} from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import ManageMarques from './adminPages/manageMarques/manageMarques';
-import dotenv from 'dotenv';
-dotenv.config()
+
 class App extends Component
  {
 

@@ -1,14 +1,18 @@
+const imageService=require('../services/imageService')
 const   marque = require( "../model/marque.model")
 async function addMarque(req,res,next){
+   const {name,location,status ,imageName , imageType,base64Image}=req.body
+   imageURL = await imageService.upload(imageName,base64Image,imageType) 
 
-const {name,location,image,status}=req.body
+
+
 const capacity= parseInt (req.body.capacity);
 // console.log(typeof capacity);
 try{
     const newMarque= new marque({
         name: name,
         location: location,
-        image: image,
+        image: imageURL,
         capacity: capacity,
         status: status
       });
