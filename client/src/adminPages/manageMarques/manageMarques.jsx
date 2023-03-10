@@ -3,24 +3,42 @@ import Preview from "../../components/adminComponents/preview/preview";
 import {useForm} from "react-hook-form"
 import { useState } from "react";
 import './manageMarques.css'
-
+import AWS from 'aws-sdk'
 function ManageMarques() {
-  const AWS = require('aws-sdk')
+  
   const {register, handleSubmit , formState : {errors}}=useForm();
   const [image,setImage]=useState()
   const [imagePreview,setImagePreview]=useState(null)
   const []=useState(null)
+  const s3 =new AWS.S3({
+    accessKeyId: process.env.REACT_APP_AWS_ACCESS_KEY,
+    secretAccessKey: process.env.REACT_APP_AWS_SECRET_ACCESS_KEY,
+ })
+
+ const params = {
+  Bucket :'',
+  Key:'',
+  Body:''
+
+ }
   
 
   async function uploadImage()
   {
-     
+ 
+    s3.putObject(params, (err, data) => {
+      if (err)
+        console.log(err);
+
+      else
+        console.log(data);
+    })
 
   }
 
   async function handleFormSubmit(data, event) {
     event.preventDefault();
-
+    
     
     const formData = new FormData();
     

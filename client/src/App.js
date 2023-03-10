@@ -1,4 +1,3 @@
-
 import AdminHome from './adminPages/adminHome';
 import Home from './pages/home/home';
 import bookMarque from './pages/bookMarque/bookMarque';
@@ -6,13 +5,17 @@ import SignIn from './pages/signIn/signIn';
 import SignUp from './pages/singUp/signUp';
 import { ReactDOM , Browser, Component, useState } from 'react';
 import NotFound from './pages/notFound/notFound';
-
 import { ProtectedRoutes } from './pages/protectedRoutes';
 import {BrowserRouter as Router , Routes , Route , Link} from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import ManageMarques from './adminPages/manageMarques/manageMarques';
+import dotenv from 'dotenv';
+dotenv.config()
 class App extends Component
  {
+
+  
+
   render ()
   {
     return ( 
