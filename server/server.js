@@ -1,6 +1,7 @@
 const express = require('express');
 const mysql=require('mysql2')
 const app = express();
+const multer =require('multer');
 const path=require('path')
 const handlebars = require('express-handlebars');
 const bodyParser = require('body-parser');
@@ -25,7 +26,8 @@ origin: 'http://localhost:3000',
 methods: ['GET', 'POST', 'PUT', 'DELETE'],
 allowedHeaders: ['Content-Type', 'Authorization']}))
 app.use(express.static('public'));
-app.use(bodyParser.urlencoded({extended:true}))
+app.use(express.urlencoded({ limit: '10mb', extended: false }))
+app.use(multer().any());
 // 
 
 app.use(cookieSession({
@@ -48,6 +50,25 @@ app.set('port',process.env.PORT || 8000);
 
 require('./routes/auth.routes.js')(app);
 require('./routes/user.routes.js')(app);
+
+
+
+app.post('/api/addMarque', (req, res) => {
+  const base64Image=req.body.base64Image.replace(/^data:image\/\w+;base64,/, '')
+  const buffer=Buffer.from(base64Image,'base64')
+  
+  res.sendStatus(200);
+});
+
+
+
+
+
+
+
+
+
+
 
 //get mongodb connection
 const uri = `mongodb+srv://${process.env.MONGO_DB_USERNAME}:${process.env.MONGO_DB_PASSWORD}@cluster0.gzyxqbq.mongodb.net/BookingApplicationDB?retryWrites=true&w=majority`

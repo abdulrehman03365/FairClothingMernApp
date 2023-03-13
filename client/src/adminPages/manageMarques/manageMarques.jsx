@@ -48,7 +48,7 @@ function ManageMarques() {
   async function handleFormSubmit(data, event) {
     event.preventDefault();
     data['base64Image']=imagePreview;
-    data['imagaName']=image.name;
+    data['imageName']=image.name;
     data['imageType']=image.type;
    
     // const url=await uploadImage();
@@ -62,10 +62,7 @@ function ManageMarques() {
     await fetch('http://localhost:8000/api/addMarque', {
       method: 'POST',
       credentials: 'include',
-      headers: new Headers({
-        'Content-type': 'application/x-www-form-urlencoded'
-      }), 
-      body: formData 
+      body: formData
     });
   }
 
@@ -93,7 +90,7 @@ function ManageMarques() {
          <button className="addNewBt">Add new</button>
         </div>
       
-         <form onSubmit={handleSubmit(handleFormSubmit)}>
+         <form onSubmit={handleSubmit(handleFormSubmit)} >
             <div className="add-marque-form" style={{"marginTop":50 , "display":"flex" ,
        "flexDirection":"column" , "alignContent":"center"  , "justifyContent":"center" , "marginRight":"30%" , "marginLeft":"30%"}}>
 

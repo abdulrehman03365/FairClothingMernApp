@@ -1,10 +1,18 @@
+
 const BUCKET_NAME=process.env.BUCKET_NAME
-const REGION=process.env.REGION
-const { S3Client, PutObjectCommand , GetObjectCommand } = require("@aws-sdk/client-s3");
+const REGION=process.env.AWS_REGION
+const { S3Client, PutObjectCommand , GetObjectCommand , getSignedUrl } = require("@aws-sdk/client-s3");
 
 async function upload(imageName, base64Image , type)
 {
-const buffer =new Buffer.from(base64Image,"base64")
+
+base64Image=base64Image.replace(/^data:image\/\w+;base64,/, '')
+const buffer=Buffer.from(base64Image,'base64')
+                
+
+const sizeInBytes = Buffer.byteLength(buffer);
+
+console.log("Size of base64 file:", sizeInBytes, "bytes");
 const params =
  {
         Bucket :BUCKET_NAME,
@@ -13,21 +21,32 @@ const params =
         ContentType:type
 }
 
-
-const S3Client = new S3Client({region:REGION})
-const command = new PutObjectCommand(params)
-await S3Client.send(command)
-
-// Get signed URL for uploaded file
-const getCommand = new GetObjectCommand({ Bucket: params.Bucket, Key: params.Key });
-const url = await getSignedUrl(s3Client, getCommand, { expiresIn: 3600 });
-log(url)
-
-
-
-
-
-
+try{
+        console.log("REGION :" +REGION);
+        const client = new S3Client({
+                region: REGION,
+                credentials: {
+                  accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+                  secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+                },
+              })
+        const command = new PutObjectCommand(params)
+        const response=await client.send(command)
+        console.log("s3 response :"+response);
+        //Get signed URL for uploaded file
+        const getCommand = new GetObjectCommand({ Bucket: params.Bucket, Key: params.Key });
+        const getresp=await client.send(getCommand)
+        log("Signed url of image: " +getresp)
+        
+}
+catch(error)
+{
+        console.log("error uploading to aws s3 :"+ error);
 }
 
+
+
+return url
+
+}
 module.exports={upload}
