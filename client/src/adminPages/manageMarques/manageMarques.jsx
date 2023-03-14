@@ -2,6 +2,7 @@ import AdminHeader from "../../components/adminComponents/adminHeader/adminHeade
 import Preview from "../../components/adminComponents/preview/preview";
 import {useForm} from "react-hook-form"
 import { useState } from "react";
+import {toast} from 'react-toastify';
 import './manageMarques.css'
 import AWS from 'aws-sdk'
 function ManageMarques() {
@@ -13,37 +14,6 @@ function ManageMarques() {
   const [base64image,setBase64Image]=useState('');
 
   
-
-//   const s3 =new AWS.S3({
-//     accessKeyId: process.env.REACT_APP_AWS_ACCESS_KEY,
-//     secretAccessKey: process.env.REACT_APP_AWS_SECRET_ACCESS_KEY,
-//  })
-
-//  const params = {
-//   Bucket :'bookingwebsitebucket',
-//   Key:image.name,
-//   Body:image
-
-
-//  }
-  
-
-  // async function uploadImage()
-  // {
- 
-  //   s3.putObject(params, (err, data) => {
-  //     if (err)
-  //     {
-  //       console.log(err);
-  //       return;
-  //     } 
-  //     else 
-       
-  //       console.log(data.location);
-        
-  //   })
-
-  // }
 
   async function handleFormSubmit(data, event) {
     event.preventDefault();
@@ -59,11 +29,25 @@ function ManageMarques() {
       formData.append(key, data[key]);
     }
     
-    await fetch('http://localhost:8000/api/addMarque', {
+   const response= await fetch('http://localhost:8000/api/addMarque', {
       method: 'POST',
       credentials: 'include',
       body: formData
     });
+  
+
+    if (response.status)
+    {
+      
+      toast.success('Marque is added')
+
+    }
+
+    else
+    {
+      toast.console.error('Error adding marque');
+    }
+  
   }
 
   function convertToBase64(file){

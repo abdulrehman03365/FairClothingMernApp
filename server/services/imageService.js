@@ -2,7 +2,7 @@
 const BUCKET_NAME=process.env.BUCKET_NAME
 const REGION=process.env.AWS_REGION
 const { S3Client, PutObjectCommand , GetObjectCommand , getSignedUrl } = require("@aws-sdk/client-s3");
-
+var url ="";
 async function upload(imageName, base64Image , type)
 {
 
@@ -36,7 +36,8 @@ try{
         //Get signed URL for uploaded file
         const getCommand = new GetObjectCommand({ Bucket: params.Bucket, Key: params.Key });
         const getresp=await client.send(getCommand)
-        log("Signed url of image: " +getresp)
+        url = `https://${params.Bucket}.s3.amazonaws.com/${params.Key}`;
+        console.log("url of image: " +url)
         
 }
 catch(error)

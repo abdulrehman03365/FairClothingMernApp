@@ -8,6 +8,7 @@ import NotFound from './pages/notFound/notFound';
 import { ProtectedRoutes } from './pages/protectedRoutes';
 import {BrowserRouter as Router , Routes , Route , Link} from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { ToastContainer } from 'react-toastify';
 import ManageMarques from './adminPages/manageMarques/manageMarques';
 
 class App extends Component
@@ -18,6 +19,8 @@ class App extends Component
   render ()
   {
     return ( 
+        <>
+        <ToastContainer/>
       
         <Router>
       <div>
@@ -34,7 +37,8 @@ class App extends Component
             
         </Routes>
       </div>
-    </Router>)
+    </Router>
+        </>)
 
   };
 }
