@@ -40,6 +40,8 @@
 
 #manage-main-div{
     display: flex;
+    margin-top :3%;
     margin-left: 20px;
+    align-items: center;
     flex-direction: column;
 }

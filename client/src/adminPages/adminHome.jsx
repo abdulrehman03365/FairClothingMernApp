@@ -5,21 +5,30 @@ import Preview from '../components/adminComponents/preview/preview';
 import AdminHeader from '../components/adminComponents/adminHeader/adminHeader';
 function AdminHome() {
     const [screenSize, setScreenSize] = useState(window.innerWidth);
-  
+    
     const updateScreenSize = () => {
       setScreenSize(window.innerWidth);
     };
   
+    async function populatePreview()
+    {
+      response=await fetch()
+      
+    }
+
     useEffect(() => {
       window.addEventListener('resize', updateScreenSize);
       return () => window.removeEventListener('resize', updateScreenSize);
+      function populatePreview()
+    
+    
     }, []);
   
     return (
       <div className="adminPanel">
       <AdminHeader></AdminHeader>
         <div className="container-fluid">
-          <h1>Welcome to Admin Panel</h1>
+  
         </div>
         <div id="manage-main-div">
 

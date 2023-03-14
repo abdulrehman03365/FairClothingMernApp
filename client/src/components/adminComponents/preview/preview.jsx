@@ -1,7 +1,7 @@
 import './preview.css'
 function Preview() {
     return (  <>
-         <div id='preview-holder'>
+         <div id='preview-holder' style={{border:"1px solid" }}>
 
         <div id='st-preview'>
         <p id='pr-view'>name of marque</p>

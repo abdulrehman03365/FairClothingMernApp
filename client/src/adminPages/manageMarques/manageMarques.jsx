@@ -15,61 +15,43 @@ function ManageMarques() {
 
   
 
-//   const s3 =new AWS.S3({
-//     accessKeyId: process.env.REACT_APP_AWS_ACCESS_KEY,
-//     secretAccessKey: process.env.REACT_APP_AWS_SECRET_ACCESS_KEY,
-//  })
 
-//  const params = {
-//   Bucket :'bookingwebsitebucket',
-//   Key:image.name,
-//   Body:image
-
-
-//  }
-  
-
-  // async function uploadImage()
-  // {
- 
-  //   s3.putObject(params, (err, data) => {
-  //     if (err)
-  //     {
-  //       console.log(err);
-  //       return;
-  //     } 
-  //     else 
-       
-  //       console.log(data.location);
-        
-  //   })
-
-  // }
 
   async function handleFormSubmit(data, event) {
     event.preventDefault();
     data['base64Image']=imagePreview;
-    data['imagaName']=image.name;
+    data['imageName']=image.name;
     data['imageType']=image.type;
    
-    // const url=await uploadImage();
-    // console.log("s3 url:" +url);
+  
     const formData = new FormData();
     
     for (const key in data) {
       formData.append(key, data[key]);
     }
     
-    await fetch('http://localhost:8000/api/addMarque', {
+ const response=  await fetch('http://localhost:8000/api/addMarque', {
       method: 'POST',
       credentials: 'include',
-      headers: new Headers({
-        'Content-type': 'application/x-www-form-urlencoded'
-      }), 
-      body: formData 
+      body: formData
     });
+  
+  if(response.status==201)
+  {
+    toast.success("Marque is added successfuly")
   }
+  
+else if (response.status!=200){
+  toast.error("Error adding marque")
 
+}
+
+  }
+  
+  function deleteMarque()
+  {
+    
+  }
   function convertToBase64(file){
     const reader = new FileReader();
     reader.readAsDataURL(file);
@@ -94,7 +76,7 @@ function ManageMarques() {
          <button className="addNewBt">Add new</button>
         </div>
       
-         <form onSubmit={handleSubmit(handleFormSubmit)}>
+         <form onSubmit={handleSubmit(handleFormSubmit)} >
             <div className="add-marque-form" style={{"marginTop":50 , "display":"flex" ,
        "flexDirection":"column" , "alignContent":"center"  , "justifyContent":"center" , "marginRight":"30%" , "marginLeft":"30%"}}>
 
