@@ -1,3 +1,4 @@
+import { ToastContainer } from "react-toastify";
 import AdminHome from './adminPages/adminHome';
 import Home from './pages/home/home';
 import bookMarque from './pages/bookMarque/bookMarque';
@@ -19,6 +20,8 @@ class App extends Component
   {
     return ( 
       
+     <>
+       <ToastContainer/>
         <Router>
       <div>
        
@@ -34,7 +37,9 @@ class App extends Component
             
         </Routes>
       </div>
-    </Router>)
+    </Router>
+     
+     </>)
 
   };
 }

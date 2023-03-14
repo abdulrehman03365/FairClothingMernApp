@@ -1,3 +1,14 @@
+/**
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ *
+ */
+
 const BUCKET_NAME=process.env.BUCKET_NAME
 const REGION=process.env.REGION
 const { S3Client, PutObjectCommand , GetObjectCommand } = require("@aws-sdk/client-s3");

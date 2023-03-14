@@ -4,6 +4,7 @@ import {useForm} from "react-hook-form"
 import { useState } from "react";
 import './manageMarques.css'
 import AWS from 'aws-sdk'
+import {toast} from 'react-toastify'
 function ManageMarques() {
   
   const {register, handleSubmit , formState : {errors}}=useForm();
