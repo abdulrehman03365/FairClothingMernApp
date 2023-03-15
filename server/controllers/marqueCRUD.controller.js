@@ -59,7 +59,7 @@ async function getallMarques(req,res,next)
 try{
 
     const marques=await marque.find()
-    res.json(marques)
+    res.status(200).json(marques)
 }
 catch(error)
 {
@@ -79,26 +79,26 @@ module.exports={addMarque,deleteMarque,getallMarques}
 
 
 
-// Create a new Marque
-async function createMarque(req, res) {
-    try {
-      const marque = new Marque(req.body);
-      await marque.save();
-      res.status(201).json(marque);
-    } catch (err) {
-      res.status(400).json({ error: err.message });
-    }
-  }
+// // Create a new Marque
+// async function createMarque(req, res) {
+//     try {
+//       const marque = new Marque(req.body);
+//       await marque.save();
+//       res.status(201).json(marque);
+//     } catch (err) {
+//       res.status(400).json({ error: err.message });
+//     }
+//   }
   
-  // Read all Marques
-  async function getAllMarques(req, res) {
-    try {
-      const marques = await Marque.find();
-      res.json(marques);
-    } catch (err) {
-      res.status(500).json({ error: err.message });
-    }
-  }
+//   // Read all Marques
+//   async function getAllMarques(req, res) {
+//     try {
+//       const marques = await Marque.find();
+//       res.json(marques);
+//     } catch (err) {
+//       res.status(500).json({ error: err.message });
+//     }
+//   }
   
 //   // Read a Marque by ID
 //   async function getMarqueById(req, res) {

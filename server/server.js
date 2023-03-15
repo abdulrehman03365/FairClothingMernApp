@@ -28,7 +28,7 @@ allowedHeaders: ['Content-Type', 'Authorization']}))
 app.use(express.static('public'));
 app.use(express.urlencoded({ limit: '10mb', extended: false }))
 app.use(multer().any());
-// 
+
 
 app.use(cookieSession({
 	name:'NodeJsBookingWebsite',

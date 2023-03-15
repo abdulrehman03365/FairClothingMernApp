@@ -12,18 +12,16 @@ function AdminHome() {
   
     async function populatePreview()
     {
-      const response=await fetch('http://localhost:8000/api/getallMarques',{method:'GET',
-      headers:{'Content-type':'application/json'}})
-      setMarquees( response.json())
+      const response=await fetch('http://localhost:8000/api/getallMarques',{method:'GET'})
+      const data= await response.json()
+      setMarquees(data )
+      console.log('marques :'+marquees);
     }
 
     useEffect(() => {
       populatePreview()
-      window.addEventListener('resize', updateScreenSize);
-      return () => window.removeEventListener('resize', updateScreenSize);
-      
-    
-    
+      // window.addEventListener('resize', updateScreenSize);
+      // return () => window.removeEventListener('resize', updateScreenSize);
     }, []);
   
     return (
@@ -33,7 +31,7 @@ function AdminHome() {
             
         </div>
         <div id="manage-main-div">
-{marquees.map((marquee)=>(<Preview marqueDetails={marquee}  />))}
+        {marquees?.map((marquee)=>(<Preview marqueDetails={marquee} />))}
 <Preview/>
 
 </div>

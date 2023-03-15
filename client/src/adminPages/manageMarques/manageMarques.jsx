@@ -5,7 +5,6 @@ import { useState } from "react";
 import {toast} from 'react-toastify';
 import './manageMarques.css'
 import AWS from 'aws-sdk'
-import {toast} from 'react-toastify'
 function ManageMarques() {
   
   const {register, handleSubmit , formState : {errors}}=useForm();
@@ -38,7 +37,7 @@ function ManageMarques() {
   
   function deleteMarque()
   {
-    
+
   }
   function convertToBase64(file){
     const reader = new FileReader();

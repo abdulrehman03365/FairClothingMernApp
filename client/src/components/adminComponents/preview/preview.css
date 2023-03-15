@@ -21,7 +21,9 @@ p{
     width: 40%;
     display: flex;
     padding: 1%;
+    
     justify-content: space-between;
     flex-direction: row;
+    margin-bottom: 3%;
         
 }

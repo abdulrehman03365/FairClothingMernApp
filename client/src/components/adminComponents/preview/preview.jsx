@@ -1,16 +1,22 @@
 import './preview.css'
 function Preview({marqueDetails}) {
 
-   
+   const handleEdit=()=>{
 
+   }
+
+   const handleRemove=()=>{
+    
+   }
+    
     return (  <>
          <div id='preview-holder' style={{border:"1px solid" }}>
 
         <div id='st-preview'>
         <p id='pr-view'>marqueDetails.name</p>
         <p>marqueDetails.location</p>
-        <img src={marqueDetails.image} alt="Marque image" id="img-Preview"></img>
-        <p>marqueDetails.status</p>
+        {/* <img src={marqueDetails.image} alt="Marque image" id="img-Preview"></img>
+        <p>marqueDetails.status</p> */}
         <p>marqueDetails.capacity</p>
 
         </div>
