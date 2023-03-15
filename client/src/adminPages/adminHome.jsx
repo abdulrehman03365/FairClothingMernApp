@@ -5,24 +5,35 @@ import Preview from '../components/adminComponents/preview/preview';
 import AdminHeader from '../components/adminComponents/adminHeader/adminHeader';
 function AdminHome() {
     const [screenSize, setScreenSize] = useState(window.innerWidth);
-  
+    const [marquees,setMarquees]=useState();
     const updateScreenSize = () => {
       setScreenSize(window.innerWidth);
     };
   
+    async function populatePreview()
+    {
+      const response=await fetch('http://localhost:8000/api/getallMarques',{method:'GET',
+      headers:{'Content-type':'application/json'}})
+      setMarquees( response.json())
+    }
+
     useEffect(() => {
+      populatePreview()
       window.addEventListener('resize', updateScreenSize);
       return () => window.removeEventListener('resize', updateScreenSize);
+      
+    
+    
     }, []);
   
     return (
       <div className="adminPanel">
       <AdminHeader></AdminHeader>
         <div className="container-fluid">
-          <h1>Welcome to Admin Panel</h1>
+            
         </div>
         <div id="manage-main-div">
-
+{marquees.map((marquee)=>(<Preview marqueDetails={marquee}  />))}
 <Preview/>
 
 </div>

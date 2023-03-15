@@ -28,4 +28,111 @@ catch(error)
 }
 }
 
-module.exports={addMarque}
+
+async function deleteMarque(req,res,next){
+const result =marque.findByIdAndDelete(req.params.id)
+try{
+if(!result)
+{
+throw new Error('Marque not found')
+}
+else{
+    res.json({message:'Marque Deleted'})
+}
+}
+catch(error){
+console.log('Error'+ error );
+res.status(400).json({'Error':error.message})
+}
+}
+
+async function updateMarque(req,res,next){
+const response = await marque.findByIdAndUpdate(req.params.id)
+
+}
+
+
+
+async function getallMarques(req,res,next)
+{
+
+try{
+
+    const marques=await marque.find()
+    res.json(marques)
+}
+catch(error)
+{
+    console.log("error in finding all marques :" + error);
+    res.status(500).json({error:error.message})
+}
+
+
+}
+module.exports={addMarque,deleteMarque,getallMarques}
+
+
+
+
+
+
+
+
+
+// Create a new Marque
+async function createMarque(req, res) {
+    try {
+      const marque = new Marque(req.body);
+      await marque.save();
+      res.status(201).json(marque);
+    } catch (err) {
+      res.status(400).json({ error: err.message });
+    }
+  }
+  
+  // Read all Marques
+  async function getAllMarques(req, res) {
+    try {
+      const marques = await Marque.find();
+      res.json(marques);
+    } catch (err) {
+      res.status(500).json({ error: err.message });
+    }
+  }
+  
+//   // Read a Marque by ID
+//   async function getMarqueById(req, res) {
+//     try {
+//       const marque = await Marque.findById(req.params.id);
+//       if (!marque) throw new Error('Marque not found');
+//       res.json(marque);
+//     } catch (err) {
+//       res.status(404).json({ error: err.message });
+//     }
+//   }
+  
+//   // Update a Marque by ID
+//   async function updateMarqueById(req, res) {
+//     try {
+//       const updates = Object.keys(req.body);
+//       const allowedUpdates = ['name', 'location', 'image', 'capacity', 'status'];
+//       const isValidOperation = updates.every((update) => allowedUpdates.includes(update));
+//       if (!isValidOperation) throw new Error('Invalid updates');
+//       const marque = await Marque.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true });
+//       if (!marque) throw new Error('Marque not found');
+//       res.json(marque);
+//     } catch (err) {
+//       res.status(400).json({ error: err.message });
+//     }
+//   }
+  
+//   // Delete a Marque by ID
+//   async function deleteMarqueById(req, res) {
+//     try {
+//       const marque = await Marque.findByIdAndDelete(req.params.id);
+//       if (!marque) throw new Error('Marque not found');
+//       res.json({ message: 'Marque deleted successfully' });
+//     } catch (err) {
+//       res.status(400).json({ error: err.message });
+//     }
+//   }

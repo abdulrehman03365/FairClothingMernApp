@@ -8,7 +8,7 @@ function BookMarque() {
     {
       name: "Niaz Marque",
       location: "Adiala Road",
-      img: "./marqueImages/bilal.jpg",
+      image: "./marqueImages/bilal.jpg",
       status:"booked",
       capacity:"1000"
 
@@ -17,21 +17,21 @@ function BookMarque() {
     {
       name: "Niaz Marque",
       location: "Adiala Road",
-      img: "./marqueImages/bilal.jpg",
+      image: "./marqueImages/bilal.jpg",
       status:"booked",
       capacity:"1000"
     },
     {
       name: "Niaz Marque",
       location: "Adiala Road",
-      img: "./marqueImages/bilal.jpg",
+      image: "./marqueImages/bilal.jpg",
       status:"booked",
       capacity:"1000"
     },
     {
       name: "Niaz Marque",
       location: "Adiala Road",
-      img: "./marqueImages/bilal.jpg",
+      image: "./marqueImages/bilal.jpg",
       status:"booked",
       capacity:"1000"
     }
@@ -42,6 +42,7 @@ function BookMarque() {
       <Nevbar />
       <div id="MarquePlaceHolder">
         {marqueDetails.map((marqueDetail) => (
+
           <MarqueView marqueDetail={marqueDetail} />
         ))}
       </div>

@@ -5,6 +5,7 @@ import { useState } from "react";
 import {toast} from 'react-toastify';
 import './manageMarques.css'
 import AWS from 'aws-sdk'
+import {toast} from 'react-toastify'
 function ManageMarques() {
   
   const {register, handleSubmit , formState : {errors}}=useForm();
@@ -21,35 +22,24 @@ function ManageMarques() {
     data['imageName']=image.name;
     data['imageType']=image.type;
    
-    // const url=await uploadImage();
-    // console.log("s3 url:" +url);
+  
     const formData = new FormData();
     
     for (const key in data) {
       formData.append(key, data[key]);
     }
     
-   const response= await fetch('http://localhost:8000/api/addMarque', {
+    await fetch('http://localhost:8000/api/addMarque', {
       method: 'POST',
       credentials: 'include',
       body: formData
     });
-  
-
-    if (response.status)
-    {
-      
-      toast.success('Marque is added')
-
-    }
-
-    else
-    {
-      toast.console.error('Error adding marque');
-    }
-  
   }
-
+  
+  function deleteMarque()
+  {
+    
+  }
   function convertToBase64(file){
     const reader = new FileReader();
     reader.readAsDataURL(file);

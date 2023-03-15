@@ -19,7 +19,7 @@ import Alertcomp from "../../components/alertComp";
           const response= await fetch('http://localhost:8000/api/auth/signIn',
           {method:'POST',credentials:'include',
         headers:{
-          'Content-type':'application/json'
+          'Content-type':'/json'
         
         }, 
         body :JSON.stringify(data)}  )
