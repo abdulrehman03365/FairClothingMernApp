@@ -20,7 +20,7 @@ class App extends Component
   {
     return ( 
   <>
-      <ToastContainer/>
+    
         <Router>
       <div>
        

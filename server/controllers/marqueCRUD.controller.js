@@ -30,6 +30,7 @@ catch(error)
 
 
 async function deleteMarque(req,res,next){
+    
 const result =marque.findByIdAndDelete(req.params.id)
 try{
 if(!result)

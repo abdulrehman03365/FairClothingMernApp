@@ -13,7 +13,7 @@ module.exports = function (app) {
 
 
    app.post("/api/addMarque",marqueCRUD.validateParameters,addMarque)
-   app.get("/api/deleteMarque",deleteMarque)
+   app.post("/api/deleteMarque",deleteMarque)
    app.get("/api/getallMarques",getallMarques)
 
 
