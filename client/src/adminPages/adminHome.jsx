@@ -34,37 +34,7 @@ function AdminHome() {
     return (
       <>
    
-      
-      <div className="adminPanel">
-       <AdminHeader></AdminHeader>
-         <div className="container-fluid">
-             
-         </div>
-         <div id="manage-main-div">
-         {console.log(marquees)}
-         {marquees?.map((marquee) => (<Preview key={marquee._id} marqueDetails={marquee} />))}
- 
- 
- </div>
-         <footer className="footer">
-           <p>© 2023 All Rights Reserved</p>
-         </footer>
-       </div>
-      <div className="adminPanel">
-       <AdminHeader></AdminHeader>
-         <div className="container-fluid">
-             
-         </div>
-         <div id="manage-main-div">
-         {console.log(marquees)}
-         {marquees?.map((marquee) => (<Preview key={marquee._id} marqueDetails={marquee} />))}
- 
- 
- </div>
-         <footer className="footer">
-           <p>© 2023 All Rights Reserved</p>
-         </footer>
-       </div>
+     
 <div className="adminPanel">
        
    

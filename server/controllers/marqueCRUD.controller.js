@@ -48,7 +48,23 @@ res.status(400).json({'Error':error.message})
 }
 
 async function updateMarque(req,res,next){
-const response = await marque.findByIdAndUpdate(req.params.id)
+try{
+    const {name ,location, status , capacity ,image}=req.params
+    const response = await marque.findByIdAndUpdate(req.params.id,{name,location,status,capacity,image}, { new: true })
+    if(response)
+    {
+        res.status(200).json(response)
+
+    }
+
+}
+catch(error)
+{
+  console.log("Error :"+ error);
+  res.status(500).json({Error:"Unable to Update"})
+}    
+
+
 
 }
 
@@ -70,7 +86,7 @@ catch(error)
 
 
 }
-module.exports={addMarque,deleteMarque,getallMarques}
+module.exports={addMarque,deleteMarque,getallMarques ,updateMarque }
 
 
 

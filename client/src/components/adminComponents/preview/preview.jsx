@@ -1,10 +1,15 @@
 import {toast} from 'react-toastify'
 import './preview.css'
+import ManageMarques from '../../../adminPages/manageMarques/manageMarques';
+import {useState} from 'react';
 function Preview({marqueDetails}) {
+  const [showEdit, setShowEdit] = useState(false);
 
-    const {name , image ,location , status , capacity}= marqueDetails;
+  const {name , image ,location , status , capacity}= marqueDetails;
 
    async function handleEdit(id){
+   
+  
          
    }
 
@@ -36,9 +41,14 @@ function Preview({marqueDetails}) {
 
         </div>
         <div id="bt-preview">
-        <button onClick={()=>handleEdit(marqueDetails._id)}>edit </button>
+        <button onClick={()=>handleEdit(setShowEdit(true))}>edit </button>
 
         <button onClick={()=>{handleRemove(marqueDetails._id)}}>remove</button>
+        
+        {showEdit && (
+        <ManageMarques id={marqueDetails._id} editView={true} />
+      )}
+        
         </div>
          </div>
         

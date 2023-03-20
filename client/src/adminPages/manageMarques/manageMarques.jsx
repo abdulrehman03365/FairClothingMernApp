@@ -1,58 +1,82 @@
-import AdminHeader from "../../components/adminComponents/adminHeader/adminHeader";
-import Preview from "../../components/adminComponents/preview/preview";
-import {useForm} from "react-hook-form"
-import { useState } from "react";
-import {toast} from 'react-toastify';
-import './manageMarques.css'
-import AWS from 'aws-sdk'
-function ManageMarques() {
-  
-  const {register, handleSubmit , formState : {errors}}=useForm();
-  const [image,setImage]=useState()
-  const [imagePreview,setImagePreview]=useState(null)  
-  const []=useState(null)
-  const [base64image,setBase64Image]=useState('');
+import qs from 'qs';
+import { useState, useEffect } from 'react';
+import { useForm } from 'react-hook-form';
+import { toast } from 'react-toastify';
+import AdminHeader from '../../components/adminComponents/adminHeader/adminHeader';
+import Preview from '../../components/adminComponents/preview/preview';
+import { addMarque,updateMarque ,getMarque } from '../../api';
+import './manageMarques.css';
 
+function ManageMarques({ id, editViewProp }) {
+  const [editViewProp, setEditView] = useState(false);
+  const { register, handleSubmit, formState: { errors }, setValue } = useForm();
+  const [image, setImage] = useState(null);
+  const [imagePreview, setImagePreview] = useState(null);
+  const [base64Image,setBase64Image]=useState('');
   
+  const [updated, setUpdated]=useState(false)
 
-  async function handleFormSubmit(data, event) {
-    event.preventDefault();
-    data['base64Image']=imagePreview;
-    data['imageName']=image.name;
-    data['imageType']=image.type;
-   
-  
-    const formData = new FormData();
-    
-    for (const key in data) {
-      formData.append(key, data[key]);
+  useEffect(() => {
+    setEditView(editViewProp)
+    async function fetchAndPopulate() {
+      const respData = await getMarque(id);
+      setValue('name', respData.name);
+      setValue('location', respData.location);
+      setValue('capacity', respData.capacity);
+      setImagePreview(respData.image);
+      setValue('status', respData.status);
     }
-    
-    await fetch('http://localhost:8000/api/addMarque', {
-      method: 'POST',
-      credentials: 'include',
-      body: formData
-    });
-  }
-  
-  function deleteMarque()
-  {
 
-  }
+    if (editViewProp ) {
+      fetchAndPopulate();
+    }
+  }, [editViewProp]);
+
   function convertToBase64(file){
+
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onloadend = () => {
       setImagePreview(reader.result);
       setBase64Image(reader.result)
-    };
+
+  }}
+  
+  async function handleFormSubmit(data, event) {
+    event.preventDefault();
+    data['base64Image'] = imagePreview;
+    data['imageName'] = image?.name;
+    data['imageType'] = image?.type;
+    
+    const formData=new FormData();
+    for (const key in data)
+    {
+    formData.append(key,data[key])
+    }
+
+    if (editViewProp) {
+      const data=await updateMarque(id, data);
+      toast.success('Marque has been Updated successfully!');
+      setEditView(false)
+      setUpdated(true)
+      setValue('name', data.name);
+      setValue('location', data.location);
+      setValue('capacity', data.capacity);
+      setImagePreview(data.image);
+      setValue('status', data.status);
+    } else {
+      await addMarque(null, data);
+      toast.success('Marque has been added successfully!');
+
+    }
+
+
   }
-  function handleImageChange(event){
-    console.log(event.target.files);
+
+  function handleImageChange(event) {
     const file = event.target.files[0];
     setImage(file);
-    convertToBase64(file)
-
+    convertToBase64(file);
   }
     return ( 
      <div>

@@ -1,9 +1,10 @@
 const { application } = require('express')
-const {addMarque,deleteMarque, getallMarques}=require('../controllers/marqueCRUD.controller')
+const {addMarque,deleteMarque, getallMarques , updateMarque}=require('../controllers/marqueCRUD.controller')
 const {authJwtMiddleware,marqueCRUD} = require('../middleware')
 const {AuthController} = require('../controllers/auth.controller')
 const express = require('express');
 const multer=require('multer')
+
 module.exports = function (app) {
 
     app.use(function (req, res, next) {
@@ -15,6 +16,8 @@ module.exports = function (app) {
    app.post("/api/addMarque",marqueCRUD.validateParameters,addMarque)
    app.post("/api/deleteMarque",deleteMarque)
    app.get("/api/getallMarques",getallMarques)
+   app.post("/api/updateMaque", updateMarque)
+   
 
 
 
