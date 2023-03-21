@@ -6,9 +6,13 @@ import AdminHeader from '../../components/adminComponents/adminHeader/adminHeade
 import Preview from '../../components/adminComponents/preview/preview';
 import { addMarque,updateMarque ,getMarque } from '../../api';
 import './manageMarques.css';
-
-function ManageMarques({ id, editViewProp }) {
-  const [editViewProp, setEditView] = useState(false);
+import {useLocation, useParams} from 'react-router-dom'
+function ManageMarques() {
+  const location = useLocation()
+  console.log("id:"+location.state.id);
+  const id =location.state.id;
+  const editViewProp=location.state.editViewProp;
+  const [editView, setEditView] = useState(false);
   const { register, handleSubmit, formState: { errors }, setValue } = useForm();
   const [image, setImage] = useState(null);
   const [imagePreview, setImagePreview] = useState(null);
@@ -26,7 +30,7 @@ function ManageMarques({ id, editViewProp }) {
       setImagePreview(respData.image);
       setValue('status', respData.status);
     }
-
+    console.log("EditViewProp :"+editViewProp);
     if (editViewProp ) {
       fetchAndPopulate();
     }

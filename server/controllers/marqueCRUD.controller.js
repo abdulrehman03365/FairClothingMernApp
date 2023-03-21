@@ -85,8 +85,25 @@ catch(error)
 }
 
 
+
 }
-module.exports={addMarque,deleteMarque,getallMarques ,updateMarque }
+
+
+async function getMarque(req,res,next){
+    try{
+
+        const marques=await marque.findById(req.params.id)
+        res.status(200).json(marques)
+    }
+    catch(error)
+    {
+        console.log("error in finding all marques :" + error);
+        res.status(500).json({error:error.message})
+    }
+       
+
+}
+module.exports={addMarque,deleteMarque,getallMarques ,updateMarque , getMarque }
 
 
 

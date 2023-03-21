@@ -32,6 +32,7 @@ class App extends Component
             <Route path='/admin' element={<AdminHome/>}/>
             <Route path='/manageMarques' element={<ManageMarques/>}/>
             <Route path='*' element={<NotFound/>}/>
+            <Route path="/manageMarques" element={ <ManageMarques/>} />
            
             
         </Routes>
