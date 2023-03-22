@@ -27,7 +27,7 @@ methods: ['GET', 'POST', 'PUT', 'DELETE'],
 allowedHeaders: ['Content-Type', 'Authorization']}))
 app.use(express.static('public'));
 app.use(express.urlencoded({ limit: '10mb', extended: false }))
-app.use(multer().any());
+app.use(multer({limits: { fieldSize: 10 * 1024 * 1024 }}).any());
 
 
 app.use(cookieSession({

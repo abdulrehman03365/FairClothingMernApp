@@ -91,8 +91,9 @@ catch(error)
 
 async function getMarque(req,res,next){
     try{
-
-        const marques=await marque.findById(req.params.id)
+       
+       
+        const marques=await marque.findById(req.query.id)
         res.status(200).json(marques)
     }
     catch(error)

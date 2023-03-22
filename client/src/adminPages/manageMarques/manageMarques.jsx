@@ -9,9 +9,14 @@ import './manageMarques.css';
 import {useLocation, useParams} from 'react-router-dom'
 function ManageMarques() {
   const location = useLocation()
-  console.log("id:"+location.state.id);
-  const id =location.state.id;
-  const editViewProp=location.state.editViewProp;
+    
+  
+    
+    let id, editViewProp;
+    if (location.state && location.state.id) {
+      id = location.state.id;
+      editViewProp = location.state.editViewProp;
+    }
   const [editView, setEditView] = useState(false);
   const { register, handleSubmit, formState: { errors }, setValue } = useForm();
   const [image, setImage] = useState(null);
@@ -27,6 +32,7 @@ function ManageMarques() {
       setValue('name', respData.name);
       setValue('location', respData.location);
       setValue('capacity', respData.capacity);
+      console.log("image url:"+respData.image);
       setImagePreview(respData.image);
       setValue('status', respData.status);
     }
@@ -48,7 +54,7 @@ function ManageMarques() {
   
   async function handleFormSubmit(data, event) {
     event.preventDefault();
-    data['base64Image'] = imagePreview;
+    data['base64Image'] = base64Image;
     data['imageName'] = image?.name;
     data['imageType'] = image?.type;
     
@@ -59,7 +65,7 @@ function ManageMarques() {
     }
 
     if (editViewProp) {
-      const data=await updateMarque(id, data);
+      const data=await updateMarque(id, formData);
       toast.success('Marque has been Updated successfully!');
       setEditView(false)
       setUpdated(true)
@@ -69,7 +75,7 @@ function ManageMarques() {
       setImagePreview(data.image);
       setValue('status', data.status);
     } else {
-      await addMarque(null, data);
+      await addMarque(formData);
       toast.success('Marque has been added successfully!');
 
     }
