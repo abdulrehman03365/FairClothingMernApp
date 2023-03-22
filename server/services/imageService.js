@@ -27,8 +27,11 @@ try{
         const client = new S3Client({
                 region: REGION,
                 credentials: {
-                  accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-                  secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+                  // accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+                  // secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+                accessKeyId: 'AKIAVRQTPOF6CFFQGS3B',
+                secretAccessKey:'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'
+
                 },
               })
         const command = new PutObjectCommand(params)
@@ -37,12 +40,13 @@ try{
         //Get signed URL for uploaded file
         const getCommand = new GetObjectCommand({ Bucket: params.Bucket, Key: params.Key });
         const getresp=await client.send(getCommand)
-        log("Signed url of image: " +getresp)
+        url=getresp
+        console.log("Signed url of image: " +getresp)
         
 }
 catch(error)
 {
-        console.log("error uploading to aws s3 :"+ error);
+        console.log("Error:"+ error);
 }
 
 
