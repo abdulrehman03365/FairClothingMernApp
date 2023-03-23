@@ -17,7 +17,7 @@ module.exports = function (app) {
    app.post("/api/deleteMarque",deleteMarque)
    app.get("/api/getallMarques",getallMarques)
    app.get("/api/getMarque",getMarque)
-   app.post("/api/updateMaque", updateMarque)
+   app.post("/api/updateMarque", updateMarque)
    
 
 

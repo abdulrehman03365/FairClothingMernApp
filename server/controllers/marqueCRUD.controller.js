@@ -1,5 +1,6 @@
 const imageService=require('../services/imageService')
-const marque = require( "../model/marque.model")
+const marque = require( "../model/marque.model");
+const { query } = require('express');
 async function addMarque(req,res,next){
    const {name,location,status ,imageName , imageType,base64Image}=req.body
    const  imageURL = await imageService.upload(imageName,base64Image,imageType) 
@@ -49,8 +50,10 @@ res.status(400).json({'Error':error.message})
 
 async function updateMarque(req,res,next){
 try{
-    const {name ,location, status , capacity ,image}=req.params
-    const response = await marque.findByIdAndUpdate(req.params.id,{name,location,status,capacity,image}, { new: true })
+    const {name,location,status ,imageName , imageType,base64Image}=req.body
+    const  image = await imageService.upload(imageName,base64Image,imageType) 
+    const capacity= parseInt (req.body.capacity);
+    const response = await marque.findByIdAndUpdate(req.query.id ,{name,location,status,capacity,image}, { new: true })
     if(response)
     {
         res.status(200).json(response)
