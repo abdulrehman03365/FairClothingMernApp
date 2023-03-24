@@ -8,7 +8,7 @@ import { addMarque,updateMarque ,getMarque } from '../../api';
 import './manageMarques.css';
 
 function ManageMarques({ id, editViewProp }) {
-  const [editViewProp, setEditView] = useState(false);
+  const [editView, setEditView] = useState(false);
   const { register, handleSubmit, formState: { errors }, setValue } = useForm();
   const [image, setImage] = useState(null);
   const [imagePreview, setImagePreview] = useState(null);

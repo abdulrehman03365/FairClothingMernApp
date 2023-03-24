@@ -9,7 +9,7 @@ function Preview({marqueDetails}) {
 
    async function handleEdit(id){
    
-  
+               
          
    }
 
