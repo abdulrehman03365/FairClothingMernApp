@@ -9,6 +9,7 @@ const handlers=require('./lib/handlers');
 const { join } = require('path');
 const bcrypt =require('bcrypt');
 const cors=require('cors')
+
 const cookieSession=require('cookie-session');
 const db = require('./model/index');
 const { mongoose } = require('./model/index');
@@ -19,7 +20,7 @@ require('dotenv').config()
 
 //Middlewares
 // console.log(join(__dirname,'public'));
-
+app.use(bodyParser.json());
 app.use(express.json());
 app.use(cors({credentials: true,
 origin: 'http://localhost:3000',
@@ -27,7 +28,7 @@ methods: ['GET', 'POST', 'PUT', 'DELETE'],
 allowedHeaders: ['Content-Type', 'Authorization']}))
 app.use(express.static('public'));
 app.use(express.urlencoded({ limit: '10mb', extended: false }))
-app.use(multer().any());
+app.use(multer({limits: { fieldSize: 10 * 1024 * 1024 }}).any());
 
 
 app.use(cookieSession({

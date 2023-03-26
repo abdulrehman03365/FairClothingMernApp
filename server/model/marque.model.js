@@ -2,7 +2,7 @@ const mongoose=require('mongoose')
 const marqueSchema = new mongoose.Schema({
     name: { type: String, required: true },
     location: { type: String, required: true },
-    image: { type: String },
+    image: {  type: String },
     capacity: { type: Number, required: true },
     status: { type: String, default: true },
   });

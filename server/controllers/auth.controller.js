@@ -174,8 +174,8 @@ signInController =(req,res,next)=>{
                 authorities.push("Role_"+email.roles[i].name.toUpperCase())
                }
                console.log("Email and Password are correct and user is successfuly Loged In",{'userId':email._id,
-               'authoroties':authorities,'authTocken':token});
-               res.status(200).send({'userId':email._id,'authoroties':authorities,'authTocken':token})
+               'authoroties':authorities,'authToken':token});
+               res.status(200).send({'userId':email._id,'authoroties':authorities,'authToken':token})
               
 
 

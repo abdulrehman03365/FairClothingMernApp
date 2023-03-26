@@ -1,16 +1,18 @@
 import {toast} from 'react-toastify'
 import './preview.css'
 import ManageMarques from '../../../adminPages/manageMarques/manageMarques';
+import { useNavigate } from 'react-router-dom';
 import {useState} from 'react';
-function Preview({marqueDetails}) {
-  const [showEdit, setShowEdit] = useState(false);
-
+function Preview({marqueDetails ,populatePreview }) {
+ 
+  const navigate=useNavigate()  
   const {name , image ,location , status , capacity}= marqueDetails;
 
    async function handleEdit(id){
-   
-               
-         
+    const editViewProp=true
+    
+    navigate(`/manageMarques`,{state:{editViewProp , id} });
+
    }
 
    async function handleRemove(id){
@@ -22,7 +24,12 @@ function Preview({marqueDetails}) {
     ,body:JSON.stringify({id:id})})
     const json_resp=response.json()
     if (response.ok)
-    toast.success('Marque Deleted')
+    // toast.success('Marque Deleted')
+    {
+      alert('Marque Deleted' + id)
+      populatePreview()
+      
+    }
     else
     toast.error('Error Deleting Marque :'+json_resp['Error'])
 
@@ -41,18 +48,16 @@ function Preview({marqueDetails}) {
 
         </div>
         <div id="bt-preview">
-        <button onClick={()=>handleEdit(setShowEdit(true))}>edit </button>
+        <button onClick={()=>handleEdit(marqueDetails._id)}>edit </button>
 
         <button onClick={()=>{handleRemove(marqueDetails._id)}}>remove</button>
         
-        {showEdit && (
-        <ManageMarques id={marqueDetails._id} editView={true} />
-      )}
+        
         
         </div>
          </div>
         
     </>);
-}
 
-export default Preview;
+    }
+export default  Preview;

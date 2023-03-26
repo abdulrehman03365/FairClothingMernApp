@@ -1,5 +1,5 @@
 const { application } = require('express')
-const {addMarque,deleteMarque, getallMarques , updateMarque}=require('../controllers/marqueCRUD.controller')
+const {addMarque,deleteMarque, getallMarques,getMarque , updateMarque}=require('../controllers/marqueCRUD.controller')
 const {authJwtMiddleware,marqueCRUD} = require('../middleware')
 const {AuthController} = require('../controllers/auth.controller')
 const express = require('express');
@@ -13,10 +13,11 @@ module.exports = function (app) {
     })
 
 
-   app.post("/api/addMarque",marqueCRUD.validateParameters,addMarque)
-   app.post("/api/deleteMarque",deleteMarque)
-   app.get("/api/getallMarques",getallMarques)
-   app.post("/api/updateMaque", updateMarque)
+   app.post("/api/addMarque",authJwtMiddleware.verifyJwtToken,marqueCRUD.validateParameters,addMarque)
+   app.post("/api/deleteMarque",authJwtMiddleware.verifyJwtToken,deleteMarque)
+   app.get("/api/getallMarques",authJwtMiddleware.verifyJwtToken,getallMarques)
+   app.get("/api/getMarque",authJwtMiddleware.verifyJwtToken,getMarque)
+   app.post("/api/updateMarque",authJwtMiddleware.verifyJwtToken, updateMarque)
    
 
 

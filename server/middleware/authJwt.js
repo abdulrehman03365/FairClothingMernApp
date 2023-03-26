@@ -4,8 +4,8 @@ require('dotenv').config
 
 verifyJwtToken = (req, res, next) => {
 
-    token = req.session.token;
-
+    token = req.headers.authorization.split(' ')[1];
+    
     if (!token) {
         console.log("Auth tocken is not ");
         res.status(403).send({ 'message': "Auth tocken is not provided" })

@@ -6,8 +6,17 @@ import AdminHeader from '../../components/adminComponents/adminHeader/adminHeade
 import Preview from '../../components/adminComponents/preview/preview';
 import { addMarque,updateMarque ,getMarque } from '../../api';
 import './manageMarques.css';
-
-function ManageMarques({ id, editViewProp }) {
+import {useLocation, useParams} from 'react-router-dom'
+function ManageMarques() {
+  const location = useLocation()
+    
+  
+    
+    let id, editViewProp;
+    if (location.state && location.state.id) {
+      id = location.state.id;
+      editViewProp = location.state.editViewProp;
+    }
   const [editView, setEditView] = useState(false);
   const { register, handleSubmit, formState: { errors }, setValue } = useForm();
   const [image, setImage] = useState(null);
@@ -23,10 +32,11 @@ function ManageMarques({ id, editViewProp }) {
       setValue('name', respData.name);
       setValue('location', respData.location);
       setValue('capacity', respData.capacity);
+      console.log("image url:"+respData.image);
       setImagePreview(respData.image);
       setValue('status', respData.status);
     }
-
+    console.log("EditViewProp :"+editViewProp);
     if (editViewProp ) {
       fetchAndPopulate();
     }
@@ -44,7 +54,7 @@ function ManageMarques({ id, editViewProp }) {
   
   async function handleFormSubmit(data, event) {
     event.preventDefault();
-    data['base64Image'] = imagePreview;
+    data['base64Image'] = base64Image;
     data['imageName'] = image?.name;
     data['imageType'] = image?.type;
     
@@ -55,7 +65,7 @@ function ManageMarques({ id, editViewProp }) {
     }
 
     if (editViewProp) {
-      const data=await updateMarque(id, data);
+      const data=await updateMarque(id, formData);
       toast.success('Marque has been Updated successfully!');
       setEditView(false)
       setUpdated(true)
@@ -65,7 +75,7 @@ function ManageMarques({ id, editViewProp }) {
       setImagePreview(data.image);
       setValue('status', data.status);
     } else {
-      await addMarque(null, data);
+      await addMarque(formData);
       toast.success('Marque has been added successfully!');
 
     }

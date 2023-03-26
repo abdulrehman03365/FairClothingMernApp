@@ -5,21 +5,21 @@ import {  toast , ToastContainer} from "react-toastify";
 import { Link } from "react-router-dom";
 import Preview from '../components/adminComponents/preview/preview';
 import AdminHeader from '../components/adminComponents/adminHeader/adminHeader';
-
+import { getallMarques } from '../api';
 function AdminHome() {
  
 
 
   const [screenSize, setScreenSize] = useState(window.innerWidth);
-    const [marquees,setMarquees]=useState();
-    const updateScreenSize = () => {
+  const [marquees,setMarquees]=useState();
+  const updateScreenSize = () => {
       setScreenSize(window.innerWidth);
     };
   
     async function populatePreview()
     {
-      const response=await fetch('http://localhost:8000/api/getallMarques',{method:'GET'})
-      const data= await response.json()
+      const data=await getallMarques()
+    
       setMarquees(data )
       
     }
@@ -44,7 +44,7 @@ function AdminHome() {
          </div>
          <div id="manage-main-div">
          {console.log(marquees)}
-         {marquees?.map((marquee) => (<Preview key={marquee._id} marqueDetails={marquee} />))}
+         {marquees?.map((marquee) => (<Preview populatePreview={populatePreview  } key={marquee._id} marqueDetails={marquee} />))}
  
  
  </div>

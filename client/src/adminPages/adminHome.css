@@ -1,3 +1,7 @@
+.adminPanel{
+  position: relative;
+}
+
 .header {
     background-color: #fff;
     border-bottom: 1px solid #ddd;
@@ -5,7 +9,7 @@
  
     top: 0;
     width: 100%;
-    z-index: 999;
+    z-index: 1;
   }
   
   .navbar-brand {
@@ -17,14 +21,7 @@
     font-size: 1.2rem;
     font-weight: 500;
   }
-  .toast-container {
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 9999;
-    width: 100%;
-  }
+ 
 
 
 

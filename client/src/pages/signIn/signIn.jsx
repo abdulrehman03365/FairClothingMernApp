@@ -4,6 +4,7 @@ import {Alert} from 'react-bootstrap'
 import {useForm} from "react-hook-form"
 import {useNavigate} from 'react-router-dom'
 import Alertcomp from "../../components/alertComp";
+import { signIn } from "../../api";
 
  function SignIn()
    {
@@ -16,19 +17,13 @@ import Alertcomp from "../../components/alertComp";
     async function handleSignIn(data,event){
         event.preventDefault()
         try{
-          const response= await fetch('http://localhost:8000/api/auth/signIn',
-          {method:'POST',credentials:'include',
-        headers:{
-          'Content-type':'/json'
-        
-        }, 
-        body :JSON.stringify(data)}  )
+          const response = signIn()
           if (response.ok)
           {
            const JsonResp =  await response.json()
             console.log(response);
             setSuccessMessage("Successfully Loged In")
-            localStorage.setItem('token',JsonResp.authTocken)
+            localStorage.setItem('token',JsonResp.authToken)
            
             navigate("/bookMarque")
             
