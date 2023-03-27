@@ -79,3 +79,17 @@ export async function signIn(data){
         }
         return response
       }
+
+export async function deleteMarque(id){
+  
+  const response = await fetch(`${BASE_URL}/deleteMarque`,{method:'POST',credentials:'include'
+  ,headers:{'Authorization': `Bearer ${token}` ,'Content-type':'application/json' , },body:JSON.stringify({id:id})});
+
+  const data = await response.json();
+
+  if (!response.ok) {
+    throw new Error(data.Error);
+  }
+
+  return data;
+}

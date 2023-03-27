@@ -1,6 +1,7 @@
 const imageService=require('../services/imageService')
 const marque = require( "../model/marque.model");
 const { query } = require('express');
+const mongoose=require('mongoose')
 async function addMarque(req,res,next){
    const {name,location,status ,imageName , imageType,base64Image}=req.body
    const  imageURL = await imageService.upload(imageName,base64Image,imageType) 
@@ -31,7 +32,8 @@ catch(error)
 
 
 async function deleteMarque(req,res,next){
-    
+    console.log("type of Id:"+req.body.id);
+    console.log("Id is valid or not :"+mongoose.Types.ObjectId.isValid(req.body.id));
 const result =await marque.findByIdAndDelete(req.body.id)
 try{
     
