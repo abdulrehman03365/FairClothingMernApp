@@ -17,31 +17,18 @@ import { signIn } from "../../api";
     async function handleSignIn(data,event){
         event.preventDefault()
         try{
-          const response = signIn()
+          const response =await signIn(data)
           if (response.ok)
-          {
-           const JsonResp =  await response.json()
-            console.log(response);
-            setSuccessMessage("Successfully Loged In")
-            localStorage.setItem('token',JsonResp.authToken)
-           
+          {    
             navigate("/bookMarque")
-            
-
-          }  
-          else if (response.status!=200)
-          {
-          const jsonResp= await response.json()
-          console.error('Error:'+ jsonResp.message);
-          setErrorMessage("Error :" + jsonResp.message)
-          
-          setShowErrorAlert(true)
+                      
           }
 
 
         }
         catch(error)
         {
+          console.log("Error SignIng In :"+error);
           setErrorMessage(error.message)
          
           setShowErrorAlert(true)

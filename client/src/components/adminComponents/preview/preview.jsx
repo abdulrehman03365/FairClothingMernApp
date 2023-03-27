@@ -3,7 +3,8 @@ import './preview.css'
 import ManageMarques from '../../../adminPages/manageMarques/manageMarques';
 import { useNavigate } from 'react-router-dom';
 import {useState} from 'react';
-function Preview({marqueDetails ,populatePreview }) {
+import { Alert } from 'react-bootstrap';
+function Preview({marqueDetails ,populatePreview ,setShowErrorAlert ,setErrorMessage }) {
  
   const navigate=useNavigate()  
   const {name , image ,location , status , capacity}= marqueDetails;
@@ -27,6 +28,8 @@ function Preview({marqueDetails ,populatePreview }) {
     // toast.success('Marque Deleted')
     {
       alert('Marque Deleted' + id)
+      setShowErrorAlert(true)
+      setErrorMessage('Marque Deleted' + id)
       populatePreview()
       
     }
