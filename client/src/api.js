@@ -88,8 +88,9 @@ export async function deleteMarque(id){
   const data = await response.json();
 
   if (!response.ok) {
-    throw new Error(data.Error);
+    return data
   }
+  
 
   return data;
 }

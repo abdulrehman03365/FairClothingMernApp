@@ -16,7 +16,7 @@ verifyJwtToken = (req, res, next) => {
         jwt.verify(token, process.env.JWT_SECRET, function (err, decoded) {
             if (err) {
                 console.log(err);
-                res.status(500).send({ 'message': "Authentication error" })
+                res.status(500).send({ 'Error': "Authentication error" })
                 return;
             }
 

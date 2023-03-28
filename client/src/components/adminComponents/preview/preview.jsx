@@ -4,9 +4,12 @@ import ManageMarques from '../../../adminPages/manageMarques/manageMarques';
 import { useNavigate } from 'react-router-dom';
 import {useState} from 'react';
 import { Alert } from 'react-bootstrap';
+import Alertcomp from '../../alertComp';
 import { deleteMarque } from '../../../api';
-function Preview({marqueDetails ,populatePreview ,setShowErrorAlert ,setErrorMessage }) {
- 
+
+function Preview({marqueDetails ,populatePreview ,setErrorMessage }) {
+   
+  const [showErrorAlert ,setShowErrorAlert]=useState('')
   const navigate=useNavigate()  
   const {name , image ,location , status , capacity}= marqueDetails;
 
@@ -27,9 +30,10 @@ function Preview({marqueDetails ,populatePreview ,setShowErrorAlert ,setErrorMes
     // ,body:JSON.stringify({id:id})})
     // const json_resp=response.json()
    
-   try{
-    const response = await deleteMarque(id)
-    if (response.ok)
+   
+    var data = await deleteMarque(id)
+  console.log(data);
+    if (data.ok)
     
     {
       alert('Marque Deleted' + id)
@@ -37,14 +41,16 @@ function Preview({marqueDetails ,populatePreview ,setShowErrorAlert ,setErrorMes
       
     }
   
-   }
-   catch (error)
+   
+  else
    {
     setShowErrorAlert(true)
-    setErrorMessage('Error:'+ error)
+    console.log(data);
+    setErrorMessage('Error:'+ data.Error)
    }
   }
     return (  <>
+{showErrorAlert && <Alertcomp varient={"danger"}  show={showErrorAlert} onClose={()=>{ setShowErrorAlert(false)}}  ></Alertcomp>}
          <div id='preview-holder' style={{border:"1px solid" }}>
 
         <div id='st-preview'>
@@ -56,6 +62,7 @@ function Preview({marqueDetails ,populatePreview ,setShowErrorAlert ,setErrorMes
 
         </div>
         <div id="bt-preview">
+        
         <button onClick={()=>handleEdit(marqueDetails._id)}>edit </button>
 
         <button onClick={()=>{handleRemove(marqueDetails._id)}}>remove</button>

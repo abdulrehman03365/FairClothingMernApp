@@ -11,7 +11,7 @@ function Alertcomp(props)
     
        
   
-        return  <Alert id='alertbox' variant={varient} show={show} onClose={onClose} dismissible >{message} </Alert>
+        return  <Alert id='alertbox' style={{'zIndex':1000}} variant={varient} show={show} onClose={onClose} dismissible >{message} </Alert>
          
         
       

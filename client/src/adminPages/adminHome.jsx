@@ -37,7 +37,7 @@ function AdminHome() {
     return (
       <>
    
-{showErrorAlert && <Alertcomp varient={"danger"} show={showErrorAlert} onClose={()=>{setShowErrorAlert(false)}} message={errorMessage} ></Alertcomp>}     
+{showErrorAlert && <Alertcomp varient={"danger"}  show={showErrorAlert} onClose={()=>{ setShowErrorAlert(false)}} message={errorMessage} ></Alertcomp>}     
 <div className="adminPanel">
        
       
