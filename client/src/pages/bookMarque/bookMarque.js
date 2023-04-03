@@ -2,8 +2,15 @@ import { useState } from "react";
 import './bookMarque.css'
 import Nevbar from "../../components/navBar/nevbar";
 import MarqueView from "../../components/marqueView/marqueView";
-
+import sendMessage from "../../services/chat";
+import socket from "../../services/chat";
+import { useEffect } from "react";
 function BookMarque() {
+ useEffect()
+ 
+    void sendMessage()
+     
+
   const marqueDetails = [
     {
       name: "Niaz Marque",

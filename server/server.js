@@ -1,6 +1,9 @@
 const express = require('express');
 const mysql=require('mysql2')
 const app = express();
+const http = require('http');
+const server = http.createServer(app);
+
 const multer =require('multer');
 const path=require('path')
 const handlebars = require('express-handlebars');
@@ -9,7 +12,7 @@ const handlers=require('./lib/handlers');
 const { join } = require('path');
 const bcrypt =require('bcrypt');
 const cors=require('cors')
-
+const socketService=require('./services/socketService')
 const cookieSession=require('cookie-session');
 const db = require('./model/index');
 const { mongoose } = require('./model/index');
@@ -29,6 +32,13 @@ allowedHeaders: ['Content-Type', 'Authorization']}))
 app.use(express.static('public'));
 app.use(express.urlencoded({ limit: '10mb', extended: false }))
 app.use(multer({limits: { fieldSize: 10 * 1024 * 1024 }}).any());
+
+// io.on('connection', (socket) => {
+// 	console.log('a user connected via socket.io');
+// 	socket.on('chat',(msg)=>{console.log('you recieved this message on socket:'+msg);})
+
+
+//   });
 
 
 app.use(cookieSession({
@@ -216,6 +226,10 @@ app.post('/signup-process',async (req,res)=>{
 // app.post('/newsletter-signup/process',handlers.newsletterSignupProcess)
 // app.get('newsletterSignupThank-you',handlers.newsLetterSignupThankYou)
 
+
+
+
+socketService.initSocket(server);
 app.listen(app.get('port'), function(){
 	console.log('Express started on port ' + app.get('port') + ' in ' + app.get('env') + ' mode.');
 });
