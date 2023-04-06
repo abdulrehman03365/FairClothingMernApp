@@ -6,9 +6,12 @@ import sendMessage from "../../services/chat";
 import socket from "../../services/chat";
 import { useEffect } from "react";
 function BookMarque() {
- useEffect()
+ useEffect(()=>{sendMessage()},)
  
-    void sendMessage()
+    function sendMessage(){
+      socket.auth={name:"Abdul-Rehman"}
+      socket.connect();
+    }
      
 
   const marqueDetails = [

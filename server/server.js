@@ -14,7 +14,7 @@ const bcrypt =require('bcrypt');
 const cors=require('cors')
 const socketService=require('./services/socketService')
 const cookieSession=require('cookie-session');
-const db = require('./model/index');
+// const db = require('./model/index');
 const { mongoose } = require('./model/index');
 const flash = require('connect-flash-plus');
 const { authJwtMiddleware } = require('./middleware');
@@ -82,20 +82,8 @@ app.post('/api/addMarque', (req, res) => {
 
 
 //get mongodb connection
-const uri = `mongodb+srv://${process.env.MONGO_DB_USERNAME}:${process.env.MONGO_DB_PASSWORD}@cluster0.gzyxqbq.mongodb.net/BookingApplicationDB?retryWrites=true&w=majority`
-mongoose.set('strictQuery', true);
-mongoose.connection.on('error',(error)=>{console.error('connection to MongoDB disconnected :');})
-mongoose.connection.on('connected',(data)=>{console.log('connected to mongoDB');})
-mongoose.connection.on('connecting',()=>{console.log('connecting to mongodb');})
-mongoose.connection.on('close',()=>{console.log('MongoDB connection closed');})
-mongoose.connect(uri,
-{
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-  }).then(()=>{
-  console.log("You are connected successfully to MongoDB");
-})
-
+const MongoDBConnection =require('../server/scripts/mongoDbConnection')
+const db=new MongoDBConnection();
 
 
 
@@ -230,6 +218,7 @@ app.post('/signup-process',async (req,res)=>{
 
 
 socketService.initSocket(server);
+
 app.listen(app.get('port'), function(){
 	console.log('Express started on port ' + app.get('port') + ' in ' + app.get('env') + ' mode.');
 });

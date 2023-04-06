@@ -6,7 +6,8 @@ function initSocket(httpserver) {
   }});
 
   io.on('connection', (socket) => {
-    console.log(' client is connected to socket server');
+    
+    console.log(socket.handshake.auth.name + " is connected to socket server");
 
     socket.on('disconnect', () => {
       console.log('Client disconnected');
@@ -16,6 +17,9 @@ function initSocket(httpserver) {
       console.log(`Received message: ${message}`);
     
     });
+
+  
+
   });
 
   io.listen(9000)
