@@ -1,11 +1,19 @@
-require('dotenv').config()
+const dotenv = require('dotenv');
+const   dotenvExpand = require('dotenv-expand');
+const   config = dotenv.config();
+dotenvExpand.expand(config)   
+
 const mongoose =require('mongoose')
 class MongoDBConnection{
+
    
     constructor(){
+  
+       
         if (!MongoDBConnection.instance)
         {
-            const uri = `mongodb+srv://${process.env.MONGO_DB_USERNAME}:${process.env.MONGO_DB_PASSWORD}@cluster0.gzyxqbq.mongodb.net/BookingApplicationDB?retryWrites=true&w=majority`
+            const uri=process.env.uri;
+            console.log(process.env.uri);
             mongoose.set('strictQuery', true);
             mongoose.connection.on('error',(error)=>{console.error('connection to MongoDB disconnected :');})
             mongoose.connection.on('connected',(data)=>{console.log('connected to mongoDB');})

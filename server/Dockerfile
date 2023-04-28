@@ -17,4 +17,4 @@
     # Exports
     EXPOSE 8000
     
-    CMD ["nodemon","server"]
+    CMD ["./node_modules/.bin/nodemon", "server.js"]
