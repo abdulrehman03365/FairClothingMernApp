@@ -1,6 +1,0 @@
-class PaymentStrategy{
-    processPayment()
-    {
-        
-    }
-}
