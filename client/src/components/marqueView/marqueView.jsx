@@ -20,7 +20,7 @@ return(
         <p id='capacity'>{marqueDetail.capacity}</p>
      </div>
      <div className='bottom_end'>
-         <button id='bookBtn'>Book</button>
+         <button id='book_btn'>Book</button>
     </div>
      
      

@@ -10,9 +10,11 @@
 }
 
 .marqueView{
-    
+    display: block;
+   
     border-radius: 5px;
     border: 2px solid;
+    margin: 2vh;
 
 }
 
@@ -22,15 +24,44 @@
 }
 
 #marqueImg{
-
-    height: 30vh;
+    
+    height: 20vh;
+    width: 40vh;
 }
 
 #bottom_sec{
 display: flex;
 flex-direction: row;
 justify-content: space-between;
+margin: 2vh;
 
+}
+
+#book_btn{
+    margin-right: 0.07rem;
+    margin-left: 0.07rem;
+    margin-bottom: 0.5rem;
+    display: inline-block;
+    font-weight: 400;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    border: 1px solid transparent;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: .25rem;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    cursor: pointer;
+ 
+    text-transform: none;
+    overflow: visible;
+    outline: none;
+  
 }
 
 .bottom_st{
