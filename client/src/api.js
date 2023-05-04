@@ -56,14 +56,17 @@ export async function getMarque(id) {
 
 export async function signIn(data){
  
- 
+  const params=new URLSearchParams()
+  for (const key in data) {
+    params.append(key, data[key]);
+  }
   const response= await fetch(`${BASE_URL}/auth/signIn`,
           {method:'POST',credentials:'include',
         headers:{
-          'Content-type':'application/json'
+          'Content-type':'application/x-www-form-urlencoded'
         
         }, 
-        body :JSON.stringify(data)}  )
+        body :params}  )
 
 
         if (!response.ok) {

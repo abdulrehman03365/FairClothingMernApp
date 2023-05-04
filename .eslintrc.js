@@ -1,5 +1,5 @@
-module.exports = {
+// module.exports = {
   
-    "excludedFiles": ["node_modules/**"]
+//     "excludedFiles": ["node_modules/**"]
   
-  };
+//   };
