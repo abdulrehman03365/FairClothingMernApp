@@ -40,7 +40,26 @@ class Challenges{
 
     secondLargest()
     {
-        
+        var numArray=[3,4,5,6]
+         let max=numArray[0];
+         let secMax=numArray[1]
+         let n=numArray.length;
+         for(var i=2;i<n;i++)
+         {
+                if(numArray[i]>max)
+                {
+                    secMax=max;
+                    max=numArray[i]
+                }
+                else if (numArray[i]>secMax && this.numArray[i]!=max){
+                    secMax=numArray[i]
+
+                }
+
+                
+         }
+         console.log("largest is "+ max
+                 + "and second largest is "+ secMax);
     }
 
 }
@@ -48,7 +67,7 @@ class Challenges{
 const chall= new Challenges()
 console.log(chall.StringReverse('ALI'));
 chall.Palaindrone('madam')
-
+chall.secondLargest()
 // 934696
 // 783521
 // 249278

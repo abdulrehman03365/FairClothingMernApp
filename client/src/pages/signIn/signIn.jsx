@@ -5,6 +5,7 @@ import {useForm} from "react-hook-form"
 import {useNavigate} from 'react-router-dom'
 import Alertcomp from "../../components/alertComp";
 import { signIn } from "../../api";
+import Nevbar from "../../components/navBar/nevbar";
 
  function SignIn()
    {
@@ -41,8 +42,10 @@ import { signIn } from "../../api";
 
             <>
       
-       
+      <Nevbar></Nevbar>
       {showErrorAlert && <Alertcomp varient={"danger"} show={showErrorAlert} onClose={()=>{setShowErrorAlert(false)}} message={errorMessage} ></Alertcomp>}
+      
+      <div className="formContainer">
       <div className="logInForm" >
       <form className="form" onSubmit={handleSubmit(handleSignIn)}>
 
@@ -70,6 +73,7 @@ import { signIn } from "../../api";
         {/* {successMessage && <div>{successMessage}</div>}
         {errorMessage && <div>{errorMessage}</div>} */}
     </div> 
+      </div>
       </>
        
             
