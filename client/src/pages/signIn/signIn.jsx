@@ -1,5 +1,6 @@
 import { Component , useState } from "react";
 import './signIn.css'
+import Button from 'react-bootstrap/Button';
 import {Alert} from 'react-bootstrap'
 import {useForm} from "react-hook-form"
 import {useNavigate} from 'react-router-dom'
@@ -62,7 +63,7 @@ import { signIn } from "../../api";
           <label for="" className="label">Password</label>
         </div>
         {errors.password?.type==='required' && <p role={'alert'}>Password is required</p>}
-
+    
         <input type="submit" className="submitBtn" value="Log In"/>
 
       </form>

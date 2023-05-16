@@ -63,19 +63,22 @@ body{
   }
   .submitBtn{
   
-    display: block;
+     display: block;
     margin-left: auto;
     padding: 10px 15px;
-    border: none;
-   background-color: black;
+    border: 10px solid blue;
+   background-color: rgb(0, 0, 0);
     color: white;
     border-radius: 6px;
     cursor: pointer;
     font-size: 16px;
-    margin-top: 30px;
+    margin-top: 30px; 
+
   }
-  
-  
+  .submitBtn:active {
+    box-shadow: box-shadow 7px 6px 28px 1px rgba(0, 0, 0, 0.24);
+    transform: translateY(4px);
+  }
   .label{
    
       position: absolute;

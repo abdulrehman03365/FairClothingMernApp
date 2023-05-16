@@ -65,15 +65,19 @@ body{
     margin-left: auto;
     padding: 10px 15px;
     border: none;
-   background-color: black;
+   background-color: rgb(0, 0, 0);
     color: white;
     border-radius: 6px;
     cursor: pointer;
     font-size: 16px;
     margin-top: 30px;
+
+
   }
-  
-  
+  .submitBtn:active {
+
+  }
+
   .label{
    
       position: absolute;
@@ -88,9 +92,16 @@ body{
   
   }
   
-  .submitBtn:hover{
-  background-color:#0f171f ;
-  transform:translateY(-2px);
-  }
+ .submitBtn:hover{
+  background: darken(black, 5%) radial-gradient(circle, transparent 1%, darken(black, 5%) 1%) center/15000%;
+ }
+
+  .submitBtn:active {
+    transform: scale(0.98);
+
+    /* Scaling button to 0.98 to its original size */
+    box-shadow: 3px 2px 22px 1px rgba(0, 0, 0, 0.24);
+    /* Lowering the shadow */
+}
   
   
