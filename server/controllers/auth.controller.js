@@ -3,7 +3,8 @@ const User=require('../model/user.model')
 const role=require('../model/role.model');
 const bcrypt=require('bcrypt')
 const jwt = require('jsonwebtoken')
-const flash=require('connect-flash')
+const flash=require('connect-flash');
+const { request } = require('express');
 var enc_pass=""
 require('dotenv').config()
 
@@ -165,9 +166,10 @@ signInController =(req,res,next)=>{
             if(isValidPassword)
             {
                
-             const token=jwt.sign({id:email._id},process.env.JWT_SECRET,{expiresIn:60000})
+             const token=jwt.sign({id:email._id},process.env.JWT_SECRET,{expiresIn:120})
                
                req.session.token=token
+              
                var authorities =[]
                for(i=0 ;i<email.roles;i++)
                {
@@ -175,7 +177,7 @@ signInController =(req,res,next)=>{
                }
                console.log("Email and Password are correct and user is successfuly Loged In",{'userId':email._id,
                'authoroties':authorities,'authToken':token});
-               res.status(200).send({'userId':email._id,'authoroties':authorities,'authToken':token})
+               res.status(200).send({'userId':email._id,'authoroties':authorities,'authToken':token,'expiresIn':120})
               
 
 

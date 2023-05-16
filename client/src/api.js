@@ -1,4 +1,6 @@
 const BASE_URL = 'http://localhost:8000/api';
+import {expirationTime ,setSessionTimeout}  from "utils";
+
 const token = localStorage.getItem('token');
 export async function addMarque(formData) {
   const response = await fetch(`${BASE_URL}/addMarque`, {
@@ -79,6 +81,8 @@ export async function signIn(data){
             
             
             localStorage.setItem('token',JsonResp.authToken)
+            localStorage.setItem('expiresIn',JsonResp.expiresIn)
+            setSessionTimeout(JsonResp.expiresIn)
         }
         return response
       }

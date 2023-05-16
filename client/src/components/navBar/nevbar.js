@@ -21,10 +21,10 @@ function Nevbar() {
           <a> Booking Website</a>
         </div>
     
-       
+        
         <ul id="menu">
         <ul className="navbar-nav mr-auto">
-          <li><Link to={'/'} className="nav-link"> Home </Link></li>
+         
           <li><Link to={'/signUp'} className="nav-link">Sign Up</Link></li>
           <li><Link to={'/signIn'} className="nav-link">Sign In</Link></li>
           <li><Link to={'/bookMarque'} className="nav-link">Book Marque</Link></li>
@@ -44,7 +44,7 @@ function Nevbar() {
     
     {showMenu && (<div class="overlay-menu">
       <ul id="menu">
-      <li><Link to={'/'} className="nav-link"> Home </Link></li>
+     
           <li><Link to={'/signUp'} className="nav-link">SignUp</Link></li>
           <li><Link to={'/signIn'} className="nav-link">SignIn</Link></li>
           <li><Link to={'/bookMarque'} className="nav-link">Book</Link></li>
