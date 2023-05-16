@@ -1,5 +1,5 @@
 const BASE_URL = 'http://localhost:8000/api';
-import {expirationTime ,setSessionTimeout}  from "utils";
+import {expirationTime ,setSessionTimeout}  from "./utils/utils";
 
 const token = localStorage.getItem('token');
 export async function addMarque(formData) {

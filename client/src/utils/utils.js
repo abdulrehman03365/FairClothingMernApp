@@ -10,6 +10,7 @@ export function checkUserLogin(){
     if (currentTime> expirationTime){
         localStorage.removeItem(token)
         localStorage.removeItem(expiresIn)
+        console.log('Your Session is expired');
         
     }
 }

@@ -1,5 +1,5 @@
 import {toast, ToastContainer } from "react-toastify";
-import { checkUserLogin } from "../utils/utils";
+import { checkUserLogin } from "./utils/utils";
 import AdminHome from './adminPages/adminHome';
 import Home from './pages/home/home';
 import bookMarque from './pages/bookMarque/bookMarque';
@@ -28,7 +28,7 @@ function App ()
    },[])
   
 
-  render ()
+ 
   {
     return ( 
 
