@@ -1,7 +1,7 @@
 import { Component } from "react";
 import './signUp.css'
 import {useForm} from "react-hook-form"
-
+import Nevbar from "../../components/navBar/nevbar";
 function SignUpform(){
 
 const {register, handleSubmit , formState : {errors}}=useForm();
@@ -30,7 +30,9 @@ function onSubmit (data){
 
   return(
     <>
-     <div className="signUpForm" >
+    <Nevbar>
+    <div className="signupformContainer">
+    <div className="signUpForm" >
       <form className="form" onSubmit={handleSubmit(onSubmit)}>
 
         <h1 className="title">Sign up</h1>
@@ -64,7 +66,10 @@ function onSubmit (data){
   
         <input type="submit" className="submitBtn" value="Sign up"/>
       </form>
-    </div> 
+    </div>  
+    </div>
+     
+    </Nevbar>
     </>
   )
 }

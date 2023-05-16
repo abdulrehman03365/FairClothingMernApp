@@ -4,7 +4,12 @@ import { useState } from "react";
 
 import '../navBar/nevbar.css'
 function Nevbar() {
+  const [showMenu, setShowMenu] = useState(false);
 
+  function toggleMenu() {
+    setShowMenu(!showMenu);
+    console.log("set Show value" + showMenu);
+  }
     
     return (
         
@@ -16,10 +21,10 @@ function Nevbar() {
           <a> Booking Website</a>
         </div>
     
-       
+        
         <ul id="menu">
         <ul className="navbar-nav mr-auto">
-          <li><Link to={'/'} className="nav-link"> Home </Link></li>
+         
           <li><Link to={'/signUp'} className="nav-link">Sign Up</Link></li>
           <li><Link to={'/signIn'} className="nav-link">Sign In</Link></li>
           <li><Link to={'/bookMarque'} className="nav-link">Book Marque</Link></li>
@@ -30,20 +35,21 @@ function Nevbar() {
     
     
     
-    <div class="menuIcon">
+    <div class="menuIcon" onClick={toggleMenu}>
+      
       <span class="icon icon-bars"></span>
       <span class="icon icon-bars overlay"></span>
     </div>
     
     
-    <div class="overlay-menu">
+    {showMenu && (<div class="overlay-menu">
       <ul id="menu">
-          <li><a href="#home">Home</a></li>
-          <li><a href="#services">Services</a></li>
-          <li><a href="#about">About</a></li>
-          <li><a href="#contact">Contact</a></li>
+     
+          <li><Link to={'/signUp'} className="nav-link">SignUp</Link></li>
+          <li><Link to={'/signIn'} className="nav-link">SignIn</Link></li>
+          <li><Link to={'/bookMarque'} className="nav-link">Book</Link></li>
         </ul>
-    </div></div>
+    </div>)}</div>
 
         
       

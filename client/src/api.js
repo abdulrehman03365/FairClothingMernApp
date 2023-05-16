@@ -1,4 +1,6 @@
 const BASE_URL = 'http://localhost:8000/api';
+import {expirationTime ,setSessionTimeout}  from "utils";
+
 const token = localStorage.getItem('token');
 export async function addMarque(formData) {
   const response = await fetch(`${BASE_URL}/addMarque`, {
@@ -55,20 +57,18 @@ export async function getMarque(id) {
 }
 
 export async function signIn(data){
- const params = new URLSearchParams()
- for (const key in data)
- {
-  params.append(key,data[key])
- }
  
+  const params=new URLSearchParams()
+  for (const key in data) {
+    params.append(key, data[key]);
+  }
   const response= await fetch(`${BASE_URL}/auth/signIn`,
-          {method:'POST',
-          credentials:'include',
-          headers:{
-          'Content-type':'application/x-www-form-urlencoded'
+          {method:'POST',credentials:'include',
+        headers:{
+          'Content-type':'application/json'
         
         }, 
-        body :params  })
+        body :JSON.stringify(data)}  )
 
 
         if (!response.ok) {
@@ -81,6 +81,8 @@ export async function signIn(data){
             
             
             localStorage.setItem('token',JsonResp.authToken)
+            localStorage.setItem('expiresIn',JsonResp.expiresIn)
+            setSessionTimeout(JsonResp.expiresIn)
         }
         return response
       }

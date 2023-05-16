@@ -1,4 +1,5 @@
 import {toast, ToastContainer } from "react-toastify";
+import { checkUserLogin } from "../utils/utils";
 import AdminHome from './adminPages/adminHome';
 import Home from './pages/home/home';
 import bookMarque from './pages/bookMarque/bookMarque';
@@ -9,12 +10,22 @@ import NotFound from './pages/notFound/notFound';
 import { ProtectedRoutes } from './pages/protectedRoutes';
 import {BrowserRouter as Router , Routes , Route , Link} from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { useEffect } from "react";
 import ManageMarques from './adminPages/manageMarques/manageMarques';
 import './App.css'
 
-class App extends Component
+function App ()
  {
+   useEffect(()=>{
 
+    const interval = setInterval(checkUserLogin,30000)
+    
+
+    return () => {
+      clearInterval(interval);
+    };
+    
+   },[])
   
 
   render ()
