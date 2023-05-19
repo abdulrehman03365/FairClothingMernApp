@@ -1,5 +1,5 @@
 const BASE_URL = 'http://localhost:8000/api';
-import {expirationTime ,setSessionTimeout}  from "./utils/utils";
+import util from "./utils/utils";
 
 const token = localStorage.getItem('token');
 export async function addMarque(formData) {
@@ -82,7 +82,9 @@ export async function signIn(data){
             
             localStorage.setItem('token',JsonResp.authToken)
             localStorage.setItem('expiresIn',JsonResp.expiresIn)
-            setSessionTimeout(JsonResp.expiresIn)
+            util.setSessionExpirationTime(JsonResp.expiresIn)
+            util.setIsUserLoggedIn(true);
+            
         }
         return response
       }

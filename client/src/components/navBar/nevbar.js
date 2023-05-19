@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 
 import '../navBar/nevbar.css'
+import util from "../../utils/utils";
 function Nevbar() {
   const [showMenu, setShowMenu] = useState(false);
 
@@ -24,9 +25,9 @@ function Nevbar() {
         
         <ul id="menu">
         <ul className="navbar-nav mr-auto">
-         
-          <li><Link to={'/signUp'} className="nav-link">Sign Up</Link></li>
-          <li><Link to={'/signIn'} className="nav-link">Sign In</Link></li>
+          console.log(util.getIsUserLoggedIn);
+          {!util.getIsUserLoggedIn&&<li><Link to={'/signUp'} className="nav-link">Sign Up</Link></li>}
+          {!util.getIsUserLoggedIn&&<li><Link to={'/signIn'} className="nav-link">Sign In</Link></li>}
           <li><Link to={'/bookMarque'} className="nav-link">Book Marque</Link></li>
         </ul>
         </ul>
@@ -44,9 +45,9 @@ function Nevbar() {
     
     {showMenu && (<div class="overlay-menu">
       <ul id="menu">
-     
-          <li><Link to={'/signUp'} className="nav-link">SignUp</Link></li>
-          <li><Link to={'/signIn'} className="nav-link">SignIn</Link></li>
+         
+          {!isUserLoggedIn&&<li><Link to={'/signUp'} className="nav-link">Sign Up</Link></li>}
+          {!isUserLoggedIn&&<li><Link to={'/signIn'} className="nav-link">Sign In</Link></li>}
           <li><Link to={'/bookMarque'} className="nav-link">Book</Link></li>
         </ul>
     </div>)}</div>
