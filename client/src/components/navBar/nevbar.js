@@ -1,9 +1,9 @@
 import { Component } from "react";
 import { Link } from "react-router-dom";
 import { useState } from "react";
-
 import '../navBar/nevbar.css'
-import util from "../../utils/utils";
+import { useContext } from "react";
+import { AuthContext } from "../../Context/AuthContext";
 function Nevbar() {
   const [showMenu, setShowMenu] = useState(false);
 
@@ -25,9 +25,9 @@ function Nevbar() {
         
         <ul id="menu">
         <ul className="navbar-nav mr-auto">
-          console.log(util.getIsUserLoggedIn);
-          {!util.getIsUserLoggedIn&&<li><Link to={'/signUp'} className="nav-link">Sign Up</Link></li>}
-          {!util.getIsUserLoggedIn&&<li><Link to={'/signIn'} className="nav-link">Sign In</Link></li>}
+         
+          { <li><Link to={'/signUp'} className="nav-link">Sign Up</Link></li>}
+          {<li><Link to={'/signIn'} className="nav-link">Sign In</Link></li>}
           <li><Link to={'/bookMarque'} className="nav-link">Book Marque</Link></li>
         </ul>
         </ul>

@@ -4,13 +4,17 @@ import Button from 'react-bootstrap/Button';
 import {Alert} from 'react-bootstrap'
 import {useForm} from "react-hook-form"
 import {useNavigate} from 'react-router-dom'
+import { AuthContext } from "../../Context/AuthContext";
+import { useContext } from "react";
 import Alertcomp from "../../components/alertComp";
 import { signIn } from "../../api";
 import Nevbar from "../../components/navBar/nevbar";
 
+
  function SignIn()
    {
-    const {register, handleSubmit , formState : {errors}}=useForm();
+  
+    const {register, handleSubmit , formState : {errors} }=useForm();
     const [successMessage, setSuccessMessage] = useState('')
     const [errorMessage, setErrorMessage] =useState('')
     const [showErrorAlert ,setShowErrorAlert]=useState(false)
