@@ -12,11 +12,7 @@ import SignUp from './pages/singUp/signUp';
 import { ReactDOM , Browser, Component, useState } from 'react';
 import NotFound from './pages/notFound/notFound';
 import { ProtectedRoutes } from './pages/protectedRoutes';
-<<<<<<< HEAD
-import {BrowserRouter as Router , Routes , Route , Link, useNavigate} from 'react-router-dom'
-=======
 import {BrowserRouter as Router , Routes , Route , Link , useNavigate} from 'react-router-dom'
->>>>>>> 81ecc2e5d5465a39cf614bffddf17ce09ddd1f4f
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useEffect } from "react";
 import ManageMarques from './adminPages/manageMarques/manageMarques';
