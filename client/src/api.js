@@ -82,7 +82,7 @@ export async function signIn(data){
             
             localStorage.setItem('token',JsonResp.authToken)
             localStorage.setItem('expiresIn',JsonResp.expiresIn)
-            setSessionTimeout(JsonResp.expiresIn)
+          
           
             
         }

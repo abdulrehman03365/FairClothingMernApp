@@ -13,12 +13,13 @@ import Nevbar from "../../components/navBar/nevbar";
 
  function SignIn()
    {
-  
+    const { isLoggedIn, setIsLoggedIn }=useContext(AuthContext)
     const {register, handleSubmit , formState : {errors} }=useForm();
     const [successMessage, setSuccessMessage] = useState('')
     const [errorMessage, setErrorMessage] =useState('')
     const [showErrorAlert ,setShowErrorAlert]=useState(false)
     const navigate = useNavigate();
+    
     
     async function handleSignIn(data,event){
         event.preventDefault()
@@ -26,6 +27,7 @@ import Nevbar from "../../components/navBar/nevbar";
           const response =await signIn(data)
           if (response.ok)
           {    
+            setIsLoggedIn(true)
             navigate("/bookMarque")
                       
           }

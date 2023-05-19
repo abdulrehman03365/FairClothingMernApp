@@ -16,50 +16,30 @@ import './App.css'
 
 function App ()
  {
-  const nevigate = useNavigate()
-   useEffect(()=>{
-    const checkUserLogin = () => {
-      const currentTime = new Date().getTime();
-      if (currentTime > util.getSessionExpireTime()) {
-        localStorage.removeItem('token');
-        localStorage.removeItem('expiresIn');
-        console.log('Your session has expired');
-        util.setIsUserLoggedIn(false);
-        nevigate('/'); 
-        // Replace '/' with the desired page to redirect the user
-      
-      }
-    };
 
-    
-   },[])
   
 
  
   {
     return ( 
-
-      <>
-       
-        <Router>
-       
-        <div>
-          <ToastContainer className={"toast-container"} />
+      <Router>
+      <AuthProvider>
+      
+          <div>
+            <ToastContainer className="toast-container" />
             <Routes>
-              <Route  path='/' element={<Home/>} />
-              <Route path="signIn" element={<SignIn/>} />
-              <Route path ="signUp" element={<SignUp/>} />
-              <Route path="bookMarque" element={<ProtectedRoutes component={bookMarque} />}/>
-              <Route path='/admin' element={<AdminHome/>}/>
-              <Route path='/manageMarques' element={<ManageMarques/>}/>
-              <Route path='*' element={<NotFound/>}/>
-              <Route path="/manageMarques" element={<ManageMarques/>} />
+              <Route path="/" element={<Home />} />
+              <Route path="signIn" element={<SignIn />} />
+              <Route path="signUp" element={<SignUp />} />
+              <Route path="bookMarque" element={<ProtectedRoutes component={bookMarque} />} />
+              <Route path="/admin" element={<AdminHome />} />
+              <Route path="/manageMarques" element={<ManageMarques />} />
+              <Route path="*" element={<NotFound />} />
             </Routes>
           </div>
-       
-        </Router>
-      </>
-  
+    
+      </AuthProvider>
+    </Router>
      
      
     )

@@ -6,7 +6,7 @@ import { useContext } from "react";
 import { AuthContext } from "../../Context/AuthContext";
 function Nevbar() {
   const [showMenu, setShowMenu] = useState(false);
-
+  const { isLoggedIn, setIsLoggedIn }=useContext(AuthContext)
   function toggleMenu() {
     setShowMenu(!showMenu);
     console.log("set Show value" + showMenu);
@@ -26,8 +26,8 @@ function Nevbar() {
         <ul id="menu">
         <ul className="navbar-nav mr-auto">
          
-          { <li><Link to={'/signUp'} className="nav-link">Sign Up</Link></li>}
-          {<li><Link to={'/signIn'} className="nav-link">Sign In</Link></li>}
+          {!isLoggedIn && <li><Link to={'/signUp'} className="nav-link">Sign Up</Link></li>}
+          {!isLoggedIn &&<li><Link to={'/signIn'} className="nav-link">Sign In</Link></li>}
           <li><Link to={'/bookMarque'} className="nav-link">Book Marque</Link></li>
         </ul>
         </ul>
@@ -46,8 +46,8 @@ function Nevbar() {
     {showMenu && (<div class="overlay-menu">
       <ul id="menu">
          
-          {!isUserLoggedIn&&<li><Link to={'/signUp'} className="nav-link">Sign Up</Link></li>}
-          {!isUserLoggedIn&&<li><Link to={'/signIn'} className="nav-link">Sign In</Link></li>}
+          {!isLoggedIn&&<li><Link to={'/signUp'} className="nav-link">Sign Up</Link></li>}
+          {!isLoggedIn&&<li><Link to={'/signIn'} className="nav-link">Sign In</Link></li>}
           <li><Link to={'/bookMarque'} className="nav-link">Book</Link></li>
         </ul>
     </div>)}</div>
