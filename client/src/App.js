@@ -1,9 +1,5 @@
 import { AuthContext,AuthProvider } from "./Context/AuthContext";
 import {toast, ToastContainer } from "react-toastify";
-<<<<<<< HEAD
-import util from "./utils/utils";
-=======
->>>>>>> 81ecc2e5d5465a39cf614bffddf17ce09ddd1f4f
 import AdminHome from './adminPages/adminHome';
 import Home from './pages/home/home';
 import bookMarque from './pages/bookMarque/bookMarque';
@@ -35,15 +31,6 @@ function App ()
       }
     };
 
-<<<<<<< HEAD
-    const interval = setInterval(checkUserLogin(),30000)
-    
-
-    return () => {
-      clearInterval(interval);
-    };
-=======
->>>>>>> 81ecc2e5d5465a39cf614bffddf17ce09ddd1f4f
     
    },[])
   
