@@ -1,0 +1,22 @@
+.ParentContainer{
+   background-color: white;
+   width: 40rem;
+   height: 50vh;
+   padding: 0.1rem;
+   border: 1px solid black;
+   border-radius: 0.75rem;
+   
+   
+}
+.Top-div{
+    display: flex;
+}
+.Top-div h1 {
+    text-align: center; /* Center align the text within the h1 element */
+  }
+
+  .Top-div input[type="button"] {
+    margin-left: auto; /* Push the button to the right end */
+    width: 10rem;
+    height: 10rem;
+  }

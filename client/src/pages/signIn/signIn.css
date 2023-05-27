@@ -12,6 +12,7 @@ body{
     justify-content: center;
     height: 90vh;
     padding: 10%;
+    width: 100%;
   }
   
   .logInForm{

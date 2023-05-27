@@ -13,19 +13,23 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { useEffect } from "react";
 import ManageMarques from './adminPages/manageMarques/manageMarques';
 import './App.css'
-
+import {configureStore} from '@reduxjs/toolkit'
+import bookslice from "./slices/bookslice";
+import { Provider } from "react-redux";
+import store from './store/store'
 function App ()
  {
 
-  
+ 
+
 
  
   {
     return ( 
       <Router>
       <AuthProvider>
-      
-          <div>
+      <Provider store={store}>
+      <div>
             <ToastContainer className="toast-container" />
             <Routes>
               <Route path="/" element={<Home />} />
@@ -37,6 +41,8 @@ function App ()
               <Route path="*" element={<NotFound />} />
             </Routes>
           </div>
+      </Provider>
+          
     
       </AuthProvider>
     </Router>

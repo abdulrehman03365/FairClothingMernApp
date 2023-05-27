@@ -5,45 +5,47 @@ import MarqueView from "../../components/marqueView/marqueView";
 import sendMessage from "../../services/chat";
 import socket from "../../services/chat";
 import { useEffect } from "react";
+
 function BookMarque() {
- useEffect(()=>{sendMessage()},)
- 
-    function sendMessage(){
-      socket.auth={name:"Abdul-Rehman"}
-      socket.connect();
-    }
-     
+  useEffect(() => {}, []);
+
+  function sendMessage() {
+    socket.auth = { name: "Abdul-Rehman" };
+    socket.connect();
+  }
 
   const marqueDetails = [
     {
+      id: 1,
       name: "Niaz Marque",
       location: "Adiala Road",
       image: "./marqueImages/bilal.jpg",
-      status:"booked",
-      capacity:"1000"
-
-      
+      status: "booked",
+      capacity: "1000"
     },
     {
+      id: 2,
       name: "Niaz Marque",
       location: "Adiala Road",
       image: "./marqueImages/bilal.jpg",
-      status:"booked",
-      capacity:"1000"
+      status: "booked",
+      capacity: "1000"
     },
     {
+      id: 3,
       name: "Niaz Marque",
       location: "Adiala Road",
       image: "./marqueImages/bilal.jpg",
-      status:"booked",
-      capacity:"1000"
+      status: "booked",
+      capacity: "1000"
     },
     {
+      id: 4,
       name: "Niaz Marque",
       location: "Adiala Road",
       image: "./marqueImages/bilal.jpg",
-      status:"booked",
-      capacity:"1000"
+      status: "booked",
+      capacity: "1000"
     }
   ];
 
@@ -52,8 +54,7 @@ function BookMarque() {
       <Nevbar />
       <div id="MarquePlaceHolder">
         {marqueDetails.map((marqueDetail) => (
-
-          <MarqueView marqueDetail={marqueDetail} />
+          <MarqueView key={marqueDetail.id} marqueDetail={marqueDetail} />
         ))}
       </div>
     </div>

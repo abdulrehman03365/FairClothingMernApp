@@ -48,6 +48,7 @@ function Nevbar() {
          
           {!isLoggedIn&&<li><Link to={'/signUp'} className="nav-link">Sign Up</Link></li>}
           {!isLoggedIn&&<li><Link to={'/signIn'} className="nav-link">Sign In</Link></li>}
+          {isLoggedIn&&<li><Link to={'/signOut'} className="nav-link">Sign In</Link></li>}
           <li><Link to={'/bookMarque'} className="nav-link">Book</Link></li>
         </ul>
     </div>)}</div>

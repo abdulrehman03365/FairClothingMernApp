@@ -16,6 +16,18 @@
 
 }
 
+.booking-preview-overlay {
+    position: fixed;
+    width: 100%;
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0,0,0,0.1);
+    height: 90vh;
+    z-index: 9999; /* Ensure the overlay is on top of other elements */
+  }
+  
 
 
 .top_sec text{
@@ -88,3 +100,24 @@ gap: 4px;
     display: flex;
     justify-content: flex-end;
 }
+
+
+
+@media  (max-width: 767px) {
+    /* CSS styles for mobile devices */
+    /* Add your mobile-specific styles here */
+    /* For example: */
+    .booking-preview-overlay {
+        position: fixed;
+        height: 90vh;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 1rem;
+        background-color: rgba(0,0,0,0.1);
+        z-index: 9999; /* Ensure the overlay is on top of other elements */
+      }
+    /* ... other mobile-specific styles ... */
+  }
+  

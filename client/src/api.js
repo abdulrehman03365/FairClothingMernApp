@@ -72,7 +72,8 @@ export async function signIn(data){
 
 
         if (!response.ok) {
-          throw new Error(data.message);
+          const JsonResp =  await response.json()
+          throw new Error(JsonResp.message);
         }
         else 
         {

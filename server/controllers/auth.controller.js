@@ -177,7 +177,7 @@ signInController =(req,res,next)=>{
                }
                console.log("Email and Password are correct and user is successfuly Loged In",{'userId':email._id,
                'authoroties':authorities,'authToken':token});
-               res.status(200).send({'userId':email._id,'authoroties':authorities,'authToken':token,'expiresIn':120})
+               res.status(200).send({'userId':email._id,'authoroties':authorities,'authToken':token,'expiresIn':1200})
               
 
 
