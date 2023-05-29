@@ -9,25 +9,29 @@ import { useContext } from "react";
 import Alertcomp from "../../components/alertComp";
 import { signIn } from "../../api";
 import Nevbar from "../../components/navBar/nevbar";
-
-
+import { useDispatch , useSelector } from "react-redux";
+import { setUserAuth } from "../../slices/authSlice";
  function SignIn()
-   {
+   
+ {
+    const dispatch=useDispatch();  
     const { isLoggedIn, setIsLoggedIn }=useContext(AuthContext)
     const {register, handleSubmit , formState : {errors} }=useForm();
     const [successMessage, setSuccessMessage] = useState('')
     const [errorMessage, setErrorMessage] =useState('')
     const [showErrorAlert ,setShowErrorAlert]=useState(false)
     const navigate = useNavigate();
+
     
     
     async function handleSignIn(data,event){
-        event.preventDefault()
+      
+      event.preventDefault()
         try{
           const response =await signIn(data)
           if (response.ok)
           {    
-            setIsLoggedIn(true)
+            dispatch(setUserAuth(true))       
             navigate("/bookMarque")
                       
           }
@@ -44,7 +48,7 @@ import Nevbar from "../../components/navBar/nevbar";
         }
 
       
-        console.log(showErrorAlert);
+        
         return(
 
             <>

@@ -1,8 +1,21 @@
+import { useDispatch , useSelector } from "react-redux";
+import { setUserAuth } from "./slices/authSlice";
 const BASE_URL = 'http://localhost:8000/api';
-import {expirationTime, isUserLoggedIn ,setSessionTimeout}  from "./utils/utils";
 
-const token = localStorage.getItem('token');
+async function fetchToken() {
+  // Retrieve the token from local storage or your authentication mechanism
+  const token = localStorage.getItem('token');
+  
+  // Check if the token is valid or expired
+  if (!token) {
+   
+  }
+  
+  // If token is valid and not expired, return it
+  return token;
+}
 export async function addMarque(formData) {
+  const token = await fetchToken();
   const response = await fetch(`${BASE_URL}/addMarque`, {
     method: 'POST',headers:{'Authorization': `Bearer ${token}`},
     credentials: 'include',
@@ -19,6 +32,7 @@ export async function addMarque(formData) {
 }
 
 export async function updateMarque(id,formData) {
+  const token = await fetchToken();
   const response = await fetch(`${BASE_URL}/updateMarque?id=${id}`,{method:'POST'
   ,headers:{'Authorization': `Bearer ${token}`},credentials:'include',body:formData});
 
@@ -33,7 +47,9 @@ export async function updateMarque(id,formData) {
 
 
 export async function getallMarques(){
-  const response=await fetch('http://localhost:8000/api/getallMarques',{method:'GET',headers:{'Authorization': `Bearer ${token}`}})
+  const token = await fetchToken();
+  const response=await fetch('http://localhost:8000/api/getallMarques',{method:'GET'
+  ,headers:{'Authorization': `Bearer ${token}`}})
   const data = await response.json();
 
   if (!response.ok) {
@@ -45,8 +61,8 @@ export async function getallMarques(){
 
 
 export async function getMarque(id) {
+  const token = await fetchToken();
   const response = await fetch(`${BASE_URL}/getMarque?id=${id}`,{method:'GET',credentials:'include',headers:{'Authorization': `Bearer ${token}`}});
-
   const data = await response.json();
 
   if (!response.ok) {
@@ -57,7 +73,7 @@ export async function getMarque(id) {
 }
 
 export async function signIn(data){
- 
+  
   const params=new URLSearchParams()
   for (const key in data) {
     params.append(key, data[key]);
@@ -80,18 +96,19 @@ export async function signIn(data){
           const JsonResp =  await response.json()
         
             
-            
+                
             localStorage.setItem('token',JsonResp.authToken)
             localStorage.setItem('expiresIn',JsonResp.expiresIn)
-          
+           
           
             
         }
+
         return response
       }
 
 export async function deleteMarque(id){
-  
+  const token = await fetchToken(); 
   const response = await fetch(`${BASE_URL}/deleteMarque`,{method:'POST',credentials:'include'
   ,headers:{'Authorization': `Bearer ${token}` ,'Content-type':'application/json' , },body:JSON.stringify({id:id})});
 

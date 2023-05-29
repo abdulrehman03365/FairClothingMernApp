@@ -17,18 +17,18 @@ import {configureStore} from '@reduxjs/toolkit'
 import bookslice from "./slices/bookslice";
 import { Provider } from "react-redux";
 import store from './store/store'
+import { useDispatch } from "react-redux";
+import AuthCheker from "./components/AuthChecker/AuthCheker";
+
 function App ()
  {
-
- 
-
-
- 
+  
   {
     return ( 
       <Router>
       <AuthProvider>
       <Provider store={store}>
+      <AuthCheker></AuthCheker>
       <div>
             <ToastContainer className="toast-container" />
             <Routes>
@@ -42,16 +42,15 @@ function App ()
             </Routes>
           </div>
       </Provider>
-          
-    
+
       </AuthProvider>
     </Router>
      
      
     )
 
-  };
-}
+  } };
+
 
 
 
