@@ -6,6 +6,7 @@ import sendMessage from "../../services/chat";
 import socket from "../../services/chat";
 import { useEffect } from "react";
 import { getallMarques } from "../../api";
+import Footer from "../../components/Footer/Footer";
 function BookMarque() {
   const [marqueDetails,setMarqueDetails]=useState([])
   useEffect((
@@ -37,6 +38,7 @@ setMarqueDetails(data)
           <MarqueView key={marqueDetail._id} marqueDetail={marqueDetail} />
         ))}
       </div>
+      <Footer></Footer>
     </div>
   );
 }

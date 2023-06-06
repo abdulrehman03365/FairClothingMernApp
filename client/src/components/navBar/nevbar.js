@@ -16,8 +16,8 @@ function Nevbar() {
   }
     
     return (
-        
-      <div><nav id="navbar" className="">
+       <>
+        <nav id="navbar" className="">
       <div className="nav-wrapper">
        
         <div className="logo">
@@ -54,7 +54,8 @@ function Nevbar() {
           {isAuthenticated&&<li><Link to={'/signOut'} className="nav-link">Sign In</Link></li>}
           <li><Link to={'/bookMarque'} className="nav-link">Book</Link></li>
         </ul>
-    </div>)}</div>
+    </div>)}
+       </>
 
         
       
