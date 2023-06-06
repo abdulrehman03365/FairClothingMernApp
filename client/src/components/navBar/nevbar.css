@@ -26,7 +26,7 @@
     color: rgb(13, 26, 38);
     box-shadow: 1px 1px 12px 5px rgba(0,0,0,.1);
     top: 0;
-    
+    position: fixed;
     height: 8%;
     line-height: 60px;
     width: 100vw;
@@ -281,12 +281,13 @@
                      Responsive Mobile Menu 
     ======================================================*/
   .overlay-menu {
-    
+    position: fixed;
+    /* background-color: rgba(0,0,0,0.1); */
     color: rgb(13, 26, 38);
     display: flex;
-    
+    background: white;
     justify-content: end;
-    
+    box-shadow: 1px 1px 12px 5px rgba(0,0,0,.1);
     top: 0;
     right: 0;
     padding-right: 15px;
