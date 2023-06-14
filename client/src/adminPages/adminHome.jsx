@@ -29,16 +29,34 @@ function AdminHome() {
 
     async function populatingApis()
     { await signIn({email:'abdulrehman03365@gmail.com',password:'Cmadak402'})
-    // setTimeout(populatePreview,2000)  
     populatePreview()
-      console.log('marques :'+marquees);}
-    useEffect(populatingApis, []);
+    console.log('marques :'+marquees);}
+    
+    useEffect(
+      
+     
+     ()=>{
+     const populatePreview=async ()=>{
+      await signIn({email:'abdulrehman03365@gmail.com',password:'Cmadak402'})
+      
+      const data=await getallMarques()
+    
+      setMarquees(data )
+    }
+     
+
+
+      
+     
+     
+     populatePreview()
+  }, []);
   
     return (
       <>
    
 {showErrorAlert && <Alertcomp varient={"danger"}  show={showErrorAlert} onClose={()=>{ setShowErrorAlert(false)}} message={errorMessage} ></Alertcomp>}     
-<div className="adminPanel">
+<div className="adminPanel" style={{width:'100vw'}}>
        
       
        <AdminHeader></AdminHeader>
