@@ -27,7 +27,7 @@ function ManageMarques() {
 
   useEffect(() => {
     setEditView(editViewProp)
-    async function fetchAndPopulate() {
+   const  fetchAndPopulate=async()=> {
       const respData = await getMarque(id);
       setValue('name', respData.name);
       setValue('location', respData.location);

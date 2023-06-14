@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 function AdminHeader() {
     return ( <>
 
-<header className="header">
+<header className="header" style={{width : '100vw'}}>
           <nav className="navbar navbar-expand-lg navbar-light bg-light">
             <div className="container-fluid">
               <Link className="navbar-brand" to="/">

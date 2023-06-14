@@ -8,9 +8,9 @@ import {BrowserRouter as Router , Routes , Route , Link} from 'react-router-dom'
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 root.render(
-<div style={{height:'100vh' , display:'flex'}}>
+< >
 <App />
-</div>
+</>
 
 
     

@@ -29,7 +29,7 @@ function App ()
       <AuthProvider>
       <Provider store={store}>
       <AuthCheker></AuthCheker>
-      <div>
+      <div style={{height:'100vh' , display:'flex' ,flexDirection:'column'}}>
             <ToastContainer className="toast-container" />
             <Routes>
               <Route path="/" element={<Home />} />
