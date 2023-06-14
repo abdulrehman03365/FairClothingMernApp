@@ -11,7 +11,7 @@ export default function MarqueView({ marqueDetail }) {
 
   const bookMarque = (itemId) => {
     setshowBookingPreview(true)
-    console.log('Value of isBookClicked before dispatch:', isBookClicked);
+    console.log('Value of is BookClicked before dispatch:', isBookClicked);
     dispatch(setBookClicked());
   };
   

@@ -40,6 +40,23 @@ function ManageMarques() {
     if (editViewProp ) {
       fetchAndPopulate();
     }
+    // if(editViewProp)
+    //   {setEditView(editViewProp);}
+
+    // const fetchAndPopulate = async () => {
+    // const respData = await getMarque(id);
+    //   setValue('name', respData.name);
+    //   setValue('location', respData.location);
+    //   setValue('capacity', respData.capacity);
+    //   console.log("image url:" + respData.image);
+    //   setImagePreview(respData.image);
+    //   setValue('status', respData.status);
+    // };
+
+    // console.log("EditViewProp: " + editViewProp);
+    // if (editViewProp) {
+    //   fetchAndPopulate();
+    // }
   }, [editViewProp]);
 
   function convertToBase64(file){
