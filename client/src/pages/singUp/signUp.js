@@ -30,7 +30,9 @@ function onSubmit (data){
 
   return(
     <>
-    <Nevbar>
+    <Nevbar></Nevbar>
+      
+      
     <div className="signupformContainer">
     <div className="signUpForm" >
       <form className="form" onSubmit={handleSubmit(onSubmit)}>
@@ -69,7 +71,7 @@ function onSubmit (data){
     </div>  
     </div>
      
-    </Nevbar>
+   
     </>
   )
 }

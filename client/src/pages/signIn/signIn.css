@@ -46,6 +46,13 @@ body{
     width: 90%;
     margin-bottom: 17px;
   }
+
+  .inputContainer-pass {
+    position: relative;
+    height: 30px;
+    width: 90%;
+    margin-top:27px;
+  }
   
   .input {
     position: absolute;
@@ -68,10 +75,11 @@ body{
   .label {
     position: absolute;
     color: black;
-    font-size: 10px;
+    /* font-size: 10px;
     transition: 0.5s;
-    z-index: 2;
+    z-index: 2; */
   }
+
   .submitBtn{
   
      display: block;
@@ -93,14 +101,14 @@ body{
   .label{
    
       position: absolute;
-      top: 15px;
-      left: 15px;
-      padding: 0 4px;
-      background-color: white;
-      color: #DADCE0;
+      top: -26px;
+      left: 2px;
+      
+      
+      
       font-size: 16px;
-      transition: 0.5s;
-      z-index: 0;
+      
+      
   
   }
   

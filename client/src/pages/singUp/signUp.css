@@ -22,6 +22,7 @@ body{
   }
   
   .form{
+    margin:1rem;
     background-color: white;
     width: 400px;
     border-radius: 8px;
@@ -33,7 +34,7 @@ body{
     position: relative;
     height: 30px;
     width: 90%;
-    margin-bottom: 17px;
+    margin-bottom: 22px;
   }
   
   .input {
@@ -52,13 +53,19 @@ body{
   }
  
   
-  .label {
+  .label{
+   
     position: absolute;
-    color: black;
-    font-size: 10px;
-    transition: 0.5s;
-    z-index: 2;
-  }
+    top: -24px;
+    left: 2px;
+    
+    
+    
+    font-size: 16px;
+    
+    
+
+}
   .submitBtn{
   
     display: block;
@@ -78,19 +85,7 @@ body{
 
   }
 
-  .label{
-   
-      position: absolute;
-      top: 15px;
-      left: 15px;
-      padding: 0 4px;
-      background-color: white;
-      color: #DADCE0;
-      font-size: 16px;
-      transition: 0.5s;
-      z-index: 0;
-  
-  }
+
   
  .submitBtn:hover{
   background: darken(black, 5%) radial-gradient(circle, transparent 1%, darken(black, 5%) 1%) center/15000%;

@@ -71,7 +71,7 @@ import { setUserAuth } from "../../slices/authSlice";
         {errors.email?.type==='pattern'&&<p role={'alert'}>Plz enter a valid email</p>}
         
   
-        <div className="inputContainer">
+        <div className="inputContainer-pass">
           <input type="text" {...register("password",{required:true , minlength:8})}  className="input" name="password" />
           <label for="" className="label">Password</label>
         </div>
