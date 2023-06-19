@@ -135,7 +135,8 @@ signInController =(req,res,next)=>{
         if(err)
         {
             console.log(err);
-            res.status(500).send({"message":err.message})
+            console.log("error finding email",err.message);
+            res.status(500).send({"message":"Error siging In"})
             return;
         }
                                                                                                                                                                                                                                                                                                                       
@@ -204,7 +205,8 @@ res.status(200).send({'message':"User is created Succfully"})
 }
 catch(err)
 {
-res.status(500).send({'message':err})
+console.log("Error Signing In", err);    
+res.status(500).send({'message':"Error Signing In"})
 
 }
 

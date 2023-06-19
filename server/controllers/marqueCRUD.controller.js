@@ -26,7 +26,7 @@ try{
 catch(error)
 {
     console.error(error);
-    res.status(500).json({ error: error });
+    res.status(500).json({ message:  "Error adding Marque"});
 }
 }
 
@@ -48,7 +48,7 @@ else{
 }
 catch(error){
 console.log('Error'+ error );
-res.status(400).json({'Error':error.message})
+res.status(400).json({'message':error.message})
 }
 }
 
@@ -68,7 +68,7 @@ try{
 catch(error)
 {
   console.log("Error :"+ error);
-  res.status(500).json({Error:"Unable to Update"})
+  res.status(500).json({message:"Unable to Update"})
 }    
 
 

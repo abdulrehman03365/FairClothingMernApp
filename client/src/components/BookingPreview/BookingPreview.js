@@ -15,7 +15,11 @@ export default function BookingPreview({handlePreviewShow}){
         <div></div>
     <h1>Booking</h1>
     {   }
-    <div style={{ backgroundImage: `url(${closeIcon})` }} ></div>
+    <div>
+    
+    <img className='closeImg' onClick={handlePreviewShow} src={closeIcon}  />
+    </div>
+   
     </div>
     <div className='Middle-div'></div>
     <div className='Bottom-div'></div>

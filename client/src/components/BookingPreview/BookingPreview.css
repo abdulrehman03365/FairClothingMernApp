@@ -8,6 +8,14 @@
    
    
 }
+
+.closeImg{
+  
+  
+  
+   width: 3rem;
+   height: 3rem;
+}
 .Top-div{
     display: flex;
     justify-content: space-between;
