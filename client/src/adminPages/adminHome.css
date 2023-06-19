@@ -22,8 +22,24 @@
     font-weight: 500;
   }
  
+  #cities-filter{
+    margin: 2vw;
+    width: 10rem;
+    height: 3vh;
+    border:  1px solid black;
+    border-radius: 2rem;
+  }
 
-
+@media (max-width:767px) {
+  .filter{
+      width: 23vw;
+  }
+  
+}
+.search-bt{
+  background-color: transparent;
+  border-radius: 2px;
+}
 
   .footer {
     background-color: #f2f2f2;

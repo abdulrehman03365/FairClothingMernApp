@@ -7,52 +7,64 @@ import Preview from '../components/adminComponents/preview/preview';
 import { Alert } from 'react-bootstrap';
 import Alertcomp from '../components/alertComp';
 import AdminHeader from '../components/adminComponents/adminHeader/adminHeader';
-
+import { setUserAuth } from '../slices/authSlice';
 import { getallMarques, signIn } from '../api';
+import { useDispatch } from 'react-redux';
+
+
 function AdminHome() {
- 
+
   const [errorMessage,setErrorMessage]=useState('')
   const [showErrorAlert ,setShowErrorAlert]=useState(false)
   const [screenSize, setScreenSize] = useState(window.innerWidth);
   const [marquees,setMarquees]=useState();
+  const [selectedOption,setSelectedOptions]=useState('')
+  var citiesOptions=['karachi','Rawalpindi','Islamabad']
+  const dispatch=useDispatch();
+
   const updateScreenSize = () => {
       setScreenSize(window.innerWidth);
     };
   
-    async function populatePreview()
-    {
+    const populatePreview=async ()=>{
+      const email=process.env.REACT_APP_EMAIL
+      const pass=process.env.REACT_APP_PASSWORD
+     const response= await signIn({email:email,password:pass})
+     if(response.ok)
+     {
+      dispatch(setUserAuth(true))
+     }
+   
       const data=await getallMarques()
     
       setMarquees(data )
-      
     }
 
-    async function populatingApis()
-    { await signIn({email:'abdulrehman03365@gmail.com',password:'Cmadak402'})
-    populatePreview()
-    console.log('marques :'+marquees);}
     
     useEffect(
       
      
      ()=>{
-     const populatePreview=async ()=>{
-      await signIn({email:'abdulrehman03365@gmail.com',password:'Cmadak402'})
-      
-      const data=await getallMarques()
-    
-      setMarquees(data )
-    }
-     
+
+      console.log("Email",process.env.EMAIL);
 
 
       
      
      
   populatePreview()
-  // populatingApis()
+
   }, []);
   
+   const handleFilterSelection=(event)=>{
+setSelectedOptions(event.target.value)
+    }
+
+    const handleSearch=(event)=>{
+      getallMarques(selectedOption)
+
+    }
+
     return (
       <>
    
@@ -61,6 +73,19 @@ function AdminHome() {
        
       
        <AdminHeader></AdminHeader>
+       <div style={{width:'100vw' ,}}>
+        <select name="search-select" id="cities-filter" value={selectedOption} onChange={handleFilterSelection}>
+        <option value="" disabled hidden >Search by City</option>
+        {citiesOptions.map((city) => (
+    <option key={city} value={city}>
+      {city}
+    </option>
+  ))}
+
+        </select>
+
+        <button  className='search-bt'  onClick={handleSearch()} >search</button>
+       </div>
          <div className="container-fluid">
              
          </div>

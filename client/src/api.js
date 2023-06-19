@@ -46,18 +46,25 @@ export async function updateMarque(id,formData) {
 }
 
 
-export async function getallMarques(){
+export async function getallMarques(location) {
+  const params = new URLSearchParams();
+  params.append('location', location);
   const token = await fetchToken();
-  const response=await fetch('http://localhost:8000/api/getallMarques',{method:'GET'
-  ,headers:{'Authorization': `Bearer ${token}`}})
+  const response = await fetch(`http://localhost:8000/api/getallMarques?${params.toString()}`, {
+    method: 'GET',
+    headers: {
+      'Authorization': `Bearer ${token}`
+    }
+  });
   const data = await response.json();
 
   if (!response.ok) {
     throw new Error(data.message);
   }
 
-  return data; 
+  return data;
 }
+
 
 
 export async function getMarque(id) {
