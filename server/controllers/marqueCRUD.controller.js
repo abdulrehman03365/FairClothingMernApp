@@ -82,8 +82,20 @@ async function getallMarques(req,res,next)
 
 try{
 
-    const marques=await marque.find()
-    res.status(200).json(marques)
+    let {location} = req.query;
+    console.log("location"+ location)
+    // Trim the location parameter
+    if (location='All') 
+    {
+        const marques=await marque.find()
+        res.status(200).json(marques)
+        
+    
+    }
+   else {
+    const marques=await marque.find({location:location})
+        res.status(200).json(marques)
+   }
 }
 catch(error)
 {

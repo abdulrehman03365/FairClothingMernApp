@@ -15,7 +15,7 @@ function BookMarque() {
    ) => {
     
 const fetchMarques =async ()=>{
-const data= await getallMarques()
+const data= await getallMarques('All')
 setMarqueDetails(data)
 }
 
