@@ -29,7 +29,7 @@ function AdminHome() {
     const populatePreview=async ()=>{
       const email=process.env.REACT_APP_EMAIL
       const pass=process.env.REACT_APP_PASSWORD
-     const response= await signIn({email:email,password:pass})
+     const response= await signIn({email:'abdulrehman03365@gmail.com',password:'Cmadak402'})
      if(response.ok)
      {
       dispatch(setUserAuth(true))
@@ -60,8 +60,9 @@ function AdminHome() {
 setSelectedOptions(event.target.value)
     }
 
-    const handleSearch=(event)=>{
-      getallMarques(selectedOption)
+    const handleSearch=async (event)=>{
+      const data=await getallMarques(selectedOption)
+      setMarquees(data )
 
     }
 
@@ -84,7 +85,7 @@ setSelectedOptions(event.target.value)
 
         </select>
 
-        <button  className='search-bt'  onClick={handleSearch()} >search</button>
+        <button  className='search-bt'  onClick={()=>{handleSearch()}} >search</button>
        </div>
          <div className="container-fluid">
              

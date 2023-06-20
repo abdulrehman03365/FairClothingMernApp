@@ -127,9 +127,9 @@ if(err)
 
 
 }
-signInController =(req,res,next)=>{
+signInController = (req,res,next)=>{
    
-    User.findOne({'email':req.body.email},(err,email)=>{
+    User.findOne({'email':req.body.email},async(err,email)=>{
   
        
         if(err)
@@ -153,7 +153,7 @@ signInController =(req,res,next)=>{
         else
         {
 
-            isValidPassword=bcrypt.compare(req.body.password,email.password)
+            isValidPassword=  bcrypt.compare(req.body.password,email.password)
             if(!isValidPassword)
             {
                 // alert('Error: Invalid Email or password')
@@ -167,7 +167,7 @@ signInController =(req,res,next)=>{
             if(isValidPassword)
             {
                
-             const token=jwt.sign({id:email._id},process.env.JWT_SECRET,{expiresIn:120})
+             const token=jwt.sign({id:email._id},process.env.JWT_SECRET,{expiresIn:1200})
                
                req.session.token=token
               

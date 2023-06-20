@@ -27,7 +27,7 @@
     box-shadow: 1px 1px 12px 5px rgba(0,0,0,.1);
     top: 0;
     position: fixed;
-    height: 8%;
+    height: 7vh;
     line-height: 60px;
     width: 100vw;
     z-index: 10;

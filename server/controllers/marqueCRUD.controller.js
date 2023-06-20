@@ -85,7 +85,7 @@ try{
     let {location} = req.query;
     console.log("location"+ location)
     // Trim the location parameter
-    if (location='All') 
+    if (location=='All') 
     {
         const marques=await marque.find()
         res.status(200).json(marques)
@@ -93,6 +93,7 @@ try{
     
     }
    else {
+    console.log("location inside API ",location);
     const marques=await marque.find({location:location})
         res.status(200).json(marques)
    }

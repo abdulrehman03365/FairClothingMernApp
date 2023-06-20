@@ -48,7 +48,16 @@ export async function updateMarque(id,formData) {
 
 export async function getallMarques(location) {
   const params = new URLSearchParams();
-  params.append('location', location);
+  if (location)
+  {
+    params.append('location', location);
+ 
+  }
+  else
+{
+  params.append('location', 'All');
+} 
+
   const token = await fetchToken();
   const response = await fetch(`http://localhost:8000/api/getallMarques?${params.toString()}`, {
     method: 'GET',
