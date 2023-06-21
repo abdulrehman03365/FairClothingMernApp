@@ -18,12 +18,11 @@ export default function AuthCheker(){
     console.log('Session Remaining Time :',remTime);
     if (currentTime > expirationTime) {
       localStorage.removeItem('token');
-      localStorage.removeItem('expiresIn');
-      
+      localStorage.removeItem('expiresIn');     
       console.log('Your Session is expired');
       dispatch(setUserAuth(false))
       alert("Your Session is expired")
-      navigate('/');
+      navigate('signIn');
 
     }
   };

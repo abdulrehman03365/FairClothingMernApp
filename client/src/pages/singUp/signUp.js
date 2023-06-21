@@ -1,18 +1,21 @@
-import { Component } from "react";
+import { Component, useEffect, useState } from "react";
 import './signUp.css'
 import {useForm} from "react-hook-form"
 import Nevbar from "../../components/navBar/nevbar";
 function SignUpform(){
-
 const {register, handleSubmit , formState : {errors}}=useForm();
-
+const [checkBoxes,setCheckBoxes]  = useState({userCheckBox:false,adminCheckBox:false})
+const [rememberUser,setRememberUser]=useState(false)
 function onSubmit (data){
+  
+
   
   fetch('https:\\localhost:8000\\api\auth\signup',{method:'POST',
   headers:{
     'Content-type':'applicaion/json'
   
   }, 
+  
   body :JSON.stringify(data)} ).
   then(
     response=>{if (response.ok)alert('Successfully signed Up;')}
@@ -25,8 +28,21 @@ function onSubmit (data){
 
 } 
 
+const handlecheckBoxChange=(event)=>{
+  const {name ,checked}=event.target
+  setCheckBoxes((prevCheckedBoxes)=>({
+  
+    ...prevCheckedBoxes,
+    [name]:checked
+  
+  })
+
+)}
 
 
+const handleRememberUser=()=>{
+
+}
 
   return(
     <>
@@ -65,6 +81,24 @@ function onSubmit (data){
           <label  className="label">Confirm Password</label>
         </div>
         {errors.confirmPassword?.type==='required' && <p role={'alert'}>Confirm password is required</p>}
+
+        <div>
+          <label >
+          <input type="checkbox" name="userCheckBox" checked={checkBoxes.userCheckBox} onChange={handlecheckBoxChange} />
+          User SignUp
+          </label>
+          <label >
+          <input type="checkbox" name="userCheckBox" checked={checkBoxes.adminCheckBox} style={{paddingLeft:'1.2rem'}} onChange={handlecheckBoxChange} />
+          Admin SignUp
+          </label>
+
+        
+
+        </div>
+        <div>  <label >
+          <input type="checkbox" name="userCheckBox" checked={rememberUser} onChange={handleRememberUser} />
+          Remember me
+          </label></div>
   
         <input type="submit" className="submitBtn" value="Sign up"/>
       </form>

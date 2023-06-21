@@ -11,7 +11,8 @@ import { signIn } from "../../api";
 import Nevbar from "../../components/navBar/nevbar";
 import { useDispatch , useSelector } from "react-redux";
 import { setUserAuth } from "../../slices/authSlice";
- function SignIn()
+import userCatagory from "../../utils/utils"; 
+function SignIn()
    
  {
     const dispatch=useDispatch();  
@@ -31,8 +32,14 @@ import { setUserAuth } from "../../slices/authSlice";
           const response =await signIn(data)
           if (response.ok)
           {    
-            dispatch(setUserAuth(true))       
-            navigate("/bookMarque")
+            dispatch(setUserAuth(true))  
+          if (userCatagory=='user')    
+              navigate("/bookMarque")
+          else if (userCatagory=='admin')
+          {
+            navigate("/admin")
+          }
+
                       
           }
 

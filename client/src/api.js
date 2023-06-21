@@ -1,5 +1,6 @@
 import { useDispatch , useSelector } from "react-redux";
 import { setUserAuth } from "./slices/authSlice";
+import userCatagory from "./utils/utils";
 const BASE_URL = 'http://localhost:8000/api';
 
 async function fetchToken() {
@@ -110,7 +111,7 @@ export async function signIn(data){
         else 
         {
           const JsonResp =  await response.json()
-        
+          userCatagory=JsonResp.userCatagory;       
             
                 
             localStorage.setItem('token',JsonResp.authToken)
