@@ -1,5 +1,6 @@
 import { Component, useEffect, useState } from "react";
 import './signUp.css'
+import { signUp } from "../../api";
 import {useForm} from "react-hook-form"
 import Nevbar from "../../components/navBar/nevbar";
 function SignUpform(){
@@ -8,27 +9,20 @@ const [checkBoxes,setCheckBoxes]  = useState({userCheckBox:false,adminCheckBox:f
 const [rememberUser,setRememberUser]=useState(false)
 function onSubmit (data){
   
+  data={
+...data,
+isAdmin:checkBoxes.adminCheckBox,
+isUser:checkBoxes.userCheckBox
 
+  }
+  signUp(data)
   
-  fetch('https:\\localhost:8000\\api\auth\signup',{method:'POST',
-  headers:{
-    'Content-type':'applicaion/json'
-  
-  }, 
-  
-  body :JSON.stringify(data)} ).
-  then(
-    response=>{if (response.ok)alert('Successfully signed Up;')}
-  )
-  .catch(error => {
-    console.error('Error:', error);
-    alert('Error:', error)
-  });
 
 
 } 
 
 const handlecheckBoxChange=(event)=>{
+
   const {name ,checked}=event.target
   setCheckBoxes((prevCheckedBoxes)=>({
   
@@ -40,7 +34,9 @@ const handlecheckBoxChange=(event)=>{
 )}
 
 
-const handleRememberUser=()=>{
+const handleRememberUser=(event)=>{
+const {name,checked}=event.target;
+setRememberUser(checked)
 
 }
 
@@ -85,17 +81,17 @@ const handleRememberUser=()=>{
         <div>
           <label >
           <input type="checkbox" name="userCheckBox" checked={checkBoxes.userCheckBox} onChange={handlecheckBoxChange} />
-          User SignUp
+          User Sign Up
           </label>
-          <label >
-          <input type="checkbox" name="userCheckBox" checked={checkBoxes.adminCheckBox} style={{paddingLeft:'1.2rem'}} onChange={handlecheckBoxChange} />
-          Admin SignUp
+          <label style={{paddingLeft:'1rem' }}>
+          <input type="checkbox" name="adminCheckBox" checked={checkBoxes.adminCheckBox} onChange={handlecheckBoxChange} />
+          Admin Sign Up
           </label>
 
         
 
         </div>
-        <div>  <label >
+        <div  >  <label >
           <input type="checkbox" name="userCheckBox" checked={rememberUser} onChange={handleRememberUser} />
           Remember me
           </label></div>

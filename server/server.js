@@ -18,12 +18,12 @@ const cookieSession=require('cookie-session');
 const { mongoose } = require('./model/index');
 const flash = require('connect-flash-plus');
 const { authJwtMiddleware } = require('./middleware');
-
+app.set('port',process.env.PORT || 8000);
 require('dotenv').config()
 
 //Middlewares
 // console.log(join(__dirname,'public'));
-app.use(bodyParser.json());
+//app.use(bodyParser.json());
 app.use(express.json());
 app.use(cors({credentials: true,
 origin: 'http://localhost:3000',
@@ -56,7 +56,7 @@ app.use(cookieSession({
 Handlebars=handlebars.create({defaultLayout:'main'});
 // app.engine('handlebars',Handlebars.engine)
 // app.set('view engine','handlebars');
-app.set('port',process.env.PORT || 8000);
+
 
 
 require('./routes/auth.routes.js')(app);
@@ -150,73 +150,8 @@ app.get('/',(req,res)=>{
 
 
 
-app.get('/newsletter',(req,res)=>{res.render('newsletter',{style:'Signup.css'})})
-app.post('/api/newsletterSignup',
-handlers.api.newsletterSignup)
 
-
-app.get('/signIn',(req,res)=>{
-	res.sendFile(__dirname+"/views/signIn.html")
-})
-app.get('/signup',(req,res)=>{
-	res.sendFile(__dirname+"/views/signup.html")})
-
-app.get('/become-Partner',)
-
-app.post('/signup-process',async (req,res)=>{
-	const password = await bcrypt.hash(req.body.password,10)
-	pool.getConnection(function(err,conn){
-		if (err)
-		console.log(err.stack);
-		else{
-			email=req.body.email
-		conn.query("SELECT email from user where email =?",[email],(err,results,fields)=>{
-			if (err)
-			{
-				console.log(err);
-			}
-			if(results.length !=0)
-			{
-			// alert('user with this email already exists')
-			console.log('user with this email already exists');
-			conn.release()
-			res.sendStatus(409)
-			
-			}
-			else{
-				
-			
-				const userDetails = {
-					uname:req.body.username,
-					email:req.body.email,
-					password:password
-
-				}
-				conn.query(`INSERT INTO user SET ?` ,[userDetails],(err,fields,results)=>{
-					if (err)
-					console.log("error: " + err.message);
-
-					else (results)
-				})
-
-				// alert('user is created successfully')
-				console.log('user is created successfuly');
-				conn.release()
-				res.sendStatus(201)
-				
-			}
-		
-			
-		})}
-	})
-})
-
-// app.post('/newsletter-signup/process',handlers.newsletterSignupProcess)
-// app.get('newsletterSignupThank-you',handlers.newsLetterSignupThankYou)
-
-
-
-
+console.log(process.env.uri);
 socketService.initSocket(server);
 
 app.listen(app.get('port'), function(){

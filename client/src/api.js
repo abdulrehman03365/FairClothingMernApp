@@ -88,6 +88,25 @@ export async function getMarque(id) {
 
   return data;
 }
+export async function signUp(data){
+  data=data;
+  fetch(`${BASE_URL}/auth/signUp`,{method:'POST',
+  headers:{
+    'Content-type':'application/json'
+  
+  }, 
+  
+  body :JSON.stringify(data)} ).
+  then(
+    response=>{if (response.ok)alert('Successfully signed Up;')}
+  )
+  .catch(error => {
+    console.error('Error:', error);
+    alert('Error:', error)
+  });
+}
+  
+
 
 export async function signIn(data){
   

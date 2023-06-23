@@ -1,5 +1,4 @@
 const { application } = require('express')
-
 const {verifySignup} = require('../middleware')
 const AuthController = require('../controllers/auth.controller')
 
@@ -10,7 +9,9 @@ module.exports = function (app) {
     next()
     })
 
-    app.post("/api/auth/signup",[verifySignup.checkEmptyfields,verifySignup.checkDuplicateUser,verifySignup.checkDuplicateEmail],
+    
+    
+    app.post("/api/auth/signUp",[verifySignup.checkEmptyfields,verifySignup.checkDuplicateUser,verifySignup.checkDuplicateEmail],
     AuthController.signUpController)
 
     
