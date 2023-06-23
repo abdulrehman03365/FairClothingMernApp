@@ -12,6 +12,7 @@ require('dotenv').config()
 
 
 signUpController=  (req,res,next)=>{
+    console.log('inside signUp Controller');
   const  user = new User( 
         {
             name : req.body.username,
@@ -48,7 +49,7 @@ if(err)
 
 
 
-    user.save( function(err, user){     
+    user.save( async function(err, user){     
         if (err)
         {
             console.log(err);
@@ -57,14 +58,14 @@ if(err)
         }
         if (req.body.roles)
         {
-           role.find({name:{$in :req.body.roles}}, function(err,roles){
+          await role.find({name:{$in :req.body.roles}}, async function(err,roles){
                 if(err)
                 {
                     console.log(err);
                     res.status(404).send({'message':"Roles does not exist"})
                 }
                 user.Role=roles.map((role)=>{role._id})
-                user.save( function(err,result){
+              await  user.save( function(err,result){
                     
                     if(err)
                     {
@@ -88,7 +89,7 @@ if(err)
 
         else
         
-        role.findOne({'name':"user"},function(err,result_user){
+      await  role.findOne({'name':"user"},async function(err,result_user){
             if(err)
         {
             res.status(500).send({'message':err})
@@ -97,7 +98,7 @@ if(err)
 
         }
             user.Role=[result_user._id]
-            user.save((err)=>{
+          await  user.save((err)=>{
                 if(err)
                 {
                     res.status(500).send({'message':err})
