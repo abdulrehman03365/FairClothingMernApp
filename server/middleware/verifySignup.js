@@ -19,17 +19,29 @@ checkDuplicateUser= (req,res,next)=>{
 
     if (err)
     {
-        res.status(400).send({message:{err}})
-    return;
+    return    res.status(400).send({message:{err}})
+    
     }
-
+try{
     console.log(result);
     if (result.length!=0)
-    {
+  {
+   return res.status(500).send({message:'Failed ! username already exist'});
+       
 
-        res.status(500).send({message:'Failed ! username already exist'});
-        return ;
-    }
+  }
+    
+}
+catch(error){
+
+    res.status(500).send({message:'Failed Verifying username'});
+    return ;
+
+    
+
+            
+}
+
 
     next()
 
@@ -43,15 +55,24 @@ checkDuplicateEmail= (req,res,next)=>{
 
 if(err)
 {
-res.status(500).send({message : err.message})
-return;
+return res.status(500).send({message : err.message});
+
+}
+try{
+
+    console.log("Duplicate Email result " + result);
+    if (result.length!=0)
+   { 
+    return res.status(400).send({error :"Failed ! email already exist"})
+    }
 }
 
-console.log(result);
-if (result.length!=0)
+catch(error){
+   
+   return res.status(500).send({error :"Failed Verifying email"})
+     ;
 
-res.status(400).send({error :"Failed ! email already exist"})
-return ;
+}
 })
 
 

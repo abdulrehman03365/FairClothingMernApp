@@ -5,6 +5,7 @@ const bcrypt=require('bcrypt')
 const jwt = require('jsonwebtoken')
 const flash=require('connect-flash');
 const { request } = require('express');
+const { Roles } = require('../model');
 var enc_pass=""
 require('dotenv').config()
 
@@ -49,7 +50,7 @@ if(err)
 
 
 
-    user.save( async function(err, user){     
+    user.save(  function(err, user){     
         if (err)
         {
             console.log(err);
@@ -58,14 +59,16 @@ if(err)
         }
         if (req.body.roles)
         {
-          await role.find({name:{$in :req.body.roles}}, async function(err,roles){
+           role.find({name:{$in :req.body.roles}},  function(err,roles){
+              
+                console.log("roles"+ roles);
                 if(err)
                 {
                     console.log(err);
                     res.status(404).send({'message':"Roles does not exist"})
                 }
-                user.Role=roles.map((role)=>{role._id})
-              await  user.save( function(err,result){
+                user.Roles=roles.map((role)=>{return role._id})
+                user.save( function(err,result){
                     
                     if(err)
                     {
@@ -89,7 +92,7 @@ if(err)
 
         else
         
-      await  role.findOne({'name':"user"},async function(err,result_user){
+        role.findOne({'name':"user"}, function(err,result_role){
             if(err)
         {
             res.status(500).send({'message':err})
@@ -97,8 +100,8 @@ if(err)
             return;
 
         }
-            user.Role=[result_user._id]
-          await  user.save((err)=>{
+            user.Roles=[result_role._id]
+            user.save((err)=>{
                 if(err)
                 {
                     res.status(500).send({'message':err})
@@ -107,7 +110,7 @@ if(err)
             else
 
             {
-                log("Created User details " + result_user)
+                log("Created User details " + result_role)
                 res.status(201).send({"message":"User is created successfully"})
             }
             
@@ -130,7 +133,7 @@ if(err)
 }
 signInController = (req,res,next)=>{
    
-    User.findOne({'email':req.body.email},async(err,email)=>{
+    User.findOne({'email':req.body.email}).populate('Roles').exec(async(err,user_res)=>{
   
        
         if(err)
@@ -141,7 +144,7 @@ signInController = (req,res,next)=>{
             return;
         }
                                                                                                                                                                                                                                                                                                                       
-        if (!email)
+        if (!user_res)
         {
             // res.status(402).send({'message': "User not found"})
             // req.flash('error','Invalid username or password')
@@ -154,7 +157,7 @@ signInController = (req,res,next)=>{
         else
         {
 
-            isValidPassword=  bcrypt.compare(req.body.password,email.password)
+            isValidPassword=  bcrypt.compare(req.body.password,user_res.password)
             if(!isValidPassword)
             {
                 // alert('Error: Invalid Email or password')
@@ -168,18 +171,18 @@ signInController = (req,res,next)=>{
             if(isValidPassword)
             {
                
-             const token=jwt.sign({id:email._id},process.env.JWT_SECRET,{expiresIn:1200})
+             const token=jwt.sign({id:user_res._id},process.env.JWT_SECRET,{expiresIn:1200})
                
                req.session.token=token
               
-               var authorities =[]
-               for(i=0 ;i<email.roles;i++)
-               {
-                authorities.push("Role_"+email.roles[i].name.toUpperCase())
-               }
-               console.log("Email and Password are correct and user is successfuly Loged In",{'userId':email._id,
-               'authoroties':authorities,'authToken':token});
-               res.status(200).send({'userId':email._id,'authoroties':authorities,'authToken':token,'expiresIn':1200})
+               var userCatagory =[]
+               
+               var userCatagory =user_res.Roles.map((role)=>{return role.name});
+               
+              
+               console.log("Email and Password are correct and user is successfuly Loged In",{'userId':user_res._id,
+               'userCatagory':userCatagory,'authToken':token});
+               res.status(200).send({'userId':user_res._id,'userCatagory':userCatagory,'authToken':token,'expiresIn':1200})
               
 
 

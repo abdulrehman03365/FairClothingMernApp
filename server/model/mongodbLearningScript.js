@@ -17,16 +17,46 @@ mongoose.connect(uri,
     useUnifiedTopology: true
   }).then(
     ()=>{
-//addrole()
-//adduser()
-//getAllRoles()
-// createUser()
-//updateUser()
-//  findRoles()
-
-// deleteAll()
+      
+findUserRole()
     })
 
+  
+    function findUserRole()
+    { 
+
+      user.findOne({email:'abdulrehman03365@gmail.com'}).populate('Roles').exec(async(err,user_res)=>{
+  
+       
+        if(err)
+        {
+            console.log(err);
+  
+         
+        }
+                                                                                                                                                                                                                                                                                                                      
+        if (!user_res)
+        {
+           
+            console.log("no response");
+          
+        }
+        else
+        {
+
+              
+               var userCatagory =user_res.Roles.map((role)=>{console.log("Role_"+role.name);
+               return role.name
+              })
+
+              
+             
+
+
+            
+        }
+    })
+    }
 
 
   function deleteAll()

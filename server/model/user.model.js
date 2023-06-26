@@ -7,8 +7,8 @@ const user=mongoose.model('user' ,new schema({
     name:String 
     ,email:String
     ,password:String,
-    Role:[{type:mongoose.Schema.Types.ObjectId,
-    ref:'Role'}]}))
+    Roles:[{type:mongoose.Schema.Types.ObjectId,
+    ref:'roles'}]}))
 
     
     module.exports=user;

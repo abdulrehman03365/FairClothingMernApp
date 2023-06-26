@@ -1,4 +1,5 @@
 import { AuthContext,AuthProvider } from "./Context/AuthContext";
+import adminSignIn from "./adminPages/adminSignIn/adminSignIn";
 import {toast, ToastContainer } from "react-toastify";
 import AdminHome from './adminPages/adminHome';
 import Home from './pages/home/home';
@@ -10,6 +11,7 @@ import NotFound from './pages/notFound/notFound';
 import { ProtectedRoutes } from './pages/protectedRoutes';
 import {BrowserRouter as Router , Routes , Route , Link , useNavigate} from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.min.css';
+import AdminSignIn from "./adminPages/adminSignIn/adminSignIn";
 import { useEffect } from "react";
 import ManageMarques from './adminPages/manageMarques/manageMarques';
 import './App.css'
@@ -34,6 +36,7 @@ function App ()
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="signIn" element={<SignIn />} />
+              <Route path="/admin/signIn" element={<AdminSignIn />} />
               <Route path="signUp" element={<SignUp />} />
               <Route path="bookMarque" element={<ProtectedRoutes component={bookMarque} />} />
               <Route path="/admin" element={<ProtectedRoutes component={AdminHome}/>} />
