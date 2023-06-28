@@ -1,17 +1,19 @@
 import {createSlice} from '@reduxjs/toolkit'  
-const authInitialState ={isAuthenticated:false , isAdminAuthenticated:false,userCatagory:undefined}
+const authInitialState ={isAuthenticated:false , userType:undefined}
 const authSlice =createSlice({
 name:'auth',
 initialState : authInitialState,
 reducers:{
+
 setUserAuth:(state,action)=>{state.isAuthenticated=action.payload},
-setAdminAuth:(state,action)=>{state.isAdminAuthenticated=action.payload},
-setUserCatagory:(state,action)=>{state.userCatagory=action.payload}
+setUserType:(state,action)=>{state.userType=action.payload}
+
+
 }
 
 })
 
-export const {setUserAuth}=authSlice.actions
+export const {setUserAuth,setUserType}=authSlice.actions
 export default authSlice.reducer;
 
 

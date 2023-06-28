@@ -23,7 +23,7 @@ p{
     padding: 1%;
     
     justify-content: space-between;
-    flex-direction: row;
+    /* flex-direction: row; */
     margin-bottom: 3%;
         
 }

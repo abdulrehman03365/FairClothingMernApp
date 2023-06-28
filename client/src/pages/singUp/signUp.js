@@ -5,14 +5,24 @@ import {useForm} from "react-hook-form"
 import Nevbar from "../../components/navBar/nevbar";
 function SignUpform(){
 const {register, handleSubmit , formState : {errors}}=useForm();
-const [checkBoxes,setCheckBoxes]  = useState({userCheckBox:false,adminCheckBox:false})
 const [rememberUser,setRememberUser]=useState(false)
+const [checkBoxes,setCheckBoxes]  = useState({userCheckBox:false,adminCheckBox:false})
+
 function onSubmit (data){
+let roles =[]
+
+if (checkBoxes.userCheckBox)
+{
+  roles.push('user')
+}
+if (checkBoxes.adminCheckBox)
+{
+  roles.push('admin')
+}
   
   data={
 ...data,
-isAdmin:checkBoxes.adminCheckBox,
-isUser:checkBoxes.userCheckBox
+roles:roles
 
   }
   signUp(data)

@@ -23,7 +23,7 @@ require('dotenv').config()
 
 //Middlewares
 // console.log(join(__dirname,'public'));
-//app.use(bodyParser.json());
+
 app.use(express.json());
 app.use(cors({credentials: true,
 origin: 'http://localhost:3000',
@@ -58,7 +58,7 @@ Handlebars=handlebars.create({defaultLayout:'main'});
 // app.set('view engine','handlebars');
 
 
-
+// app.use(bodyParser.json());
 require('./routes/auth.routes.js')(app);
 require('./routes/user.routes.js')(app);
 

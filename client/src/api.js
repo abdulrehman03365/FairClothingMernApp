@@ -130,7 +130,7 @@ export async function signIn(data){
         else 
         {
           const JsonResp =  await response.json()
-          userCatagory=JsonResp.userCatagory;       
+          // userCatagory=JsonResp.userCatagory;       
             
                 
             localStorage.setItem('token',JsonResp.authToken)

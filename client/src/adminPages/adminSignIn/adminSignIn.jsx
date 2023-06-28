@@ -1,5 +1,5 @@
 import { Component , useState } from "react";
-import './signIn.css'
+import './adminSignIn.css'
 import Button from 'react-bootstrap/Button';
 import {Alert} from 'react-bootstrap'
 import {useForm} from "react-hook-form"
@@ -12,8 +12,7 @@ import Nevbar from "../../components/navBar/nevbar";
 import { useDispatch , useSelector } from "react-redux";
 import { setUserAuth , setUserType } from "../../slices/authSlice";
 import userCatagory from "../../utils/utils"; 
-import { useEffect } from "react";
-function SignIn()
+function AdminSignIn()
    
  {
     const dispatch=useDispatch();  
@@ -25,6 +24,7 @@ function SignIn()
     const navigate = useNavigate();
 
     
+    
     async function handleSignIn(data,event){
       
       event.preventDefault()
@@ -33,9 +33,12 @@ function SignIn()
           if (response.ok)
           {    
             dispatch(setUserAuth(true))
-            dispatch(setUserType("user")) 
-             
-            navigate("/bookMarque")
+            dispatch(setUserType("admin"))
+            
+
+         
+              navigate("/admin")
+       
 
                       
           }
@@ -64,7 +67,7 @@ function SignIn()
       <div className="logInForm" >
       <form className="form" onSubmit={handleSubmit(handleSignIn)}>
 
-        <h1 className="title">Log In</h1>
+        <h1 className="title">Admin Log In</h1>
   
         <div className="inputContainer">
           <input type="text" {...register("email",{required:true , pattern :{value:/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,message:'Plz enter a valid email'}})}    className="input" name ="email"  />
@@ -94,4 +97,4 @@ function SignIn()
             
         )}
      
-export default SignIn;
+export default AdminSignIn;
