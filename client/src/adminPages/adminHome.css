@@ -57,14 +57,14 @@
   }
 
   #img-Preview{
-    width: 150px;
-    height: 120px;
+    width: 15vw;
+    height: 12vw;
 }
 
 #manage-main-div{
     display: flex;
     margin-top :3%;
-    margin-left: 20px;
+   
     align-items: center;
     flex-direction: column;
 }

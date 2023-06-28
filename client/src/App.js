@@ -39,7 +39,7 @@ function App ()
               <Route path="/admin/signIn" element={<AdminSignIn />} />
               <Route path="signUp" element={<SignUp />} />
               <Route path="bookMarque" element={<ProtectedRoutes component={bookMarque} />} />
-              <Route path="/admin" element={<ProtectedRoutes component={AdminHome}/>} />
+              <Route path="/admin" element={<ProtectedRoutes component={AdminSignIn} />} />
               <Route path="/manageMarques" element={<ManageMarques />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
