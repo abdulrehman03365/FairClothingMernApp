@@ -12,8 +12,8 @@ class MongoDBConnection{
        
         if (!MongoDBConnection.instance)
         {
-            const uri=process.env.uri;
-            console.log("MongoDB uri :" ,process.env.uri);
+            const uri=process.env.URI;
+            console.log("MongoDB uri :" ,process.env.URI);
             mongoose.set('strictQuery', true);
             mongoose.connection.on('error',(error)=>{console.error('connection to MongoDB disconnected :');})
             mongoose.connection.on('connected',(data)=>{console.log('connected to mongoDB');})

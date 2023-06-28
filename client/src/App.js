@@ -36,7 +36,7 @@ function App ()
               <Route path="signIn" element={<SignIn />} />
               <Route path="signUp" element={<SignUp />} />
               <Route path="bookMarque" element={<ProtectedRoutes component={bookMarque} />} />
-              <Route path="/admin" element={<AdminHome />} />
+              <Route path="/admin" element={<ProtectedRoutes component={AdminHome}/>} />
               <Route path="/manageMarques" element={<ManageMarques />} />
               <Route path="*" element={<NotFound />} />
             </Routes>

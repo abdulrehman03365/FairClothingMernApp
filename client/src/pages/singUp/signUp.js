@@ -1,32 +1,44 @@
-import { Component } from "react";
+import { Component, useEffect, useState } from "react";
 import './signUp.css'
+import { signUp } from "../../api";
 import {useForm} from "react-hook-form"
 import Nevbar from "../../components/navBar/nevbar";
 function SignUpform(){
-
 const {register, handleSubmit , formState : {errors}}=useForm();
-
+const [checkBoxes,setCheckBoxes]  = useState({userCheckBox:false,adminCheckBox:false})
+const [rememberUser,setRememberUser]=useState(false)
 function onSubmit (data){
   
-  fetch('https:\\localhost:8000\\api\auth\signup',{method:'POST',
-  headers:{
-    'Content-type':'applicaion/json'
+  data={
+...data,
+isAdmin:checkBoxes.adminCheckBox,
+isUser:checkBoxes.userCheckBox
+
+  }
+  signUp(data)
   
-  }, 
-  body :JSON.stringify(data)} ).
-  then(
-    response=>{if (response.ok)alert('Successfully signed Up;')}
-  )
-  .catch(error => {
-    console.error('Error:', error);
-    alert('Error:', error)
-  });
 
 
 } 
 
+const handlecheckBoxChange=(event)=>{
+
+  const {name ,checked}=event.target
+  setCheckBoxes((prevCheckedBoxes)=>({
+  
+    ...prevCheckedBoxes,
+    [name]:checked
+  
+  })
+
+)}
 
 
+const handleRememberUser=(event)=>{
+const {name,checked}=event.target;
+setRememberUser(checked)
+
+}
 
   return(
     <>
@@ -65,6 +77,24 @@ function onSubmit (data){
           <label  className="label">Confirm Password</label>
         </div>
         {errors.confirmPassword?.type==='required' && <p role={'alert'}>Confirm password is required</p>}
+
+        <div>
+          <label >
+          <input type="checkbox" name="userCheckBox" checked={checkBoxes.userCheckBox} onChange={handlecheckBoxChange} />
+          User Sign Up
+          </label>
+          <label style={{paddingLeft:'1rem' }}>
+          <input type="checkbox" name="adminCheckBox" checked={checkBoxes.adminCheckBox} onChange={handlecheckBoxChange} />
+          Admin Sign Up
+          </label>
+
+        
+
+        </div>
+        <div  >  <label >
+          <input type="checkbox" name="userCheckBox" checked={rememberUser} onChange={handleRememberUser} />
+          Remember me
+          </label></div>
   
         <input type="submit" className="submitBtn" value="Sign up"/>
       </form>
