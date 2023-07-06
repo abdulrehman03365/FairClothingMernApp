@@ -8,7 +8,7 @@ import SignIn from './pages/signIn/signIn';
 import SignUp from './pages/singUp/signUp';
 import { ReactDOM , Browser, Component, useState } from 'react';
 import NotFound from './pages/notFound/notFound';
-import { ProtectedRoutes } from './pages/protectedRoutes';
+import { ProtectedRoutes } from "./pages/protectedRoute/protectedRoutes";
 import {BrowserRouter as Router , Routes , Route , Link , useNavigate} from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import AdminSignIn from "./adminPages/adminSignIn/adminSignIn";
@@ -37,6 +37,7 @@ function App ()
               <Route path="/" element={<Home />} />
               <Route path="signIn" element={<SignIn />} />
               <Route path="/admin/signIn" element={<AdminSignIn />} />
+              <Route path="/admin/home" element={<ProtectedRoutes component={AdminHome} />} />
               <Route path="signUp" element={<SignUp />} />
               <Route path="bookMarque" element={<ProtectedRoutes component={bookMarque} />} />
               <Route path="/admin" element={<ProtectedRoutes component={AdminSignIn} />} />

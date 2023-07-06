@@ -26,7 +26,7 @@ function AdminSignIn()
     
     
     async function handleSignIn(data,event){
-      
+    
       event.preventDefault()
         try{
           const response =await signIn(data)
@@ -34,10 +34,10 @@ function AdminSignIn()
           {    
             dispatch(setUserAuth(true))
             dispatch(setUserType("admin"))
-            
+            console.log("i m in admin signIn");
 
          
-              navigate("/admin")
+              navigate("/admin/home")
        
 
                       
