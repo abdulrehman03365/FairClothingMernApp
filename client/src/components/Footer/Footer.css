@@ -1,1 +1,7 @@
-.F
+
+.Footer-List{
+    list-style-type: none;
+    padding-left: 0;
+  }
+  
+li{list-style: none;  }
