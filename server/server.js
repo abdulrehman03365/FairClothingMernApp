@@ -29,7 +29,10 @@ app.use(cors({credentials: true,
 origin: 'http://localhost:3000',
 methods: ['GET', 'POST', 'PUT', 'DELETE'],
 allowedHeaders: ['Content-Type', 'Authorization']}))
-app.use(express.static('public'));
+const parentDir = path.dirname(__dirname);
+app.use(express.static( path.join(parentDir, 'client', 'build')));
+const buildPath=path.join(parentDir, 'client', 'build')
+console.log("path is ", buildPath);
 app.use(express.urlencoded({ limit: '10mb', extended: false }))
 app.use(multer({limits: { fieldSize: 10 * 1024 * 1024 }}).any());
 

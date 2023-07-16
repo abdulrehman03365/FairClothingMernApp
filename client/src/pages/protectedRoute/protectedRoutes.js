@@ -1,12 +1,12 @@
 import { Route, Navigate, useNavigate } from "react-router-dom";
-import bookMarque from "./bookMarque/bookMarque";
+import {bookMarque} from '../bookMarque/bookMarque'
 import Cookies from 'js-cookie';
 import { useDispatch, useSelector } from "react-redux";
-import Alertcomp from "../components/alertComp";
+import Alertcomp from "../../components/alertComp";
 import { useState } from "react";
 import { useEffect } from "react";
 import { useLocation  } from "react-router-dom";
-import { setUserType } from "../slices/authSlice";
+import { setUserType } from "../../slices/authSlice";
 export  function  ProtectedRoutes({component:Component ,...rest}) {
 const navigate=useNavigate()
 const location=useLocation()
@@ -17,7 +17,7 @@ const dispatch=useDispatch()
       dispatch(setUserType("admin"))
     }
 
-})
+},[location.pathname])
 
 const userType=useSelector((state)=>state.auth.userType)
 
@@ -36,6 +36,7 @@ const token=localStorage.getItem('token')
  }
  else
  {
+  
   
   return (
     <>
