@@ -13,7 +13,7 @@ export default function AuthCheker(){
   
  
 
-  const checkUserLogin = () => {
+  const checkUserSessionTime = () => {
     
     var currentTime = new Date().getTime();
     const remTime= expirationTime-currentTime;
