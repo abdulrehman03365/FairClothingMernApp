@@ -19,7 +19,7 @@ module.exports = function (app) {
    app.get("/api/getMarque",authJwtMiddleware.verifyJwtToken,getMarque)
    app.post("/api/updateMarque",authJwtMiddleware.verifyJwtToken, updateMarque)
    app.post("/api/get-time",authJwtMiddleware.verifyJwtToken,(req,res,next)=>{ const now = new Date()
-    res.status(200).send({'Time':now})})
+   res.status(200).send({'Time':now})})
 
 
 
