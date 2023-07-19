@@ -1,4 +1,6 @@
-import { verifyParams } from "../middleware/cartMiddleware"
+const{ verifyParams } = require ('../middleware/cartMiddleware')
+const { verifyJwtToken }  =require('../middleware/authJwt')
+const {createCart , getCart , updateCart , deleteCart} =require ('../controllers/cart.controller')
 module.exports=function (app){
     app.use(function (req, res, next) {
         res.header("Access-Control-Allow-Headers", "Origin, Content-Type, Accept")
@@ -6,10 +8,10 @@ module.exports=function (app){
     })
 
 
-    app.post("/api/cart",verifyParams,cartController.createCart)
-    app.get("/api/cart/:cartId",verifyParams,cartController.getCart)
-    app.put("/api/cart/update/:cartId",verifyParams,cartController.updateCart)
-    app.delete("/api/update/:cartId",verifyParams,cartController.deleteCart)
+    app.post("/api/cart",verifyJwtToken,verifyParams,createCart)
+    app.get("/api/cart/:cartId",verifyJwtToken,verifyParams,getCart)
+    app.put("/api/cart/update/:cartId",verifyJwtToken,verifyParams,updateCart)
+    app.delete("/api/update/:cartId",verifyJwtToken,verifyParams,deleteCart)
 
  
 }
