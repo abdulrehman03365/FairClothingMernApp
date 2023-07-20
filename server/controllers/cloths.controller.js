@@ -61,7 +61,7 @@ deleteCloth=async(req, res ,next)=>{
         res.status(404).json({error:"cloth not found"})
         }
         else
-        {res.status(200).json({cloth:cloth})}
+        {res.status(200).json({message:"cloth deleted successfuly"})}
         
         }
         catch(error){
