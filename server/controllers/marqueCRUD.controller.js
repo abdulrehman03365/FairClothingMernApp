@@ -35,6 +35,7 @@ async function deleteMarque(req,res,next){
     console.log("type of Id:"+req.body.id);
     console.log("Id is valid or not :"+mongoose.Types.ObjectId.isValid(req.body.id));
 const result =await marque.findByIdAndDelete(req.body.id)
+
 try{
     
 if(!result)

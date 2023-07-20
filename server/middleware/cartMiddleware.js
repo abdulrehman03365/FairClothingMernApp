@@ -1,8 +1,8 @@
 
 
-verifyParams=(req,res,next)=>{
-const {items}=req.body.parms
-const {cartId}=req.params
+verifyCartParams=(req,res,next)=>{
+const {items}=req.body.parms || {}
+const {cartId}=req.params    || {}
 
 if (req.method ==='POST')
 {
@@ -32,4 +32,4 @@ else if (req.method==='GET' || req.method==='PUT' || req.method ==='DELETE')
 
 }
 
-module.exports={verifyParams}
+module.exports={verifyCartParams}

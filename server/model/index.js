@@ -1,7 +1,7 @@
 
 
 const mongoose=require('mongoose')
-const {cloth}=require('./cloth.model')
+const {cloth}=require('./cloths.model')
 const db ={}
 db.mongoose=mongoose
 db.Roles =['User','Admin','Owner']

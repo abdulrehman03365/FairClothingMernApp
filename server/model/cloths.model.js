@@ -1,12 +1,12 @@
 const mongoose=require('mongoose')
-constsClothSchema = new mongoose.Schema({
+const clothSchema = new mongoose.Schema({
     name: { type: String, required: true },
-    location: { type: String, required: true },
-    image: {  type: String },
-    capacity: { type: Number, required: true },
+    sku:{type:String,require:true},
+    images: [{  type: String }],
+    quantity: { type: Number, required: true },
     status: { type: String, default: true },
   });
   
-  const marque = mongoose.model('Marque', marqueSchema);
+  const cloth = mongoose.model('Cloth',clothSchema);
   
-  module.exports = marque;
+  module.exports = {cloth};
