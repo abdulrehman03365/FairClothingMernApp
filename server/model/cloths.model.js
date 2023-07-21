@@ -9,4 +9,4 @@ const clothSchema = new mongoose.Schema({
   
   const cloth = mongoose.model('Cloth',clothSchema);
   
-  module.exports = {cloth};
+  module.exports = {cloth,clothSchema};

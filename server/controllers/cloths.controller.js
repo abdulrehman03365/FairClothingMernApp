@@ -1,4 +1,4 @@
-const cloth =require( '../model/cloths.model')
+const {cloth} =require( '../model/cloths.model')
 addCloth=async(req,res,next)=>{
     try{
         const {name ,sku ,images ,quantity ,status}=req.body  
@@ -29,19 +29,19 @@ res.status(500).json({message:"Failed to retrive Cloth data"})
 }
 }
 
-// we need to search how to update any updated field in mongodb.
+
 updateCloth= async (req,res,next)=>{
     try{
         
-        const {clothId,name ,sku ,images ,quantity ,status}=req.body 
-        await cloth.findByIdAndUpdate({clothId},,{new:true})
+        const updatedCloth=req.body 
+        await cloth.findByIdAndUpdate({clothId},{updatedCloth},{new:true})
         
         if(!cloth)
         {
         res.status(404).json({error:"cloth not found"})
         }
         else
-        {res.status(200).json({cloth:cloth})}
+        {res.status(200).json({message:"cloth successfully updated",cloth:cloth})}
         
         }
         catch(error){
@@ -50,7 +50,7 @@ updateCloth= async (req,res,next)=>{
         }
 }
 
-// delete need to be modified
+
 deleteCloth=async(req, res ,next)=>{
     try{
         const {clothId}=req.body
@@ -70,4 +70,4 @@ deleteCloth=async(req, res ,next)=>{
         }
 }
 
-module.exports={createCart , getCart , updateCart , deleteCart}
+module.exports={addCloth , getCloth , updateCloth , deleteCloth}

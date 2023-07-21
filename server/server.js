@@ -65,6 +65,7 @@ Handlebars=handlebars.create({defaultLayout:'main'});
 require('./routes/auth.routes.js')(app);
 require('./routes/user.routes.js')(app);
 require('./routes/cart.routes.js')(app);
+require('./routes/cloths.routes')(app)
 
 
 app.post('/api/addMarque', (req, res) => {
