@@ -22,8 +22,10 @@ import store from './store/store'
 import { useDispatch } from "react-redux";
 import AuthCheker from "./components/AuthChecker/AuthCheker";
 
+
 function App ()
  {
+
   
   {
     return ( 

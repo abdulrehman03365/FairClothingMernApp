@@ -1,8 +1,11 @@
 import { useDispatch , useSelector } from "react-redux";
 import { setUserAuth } from "./slices/authSlice";
 import userCatagory from "./utils/utils";
-const BASE_URL = 'http://localhost:8000/api';
 
+
+const BASE_URL = process.env.REACT_APP_BASE_URL
+
+console.log("base url", BASE_URL);
 async function fetchToken() {
   // Retrieve the token from local storage or your authentication mechanism
   const token = localStorage.getItem('token');

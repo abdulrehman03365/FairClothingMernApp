@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCoffee , faEnvelope,faMobilePhone } from '@fortawesome/free-solid-svg-icons'
 import { DropdownButton , Dropdown , Button} from "react-bootstrap"
-import './footer.css'
+import './Footer.css'
 export default function Footer()
 {
 

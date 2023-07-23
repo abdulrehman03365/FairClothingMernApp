@@ -65,7 +65,7 @@ Handlebars=handlebars.create({defaultLayout:'main'});
 require('./routes/auth.routes.js')(app);
 require('./routes/user.routes.js')(app);
 require('./routes/cart.routes.js')(app);
-
+require('./routes/cloths.routes.js')(app)
 
 app.post('/api/addMarque', (req, res) => {
   const base64Image=req.body.base64Image.replace(/^data:image\/\w+;base64,/, '')
