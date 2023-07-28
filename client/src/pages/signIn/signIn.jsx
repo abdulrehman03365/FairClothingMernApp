@@ -45,7 +45,7 @@ function SignIn()
         catch(error)
         {
           console.log("Error SignIng In :"+error);
-          setErrorMessage(error.message)
+          setErrorMessage("Error Sigining In")
          
           setShowErrorAlert(true)
         }

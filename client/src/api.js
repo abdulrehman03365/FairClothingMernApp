@@ -1,7 +1,12 @@
 import { useDispatch , useSelector } from "react-redux";
 import { setUserAuth } from "./slices/authSlice";
 import userCatagory from "./utils/utils";
-const BASE_URL = 'http://localhost:8000/api';
+
+const BASE_URL = process.env.NODE_ENV === 'development'
+? '/api' // Use the proxy during development
+: "https://fairclothing-f9c79.web.app"; 
+
+console.log("BASE_URL",BASE_URL);
 
 async function fetchToken() {
   // Retrieve the token from local storage or your authentication mechanism
@@ -60,7 +65,7 @@ export async function getallMarques(location) {
 } 
 
   const token = await fetchToken();
-  const response = await fetch(`http://localhost:8000/api/getallMarques?${params.toString()}`, {
+  const response = await fetch(`${BASE_URL}/getallMarques?${params.toString()}`, {
     method: 'GET',
     headers: {
       'Authorization': `Bearer ${token}`
@@ -90,7 +95,7 @@ export async function getMarque(id) {
 }
 export async function signUp(data){
   data=data;
-  fetch(`${BASE_URL}/auth/signUp`,{method:'POST',
+  fetch(`${BASE_URL}/api/auth/signUp`,{method:'POST',
   headers:{
     'Content-type':'application/json'
   
@@ -114,7 +119,7 @@ export async function signIn(data){
   for (const key in data) {
     params.append(key, data[key]);
   }
-  const response= await fetch(`${BASE_URL}/auth/signIn`,
+  const response= await fetch(`${BASE_URL}/api/auth/signIn`,
           {method:'POST',credentials:'include',
         headers:{
           'Content-type':'application/json'
