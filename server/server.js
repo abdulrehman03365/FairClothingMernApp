@@ -3,7 +3,7 @@ const mysql=require('mysql2')
 const app = express();
 const http = require('http');
 const server = http.createServer(app);
-
+const functions = require('firebase-functions')
 const multer =require('multer');
 const path=require('path')
 const handlebars = require('express-handlebars');
@@ -25,10 +25,12 @@ require('dotenv').config()
 // console.log(join(__dirname,'public'));
 
 app.use(express.json());
-app.use(cors({credentials: true,
-origin: 'http://localhost:3000',
-methods: ['GET', 'POST', 'PUT', 'DELETE'],
-allowedHeaders: ['Content-Type', 'Authorization']}))
+app.use(cors({
+	credentials: true,
+	origin: 'https://fairclothing-f9c79.firebaseapp.com',
+	allowedHeaders: ['Content-Type', 'Authorization']
+  }));
+  
 const parentDir = path.dirname(__dirname);
 app.use(express.static( path.join(parentDir, 'client', 'build')));
 const buildPath=path.join(parentDir, 'client', 'build')
@@ -65,7 +67,8 @@ Handlebars=handlebars.create({defaultLayout:'main'});
 require('./routes/auth.routes.js')(app);
 require('./routes/user.routes.js')(app);
 require('./routes/cart.routes.js')(app);
-require('./routes/cloths.routes.js')(app)
+require('./routes/cloths.routes')(app)
+
 
 app.post('/api/addMarque', (req, res) => {
   const base64Image=req.body.base64Image.replace(/^data:image\/\w+;base64,/, '')
@@ -148,7 +151,9 @@ app.get('/',(req,res)=>{
 
 })
 
-
+// app.get("/*", function (req, res) {
+// 	res.sendFile(path.resolve(__dirname, '../client/build', 'index.html'));
+//  })
 
 
 
@@ -157,6 +162,17 @@ app.get('/',(req,res)=>{
 console.log(process.env.uri);
 socketService.initSocket(server);
 
+
+// Check if running in Firebase environment
+const isFirebase = !!process.env.FIREBASE_CONFIG;
+
+// Export app as a Firebase Cloud Function if running on Firebase
+if (isFirebase) {
+  module.exports = functions.https.onRequest( app);
+} else {
 app.listen(app.get('port'), function(){
 	console.log('Express started on port ' + app.get('port') + ' in ' + app.get('env') + ' mode.');
-});
+});}
+
+
+module.exports = app;

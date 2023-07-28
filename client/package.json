@@ -1,4 +1,5 @@
 {
+  "homepage": ".",
   "name": "client",
   "version": "0.1.0",
   "private": true,
@@ -12,7 +13,8 @@
     "@testing-library/user-event": "^13.5.0",
     "aws-sdk": "^2.1332.0",
     "bootstrap": "^5.2.3",
-    "fs": "0.0.1-security",
+    "fs": "^0.0.1-security",
+    "http-proxy-middleware": "^2.0.6",
     "js-cookie": "^3.0.1",
     "os": "^0.1.2",
     "path": "^0.12.7",
