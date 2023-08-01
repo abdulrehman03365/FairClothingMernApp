@@ -1,4 +1,4 @@
-import './marqueView.css';
+import './clothView.css';
 import { setBookClicked, setBooked } from '../../slices/bookslice';
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';

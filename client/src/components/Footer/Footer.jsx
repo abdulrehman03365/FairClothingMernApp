@@ -38,7 +38,7 @@ export default function Footer()
       </div>
       <div className="Footer-bottom">
         <p>
-          © All Rights Reserved by Developer <a href="#">Abdul-Rehman.</a>
+          © All Rights Reserved by Developer <a href="https://github.com/abdulrehman03365">Abdul-Rehman.</a>
         </p>
       </div>
     </footer>

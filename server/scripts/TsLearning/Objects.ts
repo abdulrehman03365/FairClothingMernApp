@@ -30,6 +30,9 @@ const cars: Car[] = [
  function filterCars(cars: Car[]): Car[] {
     return cars.filter(car => car.varient === Varient.VX);
   }
+
+
+
 //   const vxCars = cars.filter(car => car.varient === Varient.VX);
 const vxCars= filterCars(cars)
 console.log(vxCars);

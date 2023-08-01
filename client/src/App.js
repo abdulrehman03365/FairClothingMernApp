@@ -3,7 +3,7 @@ import adminSignIn from "./adminPages/adminSignIn/adminSignIn";
 import {toast, ToastContainer } from "react-toastify";
 import AdminHome from './adminPages/adminHome';
 import Home from './pages/home/home';
-import bookMarque from './pages/bookMarque/bookMarque';
+import BookMarque from './pages/bookMarque/bookMarque';
 import SignIn from './pages/signIn/signIn';
 import SignUp from './pages/singUp/signUp';
 import { ReactDOM , Browser, Component, useState } from 'react';
@@ -21,6 +21,7 @@ import { Provider } from "react-redux";
 import store from './store/store'
 import { useDispatch } from "react-redux";
 import AuthCheker from "./components/AuthChecker/AuthCheker";
+import Practice from "./practiceComponent/practice";
 
 
 function App ()
@@ -36,12 +37,13 @@ function App ()
       <div style={{height:'100vh' , display:'flex' ,flexDirection:'column'}}>
             <ToastContainer className="toast-container" />
             <Routes>
-              <Route path="/" element={<Home />} />
+              <Route path="/" element={<BookMarque />} />
               <Route path="signIn" element={<SignIn />} />
               <Route path="/admin/signIn" element={<AdminSignIn />} />
               <Route path="/admin/home" element={<ProtectedRoutes component={AdminHome} />} />
               <Route path="signUp" element={<SignUp />} />
-              <Route path="bookMarque" element={<ProtectedRoutes component={bookMarque} />} />
+          
+              {/* <Route path="bookMarque" element={<ProtectedRoutes component={bookMarque} />} /> */}
               <Route path="/admin" element={<ProtectedRoutes component={AdminSignIn} />} />
               <Route path="/manageMarques" element={<ManageMarques />} />
               <Route path="*" element={<NotFound />} />

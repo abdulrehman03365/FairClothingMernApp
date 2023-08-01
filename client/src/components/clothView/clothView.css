@@ -56,9 +56,7 @@ margin: 1vh 1vh 0vh 1vh ;
     box-shadow: inset 0 0 8px rgba(0,0,0,0.5); /* Add box-shadow effect */
     outline: none; /* Remove outline */
   }
-#book_btn :active{
 
-}
 #book_btn{
     background: transparent;
     margin-right: 0.07rem;

@@ -1,7 +1,7 @@
 class Challenges{
-
-    
-    StringReverse(string )  
+ 
+       
+    StringReverse(string)  
     {
 
         var tempString  ='';
@@ -10,7 +10,9 @@ class Challenges{
         }
 
     return tempString;
-    }
+
+    
+}
 
 
 
@@ -32,8 +34,25 @@ class Challenges{
     }
 
 
-    numberofOccurances()
+    numberofOccurances(pass)
     {
+        
+        var charObj={}
+        for (const char of pass)
+        {
+             charObj[char]=0;
+             for (const char2 of pass)
+             {
+                if (char==char2)
+                {
+                    charObj[char]++;
+                }
+             }
+
+             
+
+        }
+        console.log(charObj);
 
     }
 
@@ -78,13 +97,79 @@ class Challenges{
     console.log(arr);
     }
 
+
+
+
 }
+
+class phdStudent{
+    constructor(stName,stClass,stRollno,sup,reArea){
+        this.stName=stName
+        this.stClass=stClass
+        this.stRollno=stRollno
+        this.researchArea=reArea
+        this.supervisor=sup}
+    }
+class msStudent{
+    constructor(stName,stClass,stRollno,supervisor){
+        this.stName=stName
+        this.stClass=stClass
+        this.stRollno=stRollno
+        this.supervisor=supervisor}
+       
+    }
+
+
+
+
+
+
+class StudentFactory{
+createStudent(type ,data){
+    switch(type){
+
+        case "phdStudent" :
+        {
+newPhdSt= new phdStudent(data)
+console.log("new PHD student Created",newPhdSt); 
+}
+        case "msStudent":{
+const newMsst= new msStudent(data)
+console.log("new Ms Student Created",newMsst);
+        }
+     
+    }
+}
+
+
+
+    
+}
+
+ StudentFactory=new StudentFactory();
+ StudentFactory.createStudent("msStudent",{stName:"abdul",stClass:"MS(SE)",
+ stRollno:"i192086",supervisor:"Irum-Inayat"});
+
+
+
+
+
+
+
+
+
+
+
+
 
 const chall= new Challenges()
 console.log(chall.StringReverse('ALI'));
+//https://edabit.com/challenges/javascript
+// https://github.com/dinanathsj29/javascript-exercise-beginners
 chall.Palaindrone('madam')
 chall.secondLargest()
 chall.arrayReverse()
+chall.numberofOccurances("pass")
 // 934696
 // 783521
 // 249278

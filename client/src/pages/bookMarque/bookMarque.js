@@ -1,7 +1,7 @@
 import { useState } from "react";
 import './bookMarque.css'
 import Nevbar from "../../components/navBar/nevbar";
-import MarqueView from "../../components/marqueView/marqueView";
+import MarqueView from "../../components/clothView/ClothView";
 import sendMessage from "../../services/chat";
 import socket from "../../services/chat";
 import { useEffect } from "react";
@@ -15,8 +15,8 @@ function BookMarque() {
    ) => {
     
 const fetchMarques =async ()=>{
-const data= await getallMarques('All')
-setMarqueDetails(data)
+// const data= await getallMarques('All')
+// setMarqueDetails(data)
 }
 
 
@@ -34,9 +34,10 @@ setMarqueDetails(data)
     <div>
       <Nevbar />
       <div id="MarquePlaceHolder">
-        {marqueDetails.map((marqueDetail) => (
+        {/* {marqueDetails.map((marqueDetail) => (
           <MarqueView key={marqueDetail._id} marqueDetail={marqueDetail} />
-        ))}
+        ))} */}
+        {/* <MarqueView marqueDetails marqueDetail={{id:1,location:"kh",image:"src" ,status:"booked" ,capaciy:"cap"}}></MarqueView> */}
       </div>
       <Footer></Footer>
     </div>
