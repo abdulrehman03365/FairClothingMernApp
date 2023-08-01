@@ -28,14 +28,15 @@
     top: 0;
     position: sticky;
     height: 7vh;
-    line-height: 60px;
+    
     width: 100vw;
     z-index: 10;
   }
   
   .nav-wrapper {
-    margin: auto;
-    text-align: start;
+    height: 7vh;
+    /* margin: auto; */
+    /* text-align: start; */
     width: 100%;
   } @media(max-width: 768px) {
       .nav-wrapper {
@@ -50,9 +51,11 @@
   
   .logo {
     float: left;
+    display: flex;
+    align-items: center;
     margin-left: 10px;
     font-size: 1.5em;
-    height: 60px;
+    height: 7vh;
     letter-spacing: 1px;
     text-transform: uppercase;
   } @media(max-width: 768px) {
@@ -62,12 +65,17 @@
     }
   
   #navbar ul {
-    display: inline-block;
+    /* display: inline-block; */
+    height: 7vh;
     float: right;
     list-style: none;
+    flex-direction: row;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     /* margin-right: 14px; */
-    margin-top: -2px;
-    text-align: right;
+    /* margin-top: -2px; */
+    /* text-align: right; */
     transition: transform 0.5s ease-out;
     -webkit-transition: transform 0.5s ease-out;
   } @media(max-width: 640px) {
@@ -76,7 +84,7 @@
       }
     } @media(orientation: landscape) {
         #navbar ul {
-          display: inline-block;
+          /* display: inline-block; */
         }
       }
   
@@ -86,14 +94,14 @@
   
   #navbar li a {
     color: rgb(13, 26, 38);
-    display: block;
-    font-size: 0.9em;
-    height: 50px;
+    /* display: block; */
+    /* font-size: 0.9em; */
+    /* height: 50px; */
     letter-spacing: 1px;
     margin: 0 20px;
-    padding: 0 4px;
-    position: relative;
-    text-decoration: none;
+    /* padding: 0 4px; */
+    /* position: relative; */
+    /* text-decoration: none; */
     text-transform: uppercase;
     transition: all 0.5s ease;
     -webkit-transition: all 0.5s ease;
