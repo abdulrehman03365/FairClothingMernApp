@@ -22,7 +22,7 @@ function Nevbar() {
        
         <div className="logo">
        
-          <a> Booking Website</a>
+          <a> Fair Clothing</a>
         </div>
     
         

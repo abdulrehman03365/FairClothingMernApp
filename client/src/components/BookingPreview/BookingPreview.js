@@ -13,7 +13,7 @@ export default function BookingPreview({handlePreviewShow}){
     <div className="ParentContainer" >
     <div className='Top-div'>
         <div></div>
-    <h1>Booking</h1>
+    <h1>Cart</h1>
     {   }
     <div>
     

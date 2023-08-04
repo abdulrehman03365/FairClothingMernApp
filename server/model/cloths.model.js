@@ -7,6 +7,6 @@ const clothSchema = new mongoose.Schema({
     status: { type: String, default: true },
   });
   
-  const cloth = mongoose.model('Cloth',clothSchema);
+  const cloth =new mongoose.model('Cloth',clothSchema);
   
   module.exports = {cloth,clothSchema};
