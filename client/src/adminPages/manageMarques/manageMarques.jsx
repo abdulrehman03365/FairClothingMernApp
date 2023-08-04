@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 import AdminHeader from '../../components/adminComponents/adminHeader/adminHeader';
 import Preview from '../../components/adminComponents/preview/preview';
-import { addMarque,updateMarque ,getMarque } from '../../api';
+import { addMarque,updateMarque,updateCloth ,getMarque ,getallCloths, addCloth } from '../../api';
 import './manageMarques.css';
 import {useLocation, useParams} from 'react-router-dom'
 function ManageMarques() {
@@ -28,10 +28,10 @@ function ManageMarques() {
   useEffect(() => {
     setEditView(editViewProp)
    const  fetchAndPopulate=async()=> {
-      const respData = await getMarque(id);
+      const respData = await getallCloths(id);
       setValue('name', respData.name);
-      setValue('location', respData.location);
-      setValue('capacity', respData.capacity);
+      setValue('sku', respData.sku);
+      setValue('quantity', respData.quantity);
       console.log("image url:"+respData.image);
       setImagePreview(respData.image);
       setValue('status', respData.status);
@@ -54,32 +54,34 @@ function ManageMarques() {
   }}
   
   async function handleFormSubmit(data, event) {
-    event.preventDefault();
-    data['base64Image'] = base64Image;
-    data['imageName'] = image?.name;
-    data['imageType'] = image?.type;
+  
+    // console.log("i m clicked");
+    // event.preventDefault();
+    // data['images'] = base64Image;
+    // data['imageName'] = image?.name;
+    // data['imageType'] = image?.type;
     
-    const formData=new FormData();
-    for (const key in data)
-    {
-    formData.append(key,data[key])
-    }
+    // const formData=new FormData();
+    // for (const key in data)
+    // {
+    // formData.append(key,data[key])
+    // }
 
-    if (editViewProp) {
-      const data=await updateMarque(id, formData);
-      toast.success('Marque has been Updated successfully!');
-      setEditView(false)
-      setUpdated(true)
-      setValue('name', data.name);
-      setValue('location', data.location);
-      setValue('capacity', data.capacity);
-      setImagePreview(data.image);
-      setValue('status', data.status);
-    } else {
-      await addMarque(formData);
-      toast.success('Marque has been added successfully!');
+    // if (editViewProp) {
+    //   const data=await updateCloth(id, formData);
+    //   toast.success('Cloth is Updated successfully!');
+    //   setEditView(false)
+    //   setUpdated(true)
+    //   setValue('name', data.name);
+    //   setValue('sku', data.sku);
+    //   setValue('quantity', data.quantity);
+    //   setImagePreview(data.image);
+    //   setValue('status', data.status);
+    // } else {
+    //   await addCloth(formData);
+      toast.success('Cloth is added successfully!');
 
-    }
+    // }
 
 
   }
@@ -103,16 +105,16 @@ function ManageMarques() {
        "flexDirection":"column" , "alignContent":"center"  , "justifyContent":"center" , "marginRight":"30%" , "marginLeft":"30%"}}>
 
             <input className="add-marque-input" {...register("name",{required:true})}></input>
-            <label>Marque Name</label>
-            {errors.name?.type==='required' && <p role={'alert'} style={{"color":"red"}}>Marque name is required</p>}
+            <label>Cloth Name</label>
+            {errors.name?.type==='required' && <p role={'alert'} style={{"color":"red"}}>Cloth name is required</p>}
            
-            <input className="add-marque-input" {...register("location",{required:true})}></input>
-            <label>Marque Location</label>
-            {errors.location?.type==='required' && <p role={'alert'} style={{"color":"red"}}>Location is required</p>}
+            <input className="add-marque-input" {...register("sku",{required:true})}></input>
+            <label>Cloth SKU</label>
+            {errors.location?.type==='required' && <p role={'alert'} style={{"color":"red"}}>SKU is required</p>}
             
-            <input className="add-marque-input" {...register("capacity",{required:true})}></input>
-            <label>Capacity</label>
-            {errors.capacity?.type==='required' && <p role={'alert'} style={{"color":"red"}}>Capacity is required</p>}
+            <input className="add-marque-input" {...register("quantity",{required:true})}></input>
+            <label>Quantity</label>
+            {errors.capacity?.type==='required' && <p role={'alert'} style={{"color":"red"}}>Quantity is required</p>}
 
             <input className="add-marque-input" {...register("status",{required:true})}></input>
             <label>Status</label>
@@ -122,7 +124,7 @@ function ManageMarques() {
             <input type="file" id="imageInput" onChange={handleImageChange}  ></input>
             {imagePreview && (
             <img src={imagePreview} alt="Image preview" style={{ width: '200px' }} /> )}
-            <input type={"submit"} style={{ display: 'inline-block', width: 'auto' }} value="Add Marque"></input>
+            <input type={"submit"} style={{ display: 'inline-block', width: 'auto' }} value="Add Cloth"></input>
 
 
 

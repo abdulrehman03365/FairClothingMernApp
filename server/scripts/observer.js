@@ -1,3 +1,7 @@
+// in observer Pattern there are observer and subject 
+// subject produce events
+// Observer wish to be notified
+
 class Observer{
     notify(){}
    

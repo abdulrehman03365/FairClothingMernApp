@@ -1,27 +1,57 @@
 import { useDispatch , useSelector } from "react-redux";
 import { setUserAuth } from "./slices/authSlice";
 import userCatagory from "./utils/utils";
+import axios from 'axios'
 
 const BASE_URL = process.env.NODE_ENV === 'development'
 ? '/api' // Use the proxy during development
-: "https://fairclothing-f9c79.web.app"; 
+: "https://fairclothing-f9c79.web.app/api"; 
 
 console.log("BASE_URL",BASE_URL);
+axios.defaults.baseURL=BASE_URL;
+const authToken = localStorage.getItem('token');
+console.log("token", authToken);
+// axios.defaults.headers.common['Authorization'] = `Bearer ${authToken}`;
 
-async function fetchToken() {
-  // Retrieve the token from local storage or your authentication mechanism
-  const token = localStorage.getItem('token');
+export async function addCloth(clothData){
+  const authToken = localStorage.getItem('token');
+  const config={headers:{'Content-Type':'application/x-www-form-urlencoded',
+  'Authorization':`Bearer ${authToken}`}}
+  try{
+    const response = await axios.post('/addCloth',clothData,config)
+    const data = await response.json();
+    return data;
+  }
+  catch (e){
+    console.log("Exception in adding Cloth API", e.message);
   
-  // Check if the token is valid or expired
-  if (!token) {
-   
+    throw new Error("Error adding Cloth data");
+  
+  
+
+
   }
   
-  // If token is valid and not expired, return it
-  return token;
+
+
 }
+
+export async function updateCloth(clothId){
+
+}
+
+export async function deleteCloth(clothId){
+
+}
+
+export async function getallCloths(clothId){
+
+}
+
+
+
 export async function addMarque(formData) {
-  const token = await fetchToken();
+  const token = await  localStorage.getItem('token');
   const response = await fetch(`${BASE_URL}/addMarque`, {
     method: 'POST',headers:{'Authorization': `Bearer ${token}`},
     credentials: 'include',
@@ -38,7 +68,7 @@ export async function addMarque(formData) {
 }
 
 export async function updateMarque(id,formData) {
-  const token = await fetchToken();
+  const token = await  localStorage.getItem('token');
   const response = await fetch(`${BASE_URL}/updateMarque?id=${id}`,{method:'POST'
   ,headers:{'Authorization': `Bearer ${token}`},credentials:'include',body:formData});
 
@@ -64,7 +94,7 @@ export async function getallMarques(location) {
   params.append('location', 'All');
 } 
 
-  const token = await fetchToken();
+  const token = await  localStorage.getItem('token');
   const response = await fetch(`${BASE_URL}/getallMarques?${params.toString()}`, {
     method: 'GET',
     headers: {
@@ -82,8 +112,9 @@ export async function getallMarques(location) {
 
 
 
+
 export async function getMarque(id) {
-  const token = await fetchToken();
+  const token = await  localStorage.getItem('token');
   const response = await fetch(`${BASE_URL}/getMarque?id=${id}`,{method:'GET',credentials:'include',headers:{'Authorization': `Bearer ${token}`}});
   const data = await response.json();
 
@@ -112,14 +143,13 @@ export async function signUp(data){
 }
   
 
-
 export async function signIn(data){
   
   const params=new URLSearchParams()
   for (const key in data) {
     params.append(key, data[key]);
   }
-  const response= await fetch(`${BASE_URL}/api/auth/signIn`,
+  const response= await fetch(`${BASE_URL}/auth/signIn`,
           {method:'POST',credentials:'include',
         headers:{
           'Content-type':'application/json'
@@ -151,7 +181,7 @@ export async function signIn(data){
       }
 
 export async function deleteMarque(id){
-  const token = await fetchToken(); 
+  const token = await  localStorage.getItem('token'); 
   const response = await fetch(`${BASE_URL}/deleteMarque`,{method:'POST',credentials:'include'
   ,headers:{'Authorization': `Bearer ${token}` ,'Content-type':'application/json' , },body:JSON.stringify({id:id})});
 
