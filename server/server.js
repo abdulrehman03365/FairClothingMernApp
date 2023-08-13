@@ -30,7 +30,7 @@ app.use(cors({
 	origin: 'https://fairclothing-f9c79.firebaseapp.com',
 	allowedHeaders: ['Content-Type', 'Authorization']
   }));
-  
+
 const parentDir = path.dirname(__dirname);
 app.use(express.static( path.join(parentDir, 'client', 'build')));
 const buildPath=path.join(parentDir, 'client', 'build')
@@ -138,29 +138,32 @@ app.get('/call_sp',(req,res)=>{
 	})
 	
 })
-
+socketService.initSocket(server);
 
 // const viewPath=path.join(__dirname,'./views')
 console.log(__dirname);
 
-app.get('/',(req,res)=>{
-	
-  
-	res.sendFile(__dirname +"/views/home.html")
-
-
-})
-
-// app.get("/*", function (req, res) {
-// 	res.sendFile(path.resolve(__dirname, '../client/build', 'index.html'));
-//  })
 
 
 
 
 
+
+console.log("build path",  path.resolve(__dirname,"../client/build", "index.html"));
 console.log(process.env.uri);
-socketService.initSocket(server);
+
+
+app.use(express.static(path.resolve(__dirname, '../client/build')));
+app.get("/*", function (req, res) {
+res.sendFile(path.resolve(__dirname, '../client/build', 'index.html'));
+
+	
+ })
+
+ 
+
+
+
 
 
 // Check if running in Firebase environment
