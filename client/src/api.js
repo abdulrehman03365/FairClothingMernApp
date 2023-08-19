@@ -11,12 +11,12 @@ console.log("BASE_URL",BASE_URL);
 axios.defaults.baseURL=BASE_URL;
 const authToken = localStorage.getItem('token');
 console.log("token", authToken);
+const config={headers:{'Content-Type':'application/x-www-form-urlencoded',
+'Authorization':`Bearer ${authToken}`}}
 // axios.defaults.headers.common['Authorization'] = `Bearer ${authToken}`;
 
 export async function addCloth(clothData){
-  const authToken = localStorage.getItem('token');
-  const config={headers:{'Content-Type':'application/x-www-form-urlencoded',
-  'Authorization':`Bearer ${authToken}`}}
+
   try{
     const response = await axios.post('/addCloth',clothData,config)
     const data = await response.json();
@@ -26,9 +26,6 @@ export async function addCloth(clothData){
     console.log("Exception in adding Cloth API", e.message);
   
     throw new Error("Error adding Cloth data");
-  
-  
-
 
   }
   
@@ -36,7 +33,21 @@ export async function addCloth(clothData){
 
 }
 
-export async function updateCloth(clothId){
+export async function updateCloth(clothId,clothData){
+  try{
+    const response = await axios.put(`/addCloth/${clothId}`,clothData,config)
+    const data = await response.json();
+    return data;
+  }
+  catch (e){
+    console.log("Exception in updating Cloth API", e.message);
+  
+    throw new Error("Error  Cloth data");
+  
+  
+
+
+  }
 
 }
 

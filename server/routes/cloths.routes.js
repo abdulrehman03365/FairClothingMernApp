@@ -10,8 +10,8 @@ module.exports=function (app){
 
     app.post("/api/addCloth",[verifyJwtToken,verifyClothsParam],clothsController.addCloth)
     app.get("/api/cloth/:clothId",[verifyJwtToken,verifyClothsParam],clothsController.getCloth)
-    app.put("/api/cloth/:cartId",[verifyJwtToken,verifyClothsParam],clothsController.updateCloth)
-    app.delete("/api/cloth/:cartId",[verifyJwtToken,verifyClothsParam],clothsController.deleteCloth)
+    app.put("/api/cloth/:clothId",[verifyJwtToken,verifyClothsParam],clothsController.updateCloth)
+    app.delete("/api/cloth/:clothId",[verifyJwtToken,verifyClothsParam],clothsController.deleteCloth)
 
  
 }

@@ -143,13 +143,11 @@ app.get('/call_sp',(req,res)=>{
 // const viewPath=path.join(__dirname,'./views')
 console.log(__dirname);
 
-app.get('/',(req,res)=>{
-	
-  
-	res.sendFile(__dirname +"/views/home.html")
 
 
-})
+app.get("/*", function (req, res) {
+	res.sendFile(path.resolve(__dirname, '../client/build', 'index.html'));
+ })
 
 // app.get("/*", function (req, res) {
 // 	res.sendFile(path.resolve(__dirname, '../client/build', 'index.html'));

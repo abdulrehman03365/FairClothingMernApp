@@ -13,7 +13,31 @@ class Challenges{
 
     
 }
+  countCharacters(userNames){
+    const userNamesCount=[]
+    for (const userName of userNames)
+  { 
+    const userNamesObj={}
+    userNamesObj["userName"]=userName;
+    userNamesObj["charCount"]={}
+    for(const char of userName)
+     {
+        if  (userNamesObj.charCount[char])
+        {
+            userNamesObj.charCount[char]++
+        }
+        else{
+            userNamesObj.charCount[char]=1;
+        }
 
+     }
+
+     userNamesCount.push(userNamesObj)
+  }
+ 
+  console.log("count Array", userNamesCount);
+
+  }
 
 
     Palaindrone(string){
@@ -100,6 +124,11 @@ class Challenges{
 
 
 
+
+
+
+    
+
 }
 
 class phdStudent{
@@ -170,6 +199,7 @@ chall.Palaindrone('madam')
 chall.secondLargest()
 chall.arrayReverse()
 chall.numberofOccurances("pass")
+chall.countCharacters(["ali","abdul"])
 // 934696
 // 783521
 // 249278
