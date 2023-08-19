@@ -15,13 +15,13 @@ function BookMarque() {
    ) => {
     
 const fetchMarques =async ()=>{
-// const data= await getallMarques('All')
-// setMarqueDetails(data)
+const data= await getallMarques('All')
+setMarqueDetails(data)
 }
 
 
     
-   fetchMarques() 
+fetchMarques() 
    }, []);
 
   function sendMessage() {
@@ -31,16 +31,16 @@ const fetchMarques =async ()=>{
 
   
   return (
-    <div>
+    <>
       <Nevbar />
       <div id="MarquePlaceHolder">
-        {/* {marqueDetails.map((marqueDetail) => (
+        {marqueDetails.map((marqueDetail) => (
           <MarqueView key={marqueDetail._id} marqueDetail={marqueDetail} />
-        ))} */}
+        ))} 
         {/* <MarqueView marqueDetails marqueDetail={{id:1,location:"kh",image:"src" ,status:"booked" ,capaciy:"cap"}}></MarqueView> */}
       </div>
       <Footer></Footer>
-    </div>
+    </>
   );
 }
 

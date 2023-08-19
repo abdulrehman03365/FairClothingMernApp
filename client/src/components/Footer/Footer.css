@@ -1,22 +1,27 @@
 .Footer-Container {
+
+bottom: 0;
+width: 100%;
     margin-top: auto;
     padding-top: 2.5vh;
     box-shadow: 1px 1px 72px 2px rgba(0, 0, 0, 0.1);
   }
-  
+   
+ 
+
   .Footer-List {
     list-style-type: none;
     padding-left: 0;
   }
   
   .Footer-ListItem {
-    margin-bottom: 1.5vh;
+  
   }
   
   .Footer-bottom {
     text-align: center;
   }
-  
+ 
   
   
     .Footer-Container {
@@ -27,7 +32,7 @@
 
     .Footer-top {
         display: flex;
-        align-items: center;
+   
         padding-right: 10%;
         padding-left: 10%;
         flex-wrap: wrap;
@@ -38,7 +43,25 @@
       @media (max-width: 768px) {
         .Footer-top {
           flex-direction: column;
+          justify-content:center;
           padding-right: 5%;
           padding-left: 5%;
+          display: flex;
+          
         }
+      }
+    
+      @media (max-width: 576px) {
+        .Footer-top {
+          flex-direction: column;
+          padding-right: 5%;
+          padding-left: 5%;
+          display: flex;
+          
+        }
+      }
+
+      .Bottom-text {
+        color: black;
+        font-size: 13px;
       }

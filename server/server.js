@@ -27,7 +27,7 @@ require('dotenv').config()
 app.use(express.json());
 app.use(cors({
 	credentials: true,
-	origin: 'https://fairclothing-f9c79.firebaseapp.com',
+	origin: process.env.NODE_ENV=='development' ? 'http://localhost:3000':'https://fairclothing-f9c79.web.app',
 	allowedHeaders: ['Content-Type', 'Authorization']
   }));
 

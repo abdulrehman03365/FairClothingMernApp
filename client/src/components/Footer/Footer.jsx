@@ -9,7 +9,7 @@ export default function Footer()
     return(
         
        <>
-       <footer className="Footer-Container">
+       <footer className="Footer-Container" >
       <div className="Footer-top">
         <div className="Contact-div">
           <h5 className="Footer-Heading">Contact Us</h5>
@@ -37,7 +37,7 @@ export default function Footer()
         </div>
       </div>
       <div className="Footer-bottom">
-        <p>
+        <p className="Bottom-text">
           © All Rights Reserved by Developer <a href="https://github.com/abdulrehman03365">Abdul-Rehman.</a>
         </p>
       </div>

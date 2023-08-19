@@ -3,7 +3,7 @@
     "public": "client/build",
     "ignore": [
       "firebase.json",
-      "**/.*",
+   
       "**/.env/**",
       "**/node_modules/**"
     ],
