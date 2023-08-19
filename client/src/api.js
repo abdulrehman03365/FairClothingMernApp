@@ -5,7 +5,10 @@ import axios from 'axios'
 
 const BASE_URL = process.env.NODE_ENV === 'development'
 ? '/api' // Use the proxy during development
-: "https://fairclothing-f9c79.web.app/api"; 
+ : "https://fairclothing-f9c79.web.app/api"; 
+
+
+
 
 console.log("BASE_URL",BASE_URL);
 axios.defaults.baseURL=BASE_URL;

@@ -1,4 +1,14 @@
 class Challenges{
+
+    obj1={
+        name:"abdul" ,
+        class:"MS"
+    }
+
+    obj2={
+        name:"ali",
+        class:"BS"
+    }
  
        
     StringReverse(string)  
@@ -120,6 +130,33 @@ class Challenges{
         }
     console.log(arr);
     }
+
+
+
+    
+     objectCompare(obj1,obj2){
+        if (JSON.stringify(obj1)!==JSON.stringify(obj2))
+            {
+                console.log("obj 1 abject 2 are equal");
+            }        
+        else 
+        {
+            console.log("obj 1 and object 2 are not equal");
+        }
+
+     }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

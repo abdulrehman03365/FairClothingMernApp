@@ -27,10 +27,10 @@ require('dotenv').config()
 app.use(express.json());
 app.use(cors({
 	credentials: true,
-	origin: 'https://fairclothing-f9c79.firebaseapp.com',
+	origin: process.env.NODE_ENV=='development' ? 'http://localhost:3000':'https://fairclothing-f9c79.web.app',
 	allowedHeaders: ['Content-Type', 'Authorization']
   }));
-  
+
 const parentDir = path.dirname(__dirname);
 app.use(express.static( path.join(parentDir, 'client', 'build')));
 const buildPath=path.join(parentDir, 'client', 'build')
@@ -138,27 +138,32 @@ app.get('/call_sp',(req,res)=>{
 	})
 	
 })
-
+socketService.initSocket(server);
 
 // const viewPath=path.join(__dirname,'./views')
 console.log(__dirname);
 
 
 
+
+
+
+
+console.log("build path",  path.resolve(__dirname,"../client/build", "index.html"));
+console.log(process.env.uri);
+
+
+app.use(express.static(path.resolve(__dirname, '../client/build')));
 app.get("/*", function (req, res) {
-	res.sendFile(path.resolve(__dirname, '../client/build', 'index.html'));
+res.sendFile(path.resolve(__dirname, '../client/build', 'index.html'));
+
+	
  })
 
-// app.get("/*", function (req, res) {
-// 	res.sendFile(path.resolve(__dirname, '../client/build', 'index.html'));
-//  })
+ 
 
 
 
-
-
-console.log(process.env.uri);
-socketService.initSocket(server);
 
 
 // Check if running in Firebase environment

@@ -25,6 +25,7 @@ const token=localStorage.getItem('token')
 
  console.log("tocken is :" + token);
  console.log("Protected routes value of userType is " + userType);
+ console.log("user type",userType);
  if (token)
  {
    return (
@@ -40,11 +41,12 @@ const token=localStorage.getItem('token')
   
   return (
     <>
-  {userType=="undefined" &&  <Navigate to="/signIn"></Navigate>}  
+    
+
+  {typeof userType==="undefined" &&  <Navigate to="/signIn"></Navigate>}  
   {userType=="user" &&  <Navigate to="/signIn"></Navigate>}
   {userType=="admin" &&  <Navigate to="/admin/signIn"></Navigate>}
-    </>
-   
+  </> 
     )
 
  }
