@@ -1,47 +1,45 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 function AdminHeader() {
-    return ( <>
+  const [showMenu, setShowMenu] = useState(false);
+  function toggleMenu() {
+    setShowMenu(!showMenu);
+    console.log("set Show value" + showMenu);
 
-<header className="header" style={{width : '100vw'}}>
-          <nav className="navbar navbar-expand-lg navbar-light bg-light">
-            <div className="container-fluid">
-              <Link className="navbar-brand" to="/">
-                Admin Panel
-              </Link>
-              <button
-                className="navbar-toggler"
-                type="button"
-                data-bs-toggle="collapse"
-                data-bs-target="#navbarNav"
-                aria-controls="navbarNav"
-                aria-expanded="false"
-                aria-label="Toggle navigation"
-              >
-                <span className="navbar-toggler-icon"></span>
-              </button>
-              <div className="collapse-navbar-collapse" id="navbarNav">
-                <ul className="navbar-nav">
-                  <li className="nav-item">
-                    <Link className="nav-link" to="/manageMarques">
-                      Manage Marques
-                    </Link>
-                  </li>
-                  <li className="nav-item">
-                    <Link className="nav-link" to="/manage-partners">
-                      Manage Partners
-                    </Link>
-                  </li>
-                  <li className="nav-item">
-                    <Link className="nav-link" to="/manage-account">
-                      Manage Account
-                    </Link>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </nav>
-        </header>
-    </> );
+  }
+
+  return(<>
+      <nav id="navbar" className="">
+      <div className="nav-wrapper">
+       
+        <div className="logo">
+       
+          <a href="/admin/home"> Admin Panel</a>
+        </div>
+    
+        
+        <ul id="menu">
+        <ul className="navbar-nav mr-auto">
+         
+          { <li><Link to={'/signUp'} className="nav-link">Sign Up</Link></li>}
+          {<li><Link to={'/signIn'} className="nav-link">Sign In</Link></li>}
+          <li><Link to={'/bookMarque'} className="nav-link">Book Marque</Link></li>
+        </ul>
+        </ul>
+      </div>
+    </nav>
+    
+    
+    
+    <div className="menuIcon" onClick={toggleMenu}>
+      
+      <span className="icon icon-bars"></span>
+      <span className="icon icon-bars overlay"></span>
+    </div>
+    
+    
+ 
+  </>)
 }
 
 export default AdminHeader;

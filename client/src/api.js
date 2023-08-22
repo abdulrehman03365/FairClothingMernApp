@@ -20,21 +20,28 @@ const config={headers:{'Content-Type':'application/x-www-form-urlencoded',
 
 export async function addCloth(clothData){
 
-  try{
+  
     const response = await axios.post('/addCloth',clothData,config)
-    const data = await response.json();
-    return data;
-  }
-  catch (e){
-    console.log("Exception in adding Cloth API", e.message);
+    if (!response.ok)
+    {
+      const errorData = await response.json();
+      console.log("Error adding cloth", response);  
+      throw new Error("Error adding Cloth data" ,errorData.message );
+        
+    }
+    else{
+      const data = await response.json();
+      return data
+    }
+
+    
   
-    throw new Error("Error adding Cloth data");
 
   }
   
 
 
-}
+
 
 export async function updateCloth(clothId,clothData){
   try{
@@ -55,10 +62,35 @@ export async function updateCloth(clothId,clothData){
 }
 
 export async function deleteCloth(clothId){
+  const response = await axios.post(`/deleteCloth/${clothId}`,config)
+  if (!response.ok)
+  {
+    const errorData = await response.json();
+    console.log("Error deleting cloth", response);  
+    throw new Error("Error deleting Cloth data" ,errorData.message );
+      
+  }
+  else{
+    const data = await response.json();
+    return data
+  }
 
+  
 }
 
-export async function getallCloths(clothId){
+export async function getallCloths(){
+  const response = await axios.post(`/getallCloth`,config)
+  if (!response.ok)
+  {
+    const errorData = await response.json();
+    console.log("Error fetching all cloths", response);  
+    throw new Error("Error fetching all Cloth data" ,errorData.message );
+      
+  }
+  else{
+    const data = await response.json();
+    return data
+  }
 
 }
 

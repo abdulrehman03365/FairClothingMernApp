@@ -6,7 +6,7 @@
     background-color: #fff;
     border-bottom: 1px solid #ddd;
     padding: 1rem;
- 
+    position: sticky;
     top: 0;
     width: 100%;
     z-index: 1;
@@ -23,9 +23,10 @@
   }
  
   #cities-filter{
+    padding: 0.2vh;
     margin: 2vw;
-    width: 10rem;
-    height: 3vh;
+    width: max-content;
+    text-align: center;
     border:  1px solid black;
     border-radius: 2rem;
   }
@@ -43,7 +44,7 @@
 
   .footer {
     background-color: #f2f2f2;
-    padding: 1rem;
+    
     position: fixed;
     bottom: 0;
     width: 100%;

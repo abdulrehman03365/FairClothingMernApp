@@ -68,6 +68,7 @@
     /* display: inline-block; */
     height: 7vh;
     float: right;
+    padding-left: 0;
     list-style: none;
     flex-direction: row;
     display: flex;

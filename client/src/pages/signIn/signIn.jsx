@@ -1,4 +1,5 @@
 import { Component , useState } from "react";
+import Footer from '../../components/Footer/Footer'
 import './signIn.css'
 import Button from 'react-bootstrap/Button';
 import {Alert} from 'react-bootstrap'
@@ -45,8 +46,7 @@ function SignIn()
         catch(error)
         {
           console.log("Error SignIng In :"+error);
-          setErrorMessage("Error Sigining In")
-         
+          setErrorMessage("Error Sigining In")  
           setShowErrorAlert(true)
         }
         }
@@ -71,24 +71,26 @@ function SignIn()
           <label for="" className="label">Email</label>
 
         </div>
-        {errors.email?.type==='required' && <p role={'alert'}>Email is required</p>}
-        {errors.email?.type==='pattern'&&<p role={'alert'}>Plz enter a valid email</p>}
+        {errors.email?.type==='required'  && <p style={{ color: 'red' }} role={'alert'}>Email is required</p>}
+        {errors.email?.type==='pattern'&&<p style={{ color: 'red' }} role={'alert'}>Plz enter a valid email</p>}
         
   
         <div className="inputContainer-pass">
           <input type="text" {...register("password",{required:true , minlength:8})}  className="input" name="password" />
           <label for="" className="label">Password</label>
         </div>
-        {errors.password?.type==='required' && <p role={'alert'}>Password is required</p>}
+        {errors.password?.type==='required' && <p style={{ color: 'red' }} role={'alert'}>Password is required</p>}
     
         <input type="submit" className="submitBtn" value="Log In"/>
 
       </form>
-        
+      
         {/* {successMessage && <div>{successMessage}</div>}
         {errorMessage && <div>{errorMessage}</div>} */}
     </div> 
+   
       </div>
+      {/* <Footer></Footer> */}
       </>
        
             

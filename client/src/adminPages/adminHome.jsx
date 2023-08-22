@@ -1,5 +1,6 @@
 import './adminHome.css'
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
 import {useState,useEffect} from 'react';
 import {  toast , ToastContainer} from "react-toastify";
 import { Link } from "react-router-dom";
@@ -56,13 +57,14 @@ function AdminHome() {
 
   }, []);
   
-   const handleFilterSelection=(event)=>{
+   const handleFilterSelection=async(event)=>{
 setSelectedOptions(event.target.value)
+const data=await getallMarques(selectedOption)
+setMarquees(data )
     }
 
     const handleSearch=async (event)=>{
-      const data=await getallMarques(selectedOption)
-      setMarquees(data )
+     
 
     }
 
@@ -73,10 +75,13 @@ setSelectedOptions(event.target.value)
 <div className="adminPanel" style={{width:'100vw'}}>
        
       
-       <AdminHeader></AdminHeader>
-       <div style={{width:'100vw' ,}}>
+       <AdminHeader ></AdminHeader>
+       <div className='searchContainer' style={{width:'100vw' ,}}>
+        
         <select name="search-select" id="cities-filter" value={selectedOption} onChange={handleFilterSelection}>
-        <option value="" disabled hidden >Search by City</option>
+        <option value="" disabled hidden >
+        <FontAwesomeIcon icon={faMagnifyingGlass} style={{ marginRight: '0.3vw' }} />
+        Search by City</option>
         {citiesOptions.map((city) => (
     <option key={city} value={city}>
       {city}
@@ -85,7 +90,7 @@ setSelectedOptions(event.target.value)
 
         </select>
 
-        <button  className='search-bt'  onClick={()=>{handleSearch()}} >search</button>
+       
        </div>
          <div className="container-fluid">
              

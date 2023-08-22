@@ -48,7 +48,7 @@ function AdminSignIn()
         catch(error)
         {
           console.log("Error SignIng In :"+error);
-          setErrorMessage(error.message)
+          setErrorMessage("Error Signingh In")
          
           setShowErrorAlert(true)
         }
@@ -63,7 +63,7 @@ function AdminSignIn()
       <Nevbar></Nevbar>
       {showErrorAlert && <Alertcomp varient={"danger"} show={showErrorAlert} onClose={()=>{setShowErrorAlert(false)}} message={errorMessage} ></Alertcomp>}
       
-      <div className="formContainer">
+      <div className="admin-formContainer">
       <div className="logInForm" >
       <form className="form" onSubmit={handleSubmit(handleSignIn)}>
 
@@ -84,7 +84,7 @@ function AdminSignIn()
         </div>
         {errors.password?.type==='required' && <p role={'alert'}>Password is required</p>}
     
-        <input type="submit" className="submitBtn" value="Log In"/>
+        <input type="submit" className="admin-submitBtn" value="Log In"/>
 
       </form>
         

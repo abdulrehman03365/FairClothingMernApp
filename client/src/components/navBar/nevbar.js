@@ -9,6 +9,8 @@ import { useSelector } from "react-redux";
 function Nevbar() {
   const [showMenu, setShowMenu] = useState(false);
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+  const userType = useSelector((state)=>state.auth.userType)
+  
   console.log("value of isAuthenticated  state : " +isAuthenticated);
   function toggleMenu() {
     setShowMenu(!showMenu);
@@ -17,21 +19,19 @@ function Nevbar() {
     
     return (
        <>
-        <nav id="navbar" className="">
-      <div className="nav-wrapper">
-       
-        <div className="logo">
-       
-          <a> Fair Clothing</a>
+      <nav id="navbar" className="">
+      <div className="nav-wrapper">  
+      <div className="logo">
+          <a> {userType === 'admin' ? 'Admin Panel' : 'Fair Clothing'}</a>
         </div>
     
         
         <ul id="menu">
         <ul className="navbar-nav mr-auto">
-         
-          {!isAuthenticated && <li><Link to={'/signUp'} className="nav-link">Sign Up</Link></li>}
-          {!isAuthenticated &&<li><Link to={'/signIn'} className="nav-link">Sign In</Link></li>}
-          <li><Link to={'/bookMarque'} className="nav-link">Book Marque</Link></li>
+          {!isAuthenticated && userType!='admin' &&(<li><Link to={'/signUp'} className="nav-link">Sign Up</Link></li>)}
+          {!isAuthenticated && userType!='admin' &&(<li><Link to={'/signIn'} className="nav-link">Sign In</Link></li>)}
+          
+          {!userType!='admin'&&<li><Link to={'/bookMarque'} className="nav-link">Book Marque</Link></li>}
         </ul>
         </ul>
       </div>
