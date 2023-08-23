@@ -146,10 +146,15 @@ class Challenges{
 
      }
 
+    arraySort(array){
+        array.sort((a,b)=>{return a-b})
+        console.log("ascending order sorting",array);
+    }
 
 
-
-
+    timeConverter(){
+        
+    }
 
 
 
@@ -237,6 +242,7 @@ chall.secondLargest()
 chall.arrayReverse()
 chall.numberofOccurances("pass")
 chall.countCharacters(["ali","abdul"])
+chall.arraySort([4,3,2,5])
 // 934696
 // 783521
 // 249278

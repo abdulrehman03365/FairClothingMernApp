@@ -131,7 +131,7 @@ if(err)
 
 
 }
-signInController = (req,res,next)=>{
+signInController =async (req,res,next)=>{
    
     User.findOne({'email':req.body.email}).populate('Roles').exec(async(err,user_res)=>{
   
@@ -157,37 +157,39 @@ signInController = (req,res,next)=>{
         else
         {
 
-            isValidPassword=  bcrypt.compare(req.body.password,user_res.password)
-            if(!isValidPassword)
-            {
-                // alert('Error: Invalid Email or password')
-                // req.redirect('/signIn')
-                // return;
-                console.log('Password is not valid');
-                res.status(401).send('invalid password is provided')
-                return;
-            }
-
-            if(isValidPassword)
-            {
-               
-             const token=jwt.sign({id:user_res._id},process.env.JWT_SECRET,{expiresIn:1200})
-               
-               req.session.token=token
-              
-               var userCatagory =[]
-               
-               var userCatagory =user_res.Roles.map((role)=>{return role.name});
-               
-              
-               console.log("Email and Password are correct and user is successfuly Loged In",{'userId':user_res._id,
-               'userCatagory':userCatagory,'authToken':token});
-               res.status(200).send({'userId':user_res._id,'userCatagory':userCatagory,'authToken':token,'expiresIn':1200})
-              
-
-
-
-            }
+            bcrypt.compare(req.body.password, user_res.password)
+            .then(isValidPassword => {
+                if (!isValidPassword) {
+                    console.log('Password is not valid');
+                    res.status(401).send('Invalid password provided');
+                    return;
+                }
+        
+                const token = jwt.sign({ id: user_res._id }, process.env.JWT_SECRET, { expiresIn: 1200 });
+        
+                req.session.token = token;
+        
+                const userCategory = user_res.Roles.map(role => role.name);
+        
+                console.log("Email and Password are correct and user is successfully logged in", {
+                    'userId': user_res._id,
+                    'userCategory': userCategory,
+                    'authToken': token
+                });
+        
+                res.status(200).send({
+                    'userId': user_res._id,
+                    'userCategory': userCategory,
+                    'authToken': token,
+                    'expiresIn': 1200
+                });
+            })
+            .catch(error => {
+                console.error("Error occurred during password comparison:", error);
+                res.status(500).send("Internal Server Error");
+            });
+        
+           
         }
     })
 

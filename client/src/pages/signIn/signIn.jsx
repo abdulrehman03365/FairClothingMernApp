@@ -25,7 +25,9 @@ function SignIn()
     const [showErrorAlert ,setShowErrorAlert]=useState(false)
     const navigate = useNavigate();
 
-    
+     function handleResetPass(){
+ console.log("Reset Password is called");
+    }
     async function handleSignIn(data,event){
       
       event.preventDefault()
@@ -80,7 +82,7 @@ function SignIn()
           <label for="" className="label">Password</label>
         </div>
         {errors.password?.type==='required' && <p style={{ color: 'red' }} role={'alert'}>Password is required</p>}
-    
+        <a onClick={handleResetPass}>Click here to reset password</a>
         <input type="submit" className="submitBtn" value="Log In"/>
 
       </form>
