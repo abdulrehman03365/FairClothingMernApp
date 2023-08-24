@@ -14,66 +14,51 @@ require('dotenv').config()
 
 signUpController= async (req,res,next)=>{
   console.log('inside signUp Controller');
-//   var  user = new User( 
-//         {
-//             name : req.body.username,
-//             email: req.body.email,
-//             password : enc_pass
-//         }
+  var  user = new User( 
+        {
+            name : req.body.username,
+            email: req.body.email,
+            password : enc_pass
+        }
         
-//         )
+        )
     
-// const myPass=req.body.password
-// bcrypt.genSalt(10,async(err,salt)=>{
+const myPass=req.body.password
 
 
-//         bcrypt.hash(myPass,salt, function(err,hash){
-//             if(err)
-//             {
-//                 console.log(err);
-//                 res.status(500).send({"message":err.message})
-//                 return;
-//             }
-            
-          
-
-//           console.log("User Data after hashing pass", user);
-//         })
-//     })
-
-    // try {
-    //     const salt = await bcrypt.genSalt(10);
-    //     const hash = await bcrypt.hash(myPass,salt);
-    //     user.password=hash;
-    //     console.log("User Object :",user);
-    //     const savedUser = await user.save();
+    try {
+        const salt = await bcrypt.genSalt(10);
+        const hash = await bcrypt.hash(myPass,salt);
+        user.password=hash;
+        console.log("User Object :",user);
+        const savedUser = await user.save();
       
-    //     if (req.body.roles) {
-    //       const roles = await role.find({ name: { $in: req.body.roles } });
+        if (req.body.roles) {
+          const roles = await role.find({ name: { $in: req.body.roles } });
       
-    //       if (!roles.length) {
-    //         res.status(404).send({ message: "Roles do not exist" });
-    //         return;
-    //       }
+          if (!roles.length) {
+            res.status(404).send({ message: "Roles do not exist" });
+            return;
+          }
       
-    //       savedUser.Roles = roles.map(role => role._id);
-    //     } else {
-    //       const resultRole = await role.findOne({ name: "user" });
-    //       savedUser.Roles = [resultRole._id];
-    //     }
+          savedUser.Roles = roles.map(role => role._id);
+        } else {
+          const resultRole = await role.findOne({ name: "user" });
+          savedUser.Roles = [resultRole._id];
+        }
       
-    //     await savedUser.save();
-    //     console.log("Created User Data", user)
-    //     res.status(201).send({ message: "User is created successfully" });
-    //   } catch (err) {
-    //     console.error(err);
+        await savedUser.save();
+        console.log("Created User Data", user)
+        res.status(201).send({ message: "User is created successfully" });
+      } catch (err) {
+        console.error(err);
       
-    //     if (err instanceof mongoose.Error.ValidationError) {
-    //       res.status(400).send({ message: err.message });
-    //     } else {
-    //       res.status(500).send({ message: "Internal Server Error" });
-    //     }
-    //   }
+        if (err instanceof mongoose.Error.ValidationError) {
+          res.status(400).send({ message: err.message });
+        } else {
+          res.status(500).send({ message: "Internal Server Error" });
+        }
+      }
       
 
 

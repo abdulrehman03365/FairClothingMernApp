@@ -60,7 +60,7 @@ return res.status(500).send({message : err.message});
 }
 try{
 
-    console.log("Duplicate Email result " + result);
+
     if (result.length!=0)
    { 
     return res.status(400).send({error :"Failed ! email already exist"})

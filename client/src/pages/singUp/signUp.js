@@ -28,12 +28,20 @@ roles:roles
 
   }
   const response =await signUp(data)
+  const jsonResp=await response.json();
   try{
-    
+    console.log("sigup api response",response);
     if (response.ok)
     {    
      alert("User is created successfully")
                 
+    }
+    else
+    {
+    console.log(jsonResp.message)
+    alert("Error SignIng Up", jsonResp.message)
+    // setErrorMessage(jsonResp.message)  
+    // setShowErrorAlert(true)
     }
 
 
@@ -41,9 +49,8 @@ roles:roles
   }
   catch(error)
   {
-    console.log("Error SignIng In :"+error);
-  
-    setErrorMessage(response.message)  
+ 
+    setErrorMessage("Error Signing In")  
     setShowErrorAlert(true)
   }
   
