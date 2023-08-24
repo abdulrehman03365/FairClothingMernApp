@@ -11,7 +11,8 @@ module.exports = function (app) {
 
     
     
-    app.post("/api/auth/signUp",[verifySignup.checkEmptyfields,verifySignup.checkDuplicateUser,verifySignup.checkDuplicateEmail],
+    app.post("/api/auth/signUp",[verifySignup.checkEmptyfields,verifySignup.checkDuplicateUser,
+    verifySignup.checkDuplicateEmail],
     AuthController.signUpController)
 
     

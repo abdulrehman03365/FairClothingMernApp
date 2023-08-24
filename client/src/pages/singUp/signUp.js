@@ -6,9 +6,11 @@ import Nevbar from "../../components/navBar/nevbar";
 function SignUpform(){
 const {register, handleSubmit , formState : {errors}}=useForm();
 const [rememberUser,setRememberUser]=useState(false)
+const [errorMessage, setErrorMessage] =useState('')
+const [showErrorAlert ,setShowErrorAlert]=useState(false)
 const [checkBoxes,setCheckBoxes]  = useState({userCheckBox:false,adminCheckBox:false})
 
-function onSubmit (data){
+async function onSubmit (data){
 let roles =[]
 
 if (checkBoxes.userCheckBox)
@@ -25,7 +27,26 @@ if (checkBoxes.adminCheckBox)
 roles:roles
 
   }
-  signUp(data)
+  const response =await signUp(data)
+  try{
+    
+    if (response.ok)
+    {    
+     alert("User is created successfully")
+                
+    }
+
+
+
+  }
+  catch(error)
+  {
+    console.log("Error SignIng In :"+error);
+  
+    setErrorMessage(response.message)  
+    setShowErrorAlert(true)
+  }
+  
   
 
 

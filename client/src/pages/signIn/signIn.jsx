@@ -26,7 +26,7 @@ function SignIn()
     const navigate = useNavigate();
 
      function handleResetPass(){
- console.log("Reset Password is called");
+      console.log("Reset Password is called");
     }
     async function handleSignIn(data,event){
       

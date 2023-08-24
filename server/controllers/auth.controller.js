@@ -12,118 +12,69 @@ require('dotenv').config()
 
 
 
-signUpController=  (req,res,next)=>{
-    console.log('inside signUp Controller');
-  const  user = new User( 
-        {
-            name : req.body.username,
-            email: req.body.email,
-            password : enc_pass
-        }
+signUpController= async (req,res,next)=>{
+  console.log('inside signUp Controller');
+//   var  user = new User( 
+//         {
+//             name : req.body.username,
+//             email: req.body.email,
+//             password : enc_pass
+//         }
         
-        )
+//         )
     
-const myPass=req.body.password
-bcrypt.genSalt(10,(err,salt)=>{
-if(err)
-{
-    console.log(err);
-    res.status(500).send({"message":err.message})
-    return;
-}
+// const myPass=req.body.password
+// bcrypt.genSalt(10,async(err,salt)=>{
 
-        bcrypt.hash(myPass,salt, function(err,hash){
-            if(err)
-            {
-                console.log(err);
-                res.status(500).send({"message":err.message})
-                return;
-            }
+
+//         bcrypt.hash(myPass,salt, function(err,hash){
+//             if(err)
+//             {
+//                 console.log(err);
+//                 res.status(500).send({"message":err.message})
+//                 return;
+//             }
             
-          enc_pass=hash
-        })
-    })
-    
+          
 
+//           console.log("User Data after hashing pass", user);
+//         })
+//     })
 
-
-
-
-
-    user.save(  function(err, user){     
-        if (err)
-        {
-            console.log(err);
-            res.status(500).send({"message":err.message})
-            return;
-        }
-        if (req.body.roles)
-        {
-           role.find({name:{$in :req.body.roles}},  function(err,roles){
-              
-                console.log("roles"+ roles);
-                if(err)
-                {
-                    console.log(err);
-                    res.status(404).send({'message':"Roles does not exist"})
-                }
-                user.Roles=roles.map((role)=>{return role._id})
-                user.save( function(err,result){
-                    
-                    if(err)
-                    {
-                            console.log(err)
-                            res.status(500).send({"message":err})
-                            return;
-                    }
-                    
-                    else
-
-                    {
-
-                        res.status(200).send({"message":'User is created successfuly'})
-                        return;
-                    }
-
-                })
-
-            })
-          }
-
-        else
-        
-        role.findOne({'name':"user"}, function(err,result_role){
-            if(err)
-        {
-            res.status(500).send({'message':err})
-            console.log(err);
-            return;
-
-        }
-            user.Roles=[result_role._id]
-            user.save((err)=>{
-                if(err)
-                {
-                    res.status(500).send({'message':err})
-                }
-            
-            else
-
-            {
-                log("Created User details " + result_role)
-                res.status(201).send({"message":"User is created successfully"})
-            }
-            
-            })
-
-        })
-
-
-
-
-
-
-    })
+    // try {
+    //     const salt = await bcrypt.genSalt(10);
+    //     const hash = await bcrypt.hash(myPass,salt);
+    //     user.password=hash;
+    //     console.log("User Object :",user);
+    //     const savedUser = await user.save();
+      
+    //     if (req.body.roles) {
+    //       const roles = await role.find({ name: { $in: req.body.roles } });
+      
+    //       if (!roles.length) {
+    //         res.status(404).send({ message: "Roles do not exist" });
+    //         return;
+    //       }
+      
+    //       savedUser.Roles = roles.map(role => role._id);
+    //     } else {
+    //       const resultRole = await role.findOne({ name: "user" });
+    //       savedUser.Roles = [resultRole._id];
+    //     }
+      
+    //     await savedUser.save();
+    //     console.log("Created User Data", user)
+    //     res.status(201).send({ message: "User is created successfully" });
+    //   } catch (err) {
+    //     console.error(err);
+      
+    //     if (err instanceof mongoose.Error.ValidationError) {
+    //       res.status(400).send({ message: err.message });
+    //     } else {
+    //       res.status(500).send({ message: "Internal Server Error" });
+    //     }
+    //   }
+      
 
 
 
@@ -131,6 +82,9 @@ if(err)
 
 
 }
+
+
+
 signInController =async (req,res,next)=>{
    
     User.findOne({'email':req.body.email}).populate('Roles').exec(async(err,user_res)=>{
@@ -149,17 +103,18 @@ signInController =async (req,res,next)=>{
             // res.status(402).send({'message': "User not found"})
             // req.flash('error','Invalid username or password')
             // res.redirect('/signIn')
-            
+           
             console.log('Invalid Email or password provided.');
             res.status(400).send({message:'Invalid Email or password'})
             return;
         }
         else
         {
-
+            console.log("user Data", user_res);
             bcrypt.compare(req.body.password, user_res.password)
             .then(isValidPassword => {
                 if (!isValidPassword) {
+                    console.log("isValidPassword" ,isValidPassword);
                     console.log('Password is not valid');
                     res.status(401).send('Invalid password provided');
                     return;

@@ -17,6 +17,11 @@
     text-decoration: none;
   }
   
+  .Logo-img{
+    height: 3rem;
+    width: 13rem;
+
+  }
   
   /*======================================================
                             Navbar

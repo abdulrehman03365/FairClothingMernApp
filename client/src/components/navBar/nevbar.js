@@ -5,6 +5,7 @@ import '../navBar/nevbar.css'
 import { useContext } from "react";
 import { AuthContext } from "../../Context/AuthContext";
 import { useSelector } from "react-redux";
+import logo from "../../assets/logo-color.png"
 
 function Nevbar() {
   const [showMenu, setShowMenu] = useState(false);
@@ -22,16 +23,15 @@ function Nevbar() {
       <nav id="navbar" className="">
       <div className="nav-wrapper">  
       <div className="logo">
-          <a> {userType === 'admin' ? 'Admin Panel' : 'Fair Clothing'}</a>
+       <img className="Logo-img" src={logo} ></img>
         </div>
     
         
         <ul id="menu">
         <ul className="navbar-nav mr-auto">
           {!isAuthenticated && userType!='admin' &&(<li><Link to={'/signUp'} className="nav-link">Sign Up</Link></li>)}
-          {!isAuthenticated && userType!='admin' &&(<li><Link to={'/signIn'} className="nav-link">Sign In</Link></li>)}
-          
-          {!userType!='admin'&&<li><Link to={'/bookMarque'} className="nav-link">Book Marque</Link></li>}
+          {!isAuthenticated && userType!='admin' &&(<li><Link to={'/signIn'} className="nav-link">Sign In</Link></li>)}     
+          {userType!='admin'&&<li><Link to={'/bookMarque'} className="nav-link">Book Marque</Link></li>}
         </ul>
         </ul>
       </div>

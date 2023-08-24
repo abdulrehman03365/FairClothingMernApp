@@ -172,7 +172,7 @@ export async function getMarque(id) {
 }
 export async function signUp(data){
   data=data;
-  fetch(`${BASE_URL}/api/auth/signUp`,{method:'POST',
+  fetch(`${BASE_URL}/auth/signUp`,{method:'POST',
   headers:{
     'Content-type':'application/json'
   
