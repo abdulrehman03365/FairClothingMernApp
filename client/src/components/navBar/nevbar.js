@@ -20,9 +20,9 @@ function Nevbar() {
     
     return (
        <>
-      <nav id="navbar" className="">
-      <div className="nav-wrapper">  
-      <div className="logo">
+       <nav id="navbar" >
+       <div className="nav-wrapper">  
+       <div className="logo">
        <img className="Logo-img" src={logo} ></img>
         </div>
     
@@ -35,15 +35,19 @@ function Nevbar() {
         </ul>
         </ul>
       </div>
-    </nav>
-    
-    
-    
-    <div className="menuIcon" onClick={toggleMenu}>
+
+      <div className="menuIcon" onClick={toggleMenu}>
       
       <span className="icon icon-bars"></span>
       <span className="icon icon-bars overlay"></span>
-    </div>
+      </div>
+       </nav>
+   
+     
+    
+    
+    
+  
     
     
     {showMenu && (<div class="overlay-menu">

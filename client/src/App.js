@@ -1,5 +1,6 @@
 import { AuthContext, AuthProvider } from "./Context/AuthContext";
 import { toast, ToastContainer } from "react-toastify";
+import Nevbar from "./components/navBar/nevbar";
 import AdminHome from './adminPages/adminHome';
 import Home from './pages/home/home';
 import BookMarque from './pages/bookMarque/bookMarque';
@@ -15,6 +16,7 @@ import store from './store/store'
 import AuthCheker from "./components/AuthChecker/AuthCheker";
 import ManageMarques from './adminPages/manageMarques/manageMarques';
 import './App.css';
+import { Navbar } from "react-bootstrap";
 
 function App() {
 
@@ -24,7 +26,8 @@ function App() {
       <AuthProvider>
         <Provider store={store}>
           <AuthCheker />
-          <div style={{ height: '100vh', display: 'flex', flexDirection: 'column' }}>
+
+          <div style={{ overflow:"auto", height:'100vh', display: 'flex', flexDirection: 'column' }}>
             <ToastContainer className="toast-container" />
             <Routes>
               <Route path="/" element={<Home />} />
@@ -37,6 +40,7 @@ function App() {
               <Route path="/manageMarques" element={<ManageMarques />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
+          
           </div>
         </Provider>
       </AuthProvider>
