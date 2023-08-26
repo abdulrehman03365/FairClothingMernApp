@@ -39,7 +39,7 @@ roles:roles
     else
     {
     console.log(jsonResp.message)
-    alert("Error SignIng Up", jsonResp.message)
+    alert("Error SignIng Up"+ jsonResp.message)
     // setErrorMessage(jsonResp.message)  
     // setShowErrorAlert(true)
     }

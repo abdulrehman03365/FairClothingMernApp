@@ -194,28 +194,10 @@ export async function signIn(data){
         
         }, 
         body :JSON.stringify(data)}  )
+      return response;
 
 
-        if (!response.ok) {
-          const JsonResp =  await response.json()
-          throw new Error(JsonResp.message);
-        }
-        else 
-        {
-          const JsonResp =  await response.json()
-          // userCatagory=JsonResp.userCatagory;       
-            
-                
-            localStorage.setItem('token',JsonResp.authToken)
-            localStorage.setItem('expiresIn',JsonResp.expiresIn)
-            //userCatagory=JsonResp.userCatagory;
-         
-           
-          
-            
-        }
-
-        return response
+  
       }
 
 export async function deleteMarque(id){

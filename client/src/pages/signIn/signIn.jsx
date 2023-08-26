@@ -33,8 +33,15 @@ function SignIn()
       event.preventDefault()
         try{
           const response =await signIn(data)
+  
+          const jsonResp = await response.json();
+
           if (response.ok)
           {    
+            
+      
+        localStorage.setItem('token',jsonResp.authToken)
+        localStorage.setItem('expiresIn',jsonResp.expiresIn)
             dispatch(setUserAuth(true))
             dispatch(setUserType("user")) 
              
@@ -43,8 +50,15 @@ function SignIn()
                       
           }
 
+          else {
+          setErrorMessage("Error Sigining In" + jsonResp.message )  
+          setShowErrorAlert(true)
+
+          }
+
 
         }
+
         catch(error)
         {
           console.log("Error SignIng In :"+error);

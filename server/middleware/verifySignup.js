@@ -6,7 +6,7 @@ checkEmptyfields=(req,res,next)=>{
 
 
 if (!req.body.email.trim() || !req.body.password.trim())
-res.status(400).send({message:'Signup Field must not be empty'})
+res.status(400).send({message:'Fields must not be empty'})
 next()
 }
 
@@ -63,7 +63,7 @@ try{
 
     if (result.length!=0)
    { 
-    return res.status(400).send({error :"Failed ! email already exist"})
+    return res.status(400).send({message :"Failed ! email already exist"})
     }
 }
 
