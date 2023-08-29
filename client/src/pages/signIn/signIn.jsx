@@ -14,9 +14,17 @@ import { useDispatch , useSelector } from "react-redux";
 import { setUserAuth , setUserType } from "../../slices/authSlice";
 import userCatagory from "../../utils/utils"; 
 import { useEffect } from "react";
+
+import Col from 'react-bootstrap/Col';
+import Form from 'react-bootstrap/Form';
+import InputGroup from 'react-bootstrap/InputGroup';
+import Row from 'react-bootstrap/Row';
+import {Container} from "react-bootstrap";
+
 function SignIn()
    
  {
+    const [validated, setValidated] = useState(false);
     const dispatch=useDispatch();  
     const { isLoggedIn, setIsLoggedIn }=useContext(AuthContext)
     const {register, handleSubmit , formState : {errors} }=useForm();
@@ -68,48 +76,121 @@ function SignIn()
         }
 
       
+        const handleFormSubmit = (event) => {
+          const form = event.currentTarget;
+          if (form.checkValidity() === false) {
+            event.preventDefault();
+            event.stopPropagation();
+          }else {
         
+            const formData = new FormData(form);
+            for (let [name, value] of formData.entries()) {
+                console.log(`${name}: ${value}`);
+            }
+        }
+    
+      
+          setValidated(true);
+          
+        };   
         return(
 
-            <>
+    //         <>
       
-      <Nevbar></Nevbar>
-      {showErrorAlert && <Alertcomp varient={"danger"} show={showErrorAlert} onClose={()=>{setShowErrorAlert(false)}} message={errorMessage} ></Alertcomp>}
+    //   <Nevbar></Nevbar>
+    //   {showErrorAlert && <Alertcomp varient={"danger"} show={showErrorAlert} onClose={()=>{setShowErrorAlert(false)}} message={errorMessage} ></Alertcomp>}
       
-      <div className="formContainer">
-      <div className="logInForm" >
-      <form className="form" onSubmit={handleSubmit(handleSignIn)}>
+    //   <div className="formContainer">
+    //   <div className="logInForm" >
+    //   <form className="form" onSubmit={handleSubmit(handleSignIn)}>
 
-        <h1 className="title">Log In</h1>
+    //     <h1 className="title">Log In</h1>
   
-        <div className="inputContainer">
-          <input type="text" {...register("email",{required:true , pattern :{value:/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,message:'Plz enter a valid email'}})}    className="input" name ="email"  />
-          <label for="" className="label">Email</label>
+    //     <div className="inputContainer">
+    //       <input type="text" {...register("email",{required:true , pattern :{value:/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,message:'Plz enter a valid email'}})}    className="input" name ="email"  />
+    //       <label for="" className="label">Email</label>
 
-        </div>
-        {errors.email?.type==='required'  && <p style={{ color: 'red' }} role={'alert'}>Email is required</p>}
-        {errors.email?.type==='pattern'&&<p style={{ color: 'red' }} role={'alert'}>Plz enter a valid email</p>}
+    //     </div>
+    //     {errors.email?.type==='required'  && <p style={{ color: 'red' }} role={'alert'}>Email is required</p>}
+    //     {errors.email?.type==='pattern'&&<p style={{ color: 'red' }} role={'alert'}>Plz enter a valid email</p>}
         
   
-        <div className="inputContainer-pass">
-          <input type="text" {...register("password",{required:true , minlength:8})}  className="input" name="password" />
-          <label for="" className="label">Password</label>
-        </div>
-        {errors.password?.type==='required' && <p style={{ color: 'red' }} role={'alert'}>Password is required</p>}
-        <a onClick={handleResetPass}>Click here to reset password</a>
-        <input type="submit" className="submitBtn" value="Log In"/>
+    //     <div className="inputContainer-pass">
+    //       <input type="text" {...register("password",{required:true , minlength:8})}  className="input" name="password" />
+    //       <label for="" className="label">Password</label>
+    //     </div>
+    //     {errors.password?.type==='required' && <p style={{ color: 'red' }} role={'alert'}>Password is required</p>}
+    //     <a onClick={handleResetPass}>Click here to reset password</a>
+    //     <input type="submit" className="submitBtn" value="Log In"/>
 
-      </form>
+    //   </form>
       
-        {/* {successMessage && <div>{successMessage}</div>}
-        {errorMessage && <div>{errorMessage}</div>} */}
-    </div> 
+    //     {/* {successMessage && <div>{successMessage}</div>}
+    //     {errorMessage && <div>{errorMessage}</div>} */}
+    // </div> 
    
-      </div>
-      {/* <Footer></Footer> */}
-      </>
+    //   </div>
+    //   {/* <Footer></Footer> */}
+    //   </>
        
             
+
+<>
+<Nevbar></Nevbar>
+<Container>
+<Col>
+<Form  noValidate validated={validated} onSubmit={handleFormSubmit}>
+<Row className="mb-3">
+ 
+        <Form.Group  controlId="validationCustom01">
+          <Form.Label>Email</Form.Label>
+          <Form.Control
+            required
+            type="text"
+            placeholder=""
+            defaultValue=""
+          />
+          <Form.Control.Feedback type="invalid">Email is required</Form.Control.Feedback>
+        </Form.Group>
+
+
+</Row>
+<Row className="mb-3">
+ 
+ <Form.Group  controlId="validationCustom02">
+   <Form.Label>Password</Form.Label>
+   <Form.Control
+     required
+     type="password"
+     placeholder=""
+     defaultValue=""
+   />
+   <Form.Control.Feedback  type="invalid">Password is required</Form.Control.Feedback>
+ </Form.Group>
+ <Form.Group className="mb-3">
+        <Form.Check
+          
+          label="Save Password"
+         
+        
+        />
+      </Form.Group>
+
+
+</Row>
+
+
+
+<Button type="submit">Sign In</Button>
+</Form>
+
+</Col>
+</Container>
+
+
+</>
+
+
         )}
      
 export default SignIn;

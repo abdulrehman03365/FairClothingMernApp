@@ -1,4 +1,49 @@
-* {
+.navbar.navbar-expand-lg.bg-body-tertiary{
+  box-shadow: 1px 1px 12px 5px rgba(0,0,0,.1);
+}
+
+.nev-brand{
+
+}
+
+.me-auto{
+  
+display: flex;
+ justify-content: flex-end;
+ width: 100%;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* * {
     border: 0;
     box-sizing: border-box;
     margin: 0;
@@ -21,7 +66,7 @@
     height: 3rem;
     width: 13rem;
 
-  }
+  } */
   
   /*======================================================
                             Navbar

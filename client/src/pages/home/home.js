@@ -5,41 +5,25 @@ import { useState } from "react";
 import bookMarque from "../bookMarque/bookMarque";
 import Nevbar from "../../components/navBar/nevbar";
 import Footer from "../../components/Footer/Footer";
-import Container from 'react-bootstrap/Container';
+import  Container   from 'react-bootstrap/Container';
+import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-
+import logo from "../../assets/logo-color.png"
+import './home.css'
 function Home() {
 
 
   const [value, setValue] = useState("initial value")
   return (
-    < >
-      <Nevbar></Nevbar>
-
-
-      <div className="homeBody">
-
-        <Container>
-          <Row>
-            <Col>1 of 2</Col>
-            <Col>
-             <Row>
-             <Col>1 of 3</Col> <Col bg="primary">1 of 3</Col>
-              </Row> 
-            </Col>
-          </Row>
-          <Row>
-            <Col>1 of 3</Col>
-            <Col>2 of 3</Col>
-            <Col>3 of 3</Col>
-          </Row>
-        </Container>
-      </div>
-      <Footer></Footer>
+    <>
+<Nevbar></Nevbar>
 
 
     </>
+    
+    
   )
 }
 
