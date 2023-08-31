@@ -95,4 +95,16 @@ body{
   transform:translateY(-2px);
   }
   
-  
+
+
+.custom{
+color: aqua !important;
+}
+
+.custom-form-control{
+width: fit-content;
+}
+
+.hy{
+background-color: #0f171f;
+}

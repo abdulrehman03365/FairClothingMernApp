@@ -1,5 +1,5 @@
 import { Component , useState } from "react";
-import Footer from '../../components/Footer/Footer'
+import Footer from '../../components/Footer/Footer';
 import './signIn.css'
 import Button from 'react-bootstrap/Button';
 import {Alert} from 'react-bootstrap'
@@ -77,8 +77,10 @@ function SignIn()
 
       
         const handleFormSubmit = (event) => {
+          event.preventDefault();
+        
           const form = event.currentTarget;
-          if (form.checkValidity() === false) {
+            if (form.checkValidity() === false) {
             event.preventDefault();
             event.stopPropagation();
           }else {
@@ -94,6 +96,99 @@ function SignIn()
           
         };   
         return(
+
+
+<>
+<Nevbar></Nevbar>
+
+<Container className="my-auto " >
+<Row>
+  <Col>
+  <h1 className="custom text-center">Sign In</h1>
+  </Col>
+</Row>
+  
+  <Row >
+
+  <Col sm={4}></Col>
+  
+  
+
+<Col className="d-flex justify-content-center" sm={4}>
+
+  
+<Form  noValidate validated={validated} onSubmit={handleFormSubmit}>
+
+
+
+ 
+        <Form.Group controlId="signInForm">
+          <Form.Label>Email</Form.Label>
+          <Form.Control className="custom-form-control"
+            required
+            type="text"
+            placeholder=""
+            defaultValue=""
+      
+          />
+          <Form.Control.Feedback type="invalid">Email is required</Form.Control.Feedback>
+          <Form.Label>Password</Form.Label>
+
+   <Form.Control
+   
+    className="custom-form-control"
+    required
+     type="password"
+     placeholder=""
+     defaultValue=""
+   />
+   <Form.Control.Feedback  type="invalid">Password is required</Form.Control.Feedback>
+
+   <Form.Check
+          
+          label="Save Password"
+         
+        
+        />
+        </Form.Group>
+
+        <Button type="submit">Sign In</Button>
+
+
+
+
+</Form>
+
+</Col>
+
+<Col sm={4}></Col>
+  </Row>
+
+
+</Container>
+
+
+
+</>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     //         <>
       
@@ -135,60 +230,6 @@ function SignIn()
        
             
 
-<>
-<Nevbar></Nevbar>
-<Container>
-<Col>
-<Form  noValidate validated={validated} onSubmit={handleFormSubmit}>
-<Row className="mb-3">
- 
-        <Form.Group  controlId="validationCustom01">
-          <Form.Label>Email</Form.Label>
-          <Form.Control
-            required
-            type="text"
-            placeholder=""
-            defaultValue=""
-          />
-          <Form.Control.Feedback type="invalid">Email is required</Form.Control.Feedback>
-        </Form.Group>
-
-
-</Row>
-<Row className="mb-3">
- 
- <Form.Group  controlId="validationCustom02">
-   <Form.Label>Password</Form.Label>
-   <Form.Control
-     required
-     type="password"
-     placeholder=""
-     defaultValue=""
-   />
-   <Form.Control.Feedback  type="invalid">Password is required</Form.Control.Feedback>
- </Form.Group>
- <Form.Group className="mb-3">
-        <Form.Check
-          
-          label="Save Password"
-         
-        
-        />
-      </Form.Group>
-
-
-</Row>
-
-
-
-<Button type="submit">Sign In</Button>
-</Form>
-
-</Col>
-</Container>
-
-
-</>
 
 
         )}

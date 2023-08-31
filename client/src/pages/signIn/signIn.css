@@ -117,4 +117,6 @@ body{
   transform:translateY(-2px);
   }
   
-  
+  .custom-form-control{
+  width: 17rem;
+}
