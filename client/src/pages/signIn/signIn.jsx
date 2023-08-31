@@ -101,7 +101,7 @@ function SignIn()
 <>
 <Nevbar></Nevbar>
 
-<Container className="my-auto " >
+{/* <Container className="my-auto custom-bg" >
 <Row>
   <Col>
   <h1 className="custom text-center">Sign In</h1>
@@ -110,11 +110,11 @@ function SignIn()
   
   <Row >
 
-  <Col sm={4}></Col>
+
   
   
 
-<Col className="d-flex justify-content-center" sm={4}>
+<Col  >
 
   
 <Form  noValidate validated={validated} onSubmit={handleFormSubmit}>
@@ -161,12 +161,49 @@ function SignIn()
 
 </Col>
 
-<Col sm={4}></Col>
   </Row>
 
 
-</Container>
+</Container> */}
 
+<Container className="my-auto custom-bg" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' , width : 'fit-content' }}>
+  {/* <Row>
+    <Col>
+      <h1 className="custom text-center">Sign In</h1>
+    </Col>
+  </Row> */}
+  
+  <Row style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+    <Col className="col-auto">
+      <Form noValidate validated={validated} onSubmit={handleFormSubmit}>
+        <Form.Group controlId="signInForm">
+          <Form.Label>Email</Form.Label>
+          <Form.Control
+            className="custom-form-control"
+            required
+            type="text"
+            placeholder=""
+            defaultValue=""
+            style={{ width: '17rem' }}
+          />
+          <Form.Control.Feedback type="invalid">Email is required</Form.Control.Feedback>
+          <Form.Label>Password</Form.Label>
+          <Form.Control
+            className="custom-form-control"
+            required
+            type="password"
+            placeholder=""
+            defaultValue=""
+            style={{ width: '17rem' }}
+          />
+          <Form.Control.Feedback type="invalid">Password is required</Form.Control.Feedback>
+          <Form.Check label="Save Password" />
+        </Form.Group>
+        <Button type="submit">Sign In</Button>
+      </Form>
+    </Col>
+  </Row>
+</Container>
 
 
 </>
