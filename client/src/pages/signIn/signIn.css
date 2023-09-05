@@ -95,7 +95,7 @@ body{
 
   }
   .submitBtn:active {
-    box-shadow: box-shadow 7px 6px 28px 1px rgba(0, 0, 0, 0.24);
+    box-shadow: box-shadow 3px 3px 3px 1px rgba(0, 0, 0, 0.1);
     transform: translateY(4px);
   }
   .label{
@@ -121,7 +121,10 @@ body{
   width: 17rem;
 }
 
-
+.custom-submit-bt{
+ 
+  
+}
 .custom-bg{
   padding: 1rem;
   box-shadow: 10px 10px 25px 10px rgba(92, 99, 105, .2);

@@ -65,7 +65,7 @@ function Nevbar() {
     <>
  <Navbar expand="lg" className="bg-body-tertiary">
       <Container>
-        <Navbar.Brand className="nav-brand" href="#home">React-Bootstrap</Navbar.Brand>
+        <Navbar.Brand className="nav-brand" href="#home">Fair Clothing</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ms-auto">

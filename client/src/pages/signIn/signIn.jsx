@@ -32,13 +32,13 @@ function SignIn()
     const [errorMessage, setErrorMessage] =useState('')
     const [showErrorAlert ,setShowErrorAlert]=useState(false)
     const navigate = useNavigate();
-
+    const [formData, setFormData]=useState({email:'',password:'',savePassword:false})
      function handleResetPass(){
       console.log("Reset Password is called");
     }
-    async function handleSignIn(data,event){
+    async function handleSignIn(data){
       
-      event.preventDefault()
+    
         try{
           const response =await signIn(data)
   
@@ -75,28 +75,39 @@ function SignIn()
         }
         }
 
-      
-        const handleFormSubmit = (event) => {
-          event.preventDefault();
-        
-          const form = event.currentTarget;
-            if (form.checkValidity() === false) {
-            event.preventDefault();
-            event.stopPropagation();
-          }else {
-        
-            const formData = new FormData(form);
-            for (let [name, value] of formData.entries()) {
-                console.log(`${name}: ${value}`);
-            }
-        }
     
-      
-          setValidated(true);
+        
+        const  handleFormSubmit = (event) => {
+          event.preventDefault();
+          const form = event.currentTarget;
+          if (form.checkValidity() === false) {
+            event.stopPropagation();
+            // setShowError(true);
+          } else {
+            // setShowError(false);
+            console.log('Form data submitted:', formData);
+            const {savePassword,...newformData}=formData
+            handleSignIn(newformData)
+            // You can perform your authentication logic here
+          }
           
-        };   
+          setValidated(true);
+        };
+      
+        const handleDataChange=(event)=>{
+          setFormData({...formData,[event.target.name]:event.target.value})
+        }
+
+        const handleCheckBoxChange=(event)=>{
+          setFormData({...formData,[event.target.name]:event.target.checked})
+          localStorage.setItem("email",formData.email)
+          localStorage.setItem("password",formData.password)
+
+        }
+
         return(
 
+        
 
 <>
 <Nevbar></Nevbar>
@@ -181,25 +192,34 @@ function SignIn()
           <Form.Control
             className="custom-form-control"
             required
+            name="email"
+            value={formData.email}
             type="text"
             placeholder=""
             defaultValue=""
-            style={{ width: '17rem' }}
+            style={{ width: '19rem' }}
+            onChange={handleDataChange}
           />
           <Form.Control.Feedback type="invalid">Email is required</Form.Control.Feedback>
           <Form.Label>Password</Form.Label>
           <Form.Control
             className="custom-form-control"
             required
+            name="password"
+            value={formData.password}
+            onChange={handleDataChange}
             type="password"
             placeholder=""
             defaultValue=""
-            style={{ width: '17rem' }}
+            style={{ width: '19rem' }}
           />
           <Form.Control.Feedback type="invalid">Password is required</Form.Control.Feedback>
-          <Form.Check label="Save Password" />
+          <Form.Check className="mt-2"
+          name="savePassword"
+          onchange={handleCheckBoxChange} 
+          label="Save Password" />
         </Form.Group>
-        <Button type="submit">Sign In</Button>
+        <Button className=" btn btn-dark float-end" type="submit">Sign In</Button>
       </Form>
     </Col>
   </Row>
@@ -269,6 +289,12 @@ function SignIn()
 
 
 
-        )}
+        )
+        
+
+
+        };   
+        
+      
      
 export default SignIn;
