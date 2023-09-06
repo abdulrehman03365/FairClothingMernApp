@@ -20,58 +20,38 @@ function Nevbar() {
   }
     
     return (
-    //    <>
-    //    <nav id="navbar" >
-    //    <div className="nav-wrapper">  
-    //    <div className="logo">
-    //    <img className="Logo-img" src={logo} ></img>
-    //     </div>
     
-        
-    //     <ul id="menu">
-    //     <ul className="navbar-nav mr-auto">
-    //       {!isAuthenticated && userType!='admin' &&(<li><Link to={'/signUp'} className="nav-link">Sign Up</Link></li>)}
-    //       {!isAuthenticated && userType!='admin' &&(<li><Link to={'/signIn'} className="nav-link">Sign In</Link></li>)}     
-    //       {userType!='admin'&&<li><Link to={'/bookMarque'} className="nav-link">Book Marque</Link></li>}
-    //     </ul>
-    //     </ul>
-    //   </div>
-
-    //   <div className="menuIcon" onClick={toggleMenu}>
-      
-    //   <span className="icon icon-bars"></span>
-    //   <span className="icon icon-bars overlay"></span>
-    //   </div>
-    //    </nav>
-   
-     
-    
-    
-    
-  
-    
-    
-    // {showMenu && (<div class="overlay-menu">
-    //   <ul id="menu">
-         
-    //       {!isAuthenticated&&<li><Link to={'/signUp'} className="nav-link">Sign Up</Link></li>}
-    //       {!isAuthenticated&&<li><Link to={'/signIn'} className="nav-link">Sign In</Link></li>}
-    //       {isAuthenticated&&<li><Link to={'/signOut'} className="nav-link">Sign In</Link></li>}
-    //       <li><Link to={'/bookMarque'} className="nav-link">Book</Link></li>
-    //     </ul>
-    // </div>)}
-    //    </>
 
     <>
- <Navbar expand="lg" className="bg-body-tertiary">
+ <Navbar expand="lg" className="bg-body-tertiary  justify-content-start">
       <Container>
-        <Navbar.Brand className="nav-brand" href="#home">Fair Clothing</Navbar.Brand>
+      <Navbar.Brand className="nav-brand">
+        <Link to="/">
+          <img
+            src={logo} // Use the imported logo variable as the src
+            alt="Fair Clothing Logo"
+            width="180"
+            height="20"
+            className="img-fluid" // Add the "img-fluid" class for responsive images
+          />
+     
+        </Link>
+      </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
+         
           <Nav className="ms-auto">
-            <Nav.Link href='/signUp'>Sign Up</Nav.Link>
-            <Nav.Link href='/SignIn'>Sign In</Nav.Link>
-            <Nav.Link href='/bookMarque'>Book Marque</Nav.Link>
+              {/* Use Link for client-side navigation */}
+              <Link to="/signUp" className="nav-link">
+                Sign Up
+              </Link>
+              <Link to="/signIn" className="nav-link">
+                Sign In
+              </Link>
+              <Link to="/bookMarque" className="nav-link">
+                Book Marque
+              </Link>
+       
           </Nav>
         </Navbar.Collapse>
       </Container>
