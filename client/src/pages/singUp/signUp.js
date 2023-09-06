@@ -179,9 +179,9 @@ const handleDataChange=(event)=>{
         <h1 className="title">Sign up</h1>
         <div className="inputContainer">
           <input type="text" {...register("username",{required:true})} aria-invalid={errors.username ? "true" : "false"} className="input" name="username"  />
-          <label  className="label">Username</label>
+          <label  className="label">username</label>
         </div>
-        {errors.username?.type==='required' && <p role={'alert'}>Username is required</p>}
+        {errors.username?.type==='required' && <p role={'alert'}>username is required</p>}
   
         <div className="inputContainer">
           <input type="text" {...register("email",{required:true , pattern :{value:/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,message:'Plz enter a valid email'}})}    className="input" name ="email"  />
@@ -243,8 +243,8 @@ const handleDataChange=(event)=>{
           <Form.Control
             className="custom-form-control"
             required
-            name="userName"
-            value={formData.userName}
+            name="username"
+            value={formData.username}
             type="text"
             placeholder=""
             defaultValue=""
