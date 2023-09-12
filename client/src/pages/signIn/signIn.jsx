@@ -186,6 +186,7 @@ function SignIn()
   
   <Row style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
     <Col className="col-auto">
+      <h1 className="text-center">Sign In</h1>
       <Form noValidate validated={validated} onSubmit={handleFormSubmit}>
         <Form.Group controlId="signInForm">
           <Form.Label>Email</Form.Label>
@@ -219,7 +220,7 @@ function SignIn()
           onchange={handleCheckBoxChange} 
           label="Save Password" />
         </Form.Group>
-        <Button className=" btn btn-dark float-end" type="submit">Sign In</Button>
+        <Button className=" btn btn-dark float-end cust-signIn-bt" type="submit">Sign In</Button>
       </Form>
     </Col>
   </Row>

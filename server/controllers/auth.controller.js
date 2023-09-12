@@ -33,7 +33,7 @@ const myPass=req.body.password
         console.log("User Object :",user);
         const savedUser = await user.save();
       
-        if (req.body.roles) {
+        if (req.body.roles.length !==0) {
           const roles = await role.find({ name: { $in: req.body.roles } });
       
           if (!roles.length) {
@@ -41,8 +41,9 @@ const myPass=req.body.password
             return;
           }
       
-          savedUser.Roles = roles.map(role => role._id);
+          
         } else {
+         
           const resultRole = await role.findOne({ name: "user" });
           savedUser.Roles = [resultRole._id];
         }

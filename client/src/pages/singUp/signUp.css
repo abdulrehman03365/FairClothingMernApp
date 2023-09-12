@@ -99,4 +99,10 @@ body{
     /* Lowering the shadow */
 }
   
-  
+.cust-signup-bt{
+  transform: scale(1);
+}
+
+.cust-signup-bt:active{
+  transform: scale(0.9);
+}    
