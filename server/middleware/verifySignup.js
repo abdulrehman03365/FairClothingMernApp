@@ -13,57 +13,51 @@ next()
 
 
 
-checkDuplicateUser= (req,res,next)=>{
- user.find({'name':req.body.username}
-,function(err,result){
+checkDuplicateUser=async (req,res,next)=>{
+const result=await user.find({'name':req.body.username})
 
-    if (err)
-    {
-    return    res.status(400).send({message:{err}})
-    
-    }
 try{
-    console.log(result);
+    console.log("result of finding names "+ result);
     if (result.length!=0)
   {
    return res.status(500).send({message:'Failed ! username already exist'});
        
 
   }
+  else
+  {
+    next()
+  }
     
 }
 catch(error){
 
-    res.status(500).send({message:'Failed Verifying username'});
-    return ;
+   return res.status(500).send({message:'Failed Verifying username'});
+   
 
     
 
             
+
+   
+
+
+}
 }
 
 
-    next()
-
-
-})
-}
-
-
-checkDuplicateEmail= (req,res,next)=>{
-    user.find({'email':req.body.email}, function(err,result){
-
-if(err)
-{
-return res.status(500).send({message : err.message});
-
-}
+checkDuplicateEmail=async (req,res,next)=>{
+    const result =await user.find({'email':req.body.email})
 try{
 
 
     if (result.length!=0)
    { 
     return res.status(400).send({message :"Failed ! email already exist"})
+    }
+    else
+    {
+        next()
     }
 }
 
@@ -73,12 +67,12 @@ catch(error){
      ;
 
 }
-})
-
-
-next()
-
 }
+
+
+
+
+
 
 
 
