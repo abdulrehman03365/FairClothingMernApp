@@ -129,3 +129,8 @@ body{
   padding: 1rem;
   box-shadow: 10px 10px 25px 10px rgba(92, 99, 105, .2);
 }
+
+.cust-signIn-bt:active{
+  transform: scale(0.9);
+
+}
