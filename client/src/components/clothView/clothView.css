@@ -100,6 +100,12 @@ gap: 4px;
 }
 
 
+.custom-dim{
+
+    width: 15rem;
+    height: 10rem;
+}
+
 
 @media  (max-width: 767px) {
     /* CSS styles for mobile devices */

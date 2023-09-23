@@ -33,11 +33,19 @@ fetchMarques()
   return (
     <>
       <Nevbar />
-      <div id="MarquePlaceHolder">
-        {marqueDetails.map((marqueDetail) => (
+      <div className="container d-flex justify-content-center align-items-center " style={{height :"100%"}} id="MarquePlaceHolder">
+        {/* {marqueDetails.map((marqueDetail) => (
           <MarqueView key={marqueDetail._id} marqueDetail={marqueDetail} />
-        ))} 
-        {/* <MarqueView marqueDetails marqueDetail={{id:1,location:"kh",image:"src" ,status:"booked" ,capaciy:"cap"}}></MarqueView> */}
+        ))}  */}
+        <MarqueView marqueDetails marqueDetail={{id:1,location:"kh",image:"src" ,status:"booked" ,capaciy:"cap"}}></MarqueView>
+        <MarqueView marqueDetails marqueDetail={{id:1,location:"kh",image:"src" ,status:"booked" ,capaciy:"cap"}}></MarqueView>
+        <MarqueView marqueDetails marqueDetail={{id:1,location:"kh",image:"src" ,status:"booked" ,capaciy:"cap"}}></MarqueView>
+        <MarqueView marqueDetails marqueDetail={{id:1,location:"kh",image:"src" ,status:"booked" ,capaciy:"cap"}}></MarqueView>
+        <MarqueView marqueDetails marqueDetail={{id:1,location:"kh",image:"src" ,status:"booked" ,capaciy:"cap"}}></MarqueView>
+        <MarqueView marqueDetails marqueDetail={{id:1,location:"kh",image:"src" ,status:"booked" ,capaciy:"cap"}}></MarqueView>
+        <MarqueView marqueDetails marqueDetail={{id:1,location:"kh",image:"src" ,status:"booked" ,capaciy:"cap"}}></MarqueView>
+        <MarqueView marqueDetails marqueDetail={{id:1,location:"kh",image:"src" ,status:"booked" ,capaciy:"cap"}}></MarqueView>
+        
       </div>
       <Footer></Footer>
     </>
