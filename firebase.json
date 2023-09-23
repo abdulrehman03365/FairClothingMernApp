@@ -17,12 +17,12 @@
       {
 
         "source": "/api/**",
-        "destination": "app"
+        "function": "app"
 
       }  ,
     {
       "source":"/auth/**",
-      "destination":"app"
+      "function":"app"
     }  ]
   }
 }
