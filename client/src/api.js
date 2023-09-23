@@ -45,7 +45,7 @@ export async function addCloth(clothData){
 
 export async function updateCloth(clothId,clothData){
   try{
-    const response = await axios.put(`/addCloth/${clothId}`,clothData,config)
+    const response = await axios.put(`/updateCloth/${clothId}`,clothData,config)
     const data = await response.json();
     return data;
   }
