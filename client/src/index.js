@@ -4,6 +4,9 @@ import './index.css';
 import { ToastContainer } from 'react-bootstrap';
 import App from './App';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.min.js';
+import 'jquery';
+import 'popper.js';
 import {BrowserRouter as Router , Routes , Route , Link} from 'react-router-dom'
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
