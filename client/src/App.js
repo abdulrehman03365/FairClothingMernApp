@@ -16,6 +16,7 @@ import store from './store/store'
 import AuthCheker from "./components/AuthChecker/AuthCheker";
 import ManageCloths from './adminPages/manageCloths/manageCloths';
 import './App.css';
+import Footer from "./components/Footer/Footer";
 import { Navbar } from "react-bootstrap";
 
 function App() {
@@ -27,7 +28,7 @@ function App() {
         <Provider store={store}>
           <AuthCheker />
 
-          <div style={{ overflow:"auto", height:'100vh', display: 'flex', flexDirection: 'column' }}>
+          <div style={{ overflow:"auto", minHeight:'100vh', display: 'flex', flexDirection: 'column' }}>
             <ToastContainer className="toast-container" />
             <Routes>
               <Route path="/" element={<Home />} />
@@ -40,7 +41,7 @@ function App() {
               <Route path="/manageCloths" element={<ProtectedRoutes component={ManageCloths}  />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
-          
+            <Footer></Footer>
           </div>
         </Provider>
       </AuthProvider>

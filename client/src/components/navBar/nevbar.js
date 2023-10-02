@@ -7,7 +7,7 @@ import { AuthContext } from "../../Context/AuthContext";
 import { useSelector } from "react-redux";
 import logo from "../../assets/logo-color.png"
 import { Navbar , Container , Nav , NavDropdown } from "react-bootstrap";
-
+import './nevbar.css'
 function Nevbar() {
   const [showMenu, setShowMenu] = useState(false);
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
@@ -23,7 +23,7 @@ function Nevbar() {
     
 
     <>
- <Navbar expand="lg" className="bg-body-tertiary  justify-content-start">
+ <Navbar expand="lg" style={{"position":"sticky"}} className="custom-style  fixed-top bg-body-tertiary  justify-content-start   ">
       <Container>
       <Navbar.Brand className="nav-brand">
         <Link to="/">
@@ -66,3 +66,5 @@ function Nevbar() {
 
 
 export default Nevbar
+
+

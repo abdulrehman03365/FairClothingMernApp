@@ -38,16 +38,11 @@ fetchMarques()
           <MarqueView key={marqueDetail._id} marqueDetail={marqueDetail} />
         ))}  */}
         <MarqueView marqueDetails marqueDetail={{id:1,location:"kh",image:"src" ,status:"booked" ,capaciy:"cap"}}></MarqueView>
-        <MarqueView marqueDetails marqueDetail={{id:1,location:"kh",image:"src" ,status:"booked" ,capaciy:"cap"}}></MarqueView>
-        <MarqueView marqueDetails marqueDetail={{id:1,location:"kh",image:"src" ,status:"booked" ,capaciy:"cap"}}></MarqueView>
-        <MarqueView marqueDetails marqueDetail={{id:1,location:"kh",image:"src" ,status:"booked" ,capaciy:"cap"}}></MarqueView>
-        <MarqueView marqueDetails marqueDetail={{id:1,location:"kh",image:"src" ,status:"booked" ,capaciy:"cap"}}></MarqueView>
-        <MarqueView marqueDetails marqueDetail={{id:1,location:"kh",image:"src" ,status:"booked" ,capaciy:"cap"}}></MarqueView>
-        <MarqueView marqueDetails marqueDetail={{id:1,location:"kh",image:"src" ,status:"booked" ,capaciy:"cap"}}></MarqueView>
+        
         <MarqueView marqueDetails marqueDetail={{id:1,location:"kh",image:"src" ,status:"booked" ,capaciy:"cap"}}></MarqueView>
         
       </div>
-      <Footer></Footer>
+     
     </>
   );
 }
