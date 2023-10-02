@@ -1,6 +1,6 @@
 import {toast} from 'react-toastify'
 import './preview.css'
-import ManageMarques from '../../../adminPages/manageMarques/manageMarques';
+import ManageMarques from '../../../adminPages/manageCloths/manageCloths';
 import { useNavigate } from 'react-router-dom';
 import {useState} from 'react';
 import { Alert } from 'react-bootstrap';

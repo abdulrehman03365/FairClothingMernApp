@@ -5,9 +5,9 @@ import { toast } from 'react-toastify';
 import AdminHeader from '../../components/adminComponents/adminHeader/adminHeader';
 import Preview from '../../components/adminComponents/preview/preview';
 import { addMarque,updateMarque,updateCloth ,getMarque ,getallCloths, addCloth } from '../../api';
-import './manageMarques.css';
+import './manageCloths.css';
 import {useLocation, useParams} from 'react-router-dom'
-function ManageMarques() {
+function ManageCloths() {
   const location = useLocation()
     
   
@@ -28,7 +28,7 @@ function ManageMarques() {
   useEffect(() => {
     setEditView(editViewProp)
    const  fetchAndPopulate=async()=> {
-      const respData = await getallCloths(id);
+      const respData = await getallCloths();
       setValue('name', respData.name);
       setValue('sku', respData.sku);
       setValue('quantity', respData.quantity);
@@ -144,4 +144,4 @@ function ManageMarques() {
      );
 }
 
-export default ManageMarques;
+export default ManageCloths;

@@ -14,7 +14,7 @@ import AdminSignIn from "./adminPages/adminSignIn/adminSignIn";
 import { Provider } from "react-redux";
 import store from './store/store'
 import AuthCheker from "./components/AuthChecker/AuthCheker";
-import ManageMarques from './adminPages/manageMarques/manageMarques';
+import ManageCloths from './adminPages/manageCloths/manageCloths';
 import './App.css';
 import { Navbar } from "react-bootstrap";
 
@@ -36,8 +36,8 @@ function App() {
               <Route path="/admin/home" element={<ProtectedRoutes component={AdminHome} />} />
               <Route path="signUp" element={<SignUp />} />
               <Route path="/bookMarque" element={<ProtectedRoutes component={BookMarque} />} />
-              <Route path="/admin" element={<ProtectedRoutes component={AdminSignIn} />} />
-              <Route path="/manageMarques" element={<ManageMarques />} />
+              <Route path="/admin" element={ <AdminSignIn/>} />
+              <Route path="/manageCloths" element={<ProtectedRoutes component={ManageCloths}  />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           

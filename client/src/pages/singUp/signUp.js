@@ -172,9 +172,21 @@ alert(" Password Don't Matched ")
  
 };
 
-const handlePasswordCheck = (event) => {
-  const reEnteredPassword = event.target.value;
-  if (formData.confirmPassword===reEnteredPassword)
+const handlePasswordCheck =async (event) => {
+ 
+  if (event.target.value="password")
+  {
+        formData.password=event.target.value;
+  }
+  else
+  {
+        formData.confirmPassword=event.target.value
+      
+
+  }
+  console.log("Password", formData.password);
+  console.log("confirmed Password", formData.confirmPassword);
+  if (formData.confirmPassword===formData.password)
   {
 setIsPassMatched(true)
   }
@@ -184,6 +196,7 @@ setIsPassMatched(false)
   }
 }
 const handleDataChange=(event)=>{
+  console.log("changed form field :",event.target.name);
   setFormData({...formData,[event.target.name]:event.target.value})
 }
 
@@ -198,7 +211,7 @@ return(
   </Col>
 </Row> */}
 
-  <Container className="my-auto custom-bg" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' , width : 'fit-content' }}>
+<Container className="my-auto custom-bg" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' , width : 'fit-content' }}>
 
 
 <Row style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
@@ -239,7 +252,7 @@ return(
           className="custom-form-control"
           required
           name="password"
-        
+          onBlur={handlePasswordCheck}
           onChange={handleDataChange}
           type="password"
           placeholder=""
@@ -252,8 +265,8 @@ return(
           className="custom-form-control"
           required
           name="confirmPassword"
-         
           onBlur={handlePasswordCheck}
+          onChange={handleDataChange}
           type="password"
           placeholder=""
           defaultValue=""

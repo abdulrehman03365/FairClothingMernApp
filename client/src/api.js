@@ -7,9 +7,6 @@ const BASE_URL = process.env.NODE_ENV === 'development'
 ? '/api' // Use the proxy during development
  : "https://fairclothing-f9c79.web.app/api"; 
 
-
-
-
 console.log("BASE_URL",BASE_URL);
 axios.defaults.baseURL=BASE_URL;
 const authToken = localStorage.getItem('token');
@@ -20,77 +17,88 @@ const config={headers:{'Content-Type':'application/x-www-form-urlencoded',
 
 export async function addCloth(clothData){
 
-  
+  try {
     const response = await axios.post('/addCloth',clothData,config)
-    if (!response.ok)
-    {
-      const errorData = await response.json();
-      console.log("Error adding cloth", response);  
-      throw new Error("Error adding Cloth data" ,errorData.message );
-        
-    }
-    else{
-      const data = await response.json();
-      return data
-    }
-
-    
-  
-
-  }
-  
-
-
-
-
-export async function updateCloth(clothId,clothData){
-  try{
-    const response = await axios.put(`/updateCloth/${clothId}`,clothData,config)
+    if(!response.ok)
+     {
+      throw new Error("Exception in Adding Cloth")
+     }
     const data = await response.json();
+    if(data && data.message)
+    {
+      throw new Error(data.message)
+    }
     return data;
-  }
-  catch (e){
-    console.log("Exception in updating Cloth API", e.message);
+
+  } catch (error) {
+    console.log("Exception in Adding Cloth API", error.message);
+    throw new Error(error.message);
+  }  
   
-    throw new Error("Error  Cloth data");
+}
   
-  
+export async function updateCloth(clothId,clothData){
 
 
-  }
+  try {
+    const response = await axios.post(`/updateCloth/${clothId}`,clothData,config)
+    if(!response.ok)
+     {
+      throw new Error("Exception in updating Cloth")
+     }
+    const data = await response.json();
+    if(data && data.message)
+    {
+      throw new Error(data.message)
+    }
+    return data;
 
+  } catch (error) {
+    console.log("Exception in updating Cloth API", error.message);
+    throw new Error(error.message);
+  } 
 }
 
 export async function deleteCloth(clothId){
-  const response = await axios.post(`/deleteCloth/${clothId}`,config)
-  if (!response.ok)
-  {
-    const errorData = await response.json();
-    console.log("Error deleting cloth", response);  
-    throw new Error("Error deleting Cloth data" ,errorData.message );
-      
-  }
-  else{
-    const data = await response.json();
-    return data
-  }
 
-  
+
+  try {
+    const response = await axios.post(`/deleteCloth/${clothId}`,config)
+    if(!response.ok)
+     {
+      throw new Error("Exception in deleting Cloth")
+     }
+    const data = await response.json();
+    if(data && data.message)
+    {
+      throw new Error(data.message)
+    }
+    return data;
+
+  } catch (error) {
+    console.log("Exception in deleting Cloth API", error.message);
+    throw new Error(error.message);
+  } 
 }
 
 export async function getallCloths(){
-  const response = await axios.post(`/getallCloth`,config)
-  if (!response.ok)
-  {
-    const errorData = await response.json();
-    console.log("Error fetching all cloths", response);  
-    throw new Error("Error fetching all Cloth data" ,errorData.message );
-      
-  }
-  else{
+  try {
+    const response = await axios.post('/getAllCloth',config)
+    if(!response.ok)
+     {
+      throw new Error("Exception in Getting All Cloths")
+     }
     const data = await response.json();
-    return data
-  }
+    if(data && data.message)
+    {
+      throw new Error(data.message)
+    }
+    return data;
+
+  } catch (error) {
+    console.log("Exception in geting all  Cloths API", error.message);
+    throw new Error(error.message);
+  } 
 
 }
 

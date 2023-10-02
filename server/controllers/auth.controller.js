@@ -1,3 +1,5 @@
+const {
+  log} = require("firebase-functions/logger");
 const db = require('../model');
 const User=require('../model/user.model')
 const role=require('../model/role.model');
@@ -72,7 +74,7 @@ const myPass=req.body.password
 
 
 signInController =async (req,res,next)=>{
-   
+  log("sign In Controller is executing"); 
   try {
     const user_res = await User.findOne({'email': req.body.email}).populate('Roles').exec();
     console.log("user_res ", user_res);
@@ -130,8 +132,8 @@ res.status(200).send({'message':"User is created Succfully"})
 }
 catch(err)
 {
-console.log("Error Signing In", err);    
-res.status(500).send({'message':"Error Signing In"})
+console.log("Error Signing Out", err);    
+res.status(500).send({'message':"Error Signing Out"})
 
 }
 

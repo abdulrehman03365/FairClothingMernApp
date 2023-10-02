@@ -15,10 +15,10 @@ addCloth=async(req,res,next)=>{
 getCloth =async(req,res,next)=>{
 try{
 const {clothId}= req.body    
-await cloth.findById({clothId})
+const cloth=await cloth.findById({clothId})
 if(!cloth)
 {
-res.status(404).json({error:"cloth not found"})
+res.status(404).json({message:"cloth not found"})
 }
 else
 {res.status(200).json({cloth:cloth})}
@@ -29,16 +29,34 @@ res.status(500).json({message:"Failed to retrive Cloth data"})
 }
 }
 
+getAllCloths =async(req,res,next)=>{
+    try{
+      
+  const  cloth=await cloth.find()
+    if(!cloth)
+    {
+    res.status(404).json({message:"cloth not found"})
+    }
+    else
+    {res.status(200).json({cloth:cloth})}
+    }
+    catch(error){
+    console.error("Error getting cloth",error);
+    res.status(500).json({message:"Failed to retrive Cloth data"})
+    }
+    }
 
 updateCloth= async (req,res,next)=>{
     try{
         
-        const updatedCloth=req.body 
-        await cloth.findByIdAndUpdate({clothId},{updatedCloth},{new:true})
+        const clothId=req.body 
+        const {name ,sku ,images ,quantity ,status}=req.body  
+        const  updatedCloth={name ,sku ,images ,quantity ,status}
+        const  cloth=await cloth.findByIdAndUpdate(clothId,updatedCloth,{new:true})
         
         if(!cloth)
         {
-        res.status(404).json({error:"cloth not found"})
+        res.status(404).json({message:"cloth not found"})
         }
         else
         {res.status(200).json({message:"cloth successfully updated",cloth:cloth})}
@@ -55,8 +73,8 @@ deleteCloth=async(req, res ,next)=>{
     try{
         const {clothId}=req.body
         
-        await cloth.findByIdAndDelete(clothId)
-        if(!cloth)
+       const deletedCloth= await cloth.findByIdAndDelete(clothId)
+        if(!deletedCloth)
         {
         res.status(404).json({error:"cloth not found"})
         }

@@ -24,5 +24,13 @@
       "source":"/auth/**",
       "function":"app"
     }  ]
+  },
+  "functions":{
+    "source":"server",
+    "runtime": "nodejs14"
   }
+
+  
+
+
 }

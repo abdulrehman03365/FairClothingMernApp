@@ -1,0 +1,5 @@
+functions:
+  app:
+    source: server
+    runtime: nodejs18
+    # Add any other relevant configuration options here
