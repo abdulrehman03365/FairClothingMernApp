@@ -3,7 +3,6 @@
     "public": "client/build",
     "ignore": [
       "firebase.json",
-   
       "**/.env/**",
       "**/node_modules/**"
     ],
@@ -11,26 +10,19 @@
       {
         "source": "**",
         "destination": "/index.html"
-      }
-
-,
+      },
       {
-
         "source": "/api/**",
         "function": "app"
-
-      }  ,
-    {
-      "source":"/auth/**",
-      "function":"app"
-    }  ]
+      },
+      {
+        "source": "/auth/**",
+        "function": "app"
+      }
+    ]
   },
-  "functions":{
-    "source":"server",
-    "runtime": "nodejs14"
+  "functions": {
+    "source": "./server",
+    "runtime": "nodejs16"
   }
-
-  
-
-
 }

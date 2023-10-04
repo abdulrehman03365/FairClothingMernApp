@@ -174,7 +174,7 @@ alert(" Password Don't Matched ")
 
 const handlePasswordCheck =async (event) => {
  
-  if (event.target.value="password")
+  if (event.target.value=="password")
   {
         formData.password=event.target.value;
   }
@@ -184,6 +184,7 @@ const handlePasswordCheck =async (event) => {
       
 
   }
+  console.log("form Data", formData);
   console.log("Password", formData.password);
   console.log("confirmed Password", formData.confirmPassword);
   if (formData.confirmPassword===formData.password)
@@ -193,7 +194,11 @@ setIsPassMatched(true)
   else
   {
 setIsPassMatched(false)
+  alert("Password Don't matched")  
+
   }
+
+ console.log("is Password Match",isPassMatched);
 }
 const handleDataChange=(event)=>{
   console.log("changed form field :",event.target.name);
@@ -255,6 +260,7 @@ return(
           onBlur={handlePasswordCheck}
           onChange={handleDataChange}
           type="password"
+          id="password"
           placeholder=""
           defaultValue=""
           style={{ width: '19rem' }}
@@ -265,6 +271,7 @@ return(
           className="custom-form-control"
           required
           name="confirmPassword"
+          id="confirmPassword"
           onBlur={handlePasswordCheck}
           onChange={handleDataChange}
           type="password"

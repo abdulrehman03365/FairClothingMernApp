@@ -3,7 +3,7 @@
   "name": "NodeJsBookingWebSite",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "./server/server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -16,5 +16,10 @@
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/abdulrehman03365/NodeJsBookingWebSite/issues"
+  },
+  "engines":{
+    "node":"16"
+
   }
+
 }
