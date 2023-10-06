@@ -166,16 +166,17 @@ res.sendFile(path.resolve(__dirname, '../client/build', 'index.html'));
 
 
 
-// Check if running in Firebase environment
-const isFirebase = !!process.env.FIREBASE_CONFIG;
+// // Check if running in Firebase environment
+// const isFirebase = !!process.env.FIREBASE_CONFIG;
 
-// Export app as a Firebase Cloud Function if running on Firebase
-if (isFirebase) {
-  exports.app = functions.https.onRequest( app);
-} else {
-app.listen(app.get('port'), function(){
-	console.log('Express started on port ' + app.get('port') + ' in ' + app.get('env') + ' mode.');
-});}
+// // Export app as a Firebase Cloud Function if running on Firebase
+// if (isFirebase) {
+//   exports.app = functions.https.onRequest( app);
+// } else {
+// app.listen(app.get('port'), function(){
+// 	console.log('Express started on port ' + app.get('port') + ' in ' + app.get('env') + ' mode.');
+// });}
 
+exports.app = functions.https.onRequest( app);
 
-module.exports = app;
+// module.exports = app;
