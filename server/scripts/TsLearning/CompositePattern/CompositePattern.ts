@@ -1,49 +1,51 @@
-interface Directory{
+// it let us deal individual objects and composite objects uniformly
+
+// interface Directory{
     
    
-    showFiles() : void;
-}
-class FileClass{
-    filename : string;
-    constructor(filename:string){
-    this.filename=filename;
-    }
-    getFileName()
-    {
-        console.log(this.filename);
+//     showFiles() : void;
+// }
+// class FileClass{
+//     filename : string;
+//     constructor(filename:string){
+//     this.filename=filename;
+//     }
+//     getFileName()
+//     {
+//         console.log(this.filename);
         
-    }
-    setFileName(filename:string ) : void
-    {
-        this.filename=filename;
-        console.log(`File name updated${ filename}`);
+//     }
+//     setFileName(filename:string ) : void
+//     {
+//         this.filename=filename;
+//         console.log(`File name updated${ filename}`);
         
        
-    }
+//     }
     
     
-    }
+//     }
 
-class DirectoryClass implements Directory{
-    private files :FileClass[]=[]
+// class DirectoryClass implements Directory{
+//     private files :FileClass[]=[]
 
-    addFiles(newfile:FileClass) {
+//     addFiles(newfile:FileClass) {
    
-     this.files.push(newfile); 
+//      this.files.push(newfile); 
 
-    }
-
-
-    showFiles(): void {
-      this.files.map((file)=>{file.getFileName()})  
-    }
-
-}
+//     }
 
 
-const homeDir=new DirectoryClass();
-homeDir.addFiles(new FileClass("python"))
-homeDir.showFiles()
+//     showFiles(): void {
+//       this.files.map((file)=>{file.getFileName()})  
+//     }
+
+// }
+
+
+// const homeDir=new DirectoryClass();
+// homeDir.addFiles(new FileClass("python"))
+// homeDir.showFiles()
 
 
 

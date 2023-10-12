@@ -1,3 +1,7 @@
+// Bridge Pattern is used  when we want abstraction and implementation to vary independently.
+
+
+
 abstract class BaseRemote{
     tv:Tv
     
@@ -60,6 +64,10 @@ constructor(tv:Tv) {
     }
     changeChannel() {
        this.tv.changeChannel() 
+    }
+
+    turnOnTvUsingTouch(): void {
+        this.tv.turnOnTv()
     }
 }
 

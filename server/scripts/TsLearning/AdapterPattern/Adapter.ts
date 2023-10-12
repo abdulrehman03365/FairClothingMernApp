@@ -1,3 +1,7 @@
+// when we want to integrate our code with third party apis or legacy code we use adapter pattern and create their adapter .
+// when we want all our apis like different payment apis to adapt to standard interface writtern by our developer then we use adapter pattern.
+
+
 interface INotification{
     send() : void;
 }

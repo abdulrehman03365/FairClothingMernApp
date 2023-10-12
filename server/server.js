@@ -20,7 +20,10 @@ const flash = require('connect-flash-plus');
 const { authJwtMiddleware } = require('./middleware');
 app.set('port',process.env.PORT || 8000);
 require('dotenv').config()
+const admin = require('firebase-admin');
 
+// Initialize Firebase Admin SDK
+admin.initializeApp();
 //Middlewares
 // console.log(join(__dirname,'public'));
 

@@ -1,23 +1,41 @@
+// Builder pattern is used to create a object either step by step and in a more readable configurable manner
+// Consider Building a character of video game using lot of configurable options from front end.
+
+
 interface IHouseBuilder{
-SetStory(Number) : House
-Rooms(Number) : House
+SetStory(story:number) : void
+SetRooms(rooms:number) : void
 
 }
 
-class House implements IHouseBuilder
+class HouseBuilder implements IHouseBuilder
 {
-    Rooms(Number: any): House {
+    private rooms : Number;
+    private story : Number;
+
+  
+    SetStory(story :Number): void {
+      this.story=story;
+    }
+    SetRooms(Rooms:Number): void {
+      this.rooms=Rooms;
+    }
+
+    build(){
         return this;
-        // throw new Error("Method not implemented.")
     }
-    SetStory(story :Number): House {
-        return this
-    }
-    SetRooms(Rooms:Number): House {
-        return this
+
+    displayDetails()
+    {
+        console.log("This house has" + this.rooms + "rooms  " + " stories " + this.story);
+        
     }
 
 }
 
 
-class Builder{}
+let houseBuilder=new HouseBuilder()
+houseBuilder.SetRooms(2)
+houseBuilder.SetStory(3)
+houseBuilder.build();
+houseBuilder.displayDetails();
