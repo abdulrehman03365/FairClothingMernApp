@@ -1,4 +1,4 @@
 # NodeJsBookingWebSite
-This is a Booking web application using node Js.
+This is a Clothins store web application using mERN Stack my learning project.
 
-Base website https://www.studiobytcs.com/
+
