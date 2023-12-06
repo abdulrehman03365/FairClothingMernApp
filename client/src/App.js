@@ -1,4 +1,5 @@
 import { AuthContext, AuthProvider } from "./Context/AuthContext";
+import "bootstrap-icons/font/bootstrap-icons.css";
 import { toast, ToastContainer } from "react-toastify";
 import Nevbar from "./components/navBar/nevbar";
 import AdminHome from './adminPages/adminHome';

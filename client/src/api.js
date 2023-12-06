@@ -5,12 +5,14 @@ import axios from 'axios'
 
 const BASE_URL = process.env.NODE_ENV === 'development'
 ? '/api' // Use the proxy during development
- : "https://fairclothing-f9c79.web.app/api"; 
+ : "https://us-central1-fairclothing-f9c79.cloudfunctions.net/app/api"; 
 
 console.log("BASE_URL",BASE_URL);
 axios.defaults.baseURL=BASE_URL;
 const authToken = localStorage.getItem('token');
-console.log("token", authToken);
+
+
+
 const config={headers:{'Content-Type':'application/x-www-form-urlencoded',
 'Authorization':`Bearer ${authToken}`}}
 // axios.defaults.headers.common['Authorization'] = `Bearer ${authToken}`;

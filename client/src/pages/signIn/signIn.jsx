@@ -23,7 +23,7 @@ import {Container} from "react-bootstrap";
 
 function SignIn()
    
- {
+ {  const [showPassword,setShowPassword]=useState(false)
     const [validated, setValidated] = useState(false);
     const dispatch=useDispatch();  
     const { isLoggedIn, setIsLoggedIn }=useContext(AuthContext)
@@ -203,17 +203,36 @@ function SignIn()
           />
           <Form.Control.Feedback type="invalid">Email is required</Form.Control.Feedback>
           <Form.Label>Password</Form.Label>
+          <div className="input-group">
           <Form.Control
             className="custom-form-control"
             required
             name="password"
+            type={showPassword ? 'text' : 'password'}
             value={formData.password}
             onChange={handleDataChange}
-            type="password"
+          
             placeholder=""
             defaultValue=""
             style={{ width: '19rem' }}
           />
+          <div className="input-group-append">
+
+          <span
+            className="input-group-text border-0 bg-transparent"
+            onClick={() => setShowPassword(!showPassword)}
+            style={{ cursor: 'pointer' }}>
+              {showPassword ? (
+              <i className="bi bi-eye-slash-fill"></i>
+            ) : (
+              <i className="bi bi-eye-fill"></i>
+            )}       
+            </span>
+
+          </div>
+
+          </div>
+         
           <Form.Control.Feedback type="invalid">Password is required</Form.Control.Feedback>
           <Form.Check className="mt-2"
           name="savePassword"
