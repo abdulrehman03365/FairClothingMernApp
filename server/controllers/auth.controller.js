@@ -52,7 +52,8 @@ const myPass=req.body.password
       
         await savedUser.save();
         console.log("Created User Data", user)
-        res.status(201).send({ message: "User is created successfully" });
+      
+        
       } catch (err) {
         console.error(err);
       

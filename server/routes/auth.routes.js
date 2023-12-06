@@ -5,6 +5,7 @@ const bodyParser=require('body-parser')
 module.exports = function (app) {
     
     app.use(function (res, req, next) {
+        res.header('Access-Control-Allow-Origin', 'https://fairclothing-f9c79.web.app');
         res.header("Access-Control-Allow-Headers","Origin","Content-Type","Accept")
     next()
     })
@@ -17,6 +18,8 @@ module.exports = function (app) {
 
     
     app.post("/api/auth/signIn",[verifySignup.checkEmptyfields],AuthController.signInController)
+
+
 
     app.get("/api/auth/signout",AuthController.signOutController)
 

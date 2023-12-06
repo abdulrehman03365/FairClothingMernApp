@@ -1,3 +1,6 @@
+// Decorator pattern let us extend the functionality of  object by creating decorators  that wrap  the concrete classses.
+
+
 interface Product {
     getPrice(): number;
   }

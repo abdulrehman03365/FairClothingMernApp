@@ -27,10 +27,18 @@ admin.initializeApp();
 //Middlewares
 // console.log(join(__dirname,'public'));
 
+const dotenv = require('dotenv');
+const dotenvExpand = require('dotenv-expand');
+const config = dotenv.config();
+dotenvExpand.expand(config)   
+
+
+
+
 app.use(express.json());
 app.use(cors({
 	credentials: true,
-	origin: process.env.NODE_ENV=='development' ? 'http://localhost:3000':'https://fairclothing-f9c79.web.app',
+	origin: process.env.NODE_ENV=='development' ? 'http://localhost:3000':'https://fairclothing-f9c79.web.app/',
 	allowedHeaders: ['Content-Type', 'Authorization']
   }));
 
@@ -91,7 +99,38 @@ app.post('/api/addMarque', (req, res) => {
 
 
 //get mongodb connection
-const MongoDBConnection =require('../server/scripts/mongoDbConnection')
+class MongoDBConnection{
+
+   
+    constructor(){
+  
+       
+        if (!MongoDBConnection.instance)
+        {
+            const uri=process.env.URI;
+            console.log("MongoDB uri :" ,process.env.URI);
+            mongoose.set('strictQuery', true);
+            mongoose.connection.on('error',(error)=>{console.error('connection to MongoDB disconnected :');})
+            mongoose.connection.on('connected',(data)=>{console.log('connected to mongoDB');})
+            mongoose.connection.on('connecting',()=>{console.log('connecting to mongodb');})
+            mongoose.connection.on('close',()=>{console.log('MongoDB connection closed');})
+            mongoose.connect(uri,
+            {
+                useNewUrlParser: true,
+                useUnifiedTopology: true
+              }).then(()=>{
+              console.log("You are connected successfully to MongoDB");
+            })
+        
+             return MongoDBConnection.instance =mongoose.connection;
+        }
+
+        else
+
+       return MongoDBConnection.instance;
+    }
+}
+
 const db=new MongoDBConnection();
 
 
@@ -108,7 +147,7 @@ const pool=mysql.createPool({
 
 })
 
-
+app.get('/api/auth/signIn',(req,res,next)=>{req.statusCode(200).send({message:"test sign In on gcf"})})
 
 app.get('/call_sp',(req,res)=>{
 	pool.getConnection((err,conn)=>{
@@ -169,16 +208,16 @@ res.sendFile(path.resolve(__dirname, '../client/build', 'index.html'));
 
 
 
-// // Check if running in Firebase environment
-// const isFirebase = !!process.env.FIREBASE_CONFIG;
+// Check if running in Firebase environment
+const isFirebase = !!process.env.FIREBASE_CONFIG;
 
-// // Export app as a Firebase Cloud Function if running on Firebase
-// if (isFirebase) {
-//   exports.app = functions.https.onRequest( app);
-// } else {
-// app.listen(app.get('port'), function(){
-// 	console.log('Express started on port ' + app.get('port') + ' in ' + app.get('env') + ' mode.');
-// });}
+// Export app as a Firebase Cloud Function if running on Firebase
+if (isFirebase) {
+  exports.app = functions.https.onRequest( app);
+} else {
+app.listen(app.get('port'), function(){
+	console.log('Express started on port ' + app.get('port') + ' in ' + app.get('env') + ' mode.');
+});}
 
 exports.app = functions.https.onRequest( app);
 

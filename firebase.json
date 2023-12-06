@@ -23,6 +23,10 @@
   },
   "functions": {
     "source": "./server",
-    "runtime": "nodejs16"
+    "runtime": "nodejs16",
+    "app": {
+      ".read": true,
+      ".write": true
+    }
   }
 }
