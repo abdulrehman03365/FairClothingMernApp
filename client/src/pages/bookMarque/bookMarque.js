@@ -33,7 +33,7 @@ fetchMarques()
   return (
     <>
       <Nevbar />
-      <div className="container d-flex justify-content-center align-items-center " style={{height :"100%"}} id="MarquePlaceHolder">
+      <div className="container d-flex justify-content-center align-items-center "  id="MarquePlaceHolder">
         {/* {marqueDetails.map((marqueDetail) => (
           <MarqueView key={marqueDetail._id} marqueDetail={marqueDetail} />
         ))}  */}
