@@ -73,12 +73,22 @@ function ManageCloths() {
   
     console.log("i m clicked");
     event.preventDefault();
-    var imagesObj=[]
-    images.map((image,index)=>{[...imagesObj,{image:base64Image[index],
-                                              imageName:image[index]?.name,
-                                              imageType:image[type]?.type}]})
+   
+   
     
-    
+   var imagesObj=[]
+   for (let index=0; index <images.length ;index++)
+      {
+        const imageObject={
+    name: base64Image[index],
+    imageName: images[index].name,
+    imageType: images[index].type,
+        }
+
+        imagesObj.push(imageObject)
+      }                                        
+                                              
+                                              
     const formData=new FormData();
     for (const key in data)
     {
@@ -93,7 +103,7 @@ function ManageCloths() {
       setValue('name', data.name);
       setValue('sku', data.sku);
       setValue('quantity', data.quantity);
-      etImagePreview(data.image);
+      setImagePreview(data.image);
       setValue('status', data.status);
     } else {
       await addCloth(formData);
@@ -154,7 +164,7 @@ function ManageCloths() {
       <h2 className="text-center mb-3">Add Cloth</h2>
   
    
-      <Form onSubmit={handleSubmit(handleFormSubmit)} className='p-xs-4 mt-3 mb-2  '  style={{border:"1px-solid"}} >
+      <Form onSubmit={(event)=>handleFormSubmit(formData , event)} className='p-xs-4 mt-3 mb-2  '  style={{border:"1px-solid"}} >
         <Row className="mb-3 align-items-center">
           <Form.Group as={Col} md={5} controlId="formFirstName">
             <Form.Label>Cloth Name:</Form.Label>
@@ -189,7 +199,7 @@ function ManageCloths() {
          </Row>
          <Row> </Row>
         <Row className='d-flex justify-content-center align-items-center p-4'>
-         <Button className='w-auto d-flex submit-bt' style={{"background":"black"}}>Submit </Button>
+         <Button type="submit" className='w-auto d-flex submit-bt'  style={{"background":"black"}}>Submit </Button>
         
         </Row>
         <Row>

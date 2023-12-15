@@ -208,7 +208,7 @@ function SignIn()
                
           <Form.Control.Feedback type="invalid">Email is required</Form.Control.Feedback>
           <Form.Label>Password</Form.Label>
-          <div className="input-group">
+         
           <Form.Control
             className="custom-form-control"
             required
