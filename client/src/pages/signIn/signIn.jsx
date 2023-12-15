@@ -216,23 +216,25 @@ function SignIn()
             defaultValue=""
             style={{ width: '19rem' }}
           />
-          <div className="input-group-append">
+          <span className="input-group-append"
+          onClick={() => setShowPassword(!showPassword)}
+          style={{ cursor: 'pointer' ,position:'absolute' , right : 0 }}>
 
-          <span
-            className="input-group-text border-0 bg-transparent"
-            onClick={() => setShowPassword(!showPassword)}
-            style={{ cursor: 'pointer' }}>
-              {showPassword ? (
-              <i className="bi bi-eye-slash-fill"></i>
-            ) : (
-              <i className="bi bi-eye-fill"></i>
-            )}       
-            </span>
+          {showPassword ? (
+  <i className="bi bi-eye-slash-fill"  
 
-          </div>
+  ></i>
+) : (
+  <i className="bi bi-eye-fill"></i>
+)} 
 
+          </span>
           </div>
          
+
+         
+         
+
           <Form.Control.Feedback type="invalid">Password is required</Form.Control.Feedback>
           <Form.Check className="mt-2"
           name="savePassword"

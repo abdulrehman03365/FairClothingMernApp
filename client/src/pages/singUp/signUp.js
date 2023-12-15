@@ -6,6 +6,7 @@ import {set, useForm} from "react-hook-form"
 import Nevbar from "../../components/navBar/nevbar";
 function SignUpform(){
 const {register, handleSubmit , formState : {errors}}=useForm();
+const [showPassword,setShowPassword]=useState(false)
 const [rememberUser,setRememberUser]=useState(false)
 const [errorMessage, setErrorMessage] =useState('')
 const [showErrorAlert ,setShowErrorAlert]=useState(false)
@@ -265,6 +266,11 @@ return(
           defaultValue=""
           style={{ width: '19rem' }}
         />
+       
+          
+          
+                    
+        
         <Form.Control.Feedback type="invalid">Password is required</Form.Control.Feedback>
         <Form.Label>Confirm Password</Form.Label>
         <Form.Control
@@ -279,6 +285,9 @@ return(
           defaultValue=""
           style={{ width: '19rem' }}
         />
+        <div>
+          
+        </div>
         <Form.Control.Feedback type="invalid">Password is required</Form.Control.Feedback>
         {/* <Form.Check
         name="userSignUpCheck"
