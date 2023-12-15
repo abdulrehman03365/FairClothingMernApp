@@ -8,6 +8,11 @@ module.exports = function (app) {
     //     res.header("Access-Control-Allow-Headers","Origin","Content-Type","Accept")
     // next()
     // })
+    app.use(function (res, req, next) {
+        res.header('Access-Control-Allow-Origin', 'https://fairclothing-f9c79.web.app');
+        res.header("Access-Control-Allow-Headers","Origin","Content-Type","Accept")
+    next()
+    })
 
     app.use(function (req, res, next){
         res.header('Access-Control-Allow-Origin', 'https://fairclothing-f9c79.web.app/');
@@ -22,6 +27,8 @@ module.exports = function (app) {
 
     
     app.post("/api/auth/signIn",[verifySignup.checkEmptyfields],AuthController.signInController)
+
+
 
     app.get("/api/auth/signout",AuthController.signOutController)
 

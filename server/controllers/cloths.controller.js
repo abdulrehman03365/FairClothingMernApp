@@ -88,4 +88,4 @@ deleteCloth=async(req, res ,next)=>{
         }
 }
 
-module.exports={addCloth , getCloth , updateCloth , deleteCloth}
+module.exports={addCloth , getCloth , updateCloth , deleteCloth , getAllCloths}

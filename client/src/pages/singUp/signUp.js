@@ -209,7 +209,7 @@ const handleDataChange=(event)=>{
 
 return(
   <>
-  <Nevbar></Nevbar>
+  
 {/*     
   <Row>
   <Col>

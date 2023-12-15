@@ -11,7 +11,9 @@ module.exports=function (app){
     app.post("/api/addCloth",[verifyJwtToken,verifyClothsParam],clothsController.addCloth)
     app.get("/api/cloth/:clothId",[verifyJwtToken,verifyClothsParam],clothsController.getCloth)
     app.put("/api/cloth/:clothId",[verifyJwtToken,verifyClothsParam],clothsController.updateCloth)
+    app.get("/api/cloth/getAllCloths",clothsController.getAllCloths)
     app.delete("/api/cloth/:clothId",[verifyJwtToken,verifyClothsParam],clothsController.deleteCloth)
+    
 
  
 }

@@ -3,17 +3,21 @@ import { setUserAuth } from "./slices/authSlice";
 import userCatagory from "./utils/utils";
 import axios from 'axios'
 
+
 const BASE_URL = process.env.NODE_ENV === 'development'
 ? '/api' // Use the proxy during development
  : "https://us-central1-fairclothing-f9c79.cloudfunctions.net/app/api"; 
-
 console.log("BASE_URL",BASE_URL);
 axios.defaults.baseURL=BASE_URL;
+
+
+  // Obtain the access token
+
 const authToken = localStorage.getItem('token');
 
 
 
-const config={headers:{'Content-Type':'application/x-www-form-urlencoded',
+const config={headers:{'Content-Type':'multipart/form-data',
 'Authorization':`Bearer ${authToken}`}}
 // axios.defaults.headers.common['Authorization'] = `Bearer ${authToken}`;
 
@@ -85,7 +89,7 @@ export async function deleteCloth(clothId){
 
 export async function getallCloths(){
   try {
-    const response = await axios.post('/getAllCloth',config)
+    const response = await axios.post('/getAllCloths',config)
     if(!response.ok)
      {
       throw new Error("Exception in Getting All Cloths")
