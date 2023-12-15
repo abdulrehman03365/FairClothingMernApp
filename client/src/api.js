@@ -17,7 +17,7 @@ const authToken = localStorage.getItem('token');
 
 
 
-const config={headers:{'Content-Type':'application/x-www-form-urlencoded',
+const config={headers:{'Content-Type':'multipart/form-data',
 'Authorization':`Bearer ${authToken}`}}
 // axios.defaults.headers.common['Authorization'] = `Bearer ${authToken}`;
 
@@ -89,7 +89,7 @@ export async function deleteCloth(clothId){
 
 export async function getallCloths(){
   try {
-    const response = await axios.post('/getAllCloth',config)
+    const response = await axios.post('/getAllCloths',config)
     if(!response.ok)
      {
       throw new Error("Exception in Getting All Cloths")

@@ -12,6 +12,7 @@ import Nevbar from "../../components/navBar/nevbar";
 import { useDispatch , useSelector } from "react-redux";
 import { setUserAuth , setUserType } from "../../slices/authSlice";
 import userCatagory from "../../utils/utils"; 
+import AdminHeader from "../../components/adminComponents/adminHeader/adminHeader";
 function AdminSignIn()
    
  {
@@ -60,7 +61,7 @@ function AdminSignIn()
 
             <>
       
-      <Nevbar></Nevbar>
+     
       {showErrorAlert && <Alertcomp varient={"danger"} show={showErrorAlert} onClose={()=>{setShowErrorAlert(false)}} message={errorMessage} ></Alertcomp>}
       
       <div className="admin-formContainer">

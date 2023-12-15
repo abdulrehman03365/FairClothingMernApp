@@ -29,13 +29,14 @@ function App() {
         <Provider store={store}>
           <AuthCheker />
 
-          <div style={{ overflow:"auto", minHeight:'100vh', display: 'flex', flexDirection: 'column' }}>
+          <div style={{ overflow:"visible", minHeight:'100vh', display: 'flex', flexDirection: 'column' }}>
+          <Nevbar></Nevbar>
             <ToastContainer className="toast-container" />
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="signIn" element={<SignIn />} />
               <Route path="/admin/signIn" element={<AdminSignIn />} />
-              <Route path="/admin/home" element={<ProtectedRoutes component={AdminHome} />} />
+              <Route path="/admin/home" element={<AdminHome/> } />
               <Route path="signUp" element={<SignUp />} />
               <Route path="/bookMarque" element={<ProtectedRoutes component={BookMarque} />} />
               <Route path="/admin" element={ <AdminSignIn/>} />

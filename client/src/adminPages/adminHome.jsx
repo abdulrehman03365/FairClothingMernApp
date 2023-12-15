@@ -75,7 +75,7 @@ setMarquees(data )
 <div className="adminPanel" style={{width:'100vw'}}>
        
       
-       <AdminHeader ></AdminHeader>
+       
        <div className='searchContainer' style={{width:'100vw' ,}}>
         
         <select name="search-select" id="cities-filter" value={selectedOption} onChange={handleFilterSelection}>

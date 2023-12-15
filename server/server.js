@@ -209,7 +209,7 @@ res.sendFile(path.resolve(__dirname, '../client/build', 'index.html'));
 
 
 // Check if running in Firebase environment
-const isFirebase = !!process.env.FIREBASE_CONFIG;
+
 // Check if running in Firebase environment
 const isFirebase = !!process.env.FIREBASE_CONFIG;
 

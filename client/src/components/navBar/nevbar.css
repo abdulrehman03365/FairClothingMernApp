@@ -8,14 +8,15 @@
 
 .me-auto{
   
-display: flex;
+ display: flex;
  justify-content: flex-end;
  width: 100%;
 }
 
-.custom-style{
-  
+.sticky-navbar {
   position: sticky;
+  top: 0;
+  z-index: 1000; /* Adjust the z-index if needed */
 }
 
 

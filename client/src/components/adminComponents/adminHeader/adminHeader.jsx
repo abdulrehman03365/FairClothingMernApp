@@ -14,16 +14,16 @@ function AdminHeader() {
        
         <div className="logo">
        
-          <a href="/admin/home"> Admin Panel</a>
+          <a href="/admin/home"  style={{textDecoration:"none" , color:"rgb(13, 26, 38)"}}> Admin Panel</a>
         </div>
     
         
         <ul id="menu">
         <ul className="navbar-nav mr-auto">
          
-          { <li><Link to={'/signUp'} className="nav-link">Sign Up</Link></li>}
-          {<li><Link to={'/signIn'} className="nav-link">Sign In</Link></li>}
-          <li><Link to={'/manageCloths'} className="nav-link">manage Cloths</Link></li>
+          
+          {<li><Link to={'/admin/SignIn'} className="nav-link">Sign In</Link></li>}
+          {<li><Link to={'/manageCloths'} className="nav-link">manage Cloths</Link></li>}
         </ul>
         </ul>
       </div>

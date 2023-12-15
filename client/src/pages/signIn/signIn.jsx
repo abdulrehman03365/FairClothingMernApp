@@ -110,7 +110,7 @@ function SignIn()
         
 
 <>
-<Nevbar></Nevbar>
+
 
 {/* <Container className="my-auto custom-bg" >
 <Row>
@@ -190,6 +190,7 @@ function SignIn()
       <Form noValidate validated={validated} onSubmit={handleFormSubmit}>
         <Form.Group controlId="signInForm">
           <Form.Label>Email</Form.Label>
+          <div className="input-group">
           <Form.Control
             className="custom-form-control"
             required
@@ -201,6 +202,10 @@ function SignIn()
             style={{ width: '19rem' }}
             onChange={handleDataChange}
           />
+
+          </div>
+           
+               
           <Form.Control.Feedback type="invalid">Email is required</Form.Control.Feedback>
           <Form.Label>Password</Form.Label>
           <div className="input-group">
@@ -211,12 +216,12 @@ function SignIn()
             type={showPassword ? 'text' : 'password'}
             value={formData.password}
             onChange={handleDataChange}
-          
+            
             placeholder=""
             defaultValue=""
             style={{ width: '19rem' }}
           />
-          <div className="input-group-append">
+          <div className="input-group-append"  style={{ position : "absolute" , right:"0" }}>
 
           <span
             className="input-group-text border-0 bg-transparent"

@@ -1,5 +1,6 @@
 import { Component } from "react";
 import { Link } from "react-router-dom";
+import AdminHeader from "../adminComponents/adminHeader/adminHeader";
 import { useState } from "react";
 import '../navBar/nevbar.css'
 import { useContext } from "react";
@@ -12,7 +13,7 @@ function Nevbar() {
   const [showMenu, setShowMenu] = useState(false);
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   const userType = useSelector((state)=>state.auth.userType)
-  
+  console.log("value of userType  state : " +userType);
   console.log("value of isAuthenticated  state : " +isAuthenticated);
   function toggleMenu() {
     setShowMenu(!showMenu);
@@ -23,7 +24,9 @@ function Nevbar() {
     
 
     <>
- <Navbar expand="lg" style={{"position":"sticky"}} className="custom-style  fixed-top bg-body-tertiary  justify-content-start   ">
+    {userType=="admin" ? 
+    <AdminHeader></AdminHeader>
+    :  <Navbar expand="lg" className="custom-style sticky-top bg-body-tertiary  justify-content-start   ">
       <Container>
       <Navbar.Brand className="nav-brand">
         <Link to="/">
@@ -55,7 +58,7 @@ function Nevbar() {
           </Nav>
         </Navbar.Collapse>
       </Container>
-    </Navbar>
+    </Navbar> }
     </>
         
       

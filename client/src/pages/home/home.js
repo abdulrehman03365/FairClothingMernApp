@@ -18,7 +18,7 @@ function Home() {
   const [value, setValue] = useState("initial value")
   return (
     <>
-<Nevbar></Nevbar>
+
 
 
     </>
