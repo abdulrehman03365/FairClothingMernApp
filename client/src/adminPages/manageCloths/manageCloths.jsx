@@ -1,4 +1,5 @@
 import qs from 'qs';
+
 import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
@@ -24,9 +25,9 @@ function ManageCloths() {
   const [imagePreview, setImagePreview] = useState([]);
   const [base64Image,setBase64Image]=useState([]);
   const [updated, setUpdated]=useState(false)
-
+  const [formData,setformData]=useState({name : '',sku: '',quantity:'',status:''})
   useEffect(() => {
-    setEditView(editViewProp)
+   setEditView(editViewProp)
    const  fetchAndPopulate=async()=> {
       const respData = await getallCloths();
       setValue('name', respData.name);
@@ -51,7 +52,7 @@ function ManageCloths() {
       setBase64Image(prevBase64Images=>[...prevBase64Images,reader.result])
   }}
 
-  function handleImageChange(event) {
+  const handleImageChange=(event)=> {
     var files = event.target.files;
     if (files.length >1)
     {
@@ -71,7 +72,8 @@ function ManageCloths() {
 
   async function handleFormSubmit(data, event) {
   
-    console.log("i m clicked");
+    console.log("handle form submit m clicked");
+   
     event.preventDefault();
    
    
@@ -89,29 +91,38 @@ function ManageCloths() {
       }                                        
                                               
                                               
-    const formData=new FormData();
+    
     for (const key in data)
     {
-    formData.append(key,data[key])
+      console.log(key,data)
+    // formData.append(key,data[key])
     }
 
-    if (editViewProp) {
-      const data=await updateCloth(id, formData);
-      toast.success('Cloth is Updated successfully!');
-      setEditView(false)
-      setUpdated(true)
-      setValue('name', data.name);
-      setValue('sku', data.sku);
-      setValue('quantity', data.quantity);
-      setImagePreview(data.image);
-      setValue('status', data.status);
-    } else {
-      await addCloth(formData);
-      toast.success('Cloth is added successfully!');
+    // if (editViewProp) {
+    //   const data=await updateCloth(id, formData);
+    //   toast.success('Cloth is Updated successfully!');
+    //   setEditView(false)
+    //   setUpdated(true)
+    //   setValue('name', data.name);
+    //   setValue('sku', data.sku);
+    //   setValue('quantity', data.quantity);
+    //   setImagePreview(data.image);
+    //   setValue('status', data.status);
+    // } else {
+      // await addCloth(formData);
+     
 
     }
 
 
+  const handleChange =(e)=>{
+    const {name,value}=e.target;
+    setformData({
+      ...formData,[name]:value,
+    }
+      
+
+    )
   }
 
     return ( 
@@ -166,26 +177,27 @@ function ManageCloths() {
    
       <Form onSubmit={(event)=>handleFormSubmit(formData , event)} className='p-xs-4 mt-3 mb-2  '  style={{border:"1px-solid"}} >
         <Row className="mb-3 align-items-center">
-          <Form.Group as={Col} md={5} controlId="formFirstName">
+          <Form.Group as={Col} md={5} controlId="forClothName">
             <Form.Label>Cloth Name:</Form.Label>
-            <Form.Control type="text" placeholder="" />
+            <Form.Control type="text" placeholder="" onChange={handleChange}/>
+            
           </Form.Group>
           <Col md={2}></Col> {/* Empty column for space */}
-          <Form.Group as={Col} md={5} controlId="formLastName">
+          <Form.Group as={Col} md={5} controlId="forClothSKU">
             <Form.Label>Cloth SKU:</Form.Label>
-            <Form.Control type="text" placeholder="" />
+            <Form.Control type="text" placeholder=""  onChange={handleChange}/>
           </Form.Group>
           <Col md={2}></Col>
         </Row>
         <Row className="mb-3 align-items-center">
-          <Form.Group as={Col} md={5} controlId="formFirstName">
+          <Form.Group as={Col} md={5} controlId="forClothQuantity">
             <Form.Label>Quantity:</Form.Label>
-            <Form.Control type="text" placeholder="" />
+            <Form.Control type="text" placeholder=""  onChange={handleChange} />
           </Form.Group>
           <Col md={2}></Col> {/* Empty column for space */}
-          <Form.Group as={Col} md={5} controlId="formLastName">
+          <Form.Group as={Col} md={5} controlId="forClothStatus">
             <Form.Label>Status:</Form.Label>
-            <Form.Control type="text" placeholder="" />
+            <Form.Control type="text" placeholder=""  onChange={handleChange}/>
           </Form.Group>
           <Col md={2}></Col>
         </Row>
@@ -194,7 +206,7 @@ function ManageCloths() {
          <Row  className='d-flex align-items-center justify-content-center ' style={{position:"relative"}}>
          <Form.Group as={Col} md={5 } className='w-auto p-2'  controlId="images">
             <Form.Label  style={{position : "absolute" , left:"10px"  , top :"25%"}}>Images :</Form.Label>
-            <Form.Control type="file" placeholder=""  />
+            <Form.Control type="file" placeholder="" onChange={handleImageChange} />
           </Form.Group>
          </Row>
          <Row> </Row>
@@ -214,6 +226,6 @@ function ManageCloths() {
 
      </div>
      );
-}
+  }
 
 export default ManageCloths;

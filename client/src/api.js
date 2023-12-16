@@ -25,16 +25,21 @@ export async function addCloth(clothData){
 
   try {
     const response = await axios.post('/addCloth',clothData,config)
-    if(!response.ok)
+    if (response.ok)
+    {
+      alert('Cloth is added successfully!');
+      
+    }
+   else if(!response.ok)
      {
-      throw new Error("Exception in Adding Cloth")
-     }
-    const data = await response.json();
+      
+      const data = await response.json();
+   
     if(data && data.message)
     {
       throw new Error(data.message)
-    }
-    return data;
+    }}
+
 
   } catch (error) {
     console.log("Exception in Adding Cloth API", error.message);
