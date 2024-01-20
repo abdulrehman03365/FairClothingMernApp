@@ -1,6 +1,6 @@
 import { AuthContext, AuthProvider } from "./Context/AuthContext";
 import "bootstrap-icons/font/bootstrap-icons.css";
-import { toast, ToastContainer } from "react-toastify";
+import toast, { Toaster } from 'react-hot-toast';
 import Nevbar from "./components/navBar/nevbar";
 import AdminHome from './adminPages/adminHome';
 import Home from './pages/home/home';
@@ -31,7 +31,7 @@ function App() {
 
           <div style={{ overflow:"visible", minHeight:'100vh', display: 'flex', flexDirection: 'column' }}>
           <Nevbar></Nevbar>
-            <ToastContainer className="toast-container" />
+          <Toaster />
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="signIn" element={<SignIn />} />

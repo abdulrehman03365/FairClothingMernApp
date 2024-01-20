@@ -1,8 +1,8 @@
 
 const BUCKET_NAME=process.env.BUCKET_NAME
 const REGION=process.env.AWS_REGION
-const { S3Client, PutObjectCommand , GetObjectCommand , getSignedUrl ,  } = require("@aws-sdk/client-s3");
-const { parseUrl } =require( "@aws-sdk/url-parser");
+const { S3Client, PutObjectCommand , GetObjectCommand   } = require("@aws-sdk/client-s3");
+const { getSignedUrl } =require( "@aws-sdk/s3-request-presigner")
 var url="";
 
 async function upload(imageName, base64Image , type)
@@ -24,7 +24,7 @@ const params =
 }
 
 try{
-        console.log("REGION :" +REGION);
+     
         const client = new S3Client({
                 region: REGION,
                 credentials: {
@@ -35,11 +35,18 @@ try{
               })
         const command = new PutObjectCommand(params)
         const response=await client.send(command)
-        const getObjectCommand = new GetObjectCommand({ Bucket: params.Bucket, Key: params.Key });
+        // const getObjectCommand = new GetObjectCommand({ Bucket: params.Bucket, Key: params.Key });
+        // const url = await getSignedUrl(client, getObjectCommand, { expiresIn: 60 }); // You can adjust expiresIn as needed
+        // const urlString = url.toString();
+        // console.log('Generated signed URL:', url);
+        // console.log("type of signed url " + typeof urlString);
+        // return urlString;
+        
         url = `https://${params.Bucket}.s3.${REGION}.amazonaws.com/${params.Key}`;
-        console.log('type of url :'+url);
-        console.log("url :"+ url);
-                
+        console.log("type of generated url :"+  typeof url)
+        // const imageUrl = await S3Client.getSignedUrl(getObjectCommand, { expiresIn: 60 });
+       
+        return url.toString()       
 
 
 
@@ -52,7 +59,6 @@ catch(error)
 
 
 
-return url
 
 
 }

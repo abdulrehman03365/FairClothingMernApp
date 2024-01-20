@@ -17,9 +17,10 @@
   "bugs": {
     "url": "https://github.com/abdulrehman03365/NodeJsBookingWebSite/issues"
   },
-  "engines":{
-    "node":"16"
-
+  "engines": {
+    "node": "16"
+  },
+  "dependencies": {
+    "react-responsive": "^9.0.2"
   }
-
 }

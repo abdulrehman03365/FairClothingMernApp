@@ -1,8 +1,42 @@
 const {cloth} =require( '../model/cloths.model')
+const {upload}=require('../services/imageService')
+
+async function uploadImages(images) {
+    const images_url=[]
+    try {
+      await Promise.all(
+        images.map(async (image) => {
+          try {
+            const imageUrl = await upload(image.imageName, image.image, image.imageType);
+            images_url.push(imageUrl);
+          } catch (error) {
+            console.error(`Error uploading image (${image.imageName}):`, error.message);
+            // Handle or log the error as needed
+          }
+        })
+      );
+
+  
+    //   console.log('All images uploaded successfully:', images_url);
+      return images_url;
+    } catch (error) {
+      console.error('Error during image upload process:', error.message);
+      // Handle or log the error as needed
+      throw error;
+    }
+  }
 addCloth=async(req,res,next)=>{
     try{
-        const {name ,sku ,images ,quantity ,status}=req.body  
-        const newCloth = new cloth({name,sku,images,quantity,status})
+        const {name ,sku ,images ,quantity ,status}=req.body 
+        
+        const images_url=await uploadImages(images)
+      
+        const newCloth = new cloth({name,sku,images: images_url,quantity,status})
+        
+
+        console.log("images url value :" + images_url[0]);
+        console.log("value of image URL :" + typeof images_url);
+        console.log("value of newCloth :" + newCloth);
         await newCloth.save()
         res.status(200).json({message:'Cloth added successfully', cloth:newCloth})
         }
@@ -30,20 +64,21 @@ res.status(500).json({message:"Failed to retrive Cloth data"})
 }
 
 getAllCloths =async(req,res,next)=>{
-    try{
+   try{
+       
       
-  const  cloth=await cloth.find()
-    if(!cloth)
+  const  cloths=await cloth.find()
+    if(!cloths)
     {
     res.status(404).json({message:"cloth not found"})
     }
     else
-    {res.status(200).json({cloth:cloth})}
+    {res.status(200).json({cloth:cloths})}
     }
     catch(error){
     console.error("Error getting cloth",error);
     res.status(500).json({message:"Failed to retrive Cloth data"})
-    }
+   }
     }
 
 updateCloth= async (req,res,next)=>{

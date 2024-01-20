@@ -7,6 +7,7 @@
   "license": "ISC",
   "dependencies": {
     "@aws-sdk/client-s3": "^3.354.0",
+    "@aws-sdk/s3-request-presigner": "^3.490.0",
     "aws-sdk": "^2.1399.0",
     "bcrypt": "^5.1.0",
     "body-parser": "^1.20.1",
@@ -25,14 +26,16 @@
     "fs": "0.0.1-security",
     "google-auth-library": "^9.2.0",
     "handlebars": "^4.7.7",
+    "https": "^1.0.0",
     "install": "^0.13.0",
     "jsonwebtoken": "^9.0.0",
-    "mongoose": "^6.11.2",
+    "mongoose": "^8.0.3",
     "multer": "^1.4.5-lts.1",
     "mysql": "^2.18.1",
     "mysql2": "^2.3.3",
     "nodemailer": "^6.9.5",
     "nodemon": "^2.0.22",
+    "smithy": "^0.6.3",
     "socket.io": "^4.6.2"
   }
 }

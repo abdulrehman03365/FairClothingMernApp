@@ -15,26 +15,28 @@ const cors=require('cors')
 const socketService=require('./services/socketService')
 const cookieSession=require('cookie-session');
 // const db = require('./model/index');
-const { mongoose } = require('./model/index');
+const { mongoose, cloth } = require('./model/index');
 const flash = require('connect-flash-plus');
 const { authJwtMiddleware } = require('./middleware');
 app.set('port',process.env.PORT || 8000);
 require('dotenv').config()
 const admin = require('firebase-admin');
+const clothsController =require ('./controllers/cloths.controller')
+const clothRoutes=require('./routes/cloths.routes')
 
 // Initialize Firebase Admin SDK
 admin.initializeApp();
 //Middlewares
-// console.log(join(__dirname,'public'));
-
+const parentDir = path.dirname(__dirname);
+app.use(express.static( path.join(parentDir, 'client', 'build')));
+const buildPath=path.join(parentDir, 'client', 'build')
+console.log("path is ", buildPath);
+app.use(express.urlencoded({ limit: '10mb', extended: false }))
+app.use(multer({limits: { fieldSize: 10 * 1024 * 1024 }}).any());
 const dotenv = require('dotenv');
 const dotenvExpand = require('dotenv-expand');
 const config = dotenv.config();
 dotenvExpand.expand(config)   
-
-
-
-
 app.use(express.json());
 app.use(cors({
 	credentials: true,
@@ -42,19 +44,6 @@ app.use(cors({
 	allowedHeaders: ['Content-Type', 'Authorization']
   }));
 
-const parentDir = path.dirname(__dirname);
-app.use(express.static( path.join(parentDir, 'client', 'build')));
-const buildPath=path.join(parentDir, 'client', 'build')
-console.log("path is ", buildPath);
-app.use(express.urlencoded({ limit: '10mb', extended: false }))
-app.use(multer({limits: { fieldSize: 10 * 1024 * 1024 }}).any());
-
-// io.on('connection', (socket) => {
-// 	console.log('a user connected via socket.io');
-// 	socket.on('chat',(msg)=>{console.log('you recieved this message on socket:'+msg);})
-
-
-//   });
 
 
 app.use(cookieSession({
@@ -66,29 +55,20 @@ app.use(cookieSession({
 	
 
 }))
+ 
 
 
-// Setting view engine
-Handlebars=handlebars.create({defaultLayout:'main'});
-// app.engine('handlebars',Handlebars.engine)
-// app.set('view engine','handlebars');
+
+
+
 
 
 // app.use(bodyParser.json());
+app.use('/api/cloth',clothRoutes)
+// app.get('/api/cloth/getAll',clothsController.getAllCloths)
 require('./routes/auth.routes.js')(app);
 require('./routes/user.routes.js')(app);
 require('./routes/cart.routes.js')(app);
-require('./routes/cloths.routes')(app)
-
-
-app.post('/api/addMarque', (req, res) => {
-  const base64Image=req.body.base64Image.replace(/^data:image\/\w+;base64,/, '')
-  const buffer=Buffer.from(base64Image,'base64')
-  
-  res.sendStatus(200);
-});
-
-
 
 
 
@@ -220,7 +200,8 @@ if (isFirebase) {
 app.listen(app.get('port'), function(){
 	console.log('Express started on port ' + app.get('port') + ' in ' + app.get('env') + ' mode.');
 });}
-
+server.on('error',(err)=>{console.log("Error on server "+ err)});
+server.on('listening', (err)=>{console.log("server started listning"+ err)});
 // exports.app = functions.https.onRequest( app);
 
 // module.exports = app;

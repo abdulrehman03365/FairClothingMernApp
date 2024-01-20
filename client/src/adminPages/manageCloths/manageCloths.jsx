@@ -1,8 +1,8 @@
 import qs from 'qs';
-
+import { useMediaQuery } from 'react-responsive';
 import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-import { toast } from 'react-toastify';
+import { toast } from 'react-hot-toast';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import AdminHeader from '../../components/adminComponents/adminHeader/adminHeader';
 import Preview from '../../components/adminComponents/preview/preview';
@@ -10,8 +10,9 @@ import { addMarque,updateMarque,updateCloth ,getMarque ,getallCloths, addCloth }
 import './manageCloths.css';
 import {useLocation, useParams} from 'react-router-dom'
 function ManageCloths() {
+ 
   const location = useLocation()
-    
+
   
     
     let id, editViewProp;
@@ -27,7 +28,28 @@ function ManageCloths() {
   const [updated, setUpdated]=useState(false)
   const [formData,setformData]=useState({name : '',sku: '',quantity:'',status:''})
   useEffect(() => {
-   setEditView(editViewProp)
+    var imagesObj = [];
+
+    for (let index = 0; index < images.length; index++) {
+      const imageObject = {
+        image: base64Image[index],
+        imageName: images[index].name,
+        imageType: images[index].type,
+      };
+
+      imagesObj.push(imageObject);
+    }
+
+    setformData((prevFormData) => ({
+      ...prevFormData,
+      images: imagesObj,
+    }));
+  
+ 
+  console.log("Form Data :" ,formData) 
+  console.log("Images :",images);
+  setEditView(editViewProp)
+   
    const  fetchAndPopulate=async()=> {
       const respData = await getallCloths();
       setValue('name', respData.name);
@@ -41,135 +63,88 @@ function ManageCloths() {
     if (editViewProp ) {
       fetchAndPopulate();
     }
-   
-  }, [editViewProp]);
+    
+  }, [editViewProp, base64Image,images]);
 
   function convertToBase64(file){
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onloadend = () => {
-      setImagePreview(prevPreviews=>[...prevPreviews,reader.result]);
-      setBase64Image(prevBase64Images=>[...prevBase64Images,reader.result])
+      setImagePreview([...imagePreview,reader.result]);
+      setBase64Image([...base64Image,reader.result])
   }}
 
   const handleImageChange=(event)=> {
-    var files = event.target.files;
-    if (files.length >1)
-    {
-     
-      files.map((file,index)=>{ 
-        setImages(prevFiles=>[...prevFiles,files[0]]);
-        convertToBase64(files[0]);})
-      
-    }
-    else
-    {
-      setImages(prevFiles=>[...prevFiles,files[0]]);
-      convertToBase64(files[0]);
-    }
-    
+  var files = event.target.files;
+  convertToBase64(files[0])
+  const updatedImages=[...images,files[0]]
+  setImages(updatedImages);
   }
 
-  async function handleFormSubmit(data, event) {
+const handleRemoveImage =(indexToRemove)=>{
+  setImages((prevImages)=>{
+  const newImages=[...prevImages];
+  newImages.splice(indexToRemove,1);
+  return newImages;
+});
   
-    console.log("handle form submit m clicked");
-   
-    event.preventDefault();
-   
-   
+
+  setBase64Image((prevBase64Images)=>{
+    const newBase64Images=[...base64Image];
+    newBase64Images.splice(indexToRemove,1)
+    return newBase64Images;
     
-   var imagesObj=[]
-   for (let index=0; index <images.length ;index++)
-      {
-        const imageObject={
-    name: base64Image[index],
-    imageName: images[index].name,
-    imageType: images[index].type,
-        }
+  })
+  setformData((prevFormData)=>{
+    const newFormData = { ...prevFormData };
+    newFormData.images.splice(indexToRemove, 1);
+    return newFormData;    
 
-        imagesObj.push(imageObject)
-      }                                        
-                                              
-                                              
+  })
+
+}
+  async function handleFormSubmit(data, event) {
+  console.log("Form Data :" ,formData)   
+  event.preventDefault()
+  for (var key in formData)
+  {
     
-    for (const key in data)
-    {
-      console.log(key,data)
-    // formData.append(key,data[key])
-    }
+  }
+  
+    
+  
 
-    // if (editViewProp) {
-    //   const data=await updateCloth(id, formData);
-    //   toast.success('Cloth is Updated successfully!');
-    //   setEditView(false)
-    //   setUpdated(true)
-    //   setValue('name', data.name);
-    //   setValue('sku', data.sku);
-    //   setValue('quantity', data.quantity);
-    //   setImagePreview(data.image);
-    //   setValue('status', data.status);
-    // } else {
-      // await addCloth(formData);
-     
-
-    }
-
-
-  const handleChange =(e)=>{
-    const {name,value}=e.target;
-    setformData({
-      ...formData,[name]:value,
-    }
+    if (editViewProp) {
+      const data=await updateCloth(id, formData);
+      toast.success('Cloth is Updated successfully!');
+      setEditView(false)
+      setUpdated(true)
+      setValue('name', data.name);
+      setValue('sku', data.sku);
+      setValue('quantity', data.quantity);
+      setImagePreview(data.image);
+      setValue('status', data.status);
+    } else {
+      await addCloth(formData);
       
 
-    )
+    }
+
+  }
+  const handleChange =(e,name)=>{
+    const { value } = e.target;
+  setformData({
+    ...formData,
+    [name]: value,
+  });
+
+    
   }
 
     return ( 
      <div>
      
-{/*         
-        <div className="search-div">
-         <input className="searchTxt"></input>
-         <button className="addNewBt">Add new</button>
-        </div>
-      
-         <form onSubmit={handleSubmit(handleFormSubmit)} >
-            <div className="add-marque-form" style={{"marginTop":50 , "display":"flex" ,
-       "flexDirection":"column" , "alignContent":"center"  , "justifyContent":"center" , "marginRight":"30%" , "marginLeft":"30%"}}>
 
-            <input className="add-marque-input" {...register("name",{required:true})}></input>
-            <label>Cloth Name</label>
-            {errors.name?.type==='required' && <p role={'alert'} style={{"color":"red"}}>Cloth name is required</p>}
-           
-            <input className="add-marque-input" {...register("sku",{required:true})}></input>
-            <label>Cloth SKU</label>
-            {errors.location?.type==='required' && <p role={'alert'} style={{"color":"red"}}>SKU is required</p>}
-            
-            <input className="add-marque-input" {...register("quantity",{required:true})}></input>
-            <label>Quantity</label>
-            {errors.capacity?.type==='required' && <p role={'alert'} style={{"color":"red"}}>Quantity is required</p>}
-
-            <input className="add-marque-input" {...register("status",{required:true})}></input>
-            <label>Status</label>
-            {errors.status?.type==='required' && <p style={{"color":"red"}} role={'alert'}>Status is required</p>}
-
-            <label htmlFor="image">Image: </label>
-            <input type="file" id="imageInput" onChange={handleImageChange}  ></input>
-            {imagePreview && (
-            <img src={imagePreview} alt="Image preview" style={{ width: '200px' }} /> )}
-            <input type={"submit"} style={{ display: 'inline-block', width: 'auto' }} value="Add Cloth"></input>
-
-
-
-           
-            </div>
-            
-
-
-         </form>
-
-      */}
     
       <Container className='d-flex mt-5 justify-content-center border flex-wrap  align-items-center flex-column ' >
       <h2 className="text-center mb-3">Add Cloth</h2>
@@ -177,27 +152,38 @@ function ManageCloths() {
    
       <Form onSubmit={(event)=>handleFormSubmit(formData , event)} className='p-xs-4 mt-3 mb-2  '  style={{border:"1px-solid"}} >
         <Row className="mb-3 align-items-center">
-          <Form.Group as={Col} md={5} controlId="forClothName">
+          <Form.Group  as={Col} md={5} className='custom-input ' controlId="forClothName">
             <Form.Label>Cloth Name:</Form.Label>
-            <Form.Control type="text" placeholder="" onChange={handleChange}/>
-            
+            <Form.Control type="text" placeholder="" required onChange={(event)=>{handleChange(event,'name')}}/>
+            <Form.Control.Feedback type="invalid">
+          Please enter a name.
+        </Form.Control.Feedback>
           </Form.Group>
           <Col md={2}></Col> {/* Empty column for space */}
-          <Form.Group as={Col} md={5} controlId="forClothSKU">
+          <Form.Group as={Col}  md={5} controlId="forClothSKU">
             <Form.Label>Cloth SKU:</Form.Label>
-            <Form.Control type="text" placeholder=""  onChange={handleChange}/>
+            <Form.Control type="text" placeholder=""  onChange={(event)=>{handleChange(event,'sku')}}/>
           </Form.Group>
+          <Form.Control.Feedback type="invalid">
+          Please enter a SKU.
+        </Form.Control.Feedback>
           <Col md={2}></Col>
         </Row>
         <Row className="mb-3 align-items-center">
           <Form.Group as={Col} md={5} controlId="forClothQuantity">
             <Form.Label>Quantity:</Form.Label>
-            <Form.Control type="text" placeholder=""  onChange={handleChange} />
+            <Form.Control type="text" placeholder=""  onChange={(event)=>{handleChange(event,'quantity')}} />
           </Form.Group>
+          <Form.Control.Feedback type="invalid">
+          Please enter a Quantity.
+        </Form.Control.Feedback>
           <Col md={2}></Col> {/* Empty column for space */}
-          <Form.Group as={Col} md={5} controlId="forClothStatus">
+          <Form.Group as={Col} md={5}  controlId="forClothStatus">
             <Form.Label>Status:</Form.Label>
-            <Form.Control type="text" placeholder=""  onChange={handleChange}/>
+            <Form.Control type="text" placeholder=""  onChange={(event)=>{handleChange(event,'status')}}/>
+            <Form.Control.Feedback type="invalid">
+          Please enter Status.
+        </Form.Control.Feedback>
           </Form.Group>
           <Col md={2}></Col>
         </Row>
@@ -206,7 +192,7 @@ function ManageCloths() {
          <Row  className='d-flex align-items-center justify-content-center ' style={{position:"relative"}}>
          <Form.Group as={Col} md={5 } className='w-auto p-2'  controlId="images">
             <Form.Label  style={{position : "absolute" , left:"10px"  , top :"25%"}}>Images :</Form.Label>
-            <Form.Control type="file" placeholder="" onChange={handleImageChange} />
+            <Form.Control type="file" className='custom-input' onChange={handleImageChange} />
           </Form.Group>
          </Row>
          <Row> </Row>
@@ -216,7 +202,21 @@ function ManageCloths() {
         </Row>
         <Row>
   {images.map((img, index) => (
+  
+      
+    <><Col style={{position:"relative"}}>
     <img key={index} src={URL.createObjectURL(img)} style={{ width: '200px' }} alt={`Preview ${index}`} />
+    <Button
+    className="cross-button"
+    style={{position:"absolute" , backgroundColor:"black" , top:"-13px" , left:"186px" }}
+    onClick={() => handleRemoveImage(index)}>
+  
+    <i className="bi bi-x-square-fill"></i>
+    </Button>
+    </Col>
+                                             
+  </>
+    
   ))}
 </Row>
 

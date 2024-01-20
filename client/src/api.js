@@ -2,6 +2,8 @@ import { useDispatch , useSelector } from "react-redux";
 import { setUserAuth } from "./slices/authSlice";
 import userCatagory from "./utils/utils";
 import axios from 'axios'
+import { toast } from "react-hot-toast";
+import { ToastBar } from "react-hot-toast";
 
 
 const BASE_URL = process.env.NODE_ENV === 'development'
@@ -17,14 +19,16 @@ const authToken = localStorage.getItem('token');
 
 
 
-const config={headers:{'Content-Type':'multipart/form-data',
+const config={headers:{'Content-Type':'application/json',
 'Authorization':`Bearer ${authToken}`}}
 // axios.defaults.headers.common['Authorization'] = `Bearer ${authToken}`;
 
 export async function addCloth(clothData){
-
+  const addClothConfig={headers:{'Content-Type':'multipart/form-data',
+  'Authorization':`Bearer ${authToken}`}}
   try {
-    const response = await axios.post('/addCloth',clothData,config)
+    const response = await axios.post('/cloth/addCloth',clothData,addClothConfig)
+    alert('Cloth is added successfully!');
     if (response.ok)
     {
       alert('Cloth is added successfully!');
@@ -94,7 +98,8 @@ export async function deleteCloth(clothId){
 
 export async function getallCloths(){
   try {
-    const response = await axios.post('/getAllCloths',config)
+    const response = await axios.get('/cloth/',{headers:{'Content-Type':'application/json',
+    'Authorization':`Bearer ${authToken}`}})
     if(!response.ok)
      {
       throw new Error("Exception in Getting All Cloths")

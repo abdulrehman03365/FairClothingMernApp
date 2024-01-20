@@ -9,7 +9,8 @@ import { Alert } from 'react-bootstrap';
 import Alertcomp from '../components/alertComp';
 import AdminHeader from '../components/adminComponents/adminHeader/adminHeader';
 import { setUserAuth } from '../slices/authSlice';
-import { getallMarques, signIn } from '../api';
+import { getallMarques, signIn , getallCloths } from '../api';
+
 import { useDispatch } from 'react-redux';
 
 
@@ -18,7 +19,7 @@ function AdminHome() {
   const [errorMessage,setErrorMessage]=useState('')
   const [showErrorAlert ,setShowErrorAlert]=useState(false)
   const [screenSize, setScreenSize] = useState(window.innerWidth);
-  const [marquees,setMarquees]=useState();
+  const [cloths,setcloths]=useState();
   const [selectedOption,setSelectedOptions]=useState('')
   var citiesOptions=['karachi','Rawalpindi','Islamabad']
   const dispatch=useDispatch();
@@ -30,15 +31,15 @@ function AdminHome() {
     const populatePreview=async ()=>{
       const email=process.env.REACT_APP_EMAIL
       const pass=process.env.REACT_APP_PASSWORD
-     const response= await signIn({email:'abdulrehman03365@gmail.com',password:'Cmadak402'})
-     if(response.ok)
-     {
-      dispatch(setUserAuth(true))
-     }
+    //  const response= await signIn({email:'abdulrehman03365@gmail.com',password:'Cmadak402'})
+    //  if(response.ok)
+    //  {
+    //   dispatch(setUserAuth(true))
+    //  }
    
-      const data=await getallMarques()
+      const data=await getallCloths()
     
-      setMarquees(data )
+      setcloths(data )
     }
 
     
@@ -60,7 +61,7 @@ function AdminHome() {
    const handleFilterSelection=async(event)=>{
 setSelectedOptions(event.target.value)
 const data=await getallMarques(selectedOption)
-setMarquees(data )
+setcloths(data )
     }
 
     const handleSearch=async (event)=>{
@@ -78,7 +79,7 @@ setMarquees(data )
        
        <div className='searchContainer' style={{width:'100vw' ,}}>
         
-        <select name="search-select" id="cities-filter" value={selectedOption} onChange={handleFilterSelection}>
+        {/* <select name="search-select" id="cities-filter" value={selectedOption} onChange={handleFilterSelection}>
         <option value="" disabled hidden >
         <FontAwesomeIcon icon={faMagnifyingGlass} style={{ marginRight: '0.3vw' }} />
         Search by City</option>
@@ -88,7 +89,7 @@ setMarquees(data )
     </option>
   ))}
 
-        </select>
+        </select> */}
 
        
        </div>
@@ -96,8 +97,8 @@ setMarquees(data )
              
          </div>
          <div id="manage-main-div">
-         {console.log(marquees)}
-         {marquees?.map((marquee) => (<Preview populatePreview={populatePreview  } key={marquee._id} marqueDetails={marquee} setErrorMessage={setErrorMessage} setShowErrorAlert={setShowErrorAlert} />))}
+         {console.log(cloths)}
+         {cloths?.map((marquee) => (<Preview populatePreview={populatePreview  } key={marquee._id} marqueDetails={marquee} setErrorMessage={setErrorMessage} setShowErrorAlert={setShowErrorAlert} />))}
  
  
  </div>

@@ -21,10 +21,14 @@ class MongoDBConnection{
             mongoose.connection.on('close',()=>{console.log('MongoDB connection closed');})
             mongoose.connect(uri,
             {
-                useNewUrlParser: true,
-                useUnifiedTopology: true
+                useCreateIndex: true,
+               connectTimeoutMS: 5000
               }).then(()=>{
               console.log("You are connected successfully to MongoDB");
+            }).catch((error)=>{
+                console.error('Connection error:', error);
+    // Retry after a delay
+    setTimeout(connectWithRetry, 5000);
             })
         
              return MongoDBConnection.instance =mongoose.connection;
