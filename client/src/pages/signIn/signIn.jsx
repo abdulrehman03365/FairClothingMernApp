@@ -184,8 +184,8 @@ function SignIn()
     </Col>
   </Row> */}
   
-  <Row style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-    <Col className="col-auto">
+  <Row style={{ display: 'flex', position : 'relative' ,  justifyContent: 'center', alignItems: 'center' }}>
+    <Col className="col-auto" >
       <h1 className="text-center">Sign In</h1>
       <Form noValidate validated={validated} onSubmit={handleFormSubmit}>
         <Form.Group controlId="signInForm">
@@ -219,9 +219,9 @@ function SignIn()
             
             placeholder=""
             defaultValue=""
-            style={{ width: '19rem' }}
+            style={{ width: '19rem' , position: "absolute"}}
           />
-          <div className="input-group-append"  style={{ position : "absolute" , right:"0" }}>
+          <div className="input-group-append"  style={{ position : "absolute" , right:"9px" }}>
 
           <span
             className="input-group-text border-0 bg-transparent"
@@ -246,7 +246,7 @@ function SignIn()
           onchange={handleCheckBoxChange} 
           label="Save Password" />
         </Form.Group>
-        <Button className=" btn btn-dark float-end cust-signIn-bt" type="submit">Sign In</Button>
+        <Button className=" btn btn-dark float-end cust-signIn-bt" style={{ position : "relative" , marginBottom:"1rem" }} type="submit">Sign In</Button>
       </Form>
     </Col>
   </Row>

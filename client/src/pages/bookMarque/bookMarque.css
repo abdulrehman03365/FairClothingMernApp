@@ -1,6 +1,5 @@
 #MarquePlaceHolder {
     width: 100%; 
-    height: 69vh;
     display: flex;
     align-items: center;
     grid-template-columns: repeat(3, 1fr);
@@ -14,7 +13,7 @@
 @media only screen and (max-width: 767px) {
 
     #MarquePlaceHolder {
-     height: 100vh;
+  
     }
     
 }

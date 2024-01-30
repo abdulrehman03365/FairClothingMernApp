@@ -26,6 +26,7 @@ function ManageCloths() {
   const [imagePreview, setImagePreview] = useState([]);
   const [base64Image,setBase64Image]=useState([]);
   const [updated, setUpdated]=useState(false)
+  const [validated,setValidate]=useState(false)
   const [formData,setformData]=useState({name : '',sku: '',quantity:'',status:''})
   useEffect(() => {
     var imagesObj = [];
@@ -106,17 +107,24 @@ const handleRemoveImage =(indexToRemove)=>{
   async function handleFormSubmit(data, event) {
   console.log("Form Data :" ,formData)   
   event.preventDefault()
-  for (var key in formData)
+  const form = event.target;
+  if(form.checkValidity()===false)
   {
-    
+     toast.error("Plz enter cloth details")
+     event.stopPropogation()
   }
+
+  setValidate(true)
+
+
+  
   
     
   
 
     if (editViewProp) {
       const data=await updateCloth(id, formData);
-      toast.success('Cloth is Updated successfully!');
+     
       setEditView(false)
       setUpdated(true)
       setValue('name', data.name);
@@ -150,7 +158,7 @@ const handleRemoveImage =(indexToRemove)=>{
       <h2 className="text-center mb-3">Add Cloth</h2>
   
    
-      <Form onSubmit={(event)=>handleFormSubmit(formData , event)} className='p-xs-4 mt-3 mb-2  '  style={{border:"1px-solid"}} >
+      <Form noValidate validated={validated} onSubmit={(event)=>handleFormSubmit(formData , event)} className='p-xs-4 mt-3 mb-2  '  style={{border:"1px-solid"}} >
         <Row className="mb-3 align-items-center">
           <Form.Group  as={Col} md={5} className='custom-input ' controlId="forClothName">
             <Form.Label>Cloth Name:</Form.Label>
@@ -162,7 +170,7 @@ const handleRemoveImage =(indexToRemove)=>{
           <Col md={2}></Col> {/* Empty column for space */}
           <Form.Group as={Col}  md={5} controlId="forClothSKU">
             <Form.Label>Cloth SKU:</Form.Label>
-            <Form.Control type="text" placeholder=""  onChange={(event)=>{handleChange(event,'sku')}}/>
+            <Form.Control type="text" placeholder="" required onChange={(event)=>{handleChange(event,'sku')}}/>
           </Form.Group>
           <Form.Control.Feedback type="invalid">
           Please enter a SKU.
@@ -172,7 +180,7 @@ const handleRemoveImage =(indexToRemove)=>{
         <Row className="mb-3 align-items-center">
           <Form.Group as={Col} md={5} controlId="forClothQuantity">
             <Form.Label>Quantity:</Form.Label>
-            <Form.Control type="text" placeholder=""  onChange={(event)=>{handleChange(event,'quantity')}} />
+            <Form.Control type="text" placeholder="" required onChange={(event)=>{handleChange(event,'quantity')}} />
           </Form.Group>
           <Form.Control.Feedback type="invalid">
           Please enter a Quantity.
@@ -180,7 +188,7 @@ const handleRemoveImage =(indexToRemove)=>{
           <Col md={2}></Col> {/* Empty column for space */}
           <Form.Group as={Col} md={5}  controlId="forClothStatus">
             <Form.Label>Status:</Form.Label>
-            <Form.Control type="text" placeholder=""  onChange={(event)=>{handleChange(event,'status')}}/>
+            <Form.Control type="text" placeholder="" required onChange={(event)=>{handleChange(event,'status')}}/>
             <Form.Control.Feedback type="invalid">
           Please enter Status.
         </Form.Control.Feedback>
@@ -192,7 +200,7 @@ const handleRemoveImage =(indexToRemove)=>{
          <Row  className='d-flex align-items-center justify-content-center ' style={{position:"relative"}}>
          <Form.Group as={Col} md={5 } className='w-auto p-2'  controlId="images">
             <Form.Label  style={{position : "absolute" , left:"10px"  , top :"25%"}}>Images :</Form.Label>
-            <Form.Control type="file" className='custom-input' onChange={handleImageChange} />
+            <Form.Control type="file" required className='custom-input' onChange={handleImageChange} />
           </Form.Group>
          </Row>
          <Row> </Row>

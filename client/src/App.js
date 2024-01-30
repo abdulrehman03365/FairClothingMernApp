@@ -1,5 +1,8 @@
 import { AuthContext, AuthProvider } from "./Context/AuthContext";
 import "bootstrap-icons/font/bootstrap-icons.css";
+import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+
+import '@popperjs/core/dist/umd/popper.min.js';
 import toast, { Toaster } from 'react-hot-toast';
 import Nevbar from "./components/navBar/nevbar";
 import AdminHome from './adminPages/adminHome';

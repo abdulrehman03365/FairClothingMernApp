@@ -3,7 +3,6 @@ import { setUserAuth } from "./slices/authSlice";
 import userCatagory from "./utils/utils";
 import axios from 'axios'
 import { toast } from "react-hot-toast";
-import { ToastBar } from "react-hot-toast";
 
 
 const BASE_URL = process.env.NODE_ENV === 'development'
@@ -28,26 +27,27 @@ export async function addCloth(clothData){
   'Authorization':`Bearer ${authToken}`}}
   try {
     const response = await axios.post('/cloth/addCloth',clothData,addClothConfig)
-    alert('Cloth is added successfully!');
+
     if (response.ok)
     {
-      alert('Cloth is added successfully!');
+      toast.success('Cloth is added successfully!');
       
     }
    else if(!response.ok)
      {
       
+      
       const data = await response.json();
    
     if(data && data.message)
     {
-      throw new Error(data.message)
+      throw new Error(data.message) 
     }}
 
 
   } catch (error) {
     console.log("Exception in Adding Cloth API", error.message);
-    throw new Error(error.message);
+    toast.error(error.message)
   }  
   
 }
@@ -98,18 +98,19 @@ export async function deleteCloth(clothId){
 
 export async function getallCloths(){
   try {
-    const response = await axios.get('/cloth/',{headers:{'Content-Type':'application/json',
+    const response = await axios.get('/cloth',{headers:{'Content-Type':'application/json',
     'Authorization':`Bearer ${authToken}`}})
-    if(!response.ok)
-     {
-      throw new Error("Exception in Getting All Cloths")
-     }
-    const data = await response.json();
-    if(data && data.message)
-    {
-      throw new Error(data.message)
-    }
-    return data;
+    // if(!response.ok)
+    //  {
+    //   throw new Error("Exception in Getting All Cloths")
+    //  }
+    //  const data = await response.json();
+    // if(data && data.message)
+    // {
+    //   throw new Error(data.message)
+    // }
+    console.log("cloth :" + response.data.cloth) ;
+    return response.data.cloth;
 
   } catch (error) {
     console.log("Exception in geting all  Cloths API", error.message);

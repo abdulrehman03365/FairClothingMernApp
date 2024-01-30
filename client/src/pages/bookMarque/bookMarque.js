@@ -5,7 +5,7 @@ import MarqueView from "../../components/clothView/ClothView";
 import sendMessage from "../../services/chat";
 import socket from "../../services/chat";
 import { useEffect } from "react";
-import { getallMarques } from "../../api";
+import { getallCloths } from "../../api";
 import Footer from "../../components/Footer/Footer";
 function BookMarque() {
   const [marqueDetails,setMarqueDetails]=useState([])
@@ -15,8 +15,9 @@ function BookMarque() {
    ) => {
     
 const fetchMarques =async ()=>{
-const data= await getallMarques('All')
+const data= await getallCloths()
 setMarqueDetails(data)
+
 }
 
 
