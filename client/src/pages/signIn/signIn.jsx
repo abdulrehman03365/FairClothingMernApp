@@ -246,7 +246,7 @@ function SignIn()
           onchange={handleCheckBoxChange} 
           label="Save Password" />
         </Form.Group>
-        <Button className=" btn btn-dark float-end cust-signIn-bt" style={{ position : "relative" , marginBottom:"1rem" }} type="submit">Sign In</Button>
+        <Button className=" btn btn-dark float-end cust-signIn-bt" style={{ position : "relative" , marginTop:"1rem" }} type="submit">Sign In</Button>
       </Form>
     </Col>
   </Row>
