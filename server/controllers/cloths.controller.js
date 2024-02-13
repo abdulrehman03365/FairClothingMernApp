@@ -1,4 +1,4 @@
-const {cloth} =require( '../model/cloths.model')
+const { cloth } =require( '../model/cloths.model')
 const {upload}=require('../services/imageService')
 
 async function uploadImages(images) {
@@ -48,14 +48,14 @@ addCloth=async(req,res,next)=>{
 
 getCloth =async(req,res,next)=>{
 try{
-const {clothId}= req.body    
-const cloth=await cloth.findById({clothId})
-if(!cloth)
+const  clothId = req.params.clothId   
+const retrievedCloth=await cloth.findById(clothId)
+if(!retrievedCloth)
 {
 res.status(404).json({message:"cloth not found"})
 }
 else
-{res.status(200).json({cloth:cloth})}
+{res.status(200).json({cloth:retrievedCloth})}
 }
 catch(error){
 console.error("Error getting cloth",error);
@@ -86,7 +86,10 @@ updateCloth= async (req,res,next)=>{
         
         const clothId=req.body 
         const {name ,sku ,images ,quantity ,status}=req.body  
-        const  updatedCloth={name ,sku ,images ,quantity ,status}
+        
+        
+      
+        const  updatedCloth={name ,sku ,images:images_url,quantity ,status}
         const  cloth=await cloth.findByIdAndUpdate(clothId,updatedCloth,{new:true})
         
         if(!cloth)

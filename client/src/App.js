@@ -1,7 +1,7 @@
 import { AuthContext, AuthProvider } from "./Context/AuthContext";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
-
+// import '../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js';
 import '@popperjs/core/dist/umd/popper.min.js';
 import toast, { Toaster } from 'react-hot-toast';
 import Nevbar from "./components/navBar/nevbar";
@@ -34,7 +34,7 @@ function App() {
 
           <div style={{ overflow:"visible", minHeight:'100vh', display: 'flex', flexDirection: 'column' }}>
           <Nevbar></Nevbar>
-          <Toaster />
+          <Toaster  />
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="signIn" element={<SignIn />} />

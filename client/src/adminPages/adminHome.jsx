@@ -98,7 +98,7 @@ setcloths(data )
          </div>
          <div id="manage-main-div">
          {console.log(cloths)}
-         {cloths?.map((marquee) => (<Preview populatePreview={populatePreview  } key={marquee._id} marqueDetails={marquee} setErrorMessage={setErrorMessage} setShowErrorAlert={setShowErrorAlert} />))}
+         {cloths?.map((cloth) => (<Preview populatePreview={populatePreview  } clothId={cloth._id} clothDetails={cloth}  />))}
  
  
  </div>

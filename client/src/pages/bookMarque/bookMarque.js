@@ -7,22 +7,24 @@ import socket from "../../services/chat";
 import { useEffect } from "react";
 import { getallCloths } from "../../api";
 import Footer from "../../components/Footer/Footer";
+import Modal from 'react-bootstrap/Modal';
+import Button from 'react-bootstrap/Button';
 function BookMarque() {
-  const [marqueDetails,setMarqueDetails]=useState([])
+  const [clothDetails,setClothDetails]=useState([])
   useEffect((
    
   
    ) => {
     
-const fetchMarques =async ()=>{
+const fetchCloths =async ()=>{
 const data= await getallCloths()
-setMarqueDetails(data)
+setClothDetails(data)
 
 }
 
 
     
-fetchMarques() 
+fetchCloths() 
    }, []);
 
   function sendMessage() {
@@ -33,9 +35,9 @@ fetchMarques()
   
   return (
     <>
-      
+  
       <div className="container d-flex justify-content-center align-items-center "  id="MarquePlaceHolder">
-        {marqueDetails.map((marqueDetail) => (
+        {clothDetails.map((marqueDetail) => (
           <MarqueView key={marqueDetail._id} marqueDetail={marqueDetail} />
         ))} 
         

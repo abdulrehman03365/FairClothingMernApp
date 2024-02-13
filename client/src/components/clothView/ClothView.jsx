@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import BookingPreview from '../BookingPreview/BookingPreview';
-export default function MarqueView({ marqueDetail }) {
+export default function ClothView({ marqueDetail }) {
   const id =`carousel_${Date.now()}_${Math.floor(Math.random() * 1000)}`  
   const [showBookingPreview, setshowBookingPreview] = useState(false)
   const dispatch = useDispatch();
@@ -25,9 +25,9 @@ export default function MarqueView({ marqueDetail }) {
   return (
     <>
      {showBookingPreview && (
-        <div className='booking-preview-overlay'>
+        // <div className='booking-preview-overlay'>
           <BookingPreview  handlePreviewShow={handlePreviewShow}/>
-        </div>
+        // </div>
       )}
 
 <div className='marqueView' key={marqueDetail.id}>
@@ -43,24 +43,7 @@ export default function MarqueView({ marqueDetail }) {
 
 
 
-       {/* <div id={id} class="carousel slide" data-bs-ride="carousel">
-  <div class="carousel-inner">
     
-  {marqueDetail.images.map((img, index) => (
-      <div class={`carousel-item ${index === 0 ? 'active' : ''}`} key={index}>
-        <img src={img} class="d-block w-100" alt="cloth Image"/>
-      </div>
-    ))}
-  </div>
-  <button class="carousel-control-prev" type="button" data-bs-target={id} data-bs-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Previous</span>
-  </button>
-  <button class="carousel-control-next" type="button" data-bs-target={id} data-bs-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Next</span>
-  </button>
-</div> */}
 
  
   <div id={id}  class="carousel slide  custom-dim " data-bs-ride="false"  >
@@ -92,11 +75,19 @@ export default function MarqueView({ marqueDetail }) {
            <p id='capacity'>{marqueDetail.quantity}</p>
          </div>
          <div className='bottom_end'>
+         {/* <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  Book
+</button> */}
            <button id='book_btn' onClick={() => bookMarque(marqueDetail.id)}>
              Book
            </button>
+
+
+
          </div>
        </div>
+
+       
      </div>
     </>
    

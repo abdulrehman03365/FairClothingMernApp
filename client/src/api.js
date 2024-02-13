@@ -66,6 +66,7 @@ export async function updateCloth(clothId,clothData){
     {
       throw new Error(data.message)
     }
+    toast.success('Cloth is added successfully!');
     return data;
 
   } catch (error) {
@@ -119,6 +120,35 @@ export async function getallCloths(){
 
 }
 
+export async function getCloth(clothId){
+  // try {
+    const response = await axios.get(`/cloth/${clothId}`,{headers:{'Content-Type':'application/json',
+    'Authorization':`Bearer ${authToken}`}})
+    return response.data.cloth;
+  //   if (response.status!==200) {
+  //     // Exclude 304 status code from triggering an error
+  //     if (response.status !== 304) {
+  //       throw new Error(`HTTP error! Status on geting Cloth: ${response.status}`);
+  //     }
+  //   }
+  //    const data = await response.json();
+  //   if(data && data.message)
+  //   {
+  //     throw new Error(data.message)
+  //   }
+  //   console.log("cloth :" + response.data.cloth) ;
+  //   return data.cloth;
+
+  // } catch (error) {
+  //   console.log("Exception in geting Cloths API", error.message);
+  //   throw new Error(error.message);
+  // } 
+
+
+
+
+
+}
 
 
 export async function addMarque(formData) {

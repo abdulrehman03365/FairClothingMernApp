@@ -6,20 +6,11 @@ import { toast } from 'react-hot-toast';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import AdminHeader from '../../components/adminComponents/adminHeader/adminHeader';
 import Preview from '../../components/adminComponents/preview/preview';
-import { addMarque,updateMarque,updateCloth ,getMarque ,getallCloths, addCloth } from '../../api';
+import { addMarque,updateMarque,updateCloth ,getMarque ,getallCloths, addCloth, getCloth } from '../../api';
 import './manageCloths.css';
 import {useLocation, useParams} from 'react-router-dom'
 function ManageCloths() {
- 
   const location = useLocation()
-
-  
-    
-    let id, editViewProp;
-    if (location.state && location.state.id) {
-      id = location.state.id;
-      editViewProp = location.state.editViewProp;
-    }
   const [editView, setEditView] = useState(false);
   const {register, handleSubmit, formState: { errors }, setValue } = useForm();
   const [images, setImages] = useState([]);
@@ -27,45 +18,49 @@ function ManageCloths() {
   const [base64Image,setBase64Image]=useState([]);
   const [updated, setUpdated]=useState(false)
   const [validated,setValidate]=useState(false)
-  const [formData,setformData]=useState({name : '',sku: '',quantity:'',status:''})
+  const [formData,setformData]=useState({name : '',sku: '',quantity:'',status:'',images:[]})
+  const [clothId,setClothId]=useState('')
   useEffect(() => {
-    var imagesObj = [];
-
-    for (let index = 0; index < images.length; index++) {
-      const imageObject = {
-        image: base64Image[index],
-        imageName: images[index].name,
-        imageType: images[index].type,
-      };
-
-      imagesObj.push(imageObject);
+   const  fetchAndPopulate=async(id)=> {
+      const respData = await getCloth(id);
+      console.log("respData :"+ JSON.stringify(respData));
+      setformData({
+        ...formData,
+        name: respData.name,
+        sku: respData.sku,
+        quantity: respData.quantity,
+        status: respData.status,
+        images: []
+      });
+      setImages(respData.images)
     }
+    if (location.state && location.state.editViewProp !== null) {
+      setClothId(location.state.id);
+      fetchAndPopulate(location.state.id);
+      setEditView(location.state.editViewProp)
+    }
+    else
+    {
+      var imagesObj = [];
 
-    setformData((prevFormData) => ({
-      ...prevFormData,
-      images: imagesObj,
-    }));
+      for (let index = 0; index < images.length; index++) {
+        const imageObject = {
+          image: base64Image[index],
+          imageName: images[index].name,
+          imageType: images[index].type,
+        };
   
- 
-  console.log("Form Data :" ,formData) 
-  console.log("Images :",images);
-  setEditView(editViewProp)
-   
-   const  fetchAndPopulate=async()=> {
-      const respData = await getallCloths();
-      setValue('name', respData.name);
-      setValue('sku', respData.sku);
-      setValue('quantity', respData.quantity);
-      console.log("image url:"+respData.images);
-      setImagePreview(respData.image);
-      setValue('status', respData.status);
-    }
-    console.log("EditViewProp :"+editViewProp);
-    if (editViewProp ) {
-      fetchAndPopulate();
+        imagesObj.push(imageObject);
+      }
+  
+      setformData((prevFormData) => ({
+        ...prevFormData,
+        images: imagesObj,
+      }));
+
     }
     
-  }, [editViewProp, base64Image,images]);
+  }, [editView ]);
 
   function convertToBase64(file){
     const reader = new FileReader();
@@ -122,16 +117,12 @@ const handleRemoveImage =(indexToRemove)=>{
     
   
 
-    if (editViewProp) {
-      const data=await updateCloth(id, formData);
+    if (editView) {
+      const data=await updateCloth(clothId, formData);
      
       setEditView(false)
       setUpdated(true)
-      setValue('name', data.name);
-      setValue('sku', data.sku);
-      setValue('quantity', data.quantity);
-      setImagePreview(data.image);
-      setValue('status', data.status);
+      
     } else {
       await addCloth(formData);
       
@@ -154,7 +145,7 @@ const handleRemoveImage =(indexToRemove)=>{
      
 
     
-      <Container className='d-flex mt-5 justify-content-center border flex-wrap  align-items-center flex-column ' >
+      <Container className='d-flex m-auto mt-5 justify-content-center border flex-wrap  align-items-center flex-column custom-holder' >
       <h2 className="text-center mb-3">Add Cloth</h2>
   
    
@@ -162,7 +153,7 @@ const handleRemoveImage =(indexToRemove)=>{
         <Row className="mb-3 align-items-center">
           <Form.Group  as={Col} md={5} className='custom-input ' controlId="forClothName">
             <Form.Label>Cloth Name:</Form.Label>
-            <Form.Control type="text" placeholder="" required onChange={(event)=>{handleChange(event,'name')}}/>
+            <Form.Control type="text" placeholder="" value={formData.name} required onChange={(event)=>{handleChange(event,'name')}}/>
             <Form.Control.Feedback type="invalid">
           Please enter a name.
         </Form.Control.Feedback>
@@ -170,7 +161,7 @@ const handleRemoveImage =(indexToRemove)=>{
           <Col md={2}></Col> {/* Empty column for space */}
           <Form.Group as={Col}  md={5} controlId="forClothSKU">
             <Form.Label>Cloth SKU:</Form.Label>
-            <Form.Control type="text" placeholder="" required onChange={(event)=>{handleChange(event,'sku')}}/>
+            <Form.Control type="text" value={formData.sku} placeholder="" required onChange={(event)=>{handleChange(event,'sku')}}/>
           </Form.Group>
           <Form.Control.Feedback type="invalid">
           Please enter a SKU.
@@ -180,7 +171,7 @@ const handleRemoveImage =(indexToRemove)=>{
         <Row className="mb-3 align-items-center">
           <Form.Group as={Col} md={5} controlId="forClothQuantity">
             <Form.Label>Quantity:</Form.Label>
-            <Form.Control type="text" placeholder="" required onChange={(event)=>{handleChange(event,'quantity')}} />
+            <Form.Control type="text" value={formData.quantity} placeholder="" required onChange={(event)=>{handleChange(event,'quantity')}} />
           </Form.Group>
           <Form.Control.Feedback type="invalid">
           Please enter a Quantity.
@@ -188,7 +179,7 @@ const handleRemoveImage =(indexToRemove)=>{
           <Col md={2}></Col> {/* Empty column for space */}
           <Form.Group as={Col} md={5}  controlId="forClothStatus">
             <Form.Label>Status:</Form.Label>
-            <Form.Control type="text" placeholder="" required onChange={(event)=>{handleChange(event,'status')}}/>
+            <Form.Control type="text" value={formData.status} placeholder="" required onChange={(event)=>{handleChange(event,'status')}}/>
             <Form.Control.Feedback type="invalid">
           Please enter Status.
         </Form.Control.Feedback>
@@ -205,23 +196,27 @@ const handleRemoveImage =(indexToRemove)=>{
          </Row>
          <Row> </Row>
         <Row className='d-flex justify-content-center align-items-center p-4'>
-         <Button type="submit" className='w-auto d-flex submit-bt'  style={{"background":"black"}}>Submit </Button>
+         <Button type="submit" className='w-auto d-flex submit-bt'  style={{"background":"black"}}>{editView ?"Submit":"Update"} </Button>
         
         </Row>
-        <Row>
+        <Row className='d-flex justify-content-center flex-col align-items-center '>
   {images.map((img, index) => (
   
       
-    <><Col style={{position:"relative"}}>
-    <img key={index} src={URL.createObjectURL(img)} style={{ width: '200px' }} alt={`Preview ${index}`} />
+    <>
+    <div className='p-2 custom-image-holder' >
+    {console.log("Type of img: " +typeof img)}
+    <img key={index} src={editView && img.toString().includes("https") ?img: URL.createObjectURL(img)} style={{ width: '200px' }} alt={`Preview ${index}`} />
     <Button
     className="cross-button"
     style={{position:"absolute" , backgroundColor:"black" , top:"-13px" , left:"186px" }}
     onClick={() => handleRemoveImage(index)}>
   
     <i className="bi bi-x-square-fill"></i>
-    </Button>
-    </Col>
+    </Button> 
+    </div>
+   
+   
                                              
   </>
     

@@ -12,7 +12,7 @@ const clothsRoutes = express.Router();
     
          
         clothsRoutes.post("/addCloth",clothsController.addCloth)
-        clothsRoutes.get("/:clothId",[verifyJwtToken,verifyClothsParam],clothsController.getCloth)
+        clothsRoutes.get("/:clothId",clothsController.getCloth)
         clothsRoutes.put("/:clothId",[verifyJwtToken,verifyClothsParam],clothsController.updateCloth)
         clothsRoutes.get("/",clothsController.getAllCloths)
         clothsRoutes.delete("/:clothId",[verifyJwtToken,verifyClothsParam],clothsController.deleteCloth)
