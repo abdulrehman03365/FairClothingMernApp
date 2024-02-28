@@ -37,7 +37,7 @@ export async function addCloth(clothData){
      {
       
       
-      const data = await response.json();
+      const data = await response.data;
    
     if(data && data.message)
     {
@@ -53,10 +53,11 @@ export async function addCloth(clothData){
 }
   
 export async function updateCloth(clothId,clothData){
-
+  const updateClothConfig={headers:{'Content-Type':'multipart/form-data',
+  'Authorization':`Bearer ${authToken}`}}
 
   try {
-    const response = await axios.post(`/updateCloth/${clothId}`,clothData,config)
+    const response=await axios.put(`/cloth/${clothId}`,clothData,updateClothConfig)
     if(!response.ok)
      {
       throw new Error("Exception in updating Cloth")
@@ -70,6 +71,7 @@ export async function updateCloth(clothId,clothData){
     return data;
 
   } catch (error) {
+    toast.error('Error updating cloth');
     console.log("Exception in updating Cloth API", error.message);
     throw new Error(error.message);
   } 

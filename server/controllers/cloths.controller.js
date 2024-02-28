@@ -2,17 +2,27 @@ const { cloth } =require( '../model/cloths.model')
 const {upload}=require('../services/imageService')
 
 async function uploadImages(images) {
-    const images_url=[]
+  
+  
+  
+  const images_url=[]
     try {
       await Promise.all(
         images.map(async (image) => {
-          try {
-            const imageUrl = await upload(image.imageName, image.image, image.imageType);
-            images_url.push(imageUrl);
-          } catch (error) {
-            console.error(`Error uploading image (${image.imageName}):`, error.message);
-            // Handle or log the error as needed
-          }
+      if(image.image)
+      {
+        try {
+          const imageUrl = await upload(image.imageName, image.image, image.imageType);
+          images_url.push(imageUrl);
+        } catch (error) {
+          console.error(`Error uploading image (${image.imageName}):`, error.message);
+          // Handle or log the error as needed
+        }
+      }
+      else
+      {
+         images_url.push(image.imageURL)
+      }
         })
       );
 
@@ -21,7 +31,6 @@ async function uploadImages(images) {
       return images_url;
     } catch (error) {
       console.error('Error during image upload process:', error.message);
-      // Handle or log the error as needed
       throw error;
     }
   }
@@ -84,11 +93,9 @@ getAllCloths =async(req,res,next)=>{
 updateCloth= async (req,res,next)=>{
     try{
         
-        const clothId=req.body 
+        const clothId=req.params.clothId 
         const {name ,sku ,images ,quantity ,status}=req.body  
-        
-        
-      
+        const images_url=await uploadImages(images)
         const  updatedCloth={name ,sku ,images:images_url,quantity ,status}
         const  cloth=await cloth.findByIdAndUpdate(clothId,updatedCloth,{new:true})
         

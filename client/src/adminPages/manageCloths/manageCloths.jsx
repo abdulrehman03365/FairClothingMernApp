@@ -9,11 +9,13 @@ import Preview from '../../components/adminComponents/preview/preview';
 import { addMarque,updateMarque,updateCloth ,getMarque ,getallCloths, addCloth, getCloth } from '../../api';
 import './manageCloths.css';
 import {useLocation, useParams} from 'react-router-dom'
+
 function ManageCloths() {
   const location = useLocation()
   const [editView, setEditView] = useState(false);
   const {register, handleSubmit, formState: { errors }, setValue } = useForm();
   const [images, setImages] = useState([]);
+  const [imageURLs,setImageURLs]=useState([])
   const [imagePreview, setImagePreview] = useState([]);
   const [base64Image,setBase64Image]=useState([]);
   const [updated, setUpdated]=useState(false)
@@ -32,49 +34,48 @@ function ManageCloths() {
         status: respData.status,
         images: []
       });
-      setImages(respData.images)
+      //add new variable image urls
+      setImageURLs(respData.images)
+ 
     }
     if (location.state && location.state.editViewProp !== null) {
       setClothId(location.state.id);
       fetchAndPopulate(location.state.id);
+      setValidate(true)
       setEditView(location.state.editViewProp)
+      
     }
-    else
-    {
-      var imagesObj = [];
+   
+     updateFormData()
+ 
 
-      for (let index = 0; index < images.length; index++) {
-        const imageObject = {
-          image: base64Image[index],
-          imageName: images[index].name,
-          imageType: images[index].type,
-        };
   
-        imagesObj.push(imageObject);
-      }
-  
-      setformData((prevFormData) => ({
-        ...prevFormData,
-        images: imagesObj,
-      }));
+  }, [editView ,base64Image]);
 
+
+  function handleFormUpdate()
+  {
+
+  }
+  function convertToBase64(file){
+    return new Promise((resolve)=>{
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onloadend = () => {
+      resolve(reader.result)
+      }})
     }
     
-  }, [editView ]);
 
-  function convertToBase64(file){
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onloadend = () => {
-      setImagePreview([...imagePreview,reader.result]);
-      setBase64Image([...base64Image,reader.result])
-  }}
-
-  const handleImageChange=(event)=> {
+  const handleImageChange=async (event)=> {
   var files = event.target.files;
-  convertToBase64(files[0])
+  const base64Result= await convertToBase64(files[0])
+  setImagePreview([...imagePreview,base64Result]);
+  setBase64Image([...base64Image,base64Result])
   const updatedImages=[...images,files[0]]
   setImages(updatedImages);
+ 
+
   }
 
 const handleRemoveImage =(indexToRemove)=>{
@@ -99,35 +100,64 @@ const handleRemoveImage =(indexToRemove)=>{
   })
 
 }
-  async function handleFormSubmit(data, event) {
-  console.log("Form Data :" ,formData)   
-  event.preventDefault()
-  const form = event.target;
-  if(form.checkValidity()===false)
-  {
-     toast.error("Plz enter cloth details")
-     event.stopPropogation()
+
+function updateFormData(){
+  var imagesObj = [];
+  console.log("length of images: " + images.length);
+  for (let index = 0; index < images.length; index++) {
+    let imageObject = {
+      image: base64Image[index] || null,
+      imageName: images[index]?.name || null,
+      imageType: images[index]?.type || null,
+      imageURL: images[index] || null,
+    };
+    imagesObj.push(imageObject);
   }
+  
+  if(editView)
+  {
+    const combinedArray = [...imageURLs, ...imagesObj];
 
-  setValidate(true)
 
-
+console.log(combinedArray);
+  }
+ 
+      
+  
+    setformData((prevFormData) => ({
+      ...prevFormData,
+      images: imagesObj,
+    }));
   
   
-    
+}
   
-
-    if (editView) {
-      const data=await updateCloth(clothId, formData);
+   
+    async function handleFormSubmit(data, event) {
      
-      setEditView(false)
-      setUpdated(true)
+    event.preventDefault()
+    const form = event.target;
+    if(form.checkValidity()===false)
+    {
+      toast.error("Plz enter cloth details")
+      event.stopPropagation()
       
-    } else {
-      await addCloth(formData);
-      
-
     }
+
+
+    setValidate(true)
+    console.dir(formData );  
+    // if (editView) {
+    //   console.dir(formData );
+    //   const data = await updateCloth(clothId, formData);
+      
+    //     setEditView(false)
+    //     setUpdated(true)
+        
+    //   } else {
+    //     console.dir(formData );
+    //     await addCloth(formData);
+    // }
 
   }
   const handleChange =(e,name)=>{

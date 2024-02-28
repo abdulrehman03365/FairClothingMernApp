@@ -34,7 +34,7 @@ function App() {
 
           <div style={{ overflow:"visible", minHeight:'100vh', display: 'flex', flexDirection: 'column' }}>
           <Nevbar></Nevbar>
-          <Toaster  />
+          <Toaster position="top-center" />
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="signIn" element={<SignIn />} />
