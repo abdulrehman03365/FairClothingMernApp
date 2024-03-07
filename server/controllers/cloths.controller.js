@@ -8,20 +8,20 @@ async function uploadImages(images) {
   const images_url=[]
     try {
       await Promise.all(
-        images.map(async (image) => {
-      if(image.image)
+        images.map(async (imageObject) => {
+      if(imageObject.base64Image)
       {
         try {
-          const imageUrl = await upload(image.imageName, image.image, image.imageType);
+          const imageUrl = await upload(imageObject.imageName, imageObject.base64Image, imageObject.imageType);
           images_url.push(imageUrl);
         } catch (error) {
-          console.error(`Error uploading image (${image.imageName}):`, error.message);
+          console.error(`Error uploading image (${imageObject.imageName}):`, error.message);
           // Handle or log the error as needed
         }
       }
       else
       {
-         images_url.push(image.imageURL)
+         images_url.push(imageObject.imageUrl)
       }
         })
       );
@@ -38,8 +38,8 @@ addCloth=async(req,res,next)=>{
     try{
         const {name ,sku ,images ,quantity ,status}=req.body 
         
+
         const images_url=await uploadImages(images)
-      
         const newCloth = new cloth({name,sku,images: images_url,quantity,status})
         
 
@@ -97,9 +97,9 @@ updateCloth= async (req,res,next)=>{
         const {name ,sku ,images ,quantity ,status}=req.body  
         const images_url=await uploadImages(images)
         const  updatedCloth={name ,sku ,images:images_url,quantity ,status}
-        const  cloth=await cloth.findByIdAndUpdate(clothId,updatedCloth,{new:true})
+        const  Cloth=await cloth.findByIdAndUpdate(clothId,updatedCloth,{new:true})
         
-        if(!cloth)
+        if(!Cloth)
         {
         res.status(404).json({message:"cloth not found"})
         }
@@ -109,7 +109,7 @@ updateCloth= async (req,res,next)=>{
         }
         catch(error){
         console.error("Error getting cloth",error);
-        res.status(500).json({message:"Failed to updateCart"})
+        res.status(500).json({message:"Failed to update Cloth"})
         }
 }
 
