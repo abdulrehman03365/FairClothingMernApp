@@ -33,7 +33,7 @@ export default function Footer()
         </div>
         <div className="Newsletter-div">
           <h5 className="Footer-Heading">Newsletter SignUp</h5>
-          <p className="Footer-Description">Subscribe to our Newsletter for Exclusive Updates</p>
+          <p className="Footer-description">Subscribe to our Newsletter for Exclusive Updates</p>
         </div>
       </div>
       <div className="Footer-bottom">

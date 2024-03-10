@@ -20,6 +20,7 @@ function AdminHome() {
   const [showErrorAlert ,setShowErrorAlert]=useState(false)
   const [screenSize, setScreenSize] = useState(window.innerWidth);
   const [cloths,setcloths]=useState();
+  const [clothDelete,setClothDelet]=useState(false);
   const [selectedOption,setSelectedOptions]=useState('')
   var citiesOptions=['karachi','Rawalpindi','Islamabad']
   const dispatch=useDispatch();
@@ -38,7 +39,7 @@ function AdminHome() {
     //  }
    
       const data=await getallCloths()
-    
+      setClothDelet(true)
       setcloths(data )
     }
 
@@ -49,7 +50,7 @@ function AdminHome() {
      ()=>{
 
       console.log("Email",process.env.EMAIL);
-
+      console.log("Delete variable :", clothDelete );
 
       
      
@@ -102,9 +103,7 @@ setcloths(data )
  
  
  </div>
-         <footer className="footer">
-           <p>© 2023 All Rights Reserved</p>
-         </footer>
+         
        </div>
       </>
       

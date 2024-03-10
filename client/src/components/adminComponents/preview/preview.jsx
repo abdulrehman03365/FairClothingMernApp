@@ -21,12 +21,12 @@ function Preview({ populatePreview ,clothId,clothDetails }) {
    async function handleRemove(clothId){
      
 
-  var data = await deleteCloth(clothId)
-  console.log("response from delete cloth :" + data);
-    if (data.ok)
+  var response = await deleteCloth(clothId)
+  console.log("response from delete cloth :" , response);
+    if (response.status === 200)
     
     {
-      alert('Marque Deleted' + id)
+      
       populatePreview()
       
     }
@@ -86,8 +86,8 @@ function Preview({ populatePreview ,clothId,clothDetails }) {
            <p id='status'>{clothDetails.status}</p>
            <p id='capacity'>{clothDetails.quantity}</p>
          </div>
-        <span className='icons' onClick={()=>{handleRemove(clothId)}}>
-        <i class="bi bi-trash3"></i>
+        <span className='icons'  onClick={()=>{handleRemove(clothId)}}>
+        <i class="bi bi-trash3" style={{cursor:"pointer"}}></i>
         </span>
        </div>
 

@@ -65,7 +65,8 @@
 #manage-main-div{
     display: flex;
     margin-top :3%;
-     
-    align-items: center;
-    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center; 
+    
+  
 }

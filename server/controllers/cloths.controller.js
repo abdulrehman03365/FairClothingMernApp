@@ -116,8 +116,8 @@ updateCloth= async (req,res,next)=>{
 
 deleteCloth=async(req, res ,next)=>{
     try{
-        const {clothId}=req.body
-        
+        const clothId=req.params.clothId  
+        console.log("cloth Id :",clothId);
        const deletedCloth= await cloth.findByIdAndDelete(clothId)
         if(!deletedCloth)
         {

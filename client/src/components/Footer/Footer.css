@@ -25,7 +25,7 @@ width: 100%;
   
   
     .Footer-Container {
-      padding: 2.5vh 0;
+      
     }
   
 
@@ -64,4 +64,8 @@ width: 100%;
       .Bottom-text {
         color: black;
         font-size: 13px;
+      
       }
+ .Footer-description{
+  max-width: 9em;
+ }

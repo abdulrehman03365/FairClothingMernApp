@@ -28,12 +28,12 @@ export async function addCloth(clothData){
   try {
     const response = await axios.post('/cloth/addCloth',clothData,addClothConfig)
 
-    if (response.ok)
+    if (response.status === 200)
     {
       toast.success('Cloth is added successfully!');
       
     }
-   else if(!response.ok)
+   else if(response.status != 200)
      {
       
       
@@ -46,7 +46,7 @@ export async function addCloth(clothData){
 
 
   } catch (error) {
-    console.log("Exception in Adding Cloth API", error.message);
+    console.log("Exception in Adding Cloth API", error);
     toast.error(error.message)
   }  
   
@@ -58,21 +58,27 @@ export async function updateCloth(clothId,clothData){
 
   try {
     const response=await axios.put(`/cloth/${clothId}`,clothData,updateClothConfig)
-    if(!response.ok)
+    if (response.status === 200)
+    {
+      toast.success('Cloth is updated successfully!');
+      return;
+    }
+   else if(response.status != 200)
      {
-      throw new Error("Exception in updating Cloth")
-     }
-    const data = await response.json();
+      
+      
+      const data = await response.data;
+   
     if(data && data.message)
     {
-      throw new Error(data.message)
-    }
-    toast.success('Cloth is added successfully!');
-    return data;
+      throw new Error(data.message) 
+    }}
+
+
 
   } catch (error) {
     toast.error('Error updating cloth');
-    console.log("Exception in updating Cloth API", error.message);
+    console.log("Exception in updating Cloth API", error);
     throw new Error(error.message);
   } 
 }
@@ -81,21 +87,28 @@ export async function deleteCloth(clothId){
 
 
   try {
-    const response = await axios.post(`/deleteCloth/${clothId}`,config)
-    if(!response.ok)
-     {
-      throw new Error("Exception in deleting Cloth")
-     }
-    const data = await response.json();
-    if(data && data.message)
+    const response = await axios.delete(`/cloth/${clothId}`,
+    {headers:{'Content-Type':'application/json',
+    'Authorization':`Bearer ${authToken}`}})
+    if (response.status === 200)
     {
-      throw new Error(data.message)
+      toast.success('Cloth is deleted successfully!');
+      return response;
     }
-    return data;
+   else if(response.status != 200)
+     {
+      
+      
+      const data = await response.data;
+   
+    if(data && data.error)
+    {
+      throw new Error(data.error) 
+    }}
 
   } catch (error) {
-    console.log("Exception in deleting Cloth API", error.message);
-    throw new Error(error.message);
+    console.log("Exception in deleting Cloth API", error);
+    toast.error(error.message)
   } 
 }
 

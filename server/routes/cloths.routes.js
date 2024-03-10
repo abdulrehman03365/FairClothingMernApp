@@ -15,7 +15,8 @@ const clothsRoutes = express.Router();
         clothsRoutes.get("/:clothId",clothsController.getCloth)
         clothsRoutes.put("/:clothId",clothsController.updateCloth)
         clothsRoutes.get("/",clothsController.getAllCloths)
-        clothsRoutes.delete("/:clothId",[verifyJwtToken,verifyClothsParam],clothsController.deleteCloth)
+        clothsRoutes.delete("/:clothId",clothsController.deleteCloth)
+        
     
  
         module.exports = clothsRoutes;

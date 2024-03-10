@@ -96,7 +96,7 @@ function ManageCloths() {
     const form = event.target;
     if (form.checkValidity() === false) {
       toast.error("Plz enter cloth details");
-      event.stopPropagation();
+     return
     }
 
     setValidate(true);
@@ -135,7 +135,7 @@ function ManageCloths() {
   return (
     <div>
       <Container className='d-flex m-auto mt-5 justify-content-center border flex-wrap align-items-center flex-column custom-holder'>
-        <h2 className="text-center mb-3">Add Cloth</h2>
+        <h2 className="text-center mb-3">{editView ? 'Update Cloth' : 'Add Cloth'}</h2>
 
         <Form noValidate validated={validated} onSubmit={(event) => handleFormSubmit(formData, event)} className='p-xs-4 mt-3 mb-2' style={{ border: "1px-solid" }}>
           <Row className="mb-3 align-items-center">
@@ -180,12 +180,12 @@ function ManageCloths() {
           <Row className='d-flex align-items-center justify-content-center ' style={{ position: "relative" }}>
             <Form.Group as={Col} md={5} className='w-auto p-2' controlId="images">
               <Form.Label style={{ position: "absolute", left: "10px", top: "25%" }}>Images :</Form.Label>
-              <Form.Control type="file" required className='custom-input' onChange={handleImageChange} />
+              <Form.Control type="file" required={editView ? false :true}  className='custom-input' onChange={handleImageChange} />
             </Form.Group>
           </Row>
           <Row> </Row>
           <Row className='d-flex justify-content-center align-items-center p-4'>
-            <Button type="submit" className='w-auto d-flex submit-bt' style={{ "background": "black" }}>{editView ? "Submit" : "Update"} </Button>
+            <Button type="submit" className='w-auto d-flex submit-bt' style={{ "background": "black" }}>{editView ? "Update" : "Submit"} </Button>
           </Row>
           <Row className='d-flex justify-content-center flex-col align-items-center '>
             {formData.images.map((imgObject, index) => (
